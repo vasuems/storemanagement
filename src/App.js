@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router, Redirect, Route, Link,
 } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './containers/Home';
 import ProductDetail from './containers/ProductDetail';
 import Cart from './containers/Cart';
 import Navigation from './containers/Navigation';

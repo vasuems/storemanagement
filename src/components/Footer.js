@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 class Footer extends Component {
   render() {
     return (
-      <div className="footer">
+      <Container>
         <Row>
           <Col md={3} />
           <Col md={6} className="text-center">
@@ -21,14 +21,7 @@ class Footer extends Component {
           </Col>
           <Col md={3} />
         </Row>
-        <br />
-        <br />
-        <Row>
-          <Col md={12} className="text-center">
-            <small style={{ color: '#eee' }}>&copy; LF Commerce</small>
-          </Col>
-        </Row>
-      </div>
+      </Container>
     );
   }
 }

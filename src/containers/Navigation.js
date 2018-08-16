@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { 
-    Navbar, Nav, NavbarBrand, NavItem, DropdownMenu,
-    DropdownItem, Badge, Row, Col,
-    FormGroup, Input } from 'reactstrap';
+    Navbar, Nav, NavbarBrand, NavItem, UncontrolledDropdown,
+    DropdownMenu, DropdownToggle, DropdownItem, Badge, Row, Col,
+    Container, Input } from 'reactstrap';
 import {
   Link
 } from 'react-router-dom';
@@ -13,7 +13,7 @@ class Navigation extends Component {
   constructor(props){
       super(props);
       this.state = {
-        showLogin: false
+        showLogin: true
       }
   }
 
@@ -25,49 +25,43 @@ class Navigation extends Component {
 
   render() {
     return (
-      <div>  
-        <Navbar>
-            <Row>
-              <Col md={3}>
-              </Col>
-              <Col md={6}>
-                <FormGroup className="inner-addon left-addon">
-                    <i className="glyphicon glyphicon-search"></i>
-                    <Input type="text" placeholder="Search products, design" />
-                </FormGroup>
-              </Col>
-              <Col md={3}>                                
+      <Container>  
+        <Navbar light expand="md">
+          <NavbarBrand href="/">LFCommerce</NavbarBrand>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <Input type="text" placeholder="Search products, design" />
+              </NavItem>                         
                 <Link to="/cart">
                 <span className="navbar-text">                                
                     <span className="glyphicon glyphicon-shopping-cart"></span><Badge className="badge-danger">3</Badge>                                
                 </span>
-                </Link>         
-                <DropdownMenu eventKey={3} isOpen={false} title="Nicholas Chen" id="basic-nav-dropdown">
-                <DropdownItem eventKey={3.1} href="/account">My Account</DropdownItem>
-                <DropdownItem eventKey={3.2} href="/cart">Cart <Badge className="badge-danger">3</Badge></DropdownItem>
-                <DropdownItem eventKey={3.3}>Log Out</DropdownItem>
-                </DropdownMenu>                           
-              </Col>
-            </Row>        
-            <Row>
-              <Col md={4}>
-                <NavbarBrand>
-                    <Link to="/"><i className="fa fa-smile-o" aria-hidden="true"></i>&nbsp;
-                    LF Commerce</Link>
-                </NavbarBrand>
-              </Col>
-              <Col md={8}>
-                <Nav>
-                    <NavItem eventKey={1} href="/categories/geeks">GEEKS</NavItem>
-                    <NavItem eventKey={2} href="/categories/funny">FUNNY</NavItem>
-                    <NavItem eventKey={3} href="/categories/kids">KIDS</NavItem>
-                    <NavItem eventKey={4} href="/categories/pets">PETS</NavItem>
-                </Nav>
-              </Col>
-            </Row>
+                </Link>
+                <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>
+                        Nick Chen
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                        <DropdownItem eventKey={3.1} href="/account">My Account</DropdownItem>
+                        <DropdownItem eventKey={3.2} href="/cart">Cart <Badge className="badge-danger">3</Badge></DropdownItem>
+                        <DropdownItem eventKey={3.3}>Log Out</DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>   
+            </Nav>
         </Navbar>
-        <Login show={this.state.showLogin} />
-      </div>
+        <Row>
+            <Col md={4}>
+            </Col>
+            <Col md={8}>
+            <Nav>
+                <NavItem eventKey={1} href="/categories/geeks">GEEKS</NavItem>
+                <NavItem eventKey={2} href="/categories/funny">FUNNY</NavItem>
+                <NavItem eventKey={3} href="/categories/kids">KIDS</NavItem>
+                <NavItem eventKey={4} href="/categories/pets">PETS</NavItem>
+            </Nav>
+            </Col>
+        </Row>
+      </Container>
     );
   }
 }

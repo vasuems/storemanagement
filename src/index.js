@@ -6,6 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import rootReducer from './reducers';
 import registerServiceWorker from './registerServiceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import './App.css';
 
