@@ -1,8 +1,11 @@
 #searchBar{
     border-radius: 30px;
 }
-.cartPhoto{
+.cartImage{
     width: 80%;
+}
+.productDetailImage{
+    width: 70%;
 }
 .price{
     color: #b71d1d;
