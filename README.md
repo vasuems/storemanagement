@@ -1,22 +1,37 @@
-# LF Commerce README
-=======
-# lfcommerce-react
+# LF Commerce
+
 An open source ecommerce system front-end written in ReactJS
 
-This is for the missing piece of Python + ReactJS solution for open source ecommerce system.
+This is for the missing piece of ExpressJS + ReactJS solution for ecommerce system.
 
 ![Alt Screenshot](./screenshot.png "Screenshot")
 
-This project is built based on the tool [create-react-app]https://github.com/facebookincubator/create-react-app
+
+## Installation
+
+**Yarn**
+```console
+yarn install
+```
+
+**NPM**
+
+```console
+npm install
+```
 
 
-The package manager used by this project is [yarn]https://yarnpkg.com/en/
+## How to run this?
 
-To setup the project, go to the root directory and do:
+**Yarn**
 
-*yarn install*
+```console
+yarn start
+```
 
+**NPM**
 
-To run this project
+```console
+npm start
+```
 
-*yarn start*
