@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  Row, Col, Button, FormGroup, Label, Input,
+  Container, Row, Col, Button, FormGroup, Label, Input,
 } from 'reactstrap';
 import ProductImage from '../components/ProductImage';
 import '../App.css';
@@ -10,7 +10,7 @@ import '../App.css';
 class ProductDetail extends Component {
   render() {
     return (
-      <div style={{ marginTop: '30px', marginBottom: '30px' }}>
+      <Container>
         <Row>
           <Col md={9}>
             <ProductImage
@@ -51,7 +51,7 @@ class ProductDetail extends Component {
             <Button bsStyle="primary" block>Add to cart</Button>
           </Col>
         </Row>
-      </div>
+      </Container>
     );
   }
 }

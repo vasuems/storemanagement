@@ -7,7 +7,7 @@ import NewProductList from '../containers/NewProductList';
 class Home extends Component {
   render() {
     return (
-      <Container style={{ marginTop: '30px' }}>
+      <Container>
         <PopularProductList />
         <NewProductList />
       </Container>

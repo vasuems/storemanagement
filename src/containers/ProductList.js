@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import {
-  Grid, Row, Col, Button,
+  Container, Row, Col, Button,
 } from 'reactstrap';
 import {
   Link,
@@ -12,7 +12,7 @@ import sampleProducts from '../../samples/SampleProducts';
 class ProductList extends Component {
   render() {
     return (
-      <Grid style={{ marginTop: '30px', marginBottom: '30px' }}>
+      <Container>
         <Row className="show-grid">
           {sampleProducts.map(product => (
             <Col key={product.productURL} md={3}>
@@ -27,7 +27,7 @@ class ProductList extends Component {
                 }
         </Row>
         <Button bsStyle="primary" style={{ float: 'right' }}>Checkout</Button>
-      </Grid>);
+      </Container>);
   }
 }
 
