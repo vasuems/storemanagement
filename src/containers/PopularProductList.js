@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { addProduct } from '../actions';
 import Product from '../components/Product';
 import '../App.css';
@@ -9,7 +9,7 @@ import '../App.css';
 class PopularProductList extends Component {
   render() {
     return (
-      <div style={{ marginTop: '30px' }}>
+      <Container>
         <div className="text-center headline">
                 Popular
         </div>
@@ -30,7 +30,7 @@ class PopularProductList extends Component {
           ))
               }
         </Row>
-      </div>
+      </Container>
     );
   }
 }

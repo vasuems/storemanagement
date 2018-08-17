@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  ListGroup, ListGroupItem, Row, Col, Button, Image,
+  Container, ListGroup, ListGroupItem, Row, Col, Button
 } from 'reactstrap';
-import CartItem from './CartItem';
+import CartItem from '../components/CartItem';
 import '../App.css';
 
 class Cart extends Component {
   render() {
     return (
-      <div style={{ marginTop: '30px', marginBottom: '30px' }}>
+      <Container>
         <div className="text-center lead">
           My Shopping Cart
         </div>
@@ -45,7 +45,7 @@ Subtotal:
             <Button bsStyle="primary" style={{ float: 'right' }}>Checkout</Button>
           </Col>
         </Row>
-      </div>
+      </Container>
     );
   }
 }

@@ -11,7 +11,7 @@ class CartItem extends Component {
         <Col md={8}>
           <Row>
             <Col md={3}>
-              <img src={this.props.productImage} responsive />
+              <img src={this.props.productImage} className="cartPhoto" />
             </Col>
             <Col md={9}>
               <strong><a href={this.props.productURL}>{this.props.productName}</a></strong>

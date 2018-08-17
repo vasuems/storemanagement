@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import Product from '../components/Product';
 import '../App.css';
 
 class NewProductList extends Component {
   render() {
     return (
-      <div style={{ marginTop: '30px' }}>
+      <Container>
         <div className="text-center headline">
                 New Arrivals
         </div>
@@ -24,7 +24,7 @@ class NewProductList extends Component {
           ))
               }
         </Row>
-      </div>
+      </Container>
     );
   }
 }

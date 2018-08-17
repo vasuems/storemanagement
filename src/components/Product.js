@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import {
-  Panel, Row, Col,
+  Row, Col,
 } from 'reactstrap';
 
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import {
-  ListGroup, ListGroupItem, Grid, Row, Col, Button, Image,
+  Container, ListGroup, ListGroupItem, Grid, Row, Col, Button
 } from 'reactstrap';
 import {
   Link,
@@ -10,7 +10,7 @@ import {
 class CartItemList extends Component {
   render() {
     return (
-      <Grid style={{ marginTop: '30px', marginBottom: '30px' }}>
+      <Container>
         <div className="text-center lead">
           My Shopping Cart
         </div>
@@ -20,7 +20,7 @@ class CartItemList extends Component {
               <ListGroupItem>
                 <Row>
                   <Col md={2}>
-                    <Image src="https://ih1.redbubble.net/image.394321805.2445/ra,kids_tee,x1250,FFFFFF:97ab1c12de,front-pad,940x940,ffffff.jpg" responsive />
+                    <img src="https://ih1.redbubble.net/image.394321805.2445/ra,kids_tee,x1250,FFFFFF:97ab1c12de,front-pad,940x940,ffffff.jpg" />
                   </Col>
                   <Col md={8}>
                     <div><strong>The Chicago Dog</strong></div>
@@ -33,7 +33,7 @@ class CartItemList extends Component {
               <ListGroupItem>
                 <Row>
                   <Col md={2}>
-                    <Image src="https://ih0.redbubble.net/image.388613725.8271/tb,1200x1200,small.2.jpg" responsive />
+                    <img src="https://ih0.redbubble.net/image.388613725.8271/tb,1200x1200,small.2.jpg" responsive />
                   </Col>
                   <Col md={8}>
                     <div><strong>The Chicago Dog</strong></div>
@@ -47,7 +47,7 @@ class CartItemList extends Component {
           </Col>
         </Row>
         <Button bsStyle="primary" style={{ float: 'right' }}>Checkout</Button>
-      </Grid>
+      </Container>
     );
   }
 }
