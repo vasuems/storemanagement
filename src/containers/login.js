@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col, Form, FormGroup, Input, Modal, Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from "react-intl";
 
 class Login extends Component {
   render() {
@@ -35,7 +35,9 @@ class Login extends Component {
 
                 <FormGroup>
                   <Col smOffset={2} sm={10}>
-                    <Button type="submit"><FormattedMessage id="sys.signin" /></Button>
+                    <Button type="submit">
+                      <FormattedMessage id="sys.signin" />
+                    </Button>
                   </Col>
                 </FormGroup>
               </Form>
@@ -44,7 +46,9 @@ class Login extends Component {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}><FormattedMessage id="sys.close" /></Button>
+          <Button onClick={this.props.onHide}>
+            <FormattedMessage id="sys.close" />
+          </Button>
         </Modal.Footer>
       </Modal>
     );
