@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  Container, Row, Col, Button, FormGroup, Label, Input,
+  Container, Row, Col, Button, FormGroup, Label, Input
 } from 'reactstrap';
 import ProductImage from '../components/ProductImage';
-import '../App.css';
 
 class ProductDetail extends Component {
   render() {

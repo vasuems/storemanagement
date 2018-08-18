@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import '../../App.css';
 import {
-  Table, Image, Breadcrumb, Row, Col,
-  FormGroup, Input, Button, Pagination,
+  Table, Breadcrumb, Row, Col,
+  Pagination
 } from 'reactstrap';
-import {
-  Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class OrderList extends Component {
   constructor(props) {

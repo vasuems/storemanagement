@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-import '../../App.css';
-import {
-  Navbar, Nav, NavItem, NavDropdown,
-  MenuItem, Badge, Grid, Row, Col,
-  FormGroup, Input, Button,
-} from 'reactstrap';
-import {
-  Link,
-} from 'react-router-dom';
+import { Container, Row, Col, Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Product extends Component {
   render() {
     return (
-      <Grid style={{ marginBottom: '30px' }}>
+      <Container>
         <h3>Products</h3>
         <Breadcrumb>
           <Breadcrumb.Item href="/admin/dashboard">
@@ -55,7 +48,7 @@ class Product extends Component {
           </Col>
         </Row>
         <Button bsStyle="primary" style={{ float: 'right' }}>Checkout</Button>
-      </Grid>);
+      </Container>);
   }
 }
 

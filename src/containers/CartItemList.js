@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import '../App.css';
 import {
-  Container, ListGroup, ListGroupItem, Grid, Row, Col, Button
+  Container, ListGroup, ListGroupItem, Row, Col, Button
 } from 'reactstrap';
-import {
-  Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class CartItemList extends Component {
   render() {

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import '../App.css';
-import {
-  Row, Col,
-} from 'reactstrap';
-
+import { Row, Col } from 'reactstrap';
 
 class Product extends Component {
   constructor(props) {

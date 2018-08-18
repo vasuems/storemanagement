@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Row, Col, Button, FormGroup, Input,
-} from 'reactstrap';
-import '../App.css';
+import { Row, Col, FormGroup, Input } from 'reactstrap';
 
 class CartItem extends Component {
   render() {

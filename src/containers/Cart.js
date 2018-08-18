@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import {
   Container, ListGroup, ListGroupItem, Row, Col, Button
 } from 'reactstrap';
 import CartItem from '../components/CartItem';
-import '../App.css';
 
 class Cart extends Component {
   render() {

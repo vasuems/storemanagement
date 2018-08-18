@@ -12,7 +12,6 @@ import AdminDashboard from './containers/admin/Dashboard';
 import AdminProductList from './containers/admin/ProductList';
 import AdminCustomerList from './containers/admin/CustomerList';
 import AdminOrderList from './containers/admin/OrderList';
-import './App.css';
 
 class App extends Component {
   render() {
@@ -36,7 +35,6 @@ class App extends Component {
           <Route path="/admin/customers" component={AdminCustomerList} />
           <Footer />
         </div>
-
       </Router>
     );
   }

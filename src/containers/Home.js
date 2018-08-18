@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../App.css';
+import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 import PopularProductList from '../containers/PopularProductList';
 import NewProductList from '../containers/NewProductList';
@@ -8,7 +8,7 @@ class Home extends Component {
   render() {
     return (
       <Container>
-        <PopularProductList />
+        {/* <PopularProductList /> */}
         <NewProductList />
       </Container>
     );

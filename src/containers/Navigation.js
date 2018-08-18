@@ -4,9 +4,7 @@ import {
     Navbar, Nav, NavbarBrand, NavItem, UncontrolledDropdown, NavLink,
     DropdownMenu, DropdownToggle, DropdownItem, Badge, Row, Col,
     Container, Input } from 'reactstrap';
-import {
-  Link
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Login from './Login';
 
 class Navigation extends Component {

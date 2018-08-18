@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import rootReducer from './reducers';
+import rootSaga from './sagas';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
@@ -16,6 +17,8 @@ const store = createStore(
   rootReducer,
   applyMiddleware(sagaMiddleware),
 );
+
+sagaMiddleware.run(rootSaga);
 
 const LFCommerce = () => (
   <Provider store={store}>

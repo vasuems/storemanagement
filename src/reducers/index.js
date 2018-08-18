@@ -5,10 +5,10 @@ import productDetailReducer from './products/ProductDetailReducer';
 import cartReducer from './cart/CartReducer';
 
 const rootReducer = combineReducers({
-  popularProducts: popularProductReducer,
-  newProducts: newProductReducer,
-  productDetail: productDetailReducer,
-  cart: cartReducer,
+  popularProductReducer,
+  newProductReducer,
+  productDetailReducer,
+  cartReducer,
 });
 
 export default rootReducer;

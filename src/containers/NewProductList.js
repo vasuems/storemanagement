@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
+import { fetchNewProducts } from '../actions';
 import Product from '../components/Product';
-import '../App.css';
 
 class NewProductList extends Component {
+  componentDidMount(){
+    this.props.dispatch(fetchNewProducts());
+  }
+  
   render() {
     return (
       <Container>
@@ -30,9 +34,10 @@ class NewProductList extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
-    newProducts: state.newProducts,
+    newProducts: state.newProductReducer.newProducts,
   };
 }
 
-export default connect(mapStateToProps)(NewProductList);
+export default connect(mapStateToProps, null)(NewProductList);

@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Container, Row, Col } from 'reactstrap';
-import { addProduct } from '../actions';
 import Product from '../components/Product';
-import '../App.css';
 
 class PopularProductList extends Component {
   render() {
@@ -37,12 +34,8 @@ class PopularProductList extends Component {
 
 function mapStateToProps(state) {
   return {
-    popularProducts: state.popularProducts,
+    popularProducts: state.popularProductReducer.popularProducts,
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ addProduct }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PopularProductList);
+export default connect(mapStateToProps, null)(PopularProductList);

@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import '../../App.css';
 import {
   ListGroup, ListGroupItem,
-  Image, Breadcrumb, Row, Col,
-  FormGroup, Input, Button,
+  Breadcrumb, Row, Col,
+  Button
 } from 'reactstrap';
-import {
-  Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class ProductList extends Component {
   render() {
