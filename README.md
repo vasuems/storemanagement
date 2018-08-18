@@ -1,6 +1,6 @@
 # LF Commerce (Your contribution is very welcomed)
 
-An open source ecommerce system written in ExpressJS + ReactJS.
+The goal of this project is to develop an open source ecommerce system written in ReactJS + ExpressJS. LF Commerce will provide a Plug-And-Play experience to users with minimal programming background. 
 
 ![Alt Screenshot](./screenshot.png "Screenshot")
 
