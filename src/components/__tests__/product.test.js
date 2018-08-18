@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import toJSON from "enzyme-to-json";
-import Product from "../components/product";
+import Product from "../product";
 
 Enzyme.configure({ adapter: new Adapter() });
 
