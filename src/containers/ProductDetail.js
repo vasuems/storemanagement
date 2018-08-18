@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import {
   Container, Row, Col, Button, FormGroup, Label, Input
 } from 'reactstrap';
-import ProductImage from '../components/ProductImage';
+import { fetchProductDetail } from '../actions';
+import ProductImage from '../components/productImage';
 
 class ProductDetail extends Component {
+  componentDidMount(){
+    this.props.dispatch(fetchProductDetail());
+  }
+
   render() {
     return (
+      this.props.productDetail ?
       <Container>
         <Row>
           <Col md={9}>
@@ -50,15 +55,15 @@ class ProductDetail extends Component {
             <Button bsStyle="primary" block>Add to cart</Button>
           </Col>
         </Row>
-      </Container>
+      </Container>:null
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    productDetail: state.productDetail,
+    productDetail: state.productDetailReducer.productDetail,
   };
 }
 
-export default connect(mapStateToProps)(ProductDetail);
+export default connect(mapStateToProps, null)(ProductDetail);

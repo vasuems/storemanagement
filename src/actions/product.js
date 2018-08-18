@@ -6,6 +6,10 @@ export const FETCH_FEATURED_PRODUCTS = 'FETCH_FEATURED_PRODUCTS';
 export const FETCH_FEATURED_PRODUCTS_SUCCESS = 'FETCH_FEATURED_PRODUCTS_SUCCESS';
 export const FETCH_FEATURED_PRODUCTS_FAILED = 'FETCH_FEATURED_PRODUCTS_FAILED';
 
+export const FETCH_PRODUCT_DETAIL = 'FETCH_PRODUCT_DETAIL';
+export const FETCH_PRODUCT_DETAIL_SUCCESS = 'FETCH_PRODUCT_DETAIL_SUCCESS';
+export const FETCH_PRODUCT_DETAIL_FAILED = 'FETCH_PRODUCT_DETAIL_FAILED';
+
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const INC_PRODUCT = 'INC_PRODUCT';
 export const DEC_PRODUCT = 'DEC_PRODUCT';
@@ -33,6 +37,18 @@ export function fetchFeaturedProductsSuccess(data) {
 
 export function fetchFeaturedProductsFailed() {
   return { type: FETCH_FEATURED_PRODUCTS_FAILED };
+}
+
+export function fetchProductDetail() {
+  return { type: FETCH_PRODUCT_DETAIL };
+}
+
+export function fetchProductDetailSuccess(data) {
+  return { type: FETCH_PRODUCT_DETAIL_SUCCESS, value: data };
+}
+
+export function fetchProductDetailFailed() {
+  return { type: FETCH_PRODUCT_DETAIL_FAILED };
 }
 
 export function removeProduct() {

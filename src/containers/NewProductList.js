@@ -34,7 +34,6 @@ class NewProductList extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     newProducts: state.newProductReducer.newProducts,
   };
