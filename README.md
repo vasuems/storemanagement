@@ -42,6 +42,7 @@ npm start
 
 ## Unit Test
 
+For every main directory (components, containers etc.), there should be a \_\_tests\_\_ directory for all unit test cases.
 ```console
 yarn test [test_directory]
 ```
