@@ -5,5 +5,5 @@ The goal of this project is to develop an open source ecommerce system written i
 
 **Storefront screenshot**
 
-<img src="../screenshot.png" alt="Store Front" width="50%"/>
+<img src="https://github.com/ccwukong/lfcommerce/blob/master/screenshot.png" alt="Store Front" width="50%"/>
 
