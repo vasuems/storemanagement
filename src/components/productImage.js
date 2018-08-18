@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
-import Product from "./Product";
 
 class ProductImage extends Component {
   constructor(props) {

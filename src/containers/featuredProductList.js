@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Container, Row, Col } from "reactstrap";
 import { FormattedMessage } from 'react-intl';
 import { fetchFeaturedProducts } from "../actions";
-import Product from "../components/Product";
+import Product from "../components/product";
 
 class FeaturedProductList extends Component {
   componentDidMount() {
