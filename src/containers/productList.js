@@ -21,7 +21,7 @@ class ProductList extends Component {
           ))}
         </Row>
         <Button bsStyle="primary" style={{ float: "right" }}>
-          Checkout
+          <FormattedMessage id="sys.checkout" />
         </Button>
       </Container>
     );

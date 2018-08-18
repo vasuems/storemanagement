@@ -6,5 +6,8 @@
   "sys.close": "Close",
   "sys.signin": "Sign In",
   "sys.logout": "Log Out",
-  "sys.myAccount": "My Account"
+  "sys.myAccount": "My Account",
+  "sys.cart": "Cart",
+  "sys.addToCart": "Add to Cart",
+  "sys.checkout": "Checkout"
 }

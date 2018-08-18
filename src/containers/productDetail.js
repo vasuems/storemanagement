@@ -63,7 +63,7 @@ class ProductDetail extends Component {
             </FormGroup>
             <br />
             <Button bsStyle="primary" block>
-              Add to cart
+              <FormattedMessage id="sys.addToCart" />
             </Button>
           </Col>
         </Row>
