@@ -9,6 +9,7 @@ import {
   Label,
   Input
 } from "reactstrap";
+import { FormattedMessage } from 'react-intl';
 import { fetchProductDetail } from "../actions";
 import ProductImage from "../components/productImage";
 
@@ -33,7 +34,7 @@ class ProductDetail extends Component {
             <div>{this.props.productDetail.productDescription}</div>
             <br />
             <FormGroup controlId="formControlsSelect">
-              <Label>Size</Label>
+              <Label><FormattedMessage id="prod.size" /></Label>
               <Input componentClass="select" placeholder="Please select size">
                 <option value="xs">XS</option>
                 <option value="s">S</option>
@@ -43,7 +44,7 @@ class ProductDetail extends Component {
               </Input>
             </FormGroup>
             <FormGroup controlId="formControlsSelect">
-              <Label>Quantity</Label>
+              <Label><FormattedMessage id="prod.qty" /></Label>
               <Input
                 componentClass="select"
                 placeholder="Please select quantity"
@@ -57,6 +58,7 @@ class ProductDetail extends Component {
                 <option value="7">7</option>
                 <option value="8">8</option>
                 <option value="9">9</option>
+                <option value="10">10</option>
               </Input>
             </FormGroup>
             <br />

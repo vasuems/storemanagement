@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "reactstrap";
+import { FormattedMessage } from 'react-intl';
 import { fetchFeaturedProducts } from "../actions";
 import Product from "../components/Product";
 
@@ -12,7 +13,7 @@ class FeaturedProductList extends Component {
   render() {
     return (
       <Container>
-        <div className="text-center headline">Popular</div>
+        <div className="text-center headline"><FormattedMessage id="title.featured" /></div>
         <Row className="show-grid">
           {this.props.featuredProducts.map(product => (
             <Col
