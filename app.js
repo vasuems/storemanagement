@@ -1,11 +1,8 @@
-const express = require("express");
+const express = require('express');
+const product = require('./routes/product');
 
 const app = express();
 
-app.get("/api/authentication", (req, res) => res.send("Hello World!"));
-
-app.get("/api/products", (req, res) => {
-  res.send("Hello World!");
-});
+app.use('/api', product);
 
 app.listen(8080, () => console.log("Running on port 8080!"));
