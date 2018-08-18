@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
-import PopularProductList from '../containers/PopularProductList';
-import NewProductList from '../containers/NewProductList';
+import FeaturedProductList from '../containers/featuredProductList';
+import NewProductList from '../containers/newProductList';
 
 class Home extends Component {
   render() {
     return (
       <Container>
-        {/* <PopularProductList /> */}
+        <FeaturedProductList />
         <NewProductList />
       </Container>
     );

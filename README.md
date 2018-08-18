@@ -1,8 +1,6 @@
 # LF Commerce
 
-An open source ecommerce system front-end written in ReactJS
-
-This is for the missing piece of ExpressJS + ReactJS solution for ecommerce system.
+An open source ecommerce system written in ExpressJS + ReactJS.
 
 ![Alt Screenshot](./screenshot.png "Screenshot")
 
