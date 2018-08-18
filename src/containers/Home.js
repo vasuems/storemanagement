@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Container } from 'reactstrap';
-import FeaturedProductList from '../containers/featuredProductList';
-import NewProductList from '../containers/newProductList';
+import React, { Component } from "react";
+import { Container } from "reactstrap";
+import FeaturedProductList from "./featuredProductList";
+import NewProductList from "./newProductList";
 
 class Home extends Component {
   render() {

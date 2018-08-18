@@ -1,33 +1,34 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
-  Container, ListGroup, ListGroupItem, Row, Col, Button
-} from 'reactstrap';
-import CartItem from '../components/CartItem';
+  Container,
+  ListGroup,
+  ListGroupItem,
+  Row,
+  Col,
+  Button
+} from "reactstrap";
+import CartItem from "../components/CartItem";
 
 class Cart extends Component {
   render() {
     return (
       <Container>
-        <div className="text-center lead">
-          My Shopping Cart
-        </div>
+        <div className="text-center lead">My Shopping Cart</div>
         <Row>
           <Col md={12}>
             <ListGroup>
-              {
-                this.props.cart.map(cartItem => (
-                  <ListGroupItem key={cartItem.productName}>
-                    <CartItem
-                      productImage={cartItem.productImage}
-                      productName={cartItem.productName}
-                      productURL={cartItem.productURL}
-                      productPrice={cartItem.productPrice}
-                      productQuantity={cartItem.productQuantity}
-                    />
-                  </ListGroupItem>
-                ))
-              }
+              {this.props.cart.map(cartItem => (
+                <ListGroupItem key={cartItem.productName}>
+                  <CartItem
+                    productImage={cartItem.productImage}
+                    productName={cartItem.productName}
+                    productURL={cartItem.productURL}
+                    productPrice={cartItem.productPrice}
+                    productQuantity={cartItem.productQuantity}
+                  />
+                </ListGroupItem>
+              ))}
             </ListGroup>
           </Col>
         </Row>
@@ -35,12 +36,14 @@ class Cart extends Component {
           <Col md={12} className="text-right">
             <div>
               <strong>
-Subtotal:
+                Subtotal:
                 <span className="price">$123.16</span>
               </strong>
             </div>
             <br />
-            <Button bsStyle="primary" style={{ float: 'right' }}>Checkout</Button>
+            <Button bsStyle="primary" style={{ float: "right" }}>
+              Checkout
+            </Button>
           </Col>
         </Row>
       </Container>
@@ -50,7 +53,7 @@ Subtotal:
 
 function mapStateToProps(state) {
   return {
-    cart: state.cart,
+    cart: state.cart
   };
 }
 

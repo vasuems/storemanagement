@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Row, Col } from 'reactstrap';
+import React, { Component } from "react";
+import { Row, Col } from "reactstrap";
 
 class Product extends Component {
   constructor(props) {
@@ -10,7 +10,10 @@ class Product extends Component {
     return (
       <div className="no-border product-item">
         <a href={this.props.productURL}>
-          <div className="product-cover" style={{ backgroundImage: `url(${this.props.productImage})` }} />
+          <div
+            className="product-cover"
+            style={{ backgroundImage: `url(${this.props.productImage})` }}
+          />
         </a>
         <br />
         <Row className="product-item-footer">

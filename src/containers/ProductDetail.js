@@ -1,19 +1,24 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
-  Container, Row, Col, Button, FormGroup, Label, Input
-} from 'reactstrap';
-import { fetchProductDetail } from '../actions';
-import ProductImage from '../components/productImage';
+  Container,
+  Row,
+  Col,
+  Button,
+  FormGroup,
+  Label,
+  Input
+} from "reactstrap";
+import { fetchProductDetail } from "../actions";
+import ProductImage from "../components/productImage";
 
 class ProductDetail extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.dispatch(fetchProductDetail());
   }
 
   render() {
-    return (
-      this.props.productDetail ?
+    return this.props.productDetail ? (
       <Container>
         <Row>
           <Col md={9}>
@@ -39,7 +44,10 @@ class ProductDetail extends Component {
             </FormGroup>
             <FormGroup controlId="formControlsSelect">
               <Label>Quantity</Label>
-              <Input componentClass="select" placeholder="Please select quantity">
+              <Input
+                componentClass="select"
+                placeholder="Please select quantity"
+              >
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -52,18 +60,23 @@ class ProductDetail extends Component {
               </Input>
             </FormGroup>
             <br />
-            <Button bsStyle="primary" block>Add to cart</Button>
+            <Button bsStyle="primary" block>
+              Add to cart
+            </Button>
           </Col>
         </Row>
-      </Container>:null
-    );
+      </Container>
+    ) : null;
   }
 }
 
 function mapStateToProps(state) {
   return {
-    productDetail: state.productDetailReducer.productDetail,
+    productDetail: state.productDetailReducer.productDetail
   };
 }
 
-export default connect(mapStateToProps, null)(ProductDetail);
+export default connect(
+  mapStateToProps,
+  null
+)(ProductDetail);

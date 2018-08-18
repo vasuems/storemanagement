@@ -1,4 +1,4 @@
-# LF Commerce
+# LF Commerce (Your contribution is very welcomed)
 
 An open source ecommerce system written in ExpressJS + ReactJS.
 
