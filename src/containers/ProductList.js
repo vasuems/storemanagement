@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Container, Row, Col, Button
+  Container, Row, Col, Button,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Product from './Product';

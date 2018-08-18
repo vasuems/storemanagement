@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Container, ListGroup, ListGroupItem, Row, Col, Button
+  Container, ListGroup, ListGroupItem, Row, Col, Button,
 } from 'reactstrap';
 import CartItem from '../components/CartItem';
 

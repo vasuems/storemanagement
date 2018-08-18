@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Row, Col, FormGroup, Input } from 'reactstrap';
+import {
+  Row, Col, FormGroup, Input,
+} from 'reactstrap';
 
 class CartItem extends Component {
   render() {

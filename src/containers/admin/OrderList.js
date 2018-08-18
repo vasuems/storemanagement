@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   Table, Breadcrumb, Row, Col,
-  Pagination
+  Pagination,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 

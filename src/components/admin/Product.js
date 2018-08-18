@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button } from 'reactstrap';
+import {
+  Container, Row, Col, Button,
+} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 class Product extends Component {

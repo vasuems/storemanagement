@@ -5,10 +5,10 @@ import { fetchNewProducts } from '../actions';
 import Product from '../components/Product';
 
 class NewProductList extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.dispatch(fetchNewProducts());
   }
-  
+
   render() {
     return (
       <Container>

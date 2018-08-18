@@ -5,10 +5,10 @@ import { fetchFeaturedProducts } from '../actions';
 import Product from '../components/Product';
 
 class FeaturedProductList extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.dispatch(fetchFeaturedProducts());
   }
-  
+
   render() {
     return (
       <Container>

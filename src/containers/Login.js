@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Row, Col, Form, FormGroup, Input, Modal, Button
+  Row, Col, Form, FormGroup, Input, Modal, Button,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -55,7 +55,7 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  return { }
+  return { };
 }
-  
+
 export default connect(mapStateToProps, null)(Login);
