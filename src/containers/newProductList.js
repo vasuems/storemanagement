@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "reactstrap";
+import { FormattedMessage } from 'react-intl';
 import { fetchNewProducts } from "../actions";
 import Product from "../components/Product";
 
@@ -12,7 +13,9 @@ class NewProductList extends Component {
   render() {
     return (
       <Container>
-        <div className="text-center headline">New Arrivals</div>
+        <div className="text-center headline">
+          <FormattedMessage id="title.new" />
+        </div>
         <Row className="show-grid">
           {this.props.newProducts.map(product => (
             <Col key={product.productURL} md={3}>

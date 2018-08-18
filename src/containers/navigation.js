@@ -17,7 +17,8 @@ import {
   Input
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import Login from "./Login";
+import { FormattedMessage } from 'react-intl';
+import Login from "./login";
 
 class Navigation extends Component {
   constructor(props) {
@@ -68,7 +69,7 @@ class Navigation extends Component {
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>
-                  <NavLink href="/account">My Account</NavLink>
+                  <NavLink href="/account"><FormattedMessage id="sys.myAccount" /></NavLink>
                 </DropdownItem>
                 <DropdownItem>
                   <NavLink href="/cart">
@@ -77,7 +78,7 @@ class Navigation extends Component {
                   </NavLink>
                 </DropdownItem>
                 <DropdownItem>
-                  <NavLink href="/logout">Log Out</NavLink>
+                  <NavLink href="/logout"><FormattedMessage id="sys.logout" /></NavLink>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

@@ -9,7 +9,7 @@ import Home from "./containers/home";
 import ProductDetail from "./containers/productDetail";
 import Cart from "./containers/Cart";
 import Navigation from "./containers/navigation";
-import Footer from "./components/Footer";
+import Footer from "./components/footer";
 import ProductList from "./containers/featuredProductList";
 import AdminDashboard from "./containers/admin/Dashboard";
 import AdminProductList from "./containers/admin/ProductList";
