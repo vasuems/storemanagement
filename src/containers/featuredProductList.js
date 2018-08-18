@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
+import { fetchFeaturedProducts } from '../actions';
 import Product from '../components/Product';
 
-class PopularProductList extends Component {
+class FeaturedProductList extends Component {
+  componentDidMount(){
+    this.props.dispatch(fetchFeaturedProducts());
+  }
+  
   render() {
     return (
       <Container>
@@ -11,7 +16,7 @@ class PopularProductList extends Component {
                 Popular
         </div>
         <Row className="show-grid">
-          {this.props.popularProducts.map(product => (
+          {this.props.featuredProducts.map(product => (
             <Col
               onClick={() => this.props.addProduct(product)}
               key={product.productURL}
@@ -34,8 +39,8 @@ class PopularProductList extends Component {
 
 function mapStateToProps(state) {
   return {
-    popularProducts: state.popularProductReducer.popularProducts,
+    featuredProducts: state.featuredProductReducer.featuredProducts,
   };
 }
 
-export default connect(mapStateToProps, null)(PopularProductList);
+export default connect(mapStateToProps, null)(FeaturedProductList);

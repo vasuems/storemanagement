@@ -7,7 +7,7 @@ import ProductDetail from './containers/ProductDetail';
 import Cart from './containers/Cart';
 import Navigation from './containers/Navigation';
 import Footer from './components/Footer';
-import ProductList from './containers/PopularProductList';
+import ProductList from './containers/featuredProductList';
 import AdminDashboard from './containers/admin/Dashboard';
 import AdminProductList from './containers/admin/ProductList';
 import AdminCustomerList from './containers/admin/CustomerList';
