@@ -1,7 +1,10 @@
 import React from "react";
-import { shallow, mount, render } from "enzyme";
+import Enzyme, { shallow, mount, render } from "enzyme";
+import Adapter from 'enzyme-adapter-react-16';
 import toJSON from "enzyme-to-json";
-import Product from "../components/Product";
+import Product from "../components/product";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 test("product component with display a product image, name and price", () => {
   const product = shallow(

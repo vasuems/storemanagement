@@ -73,7 +73,7 @@ class Navigation extends Component {
                 </DropdownItem>
                 <DropdownItem>
                   <NavLink href="/cart">
-                    Cart
+                    <FormattedMessage id="sys.cart" />
                     <Badge className="badge-danger">3</Badge>
                   </NavLink>
                 </DropdownItem>
