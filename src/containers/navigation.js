@@ -18,6 +18,10 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import { 
+  FaShoppingCart,
+  FaUser,
+  FaSignOutAlt } from "react-icons/fa";
 import Login from "./login";
 
 class Navigation extends Component {
@@ -63,24 +67,27 @@ class Navigation extends Component {
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Nick Chen
+                Nick Chen&nbsp;
                 <span className="glyphicon glyphicon-shopping-cart" />
                 <Badge className="badge-danger">3</Badge>
               </DropdownToggle>
-              <DropdownMenu right>
+              <DropdownMenu left>
                 <DropdownItem>
                   <NavLink href="/account">
+                    <FaUser style={{fontSize: 18}} />&nbsp;
                     <FormattedMessage id="sys.myAccount" />
                   </NavLink>
                 </DropdownItem>
                 <DropdownItem>
                   <NavLink href="/cart">
-                    <FormattedMessage id="sys.cart" />
+                    <FaShoppingCart style={{fontSize: 18}} />&nbsp;
+                    <FormattedMessage id="sys.cart" />&nbsp;
                     <Badge className="badge-danger">3</Badge>
                   </NavLink>
                 </DropdownItem>
                 <DropdownItem>
                   <NavLink href="/logout">
+                    <FaSignOutAlt style={{fontSize: 18}} />&nbsp;
                     <FormattedMessage id="sys.logout" />
                   </NavLink>
                 </DropdownItem>

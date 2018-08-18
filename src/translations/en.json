@@ -9,5 +9,7 @@
   "sys.myAccount": "My Account",
   "sys.cart": "Cart",
   "sys.addToCart": "Add to Cart",
-  "sys.checkout": "Checkout"
+  "sys.checkout": "Checkout",
+  "sys.delete": "Delete",
+  "sys.myCart": "My Shopping Cart"
 }

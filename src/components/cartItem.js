@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, FormGroup, Input } from "reactstrap";
+import { FormattedMessage } from "react-intl";
 
 class CartItem extends Component {
   render() {
@@ -33,7 +34,7 @@ class CartItem extends Component {
             &nbsp;
             <span className="glyphicon glyphicon-plus" />
           </FormGroup>
-          Delete
+          <FormattedMessage id="sys.delete" />
         </Col>
       </Row>
     );

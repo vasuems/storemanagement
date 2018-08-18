@@ -7,14 +7,14 @@ import {
 } from "react-router-dom";
 import Home from "./containers/home";
 import ProductDetail from "./containers/productDetail";
-import Cart from "./containers/Cart";
+import Cart from "./containers/cart";
 import Navigation from "./containers/navigation";
 import Footer from "./components/footer";
 import ProductList from "./containers/featuredProductList";
-import AdminDashboard from "./containers/admin/Dashboard";
+import AdminDashboard from "./containers/admin/dashboard";
 import AdminProductList from "./containers/admin/ProductList";
 import AdminCustomerList from "./containers/admin/CustomerList";
-import AdminOrderList from "./containers/admin/OrderList";
+import AdminOrderList from "./containers/admin/orderList";
 
 class App extends Component {
   render() {
@@ -28,6 +28,7 @@ class App extends Component {
           <Route path="/cart" component={Cart} />
           <Route
             path="/admin"
+            exact
             render={() => <Redirect to="/admin/dashboard" />}
           />
           <Route path="/admin/dashboard" component={AdminDashboard} />
