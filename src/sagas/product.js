@@ -31,7 +31,6 @@ export function* fetchFeaturedProducts(action) {
 
 export function* fetchProductDetail(action) {
   try {
-    console.log(productDetail);
     yield put(fetchProductDetailSuccess(productDetail));
   } catch (error) {
     yield put(fetchProductDetailFailed());
