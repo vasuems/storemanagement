@@ -1,4 +1,4 @@
-# LF Commerce (Your contribution is very welcomed)
+# LF Commerce
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-16.4.2-blue.svg">
@@ -40,3 +40,31 @@ yarn start
 npm start
 ```
 
+## How to contribute to this project?
+
+Your contribution is appreicated. However, there is way of working to follow when you contributing to this project for better project management.
+
+### #1: Always work on your own feature or bugfix branch.
+
+You will need to follow the naming convention if it's a new feature:
+**feature/xxx-xxx-xx**
+
+or **bugfix/xxx-xxx-xx** if it's a bug fixing branch.
+
+### #2. Always send your PR to **dev** branch.
+
+You are not supposed to send a PR directly to **master** branch. You should always BRANCH OUT from **dev** branch and send PR back to **dev** when it's ready for review.
+
+### #3. Always run eslint
+
+Before creating a PR, you should run:
+```console
+yarn eslint
+```
+to make sure all formatting or other issues have been properly fixed.
+
+...
+TBC
+
+## License
+LF Commerce is [Apache-2.0 licensed.](https://github.com/ccwukong/lfcommerce/blob/master/LICENSE)
