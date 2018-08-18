@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Container, Row, Col } from 'reactstrap';
-import { fetchFeaturedProducts } from '../actions';
-import Product from '../components/Product';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Container, Row, Col } from "reactstrap";
+import { fetchFeaturedProducts } from "../actions";
+import Product from "../components/Product";
 
 class FeaturedProductList extends Component {
   componentDidMount() {
@@ -12,9 +12,7 @@ class FeaturedProductList extends Component {
   render() {
     return (
       <Container>
-        <div className="text-center headline">
-                Popular
-        </div>
+        <div className="text-center headline">Popular</div>
         <Row className="show-grid">
           {this.props.featuredProducts.map(product => (
             <Col
@@ -29,8 +27,7 @@ class FeaturedProductList extends Component {
                 productPrice={product.productPrice}
               />
             </Col>
-          ))
-              }
+          ))}
         </Row>
       </Container>
     );
@@ -39,8 +36,11 @@ class FeaturedProductList extends Component {
 
 function mapStateToProps(state) {
   return {
-    featuredProducts: state.featuredProductReducer.featuredProducts,
+    featuredProducts: state.featuredProductReducer.featuredProducts
   };
 }
 
-export default connect(mapStateToProps, null)(FeaturedProductList);
+export default connect(
+  mapStateToProps,
+  null
+)(FeaturedProductList);

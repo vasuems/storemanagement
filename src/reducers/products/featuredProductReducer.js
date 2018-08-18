@@ -1,7 +1,7 @@
-import { FETCH_FEATURED_PRODUCTS_SUCCESS } from '../../actions';
+import { FETCH_FEATURED_PRODUCTS_SUCCESS } from "../../actions";
 
 const initialState = {
-  featuredProducts: [],
+  featuredProducts: []
 };
 
 export default function featuredProductReducer(state = initialState, action) {

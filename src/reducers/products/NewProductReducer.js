@@ -1,7 +1,7 @@
-import { FETCH_NEW_PRODUCTS_SUCCESS } from '../../actions';
+import { FETCH_NEW_PRODUCTS_SUCCESS } from "../../actions";
 
 const initialState = {
-  newProducts: [],
+  newProducts: []
 };
 
 export default function newProductReducer(state = initialState, action) {

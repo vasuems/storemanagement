@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import {
-  Row, Col, FormGroup, Input,
-} from 'reactstrap';
+import React, { Component } from "react";
+import { Row, Col, FormGroup, Input } from "reactstrap";
 
 class CartItem extends Component {
   render() {
@@ -13,7 +11,9 @@ class CartItem extends Component {
               <img src={this.props.productImage} className="cartImage" />
             </Col>
             <Col md={9}>
-              <strong><a href={this.props.productURL}>{this.props.productName}</a></strong>
+              <strong>
+                <a href={this.props.productURL}>{this.props.productName}</a>
+              </strong>
             </Col>
           </Row>
         </Col>
@@ -23,9 +23,14 @@ class CartItem extends Component {
         <Col md={2}>
           <FormGroup>
             <span className="glyphicon glyphicon-minus" />
-&nbsp;
-            <Input type="number" placeholder="0" value={this.props.productQuantity} className="quantity-input" />
-&nbsp;
+            &nbsp;
+            <Input
+              type="number"
+              placeholder="0"
+              value={this.props.productQuantity}
+              className="quantity-input"
+            />
+            &nbsp;
             <span className="glyphicon glyphicon-plus" />
           </FormGroup>
           Delete

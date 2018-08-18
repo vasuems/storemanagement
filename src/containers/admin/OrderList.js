@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
-import {
-  Table, Breadcrumb, Row, Col,
-  Pagination,
-} from 'reactstrap';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Table, Breadcrumb, Row, Col, Pagination } from "reactstrap";
+import { Link } from "react-router-dom";
 
 class OrderList extends Component {
   constructor(props) {
@@ -13,15 +10,11 @@ class OrderList extends Component {
 
   render() {
     return (
-      <div style={{ marginBottom: '30px', height: '90vh' }}>
+      <div style={{ marginBottom: "30px", height: "90vh" }}>
         <h3>Orders</h3>
         <Breadcrumb>
-          <Breadcrumb.Item href="/admin/dashboard">
-                Dashboard
-          </Breadcrumb.Item>
-          <Breadcrumb.Item active>
-                Orders
-          </Breadcrumb.Item>
+          <Breadcrumb.Item href="/admin/dashboard">Dashboard</Breadcrumb.Item>
+          <Breadcrumb.Item active>Orders</Breadcrumb.Item>
         </Breadcrumb>
         <Row>
           <Col md={12}>
@@ -71,7 +64,8 @@ class OrderList extends Component {
             />
           </Col>
         </Row>
-      </div>);
+      </div>
+    );
   }
 }
 

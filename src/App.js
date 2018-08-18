@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
-  BrowserRouter as Router, Redirect, Route, Link,
-} from 'react-router-dom';
-import Home from './containers/home';
-import ProductDetail from './containers/productDetail';
-import Cart from './containers/Cart';
-import Navigation from './containers/Navigation';
-import Footer from './components/Footer';
-import ProductList from './containers/featuredProductList';
-import AdminDashboard from './containers/admin/Dashboard';
-import AdminProductList from './containers/admin/ProductList';
-import AdminCustomerList from './containers/admin/CustomerList';
-import AdminOrderList from './containers/admin/OrderList';
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Link
+} from "react-router-dom";
+import Home from "./containers/home";
+import ProductDetail from "./containers/productDetail";
+import Cart from "./containers/Cart";
+import Navigation from "./containers/Navigation";
+import Footer from "./components/Footer";
+import ProductList from "./containers/featuredProductList";
+import AdminDashboard from "./containers/admin/Dashboard";
+import AdminProductList from "./containers/admin/ProductList";
+import AdminCustomerList from "./containers/admin/CustomerList";
+import AdminOrderList from "./containers/admin/OrderList";
 
 class App extends Component {
   render() {
@@ -25,9 +28,7 @@ class App extends Component {
           <Route path="/cart" component={Cart} />
           <Route
             path="/admin"
-            render={() => (
-              <Redirect to="/admin/dashboard" />
-            )}
+            render={() => <Redirect to="/admin/dashboard" />}
           />
           <Route path="/admin/dashboard" component={AdminDashboard} />
           <Route path="/admin/products" component={AdminProductList} />

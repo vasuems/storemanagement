@@ -1,13 +1,17 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put } from "redux-saga/effects";
 import {
-  fetchNewProductsSuccess, fetchNewProductsFailed,
-  fetchFeaturedProductsSuccess, fetchFeaturedProductsFailed,
-  fetchProductDetailSuccess, fetchProductDetailFailed,
-} from '../actions';
+  fetchNewProductsSuccess,
+  fetchNewProductsFailed,
+  fetchFeaturedProductsSuccess,
+  fetchFeaturedProductsFailed,
+  fetchProductDetailSuccess,
+  fetchProductDetailFailed
+} from "../actions";
 import {
-  newProducts, featuredProducts,
-  productDetail,
-} from '../apis/mocks/responses';
+  newProducts,
+  featuredProducts,
+  productDetail
+} from "../apis/mocks/responses";
 
 export function* fetchNewProducts(action) {
   try {

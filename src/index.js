@@ -1,22 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import App from './App';
-import rootReducer from './reducers';
-import rootSaga from './sagas';
-import registerServiceWorker from './registerServiceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
-import './App.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
+import App from "./App";
+import rootReducer from "./reducers";
+import rootSaga from "./sagas";
+import registerServiceWorker from "./registerServiceWorker";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
+import "./App.css";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(sagaMiddleware),
-);
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
 
@@ -25,5 +22,5 @@ const LFCommerce = () => (
     <App />
   </Provider>
 );
-ReactDOM.render(<LFCommerce />, document.getElementById('root'));
+ReactDOM.render(<LFCommerce />, document.getElementById("root"));
 registerServiceWorker();
