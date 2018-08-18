@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router, Redirect, Route, Link,
 } from 'react-router-dom';
-import Home from './containers/Home';
-import ProductDetail from './containers/ProductDetail';
+import Home from './containers/home';
+import ProductDetail from './containers/productDetail';
 import Cart from './containers/Cart';
 import Navigation from './containers/Navigation';
 import Footer from './components/Footer';
