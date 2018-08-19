@@ -15,6 +15,9 @@
     height: 38px;
     line-height: 38px;
 }
+.sidebar-link-btn{
+    color: '#fff' !important;
+}
 .product-detail-img{
     width: 70%;
 }

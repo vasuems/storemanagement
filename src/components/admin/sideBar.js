@@ -1,14 +1,65 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Button } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
 
 const SideBarContent = props => (
   <Container>
     <Row id="sidebar-header">LF Commerce Admin</Row>
-    <Row className="sidebar-link">Dashboard</Row>
-    <Row className="sidebar-link">Customers</Row>
-    <Row className="sidebar-link">Products</Row>
-    <Row className="sidebar-link">Payments</Row>
-    <Row className="sidebar-link">Reports</Row>
+    <Row className="sidebar-link">
+      <Button
+        color="link"
+        style={{ color: '#fff' }}
+        onClick={() => {
+          props.onPathChange('dashboard');
+        }}
+      >
+        <FormattedMessage id="sys.dashboard" />
+      </Button>
+    </Row>
+    <Row className="sidebar-link">
+      <Button
+        color="link"
+        style={{ color: '#fff' }}
+        onClick={() => {
+          props.onPathChange('customers');
+        }}
+      >
+        <FormattedMessage id="sys.customers" />
+      </Button>
+    </Row>
+    <Row className="sidebar-link">
+      <Button
+        color="link"
+        style={{ color: '#fff' }}
+        onClick={() => {
+          props.onPathChange('products');
+        }}
+      >
+        <FormattedMessage id="sys.products" />
+      </Button>
+    </Row>
+    <Row className="sidebar-link">
+      <Button
+        color="link"
+        style={{ color: '#fff' }}
+        onClick={() => {
+          props.onPathChange('payments');
+        }}
+      >
+        <FormattedMessage id="sys.payments" />
+      </Button>
+    </Row>
+    <Row className="sidebar-link">
+      <Button
+        color="link"
+        style={{ color: '#fff' }}
+        onClick={() => {
+          props.onPathChange('reports');
+        }}
+      >
+        <FormattedMessage id="sys.reports" />
+      </Button>
+    </Row>
   </Container>
 );
 
