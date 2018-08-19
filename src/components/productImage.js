@@ -11,7 +11,7 @@ class ProductImage extends Component {
       <Row>
         <Col md={2} style={{ paddingRight: 0 }}>
           {this.props.thumbnails.map(thumbnail => (
-            <img src={thumbnail} className="productDetailImage" />
+            <img src={thumbnail} className="product-detail-img" />
           ))}
         </Col>
         <Col md={10}>

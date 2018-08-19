@@ -8,13 +8,22 @@ import {
   Col,
   Button
 } from "reactstrap";
-import CartItem from "../components/CartItem";
+import { FormattedMessage } from "react-intl";
+import CartItem from "../components/cartItem";
+import { fetchCart } from "../actions";
 
 class Cart extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchCart());
+  }
+
   render() {
     return (
       <Container>
-        <div className="text-center lead">My Shopping Cart</div>
+        <div className="text-center lead">
+          <FormattedMessage id="sys.myCart" />
+        </div>
         <Row>
           <Col md={12}>
             <ListGroup>
@@ -42,7 +51,7 @@ class Cart extends Component {
             </div>
             <br />
             <Button bsStyle="primary" style={{ float: "right" }}>
-              Checkout
+              <FormattedMessage id="sys.checkout" />
             </Button>
           </Col>
         </Row>
@@ -53,7 +62,7 @@ class Cart extends Component {
 
 function mapStateToProps(state) {
   return {
-    cart: state.cart
+    cart: state.cartReducer.cart
   };
 }
 

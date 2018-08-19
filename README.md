@@ -1,6 +1,6 @@
 # LF Commerce
 
-<p align="center">
+<p>
   <img src="https://img.shields.io/badge/React-16.4.2-blue.svg">
   <img src="https://img.shields.io/badge/Redux-4.0.0-purple.svg?colorB=764abc">
   <img src="https://img.shields.io/badge/Nodejs-8.10.0-green.svg?colorB=90c53f">
@@ -51,9 +51,9 @@ You will need to follow the naming convention if it's a new feature:
 
 or **bugfix/xxx-xxx-xx** if it's a bug fixing branch.
 
-### #2. Always send your PR to **dev** branch.
+### #2. Always send your PR to **master** branch.
 
-You are not supposed to send a PR directly to **master** branch. You should always BRANCH OUT from **dev** branch and send PR back to **dev** when it's ready for review.
+You should always BRANCH OUT from **master** branch and send PR back to **master** when it's ready for review.
 
 ### #3. Always run eslint
 

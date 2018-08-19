@@ -1,21 +1,28 @@
-#searchBar{
+#search-bar{
     border-radius: 30px;
 }
-.cartImage{
+.pull-right{
+    display: block;
+    float: right;
+}
+.cart-img{
     width: 80%;
 }
-.productDetailImage{
+.product-detail-img{
     width: 70%;
 }
 .price{
     color: #b71d1d;
 }
-.badge-danger{
-    background-color:#D9534F;
+.badge{
+    border-radius: 50%;
 }
 .quantity-input{
     width: 60px;
     display:inline-block;
+}
+.dropdown-item{
+    padding: 5px 0;
 }
 a, a:hover, a:link, a:active, a:visited{
     text-decoration: none;

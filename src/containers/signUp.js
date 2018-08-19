@@ -15,11 +15,11 @@ import {
   FormattedMessage
 } from "react-intl";
 
-class Login extends Component{
+class SignUp extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      modal: props.show
+      modal: true
     };
   }
 
@@ -39,10 +39,16 @@ class Login extends Component{
         toggle={this.toggle}
       >
         <ModalHeader toggle={this.toggle}>
-          <FormattedMessage id="sys.signin" />
+          <FormattedMessage id="sys.register" />
         </ModalHeader>
         <ModalBody>
           <Form horizontal>
+            <FormGroup controlId="formHorizontalFirstName">
+              <Input type="text" placeholder={formatMessage({id: 'sys.fName'})} />
+            </FormGroup>
+            <FormGroup controlId="formHorizontalLastName">
+              <Input type="text" placeholder={formatMessage({id: 'sys.lName'})} />
+            </FormGroup>
             <FormGroup controlId="formHorizontalEmail">
               <Input type="email" placeholder={formatMessage({id: 'sys.email'})} />
             </FormGroup>
@@ -50,8 +56,8 @@ class Login extends Component{
               <Input type="password" placeholder={formatMessage({id: 'sys.pwd'})} />
             </FormGroup>
             <FormGroup>
-              <Button color="info" className="float-right" block>
-                <FormattedMessage id="sys.signin" />
+              <Button color="primary" className="float-right" block>
+                <FormattedMessage id="sys.register" />
               </Button>
             </FormGroup>
           </Form>
@@ -68,4 +74,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null
-)(injectIntl(Login));
+)(injectIntl(SignUp));

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {
     return (
-      <div style={{ marginTop: "30px", marginBottom: "30px", height: "90vh" }}>
+      <Container>
         <h3>Modules</h3>
         <Row>
           <Col md={2} className="text-center">
@@ -65,7 +65,7 @@ class Dashboard extends Component {
             </Link>
           </Col>
         </Row>
-      </div>
+      </Container>
     );
   }
 }
