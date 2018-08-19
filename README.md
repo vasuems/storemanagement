@@ -50,7 +50,7 @@ yarn test [test_directory]
 
 ## How to contribute to this project?
 
-Your contribution is appreicated. However, there is way of working to follow when you contributing to this project for better project management.
+Your contribution is appreicated. For the purpose of having good project management, I encourage you to understand *way of working* before you start to contribute to this project.
 
 ### 1. Always work on your own feature or bugfix branch.
 
