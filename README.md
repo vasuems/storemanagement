@@ -40,11 +40,19 @@ yarn start
 npm start
 ```
 
+## Unit Test
+
+For every main directory (components, containers etc.), there should be a \_\_tests\_\_ directory for all unit test cases.
+```console
+yarn test [test_directory]
+```
+
+
 ## How to contribute to this project?
 
 Your contribution is appreicated. However, there is way of working to follow when you contributing to this project for better project management.
 
-### #1: Always work on your own feature or bugfix branch.
+### 1. Always work on your own feature or bugfix branch.
 
 You will need to follow the naming convention if it's a new feature:
 **feature/xxx-xxx-xx**
@@ -55,7 +63,7 @@ or **bugfix/xxx-xxx-xx** if it's a bug fixing branch.
 
 You should always BRANCH OUT from **master** branch and send PR back to **master** when it's ready for review.
 
-### #3. Always run eslint
+### 3. Always run eslint
 
 Before creating a PR, you should run:
 ```console
