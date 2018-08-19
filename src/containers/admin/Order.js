@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Navbar,
   Nav,
@@ -12,8 +12,8 @@ import {
   FormGroup,
   Input,
   Button
-} from "reactstrap";
-import { Link } from "react-router-dom";
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Order extends Component {
   render() {

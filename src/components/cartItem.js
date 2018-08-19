@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import { Row, Col, FormGroup, Input } from "reactstrap";
+import React, { Component } from 'react';
+import { Row, Col, FormGroup, Input } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
 
 class CartItem extends Component {
   render() {
@@ -8,7 +9,7 @@ class CartItem extends Component {
         <Col md={8}>
           <Row>
             <Col md={3}>
-              <img src={this.props.productImage} className="cartImage" />
+              <img src={this.props.productImage} className="cart-img" />
             </Col>
             <Col md={9}>
               <strong>
@@ -33,7 +34,7 @@ class CartItem extends Component {
             &nbsp;
             <span className="glyphicon glyphicon-plus" />
           </FormGroup>
-          Delete
+          <FormattedMessage id="sys.delete" />
         </Col>
       </Row>
     );

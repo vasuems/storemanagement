@@ -1,4 +1,4 @@
-import { FETCH_PRODUCT_DETAIL_SUCCESS } from "../../actions";
+import { FETCH_PRODUCT_DETAIL_SUCCESS } from '../../actions';
 
 const initialState = {
   productDetail: null

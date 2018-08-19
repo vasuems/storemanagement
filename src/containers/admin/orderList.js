@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Table, Breadcrumb, Row, Col, Pagination } from "reactstrap";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Container, Table, Row, Col, Pagination } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
 
 class OrderList extends Component {
   constructor(props) {
@@ -10,12 +10,8 @@ class OrderList extends Component {
 
   render() {
     return (
-      <div style={{ marginBottom: "30px", height: "90vh" }}>
+      <Container>
         <h3>Orders</h3>
-        <Breadcrumb>
-          <Breadcrumb.Item href="/admin/dashboard">Dashboard</Breadcrumb.Item>
-          <Breadcrumb.Item active>Orders</Breadcrumb.Item>
-        </Breadcrumb>
         <Row>
           <Col md={12}>
             <Table condensed responsive>
@@ -64,7 +60,7 @@ class OrderList extends Component {
             />
           </Col>
         </Row>
-      </div>
+      </Container>
     );
   }
 }

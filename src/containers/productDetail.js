@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Container,
   Row,
@@ -8,10 +8,12 @@ import {
   FormGroup,
   Label,
   Input
-} from "reactstrap";
-import { FormattedMessage } from "react-intl";
-import { fetchProductDetail } from "../actions";
-import ProductImage from "../components/productImage";
+} from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
+import Navigation from './navigation';
+import Footer from '../components/footer';
+import { fetchProductDetail } from '../actions';
+import ProductImage from '../components/productImage';
 
 class ProductDetail extends Component {
   componentDidMount() {
@@ -21,6 +23,7 @@ class ProductDetail extends Component {
   render() {
     return this.props.productDetail ? (
       <Container>
+        <Navigation />
         <Row>
           <Col md={9}>
             <ProductImage
@@ -71,6 +74,7 @@ class ProductDetail extends Component {
             </Button>
           </Col>
         </Row>
+        <Footer />
       </Container>
     ) : null;
   }

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Container, Row, Col, Button } from "reactstrap";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Container, Row, Col, Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Product extends Component {
   render() {
@@ -31,7 +31,7 @@ class Product extends Component {
             </ListGroup>
           </Col>
         </Row>
-        <Button bsStyle="primary" style={{ float: "right" }}>
+        <Button bsStyle="primary" style={{ float: 'right' }}>
           Checkout
         </Button>
       </Container>

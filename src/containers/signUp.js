@@ -12,11 +12,11 @@ import {
 import { Link } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
-class Login extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: props.show
+      modal: false
     };
   }
 
@@ -32,10 +32,22 @@ class Login extends Component {
     return (
       <Modal size="sm" isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>
-          <FormattedMessage id="sys.signin" />
+          <FormattedMessage id="sys.register" />
         </ModalHeader>
         <ModalBody>
           <Form horizontal>
+            <FormGroup controlId="formHorizontalFirstName">
+              <Input
+                type="text"
+                placeholder={formatMessage({ id: 'sys.fName' })}
+              />
+            </FormGroup>
+            <FormGroup controlId="formHorizontalLastName">
+              <Input
+                type="text"
+                placeholder={formatMessage({ id: 'sys.lName' })}
+              />
+            </FormGroup>
             <FormGroup controlId="formHorizontalEmail">
               <Input
                 type="email"
@@ -49,8 +61,8 @@ class Login extends Component {
               />
             </FormGroup>
             <FormGroup>
-              <Button color="info" className="float-right" block>
-                <FormattedMessage id="sys.signin" />
+              <Button color="primary" className="float-right" block>
+                <FormattedMessage id="sys.register" />
               </Button>
             </FormGroup>
           </Form>
@@ -67,4 +79,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null
-)(injectIntl(Login));
+)(injectIntl(SignUp));

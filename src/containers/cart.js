@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Container,
   ListGroup,
@@ -7,14 +7,26 @@ import {
   Row,
   Col,
   Button
-} from "reactstrap";
-import CartItem from "../components/CartItem";
+} from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
+import Navigation from './navigation';
+import Footer from '../components/footer';
+import CartItem from '../components/cartItem';
+import { fetchCart } from '../actions';
 
 class Cart extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchCart());
+  }
+
   render() {
     return (
       <Container>
-        <div className="text-center lead">My Shopping Cart</div>
+        <Navigation />
+        <div className="text-center lead">
+          <FormattedMessage id="sys.myCart" />
+        </div>
         <Row>
           <Col md={12}>
             <ListGroup>
@@ -41,11 +53,12 @@ class Cart extends Component {
               </strong>
             </div>
             <br />
-            <Button bsStyle="primary" style={{ float: "right" }}>
-              Checkout
+            <Button bsStyle="primary" style={{ float: 'right' }}>
+              <FormattedMessage id="sys.checkout" />
             </Button>
           </Col>
         </Row>
+        <Footer />
       </Container>
     );
   }
@@ -53,7 +66,7 @@ class Cart extends Component {
 
 function mapStateToProps(state) {
   return {
-    cart: state.cart
+    cart: state.cartReducer.cart
   };
 }
 
