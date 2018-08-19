@@ -51,9 +51,9 @@ You will need to follow the naming convention if it's a new feature:
 
 or **bugfix/xxx-xxx-xx** if it's a bug fixing branch.
 
-### #2. Always send your PR to **dev** branch.
+### #2. Always send your PR to **master** branch.
 
-You are not supposed to send a PR directly to **master** branch. You should always BRANCH OUT from **dev** branch and send PR back to **dev** when it's ready for review.
+You should always BRANCH OUT from **master** branch and send PR back to **master** when it's ready for review.
 
 ### #3. Always run eslint
 
