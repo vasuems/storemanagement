@@ -10,7 +10,7 @@ import ProductDetail from './containers/productDetail';
 import Cart from './containers/cart';
 import ProductList from './containers/productList';
 import AdminDashboard from './containers/admin/sideBar';
-import AdminProductList from './containers/admin/ProductList';
+import AdminProductList from './containers/admin/productList';
 import AdminCustomerList from './containers/admin/customerList';
 import AdminOrderList from './containers/admin/orderList';
 

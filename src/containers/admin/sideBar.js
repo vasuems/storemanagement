@@ -5,6 +5,8 @@ import SideBarContent from '../../components/admin/sideBar';
 import Dashboard from './dashboard';
 import CustomerList from './customerList';
 import OrderList from './orderList';
+import ProductList from './productList';
+import Payment from './payment';
 
 const sideBarStyle = {
   width: 200,
@@ -45,6 +47,10 @@ class SideBar extends Component {
               return <CustomerList />;
             case 'orders':
               return <OrderList />;
+            case 'products':
+              return <ProductList />;
+            case 'payments':
+              return <Payment />;
           }
         })(this.state.path)}
       </Sidebar>
