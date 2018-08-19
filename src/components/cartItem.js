@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Row, Col, FormGroup, Input } from "reactstrap";
-import { FormattedMessage } from "react-intl";
+import React, { Component } from 'react';
+import { Row, Col, FormGroup, Input } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
 
 class CartItem extends Component {
   render() {

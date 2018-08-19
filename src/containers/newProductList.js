@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Container, Row, Col } from "reactstrap";
-import { FormattedMessage } from "react-intl";
-import { fetchNewProducts } from "../actions";
-import Product from "../components/product";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Container, Row, Col } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
+import { fetchNewProducts } from '../actions';
+import Product from '../components/product';
 
 class NewProductList extends Component {
   componentDidMount() {

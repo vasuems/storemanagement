@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Container, Table, Breadcrumb, Row, Col, Pagination } from "reactstrap";
-import { FormattedMessage } from "react-intl";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Container, Table, Breadcrumb, Row, Col, Pagination } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 
 class OrderList extends Component {
   constructor(props) {

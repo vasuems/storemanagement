@@ -1,4 +1,4 @@
-import { call, put } from "redux-saga/effects";
+import { call, put } from 'redux-saga/effects';
 import {
   fetchNewProductsSuccess,
   fetchNewProductsFailed,
@@ -8,8 +8,8 @@ import {
   fetchProductDetailFailed,
   fetchCartSuccess,
   fetchCartFailed
-} from "../actions";
-import { cart } from "../apis/mocks/responses";
+} from '../actions';
+import { cart } from '../apis/mocks/responses';
 
 export function* fetchCart(action) {
   try {

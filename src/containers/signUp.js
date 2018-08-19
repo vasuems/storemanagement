@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Form,
   FormGroup,
@@ -8,18 +8,15 @@ import {
   ModalHeader,
   ModalBody,
   Button
-} from "reactstrap";
-import { Link } from "react-router-dom";
-import {
-  injectIntl,
-  FormattedMessage
-} from "react-intl";
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { injectIntl, FormattedMessage } from 'react-intl';
 
-class SignUp extends Component{
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: true
+      modal: false
     };
   }
 
@@ -27,33 +24,41 @@ class SignUp extends Component{
     this.setState({
       modal: !this.state.modal
     });
-  }
+  };
 
   render() {
-    const {formatMessage} = this.props.intl;
+    const { formatMessage } = this.props.intl;
 
     return (
-      <Modal
-        size="sm"
-        isOpen={this.state.modal}
-        toggle={this.toggle}
-      >
+      <Modal size="sm" isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>
           <FormattedMessage id="sys.register" />
         </ModalHeader>
         <ModalBody>
           <Form horizontal>
             <FormGroup controlId="formHorizontalFirstName">
-              <Input type="text" placeholder={formatMessage({id: 'sys.fName'})} />
+              <Input
+                type="text"
+                placeholder={formatMessage({ id: 'sys.fName' })}
+              />
             </FormGroup>
             <FormGroup controlId="formHorizontalLastName">
-              <Input type="text" placeholder={formatMessage({id: 'sys.lName'})} />
+              <Input
+                type="text"
+                placeholder={formatMessage({ id: 'sys.lName' })}
+              />
             </FormGroup>
             <FormGroup controlId="formHorizontalEmail">
-              <Input type="email" placeholder={formatMessage({id: 'sys.email'})} />
+              <Input
+                type="email"
+                placeholder={formatMessage({ id: 'sys.email' })}
+              />
             </FormGroup>
             <FormGroup controlId="formHorizontalPassword">
-              <Input type="password" placeholder={formatMessage({id: 'sys.pwd'})} />
+              <Input
+                type="password"
+                placeholder={formatMessage({ id: 'sys.pwd' })}
+              />
             </FormGroup>
             <FormGroup>
               <Button color="primary" className="float-right" block>

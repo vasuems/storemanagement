@@ -1,15 +1,17 @@
-import React, { Component } from "react";
-import { Container, Row, Col, Button } from "reactstrap";
-import { Link } from "react-router-dom";
-import Product from "./Product";
-import sampleProducts from "../../samples/SampleProducts";
+import React, { Component } from 'react';
+import { Container, Row, Col, Button } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
+import Navigation from './navigation';
+import Footer from '../components/footer';
+import Product from '../components/product';
 
 class ProductList extends Component {
   render() {
     return (
       <Container>
+        <Navigation />
         <Row className="show-grid">
-          {sampleProducts.map(product => (
+          {[].map(product => (
             <Col key={product.productURL} md={3}>
               <Product
                 productName={product.productName}
@@ -20,9 +22,10 @@ class ProductList extends Component {
             </Col>
           ))}
         </Row>
-        <Button bsStyle="primary" style={{ float: "right" }}>
+        <Button bsStyle="primary" style={{ float: 'right' }}>
           <FormattedMessage id="sys.checkout" />
         </Button>
+        <Footer />
       </Container>
     );
   }

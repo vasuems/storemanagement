@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Container,
   ListGroup,
@@ -7,10 +7,12 @@ import {
   Row,
   Col,
   Button
-} from "reactstrap";
-import { FormattedMessage } from "react-intl";
-import CartItem from "../components/cartItem";
-import { fetchCart } from "../actions";
+} from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
+import Navigation from './navigation';
+import Footer from '../components/footer';
+import CartItem from '../components/cartItem';
+import { fetchCart } from '../actions';
 
 class Cart extends Component {
   componentDidMount() {
@@ -21,6 +23,7 @@ class Cart extends Component {
   render() {
     return (
       <Container>
+        <Navigation />
         <div className="text-center lead">
           <FormattedMessage id="sys.myCart" />
         </div>
@@ -50,11 +53,12 @@ class Cart extends Component {
               </strong>
             </div>
             <br />
-            <Button bsStyle="primary" style={{ float: "right" }}>
+            <Button bsStyle="primary" style={{ float: 'right' }}>
               <FormattedMessage id="sys.checkout" />
             </Button>
           </Col>
         </Row>
+        <Footer />
       </Container>
     );
   }

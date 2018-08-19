@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Dashboard extends Component {
   render() {
@@ -12,10 +12,10 @@ class Dashboard extends Component {
             <Link to="/admin/orders">
               <div
                 style={{
-                  width: "100%",
-                  height: "100px",
-                  backgroundColor: "silver",
-                  lineHeight: "100px"
+                  width: '100%',
+                  height: '100px',
+                  backgroundColor: 'silver',
+                  lineHeight: '100px'
                 }}
               >
                 10 Orders
@@ -26,10 +26,10 @@ class Dashboard extends Component {
             <Link to="/admin/customers">
               <div
                 style={{
-                  width: "100%",
-                  height: "100px",
-                  backgroundColor: "silver",
-                  lineHeight: "100px"
+                  width: '100%',
+                  height: '100px',
+                  backgroundColor: 'silver',
+                  lineHeight: '100px'
                 }}
               >
                 10 Customers
@@ -40,10 +40,10 @@ class Dashboard extends Component {
             <Link to="/admin/products">
               <div
                 style={{
-                  width: "100%",
-                  height: "100px",
-                  backgroundColor: "silver",
-                  lineHeight: "100px"
+                  width: '100%',
+                  height: '100px',
+                  backgroundColor: 'silver',
+                  lineHeight: '100px'
                 }}
               >
                 10 Products
@@ -54,10 +54,10 @@ class Dashboard extends Component {
             <Link to="/admin/payment">
               <div
                 style={{
-                  width: "100%",
-                  height: "100px",
-                  backgroundColor: "silver",
-                  lineHeight: "100px"
+                  width: '100%',
+                  height: '100px',
+                  backgroundColor: 'silver',
+                  lineHeight: '100px'
                 }}
               >
                 2 Payment

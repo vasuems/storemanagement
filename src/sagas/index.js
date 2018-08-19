@@ -1,16 +1,16 @@
-import { takeEvery, takeLatest, all } from "redux-saga/effects";
+import { takeEvery, takeLatest, all } from 'redux-saga/effects';
 import {
   FETCH_NEW_PRODUCTS,
   FETCH_FEATURED_PRODUCTS,
   FETCH_PRODUCT_DETAIL,
   FETCH_CART
-} from "../actions";
+} from '../actions';
 import {
   fetchNewProducts,
   fetchFeaturedProducts,
   fetchProductDetail
-} from "./product";
-import { fetchCart } from "./cart";
+} from './product';
+import { fetchCart } from './cart';
 
 export default function* rootSaga() {
   yield all([
