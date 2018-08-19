@@ -1,6 +1,6 @@
-export const FETCH_CART = "FETCH_CART";
-export const FETCH_CART_SUCCESS = "FETCH_CART_SUCCESS";
-export const FETCH_CART_FAILED = "FETCH_CART_FAILED";
+export const FETCH_CART = 'FETCH_CART';
+export const FETCH_CART_SUCCESS = 'FETCH_CART_SUCCESS';
+export const FETCH_CART_FAILED = 'FETCH_CART_FAILED';
 
 export function fetchCart() {
   return { type: FETCH_CART };

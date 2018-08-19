@@ -1,4 +1,4 @@
-import { FETCH_CART_SUCCESS } from "../../actions";
+import { FETCH_CART_SUCCESS } from '../../actions';
 
 const initialState = {
   cart: []

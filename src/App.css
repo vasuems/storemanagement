@@ -8,6 +8,13 @@
 .cart-img{
     width: 80%;
 }
+#sidebar-header{
+    height: 100px;
+}
+.sidebar-link{
+    height: 38px;
+    line-height: 38px;
+}
 .product-detail-img{
     width: 70%;
 }

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Form,
   FormGroup,
@@ -8,14 +8,11 @@ import {
   ModalHeader,
   ModalBody,
   Button
-} from "reactstrap";
-import { Link } from "react-router-dom";
-import {
-  injectIntl,
-  FormattedMessage
-} from "react-intl";
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { injectIntl, FormattedMessage } from 'react-intl';
 
-class Login extends Component{
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,27 +24,29 @@ class Login extends Component{
     this.setState({
       modal: !this.state.modal
     });
-  }
+  };
 
   render() {
-    const {formatMessage} = this.props.intl;
+    const { formatMessage } = this.props.intl;
 
     return (
-      <Modal
-        size="sm"
-        isOpen={this.state.modal}
-        toggle={this.toggle}
-      >
+      <Modal size="sm" isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>
           <FormattedMessage id="sys.signin" />
         </ModalHeader>
         <ModalBody>
           <Form horizontal>
             <FormGroup controlId="formHorizontalEmail">
-              <Input type="email" placeholder={formatMessage({id: 'sys.email'})} />
+              <Input
+                type="email"
+                placeholder={formatMessage({ id: 'sys.email' })}
+              />
             </FormGroup>
             <FormGroup controlId="formHorizontalPassword">
-              <Input type="password" placeholder={formatMessage({id: 'sys.pwd'})} />
+              <Input
+                type="password"
+                placeholder={formatMessage({ id: 'sys.pwd' })}
+              />
             </FormGroup>
             <FormGroup>
               <Button color="info" className="float-right" block>

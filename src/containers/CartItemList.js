@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Container,
   ListGroup,
@@ -6,8 +6,8 @@ import {
   Row,
   Col,
   Button
-} from "reactstrap";
-import { Link } from "react-router-dom";
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class CartItemList extends Component {
   render() {
@@ -49,7 +49,7 @@ class CartItemList extends Component {
             </ListGroup>
           </Col>
         </Row>
-        <Button bsStyle="primary" style={{ float: "right" }}>
+        <Button bsStyle="primary" style={{ float: 'right' }}>
           Checkout
         </Button>
       </Container>

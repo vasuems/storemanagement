@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   ListGroup,
   ListGroupItem,
@@ -6,13 +6,13 @@ import {
   Row,
   Col,
   Button
-} from "reactstrap";
-import { Link } from "react-router-dom";
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class ProductList extends Component {
   render() {
     return (
-      <div style={{ marginBottom: "30px" }}>
+      <div style={{ marginBottom: '30px' }}>
         <h3>Products</h3>
         <Breadcrumb>
           <Breadcrumb.Item href="/admin/dashboard">Dashboard</Breadcrumb.Item>
@@ -38,7 +38,7 @@ class ProductList extends Component {
             </ListGroup>
           </Col>
         </Row>
-        <Button bsStyle="primary" style={{ float: "right" }}>
+        <Button bsStyle="primary" style={{ float: 'right' }}>
           Checkout
         </Button>
       </div>
