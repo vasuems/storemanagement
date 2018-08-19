@@ -16,5 +16,10 @@
   "sys.email": "Email",
   "sys.pwd": "Password",
   "sys.fName": "First Name",
-  "sys.lName": "Last Name"
+  "sys.lName": "Last Name",
+  "sys.payments": "Payments",
+  "sys.products": "Products",
+  "sys.dashboard": "Dashboard",
+  "sys.customers": "Customers",
+  "sys.reports": "Reports"
 }
