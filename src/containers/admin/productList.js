@@ -2,22 +2,18 @@ import React, { Component } from 'react';
 import {
   ListGroup,
   ListGroupItem,
-  Breadcrumb,
+  Container,
   Row,
   Col,
   Button
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
-class CustomerList extends Component {
+class ProductList extends Component {
   render() {
     return (
-      <div style={{ marginBottom: '30px' }}>
-        <h3>Customers</h3>
-        <Breadcrumb>
-          <Breadcrumb.Item href="/admin/dashboard">Dashboard</Breadcrumb.Item>
-          <Breadcrumb.Item active>Customers</Breadcrumb.Item>
-        </Breadcrumb>
+      <Container>
+        <h3><FormattedMessage id="sys.products" /></h3>
         <Row>
           <Col md={12}>
             <ListGroup>
@@ -41,9 +37,9 @@ class CustomerList extends Component {
         <Button bsStyle="primary" style={{ float: 'right' }}>
           Checkout
         </Button>
-      </div>
+      </Container>
     );
   }
 }
 
-export default CustomerList;
+export default ProductList;

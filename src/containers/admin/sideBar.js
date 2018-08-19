@@ -3,7 +3,10 @@ import Sidebar from 'react-sidebar';
 import { withRouter } from 'react-router-dom';
 import SideBarContent from '../../components/admin/sideBar';
 import Dashboard from './dashboard';
+import CustomerList from './customerList';
 import OrderList from './orderList';
+import ProductList from './productList';
+import Payment from './payment';
 
 const sideBarStyle = {
   width: 200,
@@ -37,12 +40,17 @@ class SideBar extends Component {
         styles={{ sidebar: sideBarStyle }}
       >
         {(function(path) {
-          console.log(path);
           switch (path) {
             case 'dashboard':
               return <Dashboard />;
             case 'customers':
+              return <CustomerList />;
+            case 'orders':
               return <OrderList />;
+            case 'products':
+              return <ProductList />;
+            case 'payments':
+              return <Payment />;
           }
         })(this.state.path)}
       </Sidebar>
