@@ -32,6 +32,17 @@ const SideBarContent = props => (
         color="link"
         style={{ color: '#fff' }}
         onClick={() => {
+          props.onPathChange('orders');
+        }}
+      >
+        <FormattedMessage id="sys.orders" />
+      </Button>
+    </Row>
+    <Row className="sidebar-link">
+      <Button
+        color="link"
+        style={{ color: '#fff' }}
+        onClick={() => {
           props.onPathChange('products');
         }}
       >

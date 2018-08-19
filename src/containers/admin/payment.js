@@ -13,7 +13,6 @@ import {
   Input,
   Button
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 class Payment extends Component {
   render() {

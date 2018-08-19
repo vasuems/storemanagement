@@ -21,5 +21,6 @@
   "sys.products": "Products",
   "sys.dashboard": "Dashboard",
   "sys.customers": "Customers",
-  "sys.reports": "Reports"
+  "sys.reports": "Reports",
+  "sys.orders": "Orders"
 }

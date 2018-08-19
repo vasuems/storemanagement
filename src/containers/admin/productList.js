@@ -7,7 +7,6 @@ import {
   Col,
   Button
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 class ProductList extends Component {
   render() {

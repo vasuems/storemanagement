@@ -11,7 +11,7 @@ import Cart from './containers/cart';
 import ProductList from './containers/productList';
 import AdminDashboard from './containers/admin/sideBar';
 import AdminProductList from './containers/admin/ProductList';
-import AdminCustomerList from './containers/admin/CustomerList';
+import AdminCustomerList from './containers/admin/customerList';
 import AdminOrderList from './containers/admin/orderList';
 
 class App extends Component {
