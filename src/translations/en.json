@@ -5,11 +5,16 @@
   "prod.qty": "Quantity",
   "sys.close": "Close",
   "sys.signin": "Sign In",
+  "sys.register": "Register",
   "sys.logout": "Log Out",
   "sys.myAccount": "My Account",
   "sys.cart": "Cart",
   "sys.addToCart": "Add to Cart",
   "sys.checkout": "Checkout",
   "sys.delete": "Delete",
-  "sys.myCart": "My Shopping Cart"
+  "sys.myCart": "My Shopping Cart",
+  "sys.email": "Email",
+  "sys.pwd": "Password",
+  "sys.fName": "First Name",
+  "sys.lName": "Last Name"
 }

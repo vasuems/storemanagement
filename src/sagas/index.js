@@ -10,9 +10,7 @@ import {
   fetchFeaturedProducts,
   fetchProductDetail
 } from "./product";
-import {
-  fetchCart
-} from "./cart";
+import { fetchCart } from "./cart";
 
 export default function* rootSaga() {
   yield all([

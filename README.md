@@ -1,6 +1,6 @@
 # LF Commerce
 
-<p align="center">
+<p>
   <img src="https://img.shields.io/badge/React-16.4.2-blue.svg">
   <img src="https://img.shields.io/badge/Redux-4.0.0-purple.svg?colorB=764abc">
   <img src="https://img.shields.io/badge/Nodejs-8.10.0-green.svg?colorB=90c53f">

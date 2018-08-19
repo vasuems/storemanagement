@@ -1,10 +1,14 @@
-#searchBar{
+#search-bar{
     border-radius: 30px;
 }
-.cartImage{
+.pull-right{
+    display: block;
+    float: right;
+}
+.cart-img{
     width: 80%;
 }
-.productDetailImage{
+.product-detail-img{
     width: 70%;
 }
 .price{

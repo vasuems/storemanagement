@@ -9,9 +9,7 @@ import {
   fetchCartSuccess,
   fetchCartFailed
 } from "../actions";
-import {
-  cart
-} from "../apis/mocks/responses";
+import { cart } from "../apis/mocks/responses";
 
 export function* fetchCart(action) {
   try {
@@ -20,4 +18,3 @@ export function* fetchCart(action) {
     yield put(fetchCartFailed());
   }
 }
-

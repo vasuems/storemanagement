@@ -11,18 +11,14 @@ import {
   DropdownToggle,
   DropdownItem,
   Badge,
-  Row,
-  Col,
   Container,
   Input
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
-import { 
-  FaShoppingCart,
-  FaUser,
-  FaSignOutAlt } from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaSignOutAlt } from "react-icons/fa";
 import Login from "./login";
+import SignUp from "./signUp";
 
 class Navigation extends Component {
   constructor(props) {
@@ -62,7 +58,7 @@ class Navigation extends Component {
               <Input
                 type="text"
                 placeholder="Search product..."
-                id="searchBar"
+                id="search-bar"
               />
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
@@ -74,20 +70,24 @@ class Navigation extends Component {
               <DropdownMenu left>
                 <DropdownItem>
                   <NavLink href="/account">
-                    <FaUser style={{fontSize: 18}} />&nbsp;
+                    <FaUser style={{ fontSize: 18 }} />
+                    &nbsp;
                     <FormattedMessage id="sys.myAccount" />
                   </NavLink>
                 </DropdownItem>
                 <DropdownItem>
                   <NavLink href="/cart">
-                    <FaShoppingCart style={{fontSize: 18}} />&nbsp;
-                    <FormattedMessage id="sys.cart" />&nbsp;
+                    <FaShoppingCart style={{ fontSize: 18 }} />
+                    &nbsp;
+                    <FormattedMessage id="sys.cart" />
+                    &nbsp;
                     <Badge className="badge-danger">3</Badge>
                   </NavLink>
                 </DropdownItem>
                 <DropdownItem>
                   <NavLink href="/logout">
-                    <FaSignOutAlt style={{fontSize: 18}} />&nbsp;
+                    <FaSignOutAlt style={{ fontSize: 18 }} />
+                    &nbsp;
                     <FormattedMessage id="sys.logout" />
                   </NavLink>
                 </DropdownItem>
@@ -95,10 +95,8 @@ class Navigation extends Component {
             </UncontrolledDropdown>
           </Nav>
         </Navbar>
-        <Row>
-          <Col md={4} />
-          <Col md={8} />
-        </Row>
+        <Login />
+        <SignUp />
       </Container>
     );
   }
