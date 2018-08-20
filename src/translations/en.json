@@ -22,5 +22,11 @@
   "sys.dashboard": "Dashboard",
   "sys.customers": "Customers",
   "sys.reports": "Reports",
-  "sys.orders": "Orders"
+  "sys.orders": "Orders",
+  "sys.about": "About",
+  "sys.delivery": "Delivery",
+  "sys.returnPolicy": "Return Policy",
+  "sys.terms": "Terms",
+  "sys.help": "Help"
+  
 }

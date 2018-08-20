@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 class Product extends Component {
   render() {
     return (
       <Container>
-        <h3>Products</h3>
+        <h3><FormattedMessage id="sys.products" /></h3>
         <Breadcrumb>
           <Breadcrumb.Item href="/admin/dashboard">Dashboard</Breadcrumb.Item>
           <Breadcrumb.Item active>Products</Breadcrumb.Item>
@@ -31,9 +31,6 @@ class Product extends Component {
             </ListGroup>
           </Col>
         </Row>
-        <Button bsStyle="primary" style={{ float: 'right' }}>
-          Checkout
-        </Button>
       </Container>
     );
   }
