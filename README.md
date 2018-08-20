@@ -1,10 +1,12 @@
 # LF Commerce
 
 <p>
-  <img src="https://img.shields.io/badge/React-16.4.2-blue.svg">
-  <img src="https://img.shields.io/badge/Redux-4.0.0-purple.svg?colorB=764abc">
-  <img src="https://img.shields.io/badge/Nodejs-8.10.0-green.svg?colorB=90c53f">
-  <img src="https://img.shields.io/badge/Express-4.16.3-black.svg?colorB=47535e">
+  <img src="https://img.shields.io/badge/React-16.4.2-lightblue.svg">
+  <img src="https://img.shields.io/badge/Redux-4.0.0-purple.svg">
+  <img src="https://img.shields.io/badge/Nodejs-8.10.0-green.svg">
+  <img src="https://img.shields.io/badge/Express-4.16.3-black.svg">
+  <img src="https://img.shields.io/badge/Boostrap-4.+-purple.svg">
+  <img src="https://img.shields.io/badge/MySQL-5.7.+-blue.svg">
 </p>
 
 The goal of this project is to develop an open source ecommerce system written in ReactJS + ExpressJS. LF Commerce will provide a Plug-And-Play experience to users with minimal programming background. 
@@ -14,7 +16,8 @@ The goal of this project is to develop an open source ecommerce system written i
 - Order Listing components (Admin dashboard)
 - Customer Listing components (Admin dashboard)
 - Product Listing components (Admin dashboard)
-- Authentication API (ExpressJS)
+- Authentication API, oAuth (ExpressJS)
+- DB Migration
 - TBC
 
 
