@@ -50,7 +50,39 @@ yarn test [test_directory]
 
 ## How to contribute to this project?
 
-Your contribution is appreicated. For the purpose of having good project management, I encourage you to understand *way of working* before you start to contribute to this project.
+Your contribution is appreicated. For the purpose of having good project management, I encourage you to understand the project structure and *way of working* before you start to contribute to this project.
+
+```
+.
+├── build                    # React Front-end build directory
+├── docs                     # Static files for Github page, https://ccwukong.github.io/lfcommerce
+├── public                   # Static public assets and uploads
+├── routes                   # The endpoints/routes of ExpressJS
+├── src                      # ReactJS source code
+│   ├── actions              # Actions and Action creators of Redux
+│   ├── apis                 # Files for REST APIs
+│   │   ├── mocks            # Mocked API response
+│   ├── components           # React components
+│   |   ├── __tests__        # Unit test for components
+│   |   ├── admin            # React components for admin dashboard
+│   ├── containers           # React containers
+│   |   ├── __tests__        # Unit test for containers
+│   |   ├── admin            # React container components for admin dashboard
+│   ├── reducers             # React containers
+│   |   ├── __tests__        # Unit test for reducers
+│   |   ├── cart             # Reducers for cart components
+│   |   ├── products         # Reducers for product components
+│   ├── sagas                # Redux saga files
+│   ├── translations         # All language translation .json files
+│   └── App.css              # Your customized styles should be added here
+│   └── App.js               # ** Where React webapp routes configured.
+│   └── index.js             # React webapp start point
+└── .travis.yml              # Travis CI config file
+└── .eslintrc.json           # **Don't change settings here.
+└── package.json             # All project dependancies
+└── app.js                   # Server application start point
+└── README.md                # **Don't change contents here.
+```
 
 ### 1. Always work on your own feature or bugfix branch.
 
@@ -59,7 +91,7 @@ You will need to follow the naming convention if it's a new feature:
 
 or **bugfix/xxx-xxx-xx** if it's a bug fixing branch.
 
-### #2. Always send your PR to **master** branch.
+### 2. Always send your PR to **master** branch.
 
 You should always BRANCH OUT from **master** branch and send PR back to **master** when it's ready for review.
 
