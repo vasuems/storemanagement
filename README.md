@@ -1,13 +1,25 @@
 # LF Commerce
 
 <p>
-  <img src="https://img.shields.io/badge/React-16.4.2-blue.svg">
-  <img src="https://img.shields.io/badge/Redux-4.0.0-purple.svg?colorB=764abc">
-  <img src="https://img.shields.io/badge/Nodejs-8.10.0-green.svg?colorB=90c53f">
-  <img src="https://img.shields.io/badge/Express-4.16.3-black.svg?colorB=47535e">
+  <img src="https://img.shields.io/badge/React-16.4.2-lightblue.svg">
+  <img src="https://img.shields.io/badge/Redux-4.0.0-purple.svg">
+  <img src="https://img.shields.io/badge/Nodejs-8.10.0-green.svg">
+  <img src="https://img.shields.io/badge/Express-4.16.3-black.svg">
+  <img src="https://img.shields.io/badge/Boostrap-4.+-purple.svg">
+  <img src="https://img.shields.io/badge/MySQL-5.7.+-blue.svg">
 </p>
 
 The goal of this project is to develop an open source ecommerce system written in ReactJS + ExpressJS. LF Commerce will provide a Plug-And-Play experience to users with minimal programming background. 
+
+## Development plan for next 2 weeks
+
+- Order Listing components (Admin dashboard)
+- Customer Listing components (Admin dashboard)
+- Product Listing components (Admin dashboard)
+- Authentication API, oAuth (ExpressJS)
+- DB Migration
+- TBC
+
 
 ![Alt Screenshot](./screenshot.png "Screenshot")
 
@@ -73,6 +85,7 @@ Your contribution is appreicated. For the purpose of having good project managem
 │   |   ├── cart             # Reducers for cart components
 │   |   ├── products         # Reducers for product components
 │   ├── sagas                # Redux saga files
+│   |   ├── __tests__        # Unit test for sagas
 │   ├── translations         # All language translation .json files
 │   └── App.css              # Your customized styles should be added here
 │   └── App.js               # ** Where React webapp routes configured.
