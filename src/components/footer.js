@@ -1,22 +1,41 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
 
 const Footer = props => (
   <Container>
     <Row>
-      <Col md={3} />
-      <Col md={6} className="text-center">
-        <a href="/about">About</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="/shipping">Shipping</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="/return-policy">Return Policy</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="/terms">Terms</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="/help">Help</a>
+      <Col md={2} />
+      <Col md={8}>
+        <Row>
+          <Col md={2} className="text-center">
+            <a href="/about">
+              <FormattedMessage id="sys.about" />
+            </a>
+          </Col>
+          <Col md={2} className="text-center">
+            <a href="/delivery">
+              <FormattedMessage id="sys.delivery" />
+            </a>
+          </Col>
+          <Col md={4} className="text-center">
+            <a href="/return-policy">
+              <FormattedMessage id="sys.deliveryPolicy" />
+            </a>
+          </Col>
+          <Col md={2} className="text-center">
+            <a href="/terms">
+              <FormattedMessage id="sys.terms" />
+            </a>
+          </Col>
+          <Col md={2} className="text-center">
+            <a href="/help">
+              <FormattedMessage id="sys.help" />
+            </a>
+          </Col>
+        </Row>
       </Col>
-      <Col md={3} />
+      <Col md={2} />
     </Row>
   </Container>
 );
