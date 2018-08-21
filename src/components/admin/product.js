@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 
 class Product extends Component {
@@ -7,10 +7,6 @@ class Product extends Component {
     return (
       <Container>
         <h3><FormattedMessage id="sys.products" /></h3>
-        <Breadcrumb>
-          <Breadcrumb.Item href="/admin/dashboard">Dashboard</Breadcrumb.Item>
-          <Breadcrumb.Item active>Products</Breadcrumb.Item>
-        </Breadcrumb>
         <Row>
           <Col md={12}>
             <ListGroup>
