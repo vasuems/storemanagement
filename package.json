@@ -33,7 +33,8 @@
     "eject": "react-scripts eject",
     "eslint": "./node_modules/.bin/eslint --fix",
     "server": "nodemon app.js",
-    "db-migrate-dev": "db-migrate up --config db/mysql.json -e dev"
+    "add-db-dev": "db-migrate up --config db/mysql.json -e dev",
+    "remove-db-dev": "db-migrate down --config db/mysql.json -e dev"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
