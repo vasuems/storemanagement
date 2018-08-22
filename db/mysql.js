@@ -13,7 +13,12 @@ const knex = require('knex')({
 });
 
 knex.raw('CREATE DATABASE IF NOT EXISTS davinci;')
-.then(() => knex.raw(sql))
+.then(() => {
+  knex.raw(sql);
+  console.log('Finished database setup.');
+})
 .catch((err)=>{
-  console.log(err);
+  console.log('Unable to setup database.');
+}).finally(()=>{
+  process.exit();
 });
