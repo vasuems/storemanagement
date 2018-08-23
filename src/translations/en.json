@@ -30,5 +30,6 @@
   "sys.help": "Help",
   "sys.name": "Name",
   "sys.desc": "Description",
-  "sys.prodCats": "Product Categories"
+  "sys.prodCats": "Product Categories",
+  "sys.acctNo": "Account Number"
 }

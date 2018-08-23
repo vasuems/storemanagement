@@ -15,7 +15,7 @@ const SideBarContent = props => (
       >
         <FormattedMessage id="sys.dashboard" />
       </Button>
-    </Row>    
+    </Row>
     <Row className="sidebar-link">
       <Button
         color="link"

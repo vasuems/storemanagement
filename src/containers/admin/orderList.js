@@ -11,7 +11,9 @@ class OrderList extends Component {
   render() {
     return (
       <Container className="content-body">
-        <h3><FormattedMessage id="sys.orders" /></h3>
+        <h3>
+          <FormattedMessage id="sys.orders" />
+        </h3>
         <Row>
           <Col md={12}>
             <Table condensed responsive>

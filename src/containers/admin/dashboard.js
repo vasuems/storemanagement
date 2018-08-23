@@ -41,7 +41,7 @@ class Dashboard extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [{x:10,y:20,r:5}]
+          data: [{ x: 10, y: 20, r: 5 }]
         }
       ]
     };
@@ -72,38 +72,30 @@ class Dashboard extends Component {
       ]
     };
     const data4 = {
-      labels: [
-        'Red',
-        'Green',
-        'Yellow'
-      ],
-      datasets: [{
-        data: [300, 50, 100],
-        backgroundColor: [
-        '#FF6384',
-        '#36A2EB',
-        '#FFCE56'
-        ],
-        hoverBackgroundColor: [
-        '#FF6384',
-        '#36A2EB',
-        '#FFCE56'
-        ]
-      }]
+      labels: ['Red', 'Green', 'Yellow'],
+      datasets: [
+        {
+          data: [300, 50, 100],
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        }
+      ]
     };
     return (
       <Container className="content-body">
-        <h3><FormattedMessage id="sys.dashboard" /></h3>
+        <h3>
+          <FormattedMessage id="sys.dashboard" />
+        </h3>
         <Row>
           <Col md={6} className="text-center">
-          <Bar
-            data={data}
-            width={100}
-            height={200}
-            options={{
-              maintainAspectRatio: false
-            }}
-          />
+            <Bar
+              data={data}
+              width={100}
+              height={200}
+              options={{
+                maintainAspectRatio: false
+              }}
+            />
           </Col>
           <Col md={6} className="text-center">
             <Bubble data={data2} />
