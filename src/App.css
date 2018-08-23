@@ -126,3 +126,6 @@ a, a:hover, a:link, a:active, a:visited{
     color:#fff;
     text-decoration: none;
 }
+.content-body{
+    padding-top: 30px;
+}

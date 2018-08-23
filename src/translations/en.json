@@ -27,6 +27,9 @@
   "sys.delivery": "Delivery",
   "sys.returnPolicy": "Return Policy",
   "sys.terms": "Terms",
-  "sys.help": "Help"
-  
+  "sys.help": "Help",
+  "sys.name": "Name",
+  "sys.desc": "Description",
+  "sys.prodCats": "Product Categories",
+  "sys.acctNo": "Account Number"
 }
