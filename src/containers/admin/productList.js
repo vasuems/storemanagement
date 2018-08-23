@@ -1,42 +1,37 @@
 import React, { Component } from 'react';
 import {
-  ListGroup,
-  ListGroupItem,
+  Table,
   Container,
   Row,
-  Col,
-  Button
+  Col
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 
 class ProductList extends Component {
   render() {
     return (
-      <Container>
+      <Container className="content-body">
         <h3><FormattedMessage id="sys.products" /></h3>
         <Row>
           <Col md={12}>
-            <ListGroup>
-              <ListGroupItem>
-                <Row>
-                  <Col md={2}>Nicholas Chen</Col>
-                  <Col md={8}>nicholas_chan82@hotmail.com</Col>
-                  <Col md={2}>Delete</Col>
-                </Row>
-              </ListGroupItem>
-              <ListGroupItem>
-                <Row>
-                  <Col md={2}>Nicholas Chen</Col>
-                  <Col md={8}>nicholas_chan82@hotmail.com</Col>
-                  <Col md={2}>Delete</Col>
-                </Row>
-              </ListGroupItem>
-            </ListGroup>
+            <Table condensed responsive>
+              <thead>
+                <tr>
+                  <th><FormattedMessage id="sys.name" /></th>
+                  <th><FormattedMessage id="sys.desc" /></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Product 1</td>
+                  <td>asf ads fasdfasd</td>
+                  <td><FormattedMessage id="sys.delete" /></td>
+                </tr>
+              </tbody>
+            </Table>
           </Col>
         </Row>
-        <Button bsStyle="primary" style={{ float: 'right' }}>
-          Checkout
-        </Button>
       </Container>
     );
   }

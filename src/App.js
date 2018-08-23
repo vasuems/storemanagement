@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Redirect,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import Home from './containers/home';
 import ProductDetail from './containers/productDetail';

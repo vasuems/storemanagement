@@ -9,7 +9,6 @@ import {
   ModalBody,
   Button
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
 class Login extends Component {

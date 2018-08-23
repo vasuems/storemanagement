@@ -14,7 +14,6 @@ import {
   Container,
   Input
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { FaShoppingCart, FaUser, FaSignOutAlt } from 'react-icons/fa';
 import Login from './login';
