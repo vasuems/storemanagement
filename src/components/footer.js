@@ -20,7 +20,7 @@ const Footer = props => (
           </Col>
           <Col md={4} className="text-center">
             <a href="/return-policy">
-              <FormattedMessage id="sys.deliveryPolicy" />
+              <FormattedMessage id="sys.returnPolicy" />
             </a>
           </Col>
           <Col md={2} className="text-center">
