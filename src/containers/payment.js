@@ -15,7 +15,7 @@ import CartItem from '../components/cartItem';
 import { fetchCart } from '../actions';
 import { withRouter } from 'react-router-dom';
 
-class Cart extends Component {
+class Payment extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchCart());
@@ -36,7 +36,7 @@ class Cart extends Component {
           <Row>
             <Col md={12}>
               <ListGroup>
-                {this.props.cart.map(cartItem => (
+                {this.props.items.map(cartItem => (
                   <ListGroupItem key={cartItem.productName}>
                     <CartItem
                       productImage={cartItem.productImage}
@@ -60,7 +60,7 @@ class Cart extends Component {
               </div>
               <br />
               <Button color="primary" className="pull-right" onClick={this.onCheckoutClick}>
-                <FormattedMessage id="sys.checkout" />
+                <FormattedMessage id="sys.pay" />
               </Button>
             </Col>
           </Row>
@@ -73,8 +73,8 @@ class Cart extends Component {
 
 function mapStateToProps(state) {
   return {
-    cart: state.cartReducer.cart
+    items: []
   };
 }
 
-export default connect(mapStateToProps)(withRouter(Cart));
+export default connect(mapStateToProps)(withRouter(Payment));

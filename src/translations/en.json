@@ -31,5 +31,7 @@
   "sys.name": "Name",
   "sys.desc": "Description",
   "sys.prodCats": "Product Categories",
-  "sys.acctNo": "Account Number"
+  "sys.acctNo": "Account Number",
+  "sys.pay": "Pay",
+  "sys.payment": "Payment"
 }
