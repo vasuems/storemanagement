@@ -29,9 +29,9 @@ class Payment extends Component {
     return (
       <div>
         <Navigation />
-        <Container className="padding-top-80">
-          <div className="text-center lead">
-            <FormattedMessage id="sys.myCart" />
+        <Container className="padding-top-80" style={{ position:'relative', height: '100%', minHeight: '100%' }}>
+          <div className="lead">
+            <FormattedMessage id="sys.checkout" />
           </div>
           <Row>
             <Col md={12}>

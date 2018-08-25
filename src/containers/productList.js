@@ -22,12 +22,11 @@ class ProductList extends Component {
                 />
               </Col>
             ))}
-          </Row>
-          <Footer />
+          </Row>          
         </Container>
+        <Footer />
       </div>
     );
   }
 }
-
 export default ProductList;

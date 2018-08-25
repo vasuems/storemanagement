@@ -63,9 +63,9 @@ class Cart extends Component {
                 <FormattedMessage id="sys.checkout" />
               </Button>
             </Col>
-          </Row>
-          <Footer />
+          </Row>          
         </Container>
+        <Footer />
       </div>
     );
   }
