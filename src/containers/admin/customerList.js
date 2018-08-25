@@ -26,8 +26,8 @@ class CustomerList extends Component {
               </thead>
               <tbody>
                 <tr>
-                  <td>Nicholas Chen</td>
-                  <td>nicholas_chan82@hotmail.com</td>
+                  <td>Nick Chen</td>
+                  <td>nick.chen@example.com</td>
                   <td>
                     <ToggleButton
                       value={true}

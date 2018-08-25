@@ -3,40 +3,32 @@ import { Container, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 
 const Footer = props => (
-  <Container>
+  <Container id="footer">
     <Row>
       <Col md={2} />
-      <Col md={8}>
-        <Row>
-          <Col md={2} className="text-center">
-            <a href="/about">
-              <FormattedMessage id="sys.about" />
-            </a>
-          </Col>
-          <Col md={2} className="text-center">
-            <a href="/delivery">
-              <FormattedMessage id="sys.delivery" />
-            </a>
-          </Col>
-          <Col md={4} className="text-center">
-            <a href="/return-policy">
-              <FormattedMessage id="sys.returnPolicy" />
-            </a>
-          </Col>
-          <Col md={2} className="text-center">
-            <a href="/terms">
-              <FormattedMessage id="sys.terms" />
-            </a>
-          </Col>
-          <Col md={2} className="text-center">
-            <a href="/help">
-              <FormattedMessage id="sys.help" />
-            </a>
-          </Col>
-        </Row>
+      <Col md={8} className="text-center">
+        <a href="/about">
+          <FormattedMessage id="sys.about" />
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="/delivery">
+          <FormattedMessage id="sys.delivery" />
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="/return-policy">
+          <FormattedMessage id="sys.returnPolicy" />
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="/terms">
+          <FormattedMessage id="sys.terms" />
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="/help">
+          <FormattedMessage id="sys.help" />
+        </a>
       </Col>
       <Col md={2} />
-    </Row>
+    </Row><br />
+    <div className="text-center copyright">
+      <span>Copyright &copy; 2018</span>&nbsp;&nbsp;
+      <span>Creator: <a href="https://github.com/ccwukong">Nick Chen</a></span>
+    </div>
   </Container>
 );
 
