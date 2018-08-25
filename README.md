@@ -13,11 +13,11 @@ The goal of this project is to develop an open source ecommerce system written i
 
 ## Development plan for next 2 weeks
 
-- Order Listing components (Admin dashboard)
-- Customer Listing components (Admin dashboard)
-- Product Listing components (Admin dashboard)
-- Authentication API, oAuth (ExpressJS)
-- DB Migration
+- [ ] Order Listing components (Admin dashboard)
+- [ ] Customer Listing components (Admin dashboard)
+- [ ] Product Listing components (Admin dashboard)
+- [ ] Authentication API, oAuth (ExpressJS)
+- [x] DB Migration
 - TBC
 
 
