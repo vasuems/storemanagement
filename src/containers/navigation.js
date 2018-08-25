@@ -35,68 +35,70 @@ class Navigation extends Component {
 
   render() {
     return (
-      <Container>
-        <Navbar light expand="md">
-          <NavbarBrand href="/">LFCommerce</NavbarBrand>
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink href="/categories/geeks">GEEKS</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/categories/funny">FUNNY</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/categories/kids">KIDS</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/categories/pets">PETS</NavLink>
-            </NavItem>
-          </Nav>
-          <Nav className="ml-auto">
-            <NavItem>
-              <Input
-                type="text"
-                placeholder="Search product..."
-                id="search-bar"
-              />
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Nick Chen&nbsp;
-                <span className="glyphicon glyphicon-shopping-cart" />
-                <Badge className="badge-danger">3</Badge>
-              </DropdownToggle>
-              <DropdownMenu left>
-                <DropdownItem>
-                  <NavLink href="/admin/#/dashboard">
-                    <FaUser style={{ fontSize: 18 }} />
-                    &nbsp;
-                    <FormattedMessage id="sys.myAccount" />
-                  </NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="/cart">
-                    <FaShoppingCart style={{ fontSize: 18 }} />
-                    &nbsp;
-                    <FormattedMessage id="sys.cart" />
-                    &nbsp;
-                    <Badge className="badge-danger">3</Badge>
-                  </NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="/logout">
-                    <FaSignOutAlt style={{ fontSize: 18 }} />
-                    &nbsp;
-                    <FormattedMessage id="sys.logout" />
-                  </NavLink>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-        </Navbar>
-        <Login />
-        <SignUp />
-      </Container>
+      <div className="site-navbar">
+        <Container fluid>
+          <Navbar light expand="md">
+            <NavbarBrand href="/">LFCommerce</NavbarBrand>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/categories/geeks">GEEKS</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/categories/funny">FUNNY</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/categories/kids">KIDS</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/categories/pets">PETS</NavLink>
+              </NavItem>
+            </Nav>
+            <Nav className="ml-auto">
+              <NavItem>
+                <Input
+                  type="text"
+                  placeholder="Search product..."
+                  id="search-bar"
+                />
+              </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Nick Chen&nbsp;
+                  <span className="glyphicon glyphicon-shopping-cart" />
+                  <Badge className="badge-danger">3</Badge>
+                </DropdownToggle>
+                <DropdownMenu left>
+                  <DropdownItem>
+                    <NavLink href="/admin/#/dashboard">
+                      <FaUser style={{ fontSize: 18 }} />
+                      &nbsp;
+                      <FormattedMessage id="sys.myAccount" />
+                    </NavLink>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="/cart">
+                      <FaShoppingCart style={{ fontSize: 18 }} />
+                      &nbsp;
+                      <FormattedMessage id="sys.cart" />
+                      &nbsp;
+                      <Badge className="badge-danger">3</Badge>
+                    </NavLink>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="/logout">
+                      <FaSignOutAlt style={{ fontSize: 18 }} />
+                      &nbsp;
+                      <FormattedMessage id="sys.logout" />
+                    </NavLink>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </Nav>
+          </Navbar>
+          <Login />
+          <SignUp />
+        </Container>
+      </div>
     );
   }
 }

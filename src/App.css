@@ -167,7 +167,8 @@ a, a:hover, a:link, a:active, a:visited{
   -webkit-box-shadow: none !important;
   box-shadow: none  !important;
 }
-.admin-navbar{
+
+.site-navbar, .admin-navbar{
   position: fixed;
   z-index: 9999;
   width: 100%;
@@ -177,4 +178,7 @@ a, a:hover, a:link, a:active, a:visited{
 
 .admin-navbar .dropdown-menu{
   left: -30px;
+}
+.padding-top-80{
+  padding-top: 80px;
 }

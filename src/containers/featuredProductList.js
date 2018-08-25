@@ -12,27 +12,29 @@ class FeaturedProductList extends Component {
 
   render() {
     return (
-      <Container>
-        <div className="text-center headline">
-          <FormattedMessage id="title.featured" />
-        </div>
-        <Row className="show-grid">
-          {this.props.featuredProducts.map(product => (
-            <Col
-              onClick={() => this.props.addProduct(product)}
-              key={product.productURL}
-              md={3}
-            >
-              <Product
-                productName={product.productName}
-                productURL={product.productURL}
-                productImage={product.productImage}
-                productPrice={product.productPrice}
-              />
-            </Col>
-          ))}
-        </Row>
-      </Container>
+      <div className="padding-top-80">
+        <Container>
+          <div className="text-center headline">
+            <FormattedMessage id="title.featured" />
+          </div>
+          <Row className="show-grid">
+            {this.props.featuredProducts.map(product => (
+              <Col
+                onClick={() => this.props.addProduct(product)}
+                key={product.productURL}
+                md={3}
+              >
+                <Product
+                  productName={product.productName}
+                  productURL={product.productURL}
+                  productImage={product.productImage}
+                  productPrice={product.productPrice}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </div>
     );
   }
 }
