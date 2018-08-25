@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Table, Container, Row, Col } from 'reactstrap';
+import { Table, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import { FaCcPaypal, FaCcStripe, FaBtc } from "react-icons/fa";
+import { FaCcPaypal, FaCcStripe, FaBtc } from 'react-icons/fa';
 import ToggleButton from 'react-toggle-button';
 
 class Payment extends Component {
   render() {
     return (
-      <Container className="content-body">
+      <div className="content-body">
         <h3>
           <FormattedMessage id="sys.payments" />
         </h3>
@@ -27,39 +27,46 @@ class Payment extends Component {
               </thead>
               <tbody>
                 <tr>
-                  <td><FaCcPaypal size="3em" /></td>
+                  <td>
+                    <FaCcPaypal size="3em" />
+                  </td>
                   <td>your.paypal@example.com</td>
                   <td>
                     <ToggleButton
-                      value={true}
-                      onToggle={() => {}} />
+value onToggle={() => {}} />
                   </td>
                 </tr>
                 <tr>
-                  <td><FaCcStripe size="3em" /></td>
+                  <td>
+                    <FaCcStripe size="3em" />
+                  </td>
                   <td>your.paypal@example.com</td>
                   <td>
                     <ToggleButton
-                      value={true}
-                      onToggle={() => {}} />
+value onToggle={() => {}} />
                   </td>
                 </tr>
                 <tr>
-                  <td><FaBtc size="3em" /></td>
+                  <td>
+                    <FaBtc size="3em" />
+                  </td>
                   <td>your.paypal@example.com</td>
                   <td>
                     <ToggleButton
-                      value={true}
-                      onToggle={() => {}} />
+value onToggle={() => {}} />
                   </td>
                 </tr>
                 <tr>
-                  <td><img src="https://www.wirecard.com/uploads/tx_neimagefinder/wirecard-logo-white-black-download-72dpi.png" width="60" /></td>
+                  <td>
+                    <img
+                      src="https://www.wirecard.com/uploads/tx_neimagefinder/wirecard-logo-white-black-download-72dpi.png"
+                      width="60"
+                    />
+                  </td>
                   <td>000-123456-1</td>
                   <td>
                     <ToggleButton
-                      value={false}
-                      onToggle={() => {}} />
+value={false} onToggle={() => {}} />
                   </td>
                 </tr>
                 <tr>
@@ -67,15 +74,14 @@ class Payment extends Component {
                   <td>000-123456-1</td>
                   <td>
                     <ToggleButton
-                      value={true}
-                      onToggle={() => {}} />
+value onToggle={() => {}} />
                   </td>
                 </tr>
               </tbody>
             </Table>
           </Col>
         </Row>
-      </Container>
+      </div>
     );
   }
 }

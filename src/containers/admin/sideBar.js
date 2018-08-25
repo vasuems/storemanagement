@@ -9,7 +9,7 @@ import Payment from './payment';
 import ProductCategoryList from './productCategoryList';
 
 const sideBarStyle = {
-  width: 200,
+  width: 220,
   padding: '20px 12px',
   background: '#0c3b6d',
   color: '#fff'
@@ -24,13 +24,21 @@ class SideBar extends Component {
     };
   }
 
+  componentDidMount() {
+    window.onpopstate = (e) => {
+      this.setState({
+        path: e.state
+      });
+    }
+  }
+
   onPathChange = path => {
-    window.history.pushState('page2', '', `/admin/#/${path}`);
+    window.history.pushState(path, '', `/admin/#/${path}`);
 
     this.setState({
       path
     });
-  };
+  }
 
   render() {
     return (
@@ -41,7 +49,7 @@ class SideBar extends Component {
         open
         styles={{ sidebar: sideBarStyle }}
       >
-        {((path) => {
+        {(path => {
           switch (true) {
             case /dashboard/.test(path):
               return <Dashboard />;
@@ -54,7 +62,7 @@ class SideBar extends Component {
             case /payments/.test(path):
               return <Payment />;
             case /categories/.test(path):
-              return <ProductCategoryList />
+              return <ProductCategoryList />;
           }
         })(this.state.path)}
       </Sidebar>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Table, Row, Col, Pagination } from 'reactstrap';
+import { Table, Row, Col, Pagination } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 
 class OrderList extends Component {
@@ -10,7 +10,7 @@ class OrderList extends Component {
 
   render() {
     return (
-      <Container className="content-body">
+      <div className="content-body">
         <h3>
           <FormattedMessage id="sys.orders" />
         </h3>
@@ -62,7 +62,7 @@ class OrderList extends Component {
             />
           </Col>
         </Row>
-      </Container>
+      </div>
     );
   }
 }

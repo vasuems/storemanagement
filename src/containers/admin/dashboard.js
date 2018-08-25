@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { Bar, Bubble, Line, Pie } from 'react-chartjs-2';
 
@@ -82,7 +82,7 @@ class Dashboard extends Component {
       ]
     };
     return (
-      <Container className="content-body">
+      <div className="content-body">
         <h3>
           <FormattedMessage id="sys.dashboard" />
         </h3>
@@ -107,7 +107,7 @@ class Dashboard extends Component {
             <Pie data={data4} />
           </Col>
         </Row>
-      </Container>
+      </div>
     );
   }
 }
