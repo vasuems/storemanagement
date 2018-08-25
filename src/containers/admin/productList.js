@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Container, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
+import ToggleButton from 'react-toggle-button';
 
 class ProductList extends Component {
   render() {
@@ -28,7 +29,9 @@ class ProductList extends Component {
                   <td>Product 1</td>
                   <td>asf ads fasdfasd</td>
                   <td>
-                    <FormattedMessage id="sys.delete" />
+                    <ToggleButton
+                      value={false}
+                      onToggle={() => {}} />
                   </td>
                 </tr>
               </tbody>

@@ -19,7 +19,7 @@ class OrderList extends Component {
             <Table condensed responsive>
               <thead>
                 <tr>
-                  <th>Table heading</th>
+                  <th>#</th>
                   <th>Table heading</th>
                   <th>Table heading</th>
                   <th>Table heading</th>
@@ -29,15 +29,7 @@ class OrderList extends Component {
               </thead>
               <tbody>
                 <tr>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>Table cell</td>
+                  <td>1101</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
@@ -45,7 +37,15 @@ class OrderList extends Component {
                   <td>Table cell</td>
                 </tr>
                 <tr>
+                  <td>1102</td>
                   <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                </tr>
+                <tr>
+                  <td>1103</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
