@@ -1,7 +1,15 @@
 import React from 'react';
 import { Container, Row, Button } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import { FiUsers, FiShoppingCart, FiShoppingBag, FiBarChart2, FiGrid, FiDollarSign, FiHome } from "react-icons/fi";
+import {
+  FiUsers,
+  FiShoppingCart,
+  FiShoppingBag,
+  FiBarChart2,
+  FiGrid,
+  FiDollarSign,
+  FiHome
+} from 'react-icons/fi';
 
 const SideBarContent = props => (
   <Container>
