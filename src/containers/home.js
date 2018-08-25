@@ -6,12 +6,12 @@ import FeaturedProductList from './featuredProductList';
 import NewProductList from './newProductList';
 
 const Home = () => (
-  <Container>
+  <div>
     <Navigation />
     <FeaturedProductList />
     <NewProductList />
     <Footer />
-  </Container>
+  </div>
 );
 
 export default Home;

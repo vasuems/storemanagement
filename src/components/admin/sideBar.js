@@ -5,17 +5,7 @@ import { FiUsers, FiShoppingCart, FiShoppingBag, FiBarChart2, FiGrid, FiDollarSi
 
 const SideBarContent = props => (
   <Container>
-    <Row id="sidebar-header">
-      <Button
-          color="link"
-          style={{ color: '#fff' }}
-          onClick={() => {
-            props.onPathChange('dashboard');
-          }}
-        >
-        LF Commerce Admin
-      </Button>
-    </Row>
+    <br />
     <Row className="sidebar-link">
       <Button
         color="link"

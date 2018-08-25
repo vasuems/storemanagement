@@ -124,7 +124,7 @@ a, a:hover, a:link, a:active, a:visited{
   text-decoration: none;
 }
 .content-body{
-  padding: 30px 20px 0 20px;
+  padding: 80px 20px 0 20px;
 }
 .copyright{
   font-size: 12px;
@@ -147,4 +147,38 @@ a, a:hover, a:link, a:active, a:visited{
   margin-top: -3px;
   margin-right: 12px;
   color: #aaa;
+}
+
+#nav-avatar .btn{
+  background-color: #fff;
+  color: #000;
+  border: 0;
+}
+
+#nav-avatar .btn.active.focus,
+#nav-avatar .btn.active:focus,
+#nav-avatar .btn.focus,
+#nav-avatar .btn.focus:active,
+#nav-avatar .btn:active:focus,
+#nav-avatar .btn:focus {
+  outline: 0 !important;
+  outline-offset: 0  !important;
+  background-image: none  !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none  !important;
+}
+
+.site-navbar, .admin-navbar{
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  box-shadow: 1px 0 3px 1px #ccc;
+  background-color: #fff;
+}
+
+.admin-navbar .dropdown-menu{
+  left: -30px;
+}
+.padding-top-80{
+  padding-top: 80px;
 }
