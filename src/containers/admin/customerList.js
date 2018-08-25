@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Table, Container, Row, Col } from 'reactstrap';
+import { Table, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
+import ToggleButton from 'react-toggle-button';
 
 class CustomerList extends Component {
   render() {
     return (
-      <Container className="content-body">
+      <div className="content-body">
         <h3>
           <FormattedMessage id="sys.customers" />
         </h3>
@@ -28,14 +29,16 @@ class CustomerList extends Component {
                   <td>Nicholas Chen</td>
                   <td>nicholas_chan82@hotmail.com</td>
                   <td>
-                    <FormattedMessage id="sys.delete" />
+                    <ToggleButton
+                      value={true}
+                      onToggle={() => {}} />
                   </td>
                 </tr>
               </tbody>
             </Table>
           </Col>
         </Row>
-      </Container>
+      </div>
     );
   }
 }

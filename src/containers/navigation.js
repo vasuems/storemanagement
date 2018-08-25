@@ -68,7 +68,7 @@ class Navigation extends Component {
               </DropdownToggle>
               <DropdownMenu left>
                 <DropdownItem>
-                  <NavLink href="/admin/dashboard">
+                  <NavLink href="/admin/#/dashboard">
                     <FaUser style={{ fontSize: 18 }} />
                     &nbsp;
                     <FormattedMessage id="sys.myAccount" />

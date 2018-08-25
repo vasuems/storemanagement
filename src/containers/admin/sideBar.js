@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Sidebar from 'react-sidebar';
-import { withRouter } from 'react-router-dom';
 import SideBarContent from '../../components/admin/sideBar';
 import Dashboard from './dashboard';
 import CustomerList from './customerList';
@@ -10,7 +9,7 @@ import Payment from './payment';
 import ProductCategoryList from './productCategoryList';
 
 const sideBarStyle = {
-  width: 200,
+  width: 220,
   padding: '20px 12px',
   background: '#0c3b6d',
   color: '#fff'
@@ -25,11 +24,21 @@ class SideBar extends Component {
     };
   }
 
+  componentDidMount() {
+    window.onpopstate = (e) => {
+      this.setState({
+        path: e.state
+      });
+    }
+  }
+
   onPathChange = path => {
+    window.history.pushState(path, '', `/admin/#/${path}`);
+
     this.setState({
       path
     });
-  };
+  }
 
   render() {
     return (
@@ -40,20 +49,20 @@ class SideBar extends Component {
         open
         styles={{ sidebar: sideBarStyle }}
       >
-        {(function(path) {
-          switch (path) {
-            case 'dashboard':
+        {(path => {
+          switch (true) {
+            case /dashboard/.test(path):
               return <Dashboard />;
-            case 'customers':
+            case /customers/.test(path):
               return <CustomerList />;
-            case 'orders':
+            case /orders/.test(path):
               return <OrderList />;
-            case 'products':
+            case /products/.test(path):
               return <ProductList />;
-            case 'payments':
+            case /payments/.test(path):
               return <Payment />;
-            case 'categories':
-              return <ProductCategoryList />
+            case /categories/.test(path):
+              return <ProductCategoryList />;
           }
         })(this.state.path)}
       </Sidebar>
@@ -61,4 +70,4 @@ class SideBar extends Component {
   }
 }
 
-export default withRouter(SideBar);
+export default SideBar;
