@@ -102,7 +102,7 @@ Your contribution is appreicated. For the purpose of having good project managem
 You will need to follow the naming convention if it's a new feature:
 **feature/xxx-xxx-xx**
 
-or **bugfix/xxx-xxx-xx** if it's a bug fixing branch.
+or **fix/xxx-xxx-xx** if it's a bug or other type of fixing branch.
 
 ### 2. Always send your PR to **master** branch.
 
