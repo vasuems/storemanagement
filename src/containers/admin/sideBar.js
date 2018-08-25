@@ -10,9 +10,7 @@ import ProductCategoryList from './productCategoryList';
 
 const sideBarStyle = {
   width: 220,
-  padding: '20px 12px',
-  background: '#0c3b6d',
-  color: '#fff'
+  background: '#333'
 };
 
 class SideBar extends Component {
