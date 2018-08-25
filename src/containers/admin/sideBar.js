@@ -7,10 +7,12 @@ import OrderList from './orderList';
 import ProductList from './productList';
 import Payment from './payment';
 import ProductCategoryList from './productCategoryList';
+import NavBar from './navigation';
 
 const sideBarStyle = {
   width: 220,
-  background: '#333'
+  background: '#333',
+  marginTop: 56
 };
 
 class SideBar extends Component {
@@ -40,30 +42,33 @@ class SideBar extends Component {
 
   render() {
     return (
-      <Sidebar
-        docked
-        transitions={false}
-        sidebar={<SideBarContent onPathChange={this.onPathChange} />}
-        open
-        styles={{ sidebar: sideBarStyle }}
-      >
-        {(path => {
-          switch (true) {
-            case /dashboard/.test(path):
-              return <Dashboard />;
-            case /customers/.test(path):
-              return <CustomerList />;
-            case /orders/.test(path):
-              return <OrderList />;
-            case /products/.test(path):
-              return <ProductList />;
-            case /payments/.test(path):
-              return <Payment />;
-            case /categories/.test(path):
-              return <ProductCategoryList />;
-          }
-        })(this.state.path)}
-      </Sidebar>
+      <div>
+        <NavBar />
+        <Sidebar
+          docked
+          transitions={false}
+          sidebar={<SideBarContent onPathChange={this.onPathChange} />}
+          open
+          styles={{ sidebar: sideBarStyle }}
+        >        
+          {(path => {
+            switch (true) {
+              case /dashboard/.test(path):
+                return <Dashboard />;
+              case /customers/.test(path):
+                return <CustomerList />;
+              case /orders/.test(path):
+                return <OrderList />;
+              case /products/.test(path):
+                return <ProductList />;
+              case /payments/.test(path):
+                return <Payment />;
+              case /categories/.test(path):
+                return <ProductCategoryList />;
+            }
+          })(this.state.path)}
+        </Sidebar>
+      </div>
     );
   }
 }

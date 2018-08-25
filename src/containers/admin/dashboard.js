@@ -106,6 +106,12 @@ class Dashboard extends Component {
           <Col md={6} className="text-center">
             <Pie data={data4} />
           </Col>
+          <Col md={6} className="text-center">
+            <Pie data={data4} />
+          </Col>
+          <Col md={6} className="text-center">
+            <Pie data={data4} />
+          </Col>
         </Row>
       </div>
     );
