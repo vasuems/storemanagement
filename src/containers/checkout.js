@@ -6,7 +6,13 @@ import {
   ListGroupItem,
   Row,
   Col,
-  Button
+  Button,
+  Card,
+  CardHeader,
+  CardFooter,
+  CardBody,
+  CardTitle,
+  CardText
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
@@ -15,7 +21,7 @@ import Footer from '../components/footer';
 import CartItem from '../components/cartItem';
 import { fetchCart } from '../actions';
 
-class Cart extends Component {
+class Checkout extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchCart());
@@ -30,11 +36,11 @@ class Cart extends Component {
       <div>
         <Navigation />
         <Container className="padding-top-80">
-          <div className="text-center lead">
-            <FormattedMessage id="sys.myCart" />
-          </div>
           <Row>
-            <Col md={12}>
+            <Col md={8}>
+              <div className="lead">
+                <FormattedMessage id="sys.checkout" />
+              </div>
               <ListGroup>
                 {this.props.cart.map(cartItem => (
                   <ListGroupItem key={cartItem.productName}>
@@ -48,24 +54,45 @@ class Cart extends Component {
                   </ListGroupItem>
                 ))}
               </ListGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12} className="text-right">
-              <div>
+              <br />
+              <div className="pull-right">
                 <strong>
                   Subtotal:
                   <span className="price">$123.16</span>
                 </strong>
               </div>
-              <br />
-              <Button
-                color="primary"
-                className="pull-right"
-                onClick={this.onCheckoutClick}
-              >
-                <FormattedMessage id="sys.checkout" />
-              </Button>
+            </Col>
+            <Col md={4}>
+              <div className="lead">&nbsp;</div>
+              <Card body inverse color="info">
+                <CardTitle>
+                  <b>
+                    <FormattedMessage id="sys.payBy" />
+                  </b>
+                </CardTitle>
+                <CardBody>
+                  <input type="radio" name="payment-method" />
+                  &nbsp;PayPal
+                  <br />
+                  <br />
+                  <input type="radio" name="payment-method" />
+                  &nbsp;Bank Transfer
+                  <br />
+                  <br />
+                  <input type="radio" name="payment-method" />
+                  &nbsp;Cash On Delivery
+                  <br />
+                  <br />
+                  <br />
+                  <Button
+                    color="primary"
+                    className="pull-right"
+                    onClick={this.onCheckoutClick}
+                  >
+                    <FormattedMessage id="sys.proceedPay" />
+                  </Button>
+                </CardBody>
+              </Card>
             </Col>
           </Row>
         </Container>
@@ -81,4 +108,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(withRouter(Cart));
+export default connect(mapStateToProps)(withRouter(Checkout));

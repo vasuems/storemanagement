@@ -23,11 +23,10 @@ class ProductList extends Component {
               </Col>
             ))}
           </Row>
-          <Footer />
         </Container>
+        <Footer />
       </div>
     );
   }
 }
-
 export default ProductList;

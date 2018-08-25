@@ -1,3 +1,9 @@
+#root{
+  height: 100%;
+}
+#root > div{
+  height: inherit;
+}
 #search-bar{
   border-radius: 30px;
 }

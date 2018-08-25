@@ -24,7 +24,7 @@ const Footer = props => (
         </a>
       </Col>
       <Col md={2} />
-    </Row><br />
+    </Row>
     <div className="text-center copyright">
       <span>Copyright &copy; 2018</span>&nbsp;&nbsp;
       <span>Creator: <a href="https://github.com/ccwukong">Nick Chen</a></span>

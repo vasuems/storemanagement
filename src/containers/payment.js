@@ -15,7 +15,7 @@ import Footer from '../components/footer';
 import CartItem from '../components/cartItem';
 import { fetchCart } from '../actions';
 
-class Cart extends Component {
+class Payment extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchCart());
@@ -29,14 +29,17 @@ class Cart extends Component {
     return (
       <div>
         <Navigation />
-        <Container className="padding-top-80">
-          <div className="text-center lead">
-            <FormattedMessage id="sys.myCart" />
+        <Container
+          className="padding-top-80"
+          style={{ position: 'relative', height: '100%', minHeight: '100%' }}
+        >
+          <div className="lead">
+            <FormattedMessage id="sys.checkout" />
           </div>
           <Row>
             <Col md={12}>
               <ListGroup>
-                {this.props.cart.map(cartItem => (
+                {this.props.items.map(cartItem => (
                   <ListGroupItem key={cartItem.productName}>
                     <CartItem
                       productImage={cartItem.productImage}
@@ -64,12 +67,12 @@ class Cart extends Component {
                 className="pull-right"
                 onClick={this.onCheckoutClick}
               >
-                <FormattedMessage id="sys.checkout" />
+                <FormattedMessage id="sys.pay" />
               </Button>
             </Col>
           </Row>
+          <Footer />
         </Container>
-        <Footer />
       </div>
     );
   }
@@ -77,8 +80,8 @@ class Cart extends Component {
 
 function mapStateToProps(state) {
   return {
-    cart: state.cartReducer.cart
+    items: []
   };
 }
 
-export default connect(mapStateToProps)(withRouter(Cart));
+export default connect(mapStateToProps)(withRouter(Payment));

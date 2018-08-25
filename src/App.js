@@ -7,6 +7,7 @@ import {
 import Home from './containers/home';
 import ProductDetail from './containers/productDetail';
 import Cart from './containers/cart';
+import Checkout from './containers/checkout';
 import ProductList from './containers/productList';
 import AdminDashboard from './containers/admin/sideBar';
 
@@ -19,6 +20,7 @@ class App extends Component {
           <Route path="/categories/:id" component={ProductList} />
           <Route path="/products/:id" component={ProductDetail} />
           <Route path="/cart" component={Cart} />
+          <Route path="/checkout" component={Checkout} />
           <Route
             path="/admin"
             exact
