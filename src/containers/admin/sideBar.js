@@ -25,11 +25,11 @@ class SideBar extends Component {
   }
 
   componentDidMount() {
-    window.onpopstate = (e) => {
+    window.onpopstate = e => {
       this.setState({
         path: e.state
       });
-    }
+    };
   }
 
   onPathChange = path => {
@@ -38,7 +38,7 @@ class SideBar extends Component {
     this.setState({
       path
     });
-  }
+  };
 
   render() {
     return (
@@ -50,7 +50,7 @@ class SideBar extends Component {
           sidebar={<SideBarContent onPathChange={this.onPathChange} />}
           open
           styles={{ sidebar: sideBarStyle }}
-        >        
+        >
           {(path => {
             switch (true) {
               case /dashboard/.test(path):

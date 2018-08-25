@@ -9,11 +9,11 @@ import {
   Button
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
+import { withRouter } from 'react-router-dom';
 import Navigation from './navigation';
 import Footer from '../components/footer';
 import CartItem from '../components/cartItem';
 import { fetchCart } from '../actions';
-import { withRouter } from 'react-router-dom';
 
 class Cart extends Component {
   componentDidMount() {
@@ -23,7 +23,7 @@ class Cart extends Component {
 
   onCheckoutClick = () => {
     this.props.history.push('/checkout');
-  }
+  };
 
   render() {
     return (
@@ -59,11 +59,15 @@ class Cart extends Component {
                 </strong>
               </div>
               <br />
-              <Button color="primary" className="pull-right" onClick={this.onCheckoutClick}>
+              <Button
+                color="primary"
+                className="pull-right"
+                onClick={this.onCheckoutClick}
+              >
                 <FormattedMessage id="sys.checkout" />
               </Button>
             </Col>
-          </Row>          
+          </Row>
         </Container>
         <Footer />
       </div>

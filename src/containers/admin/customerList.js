@@ -30,8 +30,7 @@ class CustomerList extends Component {
                   <td>nick.chen@example.com</td>
                   <td>
                     <ToggleButton
-                      value={true}
-                      onToggle={() => {}} />
+value onToggle={() => {}} />
                   </td>
                 </tr>
               </tbody>

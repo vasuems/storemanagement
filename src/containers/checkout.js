@@ -7,15 +7,19 @@ import {
   Row,
   Col,
   Button,
-  Card, CardHeader, CardFooter, CardBody,
-  CardTitle, CardText 
+  Card,
+  CardHeader,
+  CardFooter,
+  CardBody,
+  CardTitle,
+  CardText
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
+import { withRouter } from 'react-router-dom';
 import Navigation from './navigation';
 import Footer from '../components/footer';
 import CartItem from '../components/cartItem';
 import { fetchCart } from '../actions';
-import { withRouter } from 'react-router-dom';
 
 class Checkout extends Component {
   componentDidMount() {
@@ -25,7 +29,7 @@ class Checkout extends Component {
 
   onCheckoutClick = () => {
     this.props.history.push('/checkout');
-  }
+  };
 
   render() {
     return (
@@ -59,16 +63,32 @@ class Checkout extends Component {
               </div>
             </Col>
             <Col md={4}>
-              <div className="lead">
-                &nbsp;
-              </div>
+              <div className="lead">&nbsp;</div>
               <Card body inverse color="info">
-                <CardTitle><b><FormattedMessage id="sys.payBy" /></b></CardTitle>
+                <CardTitle>
+                  <b>
+                    <FormattedMessage id="sys.payBy" />
+                  </b>
+                </CardTitle>
                 <CardBody>
-                  <input type="radio" name="payment-method" />&nbsp;PayPal<br /><br />
-                  <input type="radio" name="payment-method" />&nbsp;Bank Transfer<br /><br />
-                  <input type="radio" name="payment-method" />&nbsp;Cash On Delivery<br /><br /><br />
-                  <Button color="primary" className="pull-right" onClick={this.onCheckoutClick}>
+                  <input type="radio" name="payment-method" />
+                  &nbsp;PayPal
+                  <br />
+                  <br />
+                  <input type="radio" name="payment-method" />
+                  &nbsp;Bank Transfer
+                  <br />
+                  <br />
+                  <input type="radio" name="payment-method" />
+                  &nbsp;Cash On Delivery
+                  <br />
+                  <br />
+                  <br />
+                  <Button
+                    color="primary"
+                    className="pull-right"
+                    onClick={this.onCheckoutClick}
+                  >
                     <FormattedMessage id="sys.proceedPay" />
                   </Button>
                 </CardBody>

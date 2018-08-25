@@ -22,7 +22,7 @@ class ProductList extends Component {
                 />
               </Col>
             ))}
-          </Row>          
+          </Row>
         </Container>
         <Footer />
       </div>
