@@ -185,3 +185,6 @@ a, a:hover, a:link, a:active, a:visited{
   font-weight: 300;
   color: #aaa;
 }
+.nav-link{
+  cursor: pointer;
+}

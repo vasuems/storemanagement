@@ -17,7 +17,7 @@ import {
   NavbarToggler
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import { FiUser, FiShoppingCart, FiLogOut } from "react-icons/fi";
+import { FiUser, FiShoppingCart, FiLogOut } from 'react-icons/fi';
 import Login from './login';
 import SignUp from './signUp';
 
@@ -40,7 +40,7 @@ class Navigation extends Component {
     this.setState({
       showMenu: !this.state.showMenu
     });
-  }
+  };
 
   render() {
     return (
@@ -80,7 +80,7 @@ class Navigation extends Component {
                   </DropdownToggle>
                   <DropdownMenu left>
                     <DropdownItem>
-                      <NavLink href="/admin/#/dashboard">
+                      <NavLink href="/account">
                         <FiUser className="nav-link-icon" />
                         &nbsp;&nbsp;
                         <FormattedMessage id="sys.myAccount" />
