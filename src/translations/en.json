@@ -46,5 +46,7 @@
   "sys.orderDate": "Ordered On",
   "sys.orderStatus": "Order Status",
   "sys.orderNumber": "Order Number",
-  "sys.amount": "Amount"
+  "sys.amount": "Amount",
+  "sys.shipTo": "Ship to",
+  "sys.shippingBy": "Shipping by"
 }
