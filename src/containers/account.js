@@ -23,6 +23,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import Navigation from './navigation';
 import Footer from '../components/footer';
+import FormItem from '../components/formItem';
 import { fetchCart } from '../actions';
 
 class Account extends Component {
@@ -87,105 +88,41 @@ class Account extends Component {
               <Row>
                 <Col sm="12">
                   <Form style={{ backgroundColor: '#fff', padding: 30 }}>
-                    <FormGroup row>
-                      <Col sm={2}>
-                        <Label for="name">
-                          <FormattedMessage id="sys.name" />
-                        </Label>
-                      </Col>
-                      <Col sm={8}>
-                        <Input
-                          type="text"
-                          name="name"
-                          id="acct-name"
-                          value="Nick Chen"
-                          placeholder={formatMessage({ id: 'sys.name' })}
-                          disabled
-                        />
-                      </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                      <Col sm={2}>
-                        <Label for="email">
-                          <FormattedMessage id="sys.email" />
-                        </Label>
-                      </Col>
-                      <Col sm={8}>
-                        <Input
-                          type="email"
-                          name="email"
-                          id="acct-email"
-                          value="nick.chen@example.com"
-                          placeholder={formatMessage({ id: 'sys.email' })}
-                          disabled
-                        />
-                      </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                      <Col sm={2}>
-                        <Label for="acct-contact">
-                          <FormattedMessage id="sys.contactNo" />
-                        </Label>
-                      </Col>
-                      <Col sm={8}>
-                        <Input
-                          type="text"
-                          name="contact"
-                          id="acct-contact"
-                          value="+1-1234567890"
-                          placeholder={formatMessage({ id: 'sys.contactNo' })}
-                        />
-                      </Col>
-                      <Col sm={2}>
-                        <Button color="link" className="text-primary">
-                          <FormattedMessage id="sys.update" />
-                        </Button>
-                      </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                      <Col sm={2}>
-                        <Label for="acct-delivery-addr">
-                          <FormattedMessage id="sys.deliveryAddr" />
-                        </Label>
-                      </Col>
-                      <Col sm={8}>
-                        <Input
-                          type="text"
-                          name="delivery-addr"
-                          id="acct-delivery-addr"
-                          value="Address Line 2"
-                          placeholder={formatMessage({
-                            id: 'sys.deliveryAddr'
-                          })}
-                        />
-                      </Col>
-                      <Col sm={2}>
-                        <Button color="link" className="text-primary">
-                          <FormattedMessage id="sys.update" />
-                        </Button>
-                      </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                      <Col sm={2}>
-                        <Label for="exampleSelect">
-                          <FormattedMessage id="sys.billingAddr" />
-                        </Label>
-                      </Col>
-                      <Col sm={8}>
-                        <Input
-                          type="text"
-                          name="billing-addr"
-                          id="acct-billing-addr"
-                          value="Address Line 1"
-                          placeholder={formatMessage({ id: 'sys.billingAddr' })}
-                        />
-                      </Col>
-                      <Col sm={2}>
-                        <Button color="link" className="text-primary">
-                          <FormattedMessage id="sys.update" />
-                        </Button>
-                      </Col>
-                    </FormGroup>
+                    <FormItem
+                      label={<FormattedMessage id="sys.name" />}
+                      fieldName="acct-name"
+                      fieldType="text"
+                      fieldValue="Nick Chen"
+                      fieldPlaceholder={formatMessage({ id: 'sys.name' })}
+                      disable />
+                    <FormItem
+                      label={<FormattedMessage id="sys.email" />}
+                      fieldName="acct-email"
+                      fieldType="email"
+                      fieldValue="nick.chen@example.com"
+                      fieldPlaceholder={formatMessage({ id: 'sys.email' })}
+                      disable />
+                    <FormItem
+                      label={<FormattedMessage id="sys.contactNo" />}
+                      fieldName="acct-contact"
+                      fieldType="text"
+                      fieldValue="+1-1234567890"
+                      fieldPlaceholder={formatMessage({ id: 'sys.contactNo' })}
+                      allowUpdate />
+                    <FormItem
+                      label={<FormattedMessage id="sys.deliveryAddr" />}
+                      fieldName="acct-delivery-addr"
+                      fieldType="text"
+                      fieldValue="Address Line 1"
+                      fieldPlaceholder={formatMessage({ id: 'sys.deliveryAddr' })}
+                      allowUpdate />
+                    <FormItem
+                      label={<FormattedMessage id="sys.billingAddr" />}
+                      fieldName="acct-delivery-addr"
+                      fieldType="text"
+                      fieldValue="Address Line 2"
+                      fieldPlaceholder={formatMessage({ id: 'sys.billingAddr' })}
+                      allowUpdate />
                     <FormGroup check row>
                       <Col sm={{ size: 10, offset: 2 }}>
                         <Button color="primary">
