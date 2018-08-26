@@ -17,10 +17,10 @@ class Product extends Component {
         </a>
         <br />
         <Row className="product-item-footer">
-          <Col md={8} xs={8}>
+          <Col md={7} xs={7}>
             <a href={this.props.productURL}>{this.props.productName}</a>
           </Col>
-          <Col md={4} xs={4} className="text-right">
+          <Col md={5} xs={5} className="text-right">
             <strong>{this.props.productPrice}</strong>
           </Col>
         </Row>

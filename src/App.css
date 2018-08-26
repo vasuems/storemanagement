@@ -93,6 +93,7 @@ a, a:hover, a:link, a:active, a:visited{
 }
 .product-item{
   margin-bottom: 50px;
+  background-color: #fff;
 }
 .product-item-footer{
   padding:20px 10px;
