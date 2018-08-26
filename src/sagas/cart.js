@@ -1,11 +1,5 @@
 import { call, put } from 'redux-saga/effects';
 import {
-  fetchNewProductsSuccess,
-  fetchNewProductsFailed,
-  fetchFeaturedProductsSuccess,
-  fetchFeaturedProductsFailed,
-  fetchProductDetailSuccess,
-  fetchProductDetailFailed,
   fetchCartSuccess,
   fetchCartFailed
 } from '../actions';

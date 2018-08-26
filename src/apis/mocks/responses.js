@@ -135,7 +135,7 @@ export const cart = [
     productName: 'Test Product 2',
     productURL: '/products/test-product-2',
     productImage:
-      'http://www.toysandgeek.com/wp-content/uploads/2016/04/008-840x560.jpg',
+      'http://images.shirts.com/products/4311/13-14/womens-star-wars-poster-tshirt-front.jpg',
     productPrice: '$19.90',
     productQuantity: 5
   },
