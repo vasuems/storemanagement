@@ -81,7 +81,7 @@ class Checkout extends Component {
                   <br />
                   <br />
                   <Input type="radio" name="payment-method" />
-                  &nbsp;Cash On Delivery
+                  &nbsp;<FormattedMessage id="sys.cod" />
                   <br />
                   <br />
                   <br />

@@ -185,3 +185,9 @@ a, a:hover, a:link, a:active, a:visited{
   font-weight: 300;
   color: #aaa;
 }
+.nav-link{
+  cursor: pointer;
+}
+.tab-content{
+  padding: 20px 0;
+}

@@ -33,5 +33,8 @@
   "sys.prodCats": "Product Categories",
   "sys.acctNo": "Account Number",
   "sys.proceedPay": "Proceed to pay",
-  "sys.payBy": "Payment by"
+  "sys.payBy": "Payment by",
+  "sys.cod": "Cash On Delivery",
+  "sys.myAcct": "My Account",
+  "sys.myOrders": "My Orders"
 }

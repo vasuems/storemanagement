@@ -11,14 +11,14 @@
 
 The goal of this project is to develop an open source ecommerce system written in ReactJS + ExpressJS. LF Commerce will provide a Plug-And-Play experience to users with minimum programming background. 
 
-## Development plan for next 2 weeks
+## Development plan by Sep 2018
 
 - [ ] Order Listing components (Admin dashboard)
 - [ ] Customer Listing components (Admin dashboard)
 - [ ] Product Listing components (Admin dashboard)
-- [ ] Authentication API, oAuth (ExpressJS)
+- [ ] Customer account management(React)
+- [ ] Customer checkout(React)
 - [x] DB Migration
-- TBC
 
 
 ![Alt Screenshot](./screenshot.png "Screenshot")

@@ -80,7 +80,7 @@ class Navigation extends Component {
                   </DropdownToggle>
                   <DropdownMenu left>
                     <DropdownItem>
-                      <NavLink href="/admin/#/dashboard">
+                      <NavLink href="/account">
                         <FiUser className="nav-link-icon" />
                         &nbsp;&nbsp;
                         <FormattedMessage id="sys.myAccount" />
