@@ -41,7 +41,8 @@ class Checkout extends Component {
             <Col md={8}>
               <div className="lead">
                 <FormattedMessage id="sys.checkout" />
-              </div><br />
+              </div>
+              <br />
               <ListGroup>
                 {this.props.cart.map(cartItem => (
                   <ListGroupItem key={cartItem.productName}>
@@ -64,7 +65,10 @@ class Checkout extends Component {
               </div>
             </Col>
             <Col md={4}>
-              <div className="lead"><br /><br /></div>
+              <div className="lead">
+                <br />
+                <br />
+              </div>
               <Card body inverse color="info">
                 <CardTitle>
                   <b>
@@ -81,7 +85,8 @@ class Checkout extends Component {
                   <br />
                   <br />
                   <Input type="radio" name="payment-method" />
-                  &nbsp;<FormattedMessage id="sys.cod" />
+                  &nbsp;
+                  <FormattedMessage id="sys.cod" />
                   <br />
                   <br />
                   <br />

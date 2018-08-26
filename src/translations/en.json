@@ -36,5 +36,11 @@
   "sys.payBy": "Payment by",
   "sys.cod": "Cash On Delivery",
   "sys.myAcct": "My Account",
-  "sys.myOrders": "My Orders"
+  "sys.myOrders": "My Orders",
+  "sys.deliveryAddr": "Delivery Address",
+  "sys.billingAddr": "Billing Address",
+  "sys.update": "Update",
+  "sys.contactNo": "Contact No.",
+  "sys.empty": "Empty",
+  "sys.submit": "Submit"
 }

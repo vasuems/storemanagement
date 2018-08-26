@@ -17,7 +17,7 @@ import {
   NavbarToggler
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import { FiUser, FiShoppingCart, FiLogOut } from "react-icons/fi";
+import { FiUser, FiShoppingCart, FiLogOut } from 'react-icons/fi';
 import Login from './login';
 import SignUp from './signUp';
 
@@ -40,7 +40,7 @@ class Navigation extends Component {
     this.setState({
       showMenu: !this.state.showMenu
     });
-  }
+  };
 
   render() {
     return (

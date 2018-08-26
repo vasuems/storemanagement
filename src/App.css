@@ -188,6 +188,3 @@ a, a:hover, a:link, a:active, a:visited{
 .nav-link{
   cursor: pointer;
 }
-.tab-content{
-  padding: 20px 0;
-}
