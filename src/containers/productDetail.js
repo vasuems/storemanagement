@@ -9,6 +9,7 @@ import {
   Label,
   Input
 } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import Navigation from './navigation';
 import Footer from '../components/footer';
@@ -19,6 +20,10 @@ class ProductDetail extends Component {
   componentDidMount() {
     this.props.dispatch(fetchProductDetail());
   }
+
+  onCheckoutClick = () => {
+    this.props.history.push('/cart');
+  };
 
   render() {
     return this.props.productDetail ? (
@@ -70,7 +75,7 @@ class ProductDetail extends Component {
                 </Input>
               </FormGroup>
               <br />
-              <Button color="primary" block>
+              <Button color="primary" block onClick={this.onCheckoutClick}>
                 <FormattedMessage id="sys.addToCart" />
               </Button>
             </Col>
@@ -91,4 +96,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null
-)(ProductDetail);
+)(withRouter(ProductDetail));

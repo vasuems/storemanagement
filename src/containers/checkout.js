@@ -16,6 +16,7 @@ import {
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
+import { Input } from 'reactstrap';
 import Navigation from './navigation';
 import Footer from '../components/footer';
 import CartItem from '../components/cartItem';
@@ -40,7 +41,7 @@ class Checkout extends Component {
             <Col md={8}>
               <div className="lead">
                 <FormattedMessage id="sys.checkout" />
-              </div>
+              </div><br />
               <ListGroup>
                 {this.props.cart.map(cartItem => (
                   <ListGroupItem key={cartItem.productName}>
@@ -63,7 +64,7 @@ class Checkout extends Component {
               </div>
             </Col>
             <Col md={4}>
-              <div className="lead">&nbsp;</div>
+              <div className="lead"><br /><br /></div>
               <Card body inverse color="info">
                 <CardTitle>
                   <b>
@@ -71,15 +72,15 @@ class Checkout extends Component {
                   </b>
                 </CardTitle>
                 <CardBody>
-                  <input type="radio" name="payment-method" />
+                  <Input type="radio" name="payment-method" />
                   &nbsp;PayPal
                   <br />
                   <br />
-                  <input type="radio" name="payment-method" />
+                  <Input type="radio" name="payment-method" />
                   &nbsp;Bank Transfer
                   <br />
                   <br />
-                  <input type="radio" name="payment-method" />
+                  <Input type="radio" name="payment-method" />
                   &nbsp;Cash On Delivery
                   <br />
                   <br />

@@ -30,9 +30,9 @@ class Cart extends Component {
       <div>
         <Navigation />
         <Container className="padding-top-80">
-          <div className="text-center lead">
+          <div className="lead">
             <FormattedMessage id="sys.myCart" />
-          </div>
+          </div><br />
           <Row>
             <Col md={12}>
               <ListGroup>
