@@ -12,7 +12,7 @@ class NewProductList extends Component {
 
   render() {
     return (
-      <div className="padding-top-80">
+      <div>
         <Container>
           <div className="text-center headline">
             <FormattedMessage id="title.new" />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, FormGroup, Input } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt } from 'react-icons/fa';
 
 class CartItem extends Component {
   render() {
@@ -33,10 +33,10 @@ class CartItem extends Component {
               className="quantity-input"
             />
             &nbsp;
-            <span className="glyphicon glyphicon-plus" />&nbsp;
+            <span className="glyphicon glyphicon-plus" />
+            &nbsp;
             <FaTrashAlt />
           </FormGroup>
-          
         </Col>
       </Row>
     );

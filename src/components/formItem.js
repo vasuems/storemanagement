@@ -24,7 +24,7 @@ const FormItem = props => {
           id={fieldName}
           value={fieldValue}
           placeholder={fieldPlaceholder}
-          disabled={ disable ? true : false }
+          disabled={!!disable}
         />
       </Col>
       {allowUpdate ? (
