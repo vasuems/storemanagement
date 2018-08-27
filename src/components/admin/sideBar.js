@@ -91,6 +91,17 @@ const SideBarContent = props => (
         <FormattedMessage id="sys.reports" />
       </Button>
     </Row>
+    <Row className="sidebar-link">
+      <Button
+        color="link"
+        onClick={() => {
+          props.onPathChange('settings');
+        }}
+      >
+        <FiBarChart2 className="sidebar-icon" />
+        <FormattedMessage id="sys.settings" />
+      </Button>
+    </Row>
   </Container>
 );
 

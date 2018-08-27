@@ -63,7 +63,11 @@ class Checkout extends Component {
             </Col>
             <Col md={4}>
               <Card body>
-                <b><FormattedMessage id="sys.payBy" /> :</b>
+                <b>
+                  <FormattedMessage id="sys.payBy" />
+{' '}
+:
+</b>
                 <CardBody>
                   <Input type="radio" name="payment-method" />
                   &nbsp;PayPal
@@ -75,9 +79,14 @@ class Checkout extends Component {
                   &nbsp;
                   <FormattedMessage id="sys.cod" />
                 </CardBody>
-              </Card><br />
+              </Card>
+              <br />
               <Card body>
-                <b><FormattedMessage id="sys.shippingBy" /> :</b>
+                <b>
+                  <FormattedMessage id="sys.shippingBy" />
+{' '}
+:
+</b>
                 <CardBody>
                   <Input type="radio" name="shipping-method" />
                   &nbsp;Normal mail
@@ -88,7 +97,8 @@ class Checkout extends Component {
                   <Input type="radio" name="shipping-method" />
                   &nbsp;Registered mail
                 </CardBody>
-              </Card><br />
+              </Card>
+              <br />
               <Button
                 color="primary"
                 className="pull-right"

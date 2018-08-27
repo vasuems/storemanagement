@@ -16,15 +16,15 @@ class OrderList extends Component {
         </h3>
         <Row>
           <Col md={12}>
-            <Table condensed responsive>
+            <Table condensed responsive style={{ backgroundColor: '#fff' }}>
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
+                  <th><FormattedMessage id="sys.orderNumber" /></th>
+                  <th><FormattedMessage id="sys.orderedBy" /></th>
+                  <th><FormattedMessage id="sys.orderDate" /></th>
+                  <th><FormattedMessage id="sys.payBy" /></th>
+                  <th><FormattedMessage id="sys.orderStatus" /></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>

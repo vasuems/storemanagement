@@ -5,11 +5,11 @@ const OrderTableItem = props => {
 
   return (
     <tr>
-      <td scope="row">{ number }</td>
-      <td>{ date }</td>
-      <td>{ amount }</td>
-      <td>{ payment }</td>
-      <td>{ status }</td>
+      <td scope="row">{number}</td>
+      <td>{date}</td>
+      <td>{amount}</td>
+      <td>{payment}</td>
+      <td>{status}</td>
     </tr>
   );
 };

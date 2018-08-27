@@ -7,7 +7,8 @@ import Product from '../components/product';
 
 class FeaturedProductList extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchFeaturedProducts());
+    const { dispatch } = this.props;
+    dispatch(fetchFeaturedProducts());
   }
 
   render() {

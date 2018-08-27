@@ -48,5 +48,7 @@
   "sys.orderNumber": "Order Number",
   "sys.amount": "Amount",
   "sys.shipTo": "Ship to",
-  "sys.shippingBy": "Shipping by"
+  "sys.shippingBy": "Shipping by",
+  "sys.orderedBy": "Ordered By",
+  "sys.settings": "Settings"
 }

@@ -26,6 +26,7 @@
 }
 .product-detail-img{
   width: 70%;
+  margin-bottom: 10px;
 }
 .price{
   color: #b71d1d;
@@ -173,6 +174,9 @@ a, a:hover, a:link, a:active, a:visited{
 
 .admin-navbar .dropdown-menu{
   left: -30px;
+}
+.padding-top-20{
+  padding-top: 20px;
 }
 .padding-top-80{
   padding-top: 80px;

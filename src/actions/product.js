@@ -1,3 +1,7 @@
+export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
+export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
+export const FETCH_PRODUCTS_FAILED = 'FETCH_PRODUCTS_FAILED';
+
 export const FETCH_NEW_PRODUCTS = 'FETCH_NEW_PRODUCTS';
 export const FETCH_NEW_PRODUCTS_SUCCESS = 'FETCH_NEW_PRODUCTS_SUCCESS';
 export const FETCH_NEW_PRODUCTS_FAILED = 'FETCH_NEW_PRODUCTS_FAILED';
@@ -14,6 +18,18 @@ export const FETCH_PRODUCT_DETAIL_FAILED = 'FETCH_PRODUCT_DETAIL_FAILED';
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const INC_PRODUCT = 'INC_PRODUCT';
 export const DEC_PRODUCT = 'DEC_PRODUCT';
+
+export function fetchProducts() {
+  return { type: FETCH_PRODUCTS };
+}
+
+export function fetchProductsSuccess(data) {
+  return { type: FETCH_PRODUCTS_SUCCESS, value: data };
+}
+
+export function fetchProductsFailed() {
+  return { type: FETCH_PRODUCTS_FAILED };
+}
 
 export function fetchNewProducts() {
   return { type: FETCH_NEW_PRODUCTS };

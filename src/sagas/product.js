@@ -1,5 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import {
+  fetchProductsSuccess,
+  fetchProductsFailed,
   fetchNewProductsSuccess,
   fetchNewProductsFailed,
   fetchFeaturedProductsSuccess,
@@ -12,6 +14,14 @@ import {
   featuredProducts,
   productDetail
 } from '../apis/mocks/responses';
+
+export function* fetchProducts(action) {
+  try {
+    yield put(fetchProductsSuccess([...newProducts, ...featuredProducts]));
+  } catch (error) {
+    yield put(fetchProductsFailed());
+  }
+}
 
 export function* fetchNewProducts(action) {
   try {
