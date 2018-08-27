@@ -42,5 +42,11 @@
   "sys.update": "Update",
   "sys.contactNo": "Contact No.",
   "sys.empty": "Empty",
-  "sys.submit": "Submit"
+  "sys.submit": "Submit",
+  "sys.orderDate": "Ordered On",
+  "sys.orderStatus": "Order Status",
+  "sys.orderNumber": "Order Number",
+  "sys.amount": "Amount",
+  "sys.shipTo": "Ship to",
+  "sys.shippingBy": "Shipping by"
 }

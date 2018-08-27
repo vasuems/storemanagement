@@ -8,11 +8,8 @@ import {
   Col,
   Button,
   Card,
-  CardHeader,
-  CardFooter,
   CardBody,
-  CardTitle,
-  CardText
+  CardHeader
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
@@ -37,12 +34,12 @@ class Checkout extends Component {
       <div>
         <Navigation />
         <Container className="padding-top-80">
+          <div className="lead">
+            <FormattedMessage id="sys.checkout" />
+          </div>
+          <br />
           <Row>
             <Col md={8}>
-              <div className="lead">
-                <FormattedMessage id="sys.checkout" />
-              </div>
-              <br />
               <ListGroup>
                 {this.props.cart.map(cartItem => (
                   <ListGroupItem key={cartItem.productName}>
@@ -65,40 +62,40 @@ class Checkout extends Component {
               </div>
             </Col>
             <Col md={4}>
-              <div className="lead">
-                <br />
-                <br />
-              </div>
-              <Card body inverse color="info">
-                <CardTitle>
-                  <b>
-                    <FormattedMessage id="sys.payBy" />
-                  </b>
-                </CardTitle>
+              <Card body>
+                <b><FormattedMessage id="sys.payBy" /> :</b>
                 <CardBody>
                   <Input type="radio" name="payment-method" />
                   &nbsp;PayPal
                   <br />
-                  <br />
                   <Input type="radio" name="payment-method" />
                   &nbsp;Bank Transfer
-                  <br />
                   <br />
                   <Input type="radio" name="payment-method" />
                   &nbsp;
                   <FormattedMessage id="sys.cod" />
-                  <br />
-                  <br />
-                  <br />
-                  <Button
-                    color="primary"
-                    className="pull-right"
-                    onClick={this.onCheckoutClick}
-                  >
-                    <FormattedMessage id="sys.proceedPay" />
-                  </Button>
                 </CardBody>
-              </Card>
+              </Card><br />
+              <Card body>
+                <b><FormattedMessage id="sys.shippingBy" /> :</b>
+                <CardBody>
+                  <Input type="radio" name="shipping-method" />
+                  &nbsp;Normal mail
+                  <br />
+                  <Input type="radio" name="shipping-method" />
+                  &nbsp;Express delivery
+                  <br />
+                  <Input type="radio" name="shipping-method" />
+                  &nbsp;Registered mail
+                </CardBody>
+              </Card><br />
+              <Button
+                color="primary"
+                className="pull-right"
+                onClick={this.onCheckoutClick}
+              >
+                <FormattedMessage id="sys.proceedPay" />
+              </Button>
             </Col>
           </Row>
         </Container>

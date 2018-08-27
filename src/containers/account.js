@@ -7,23 +7,21 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Card,
   Button,
-  CardTitle,
-  CardText,
   Row,
   Col,
   Form,
   FormGroup,
-  Label,
-  Input,
-  FormText
+  ListGroup,
+  ListGroupItem,
+  Table
 } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import Navigation from './navigation';
 import Footer from '../components/footer';
 import FormItem from '../components/formItem';
+import OrderTableItem from '../components/orderTableItem';
 import { fetchCart } from '../actions';
 
 class Account extends Component {
@@ -53,6 +51,7 @@ class Account extends Component {
 
   render() {
     const { formatMessage } = this.props.intl;
+
     return (
       <div>
         <Navigation />
@@ -135,28 +134,40 @@ class Account extends Component {
               </Row>
             </TabPane>
             <TabPane tabId="my-orders">
-              <Row>
-                <Col sm="6">
-                  <Card body>
-                    <CardTitle>Special Title Treatment</CardTitle>
-                    <CardText>
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </CardText>
-                    <Button>Go somewhere</Button>
-                  </Card>
-                </Col>
-                <Col sm="6">
-                  <Card body>
-                    <CardTitle>Special Title Treatment</CardTitle>
-                    <CardText>
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </CardText>
-                    <Button>Go somewhere</Button>
-                  </Card>
-                </Col>
-              </Row>
+              <Table style={{ backgroundColor: '#fff' }} responsive>
+                <thead>
+                  <tr>
+                    <th><FormattedMessage id="sys.orderNumber" /></th>
+                    <th><FormattedMessage id="sys.orderDate" /></th>
+                    <th><FormattedMessage id="sys.amount" /></th>
+                    <th><FormattedMessage id="sys.payBy" /></th>
+                    <th><FormattedMessage id="sys.orderStatus" /></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <OrderTableItem
+                    number="123456"
+                    date="2018-08-01 13:30:59"
+                    amount="120.00"
+                    payment="PayPal"
+                    status="Out for delivery"
+                  />
+                  <OrderTableItem
+                    number="123457"
+                    date="2018-08-02 09:11:59"
+                    amount="23.50"
+                    payment="Cash On Delivery"
+                    status="In transit"
+                  />
+                  <OrderTableItem
+                    number="123458"
+                    date="2018-08-03 10:20:59"
+                    amount="11.30"
+                    payment="Cash On Delivery"
+                    status="Pending"
+                  />
+                </tbody>
+              </Table>
             </TabPane>
           </TabContent>
         </Container>
