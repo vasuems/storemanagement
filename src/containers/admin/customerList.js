@@ -12,7 +12,7 @@ class CustomerList extends Component {
         </h3>
         <Row>
           <Col md={12}>
-            <Table condensed responsive>
+            <Table condensed responsive style={{ backgroundColor: '#fff' }}>
               <thead>
                 <tr>
                   <th>

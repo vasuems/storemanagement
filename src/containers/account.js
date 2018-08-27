@@ -93,35 +93,44 @@ class Account extends Component {
                       fieldType="text"
                       fieldValue="Nick Chen"
                       fieldPlaceholder={formatMessage({ id: 'sys.name' })}
-                      disable />
+                      disable
+                    />
                     <FormItem
                       label={<FormattedMessage id="sys.email" />}
                       fieldName="acct-email"
                       fieldType="email"
                       fieldValue="nick.chen@example.com"
                       fieldPlaceholder={formatMessage({ id: 'sys.email' })}
-                      disable />
+                      disable
+                    />
                     <FormItem
                       label={<FormattedMessage id="sys.contactNo" />}
                       fieldName="acct-contact"
                       fieldType="text"
                       fieldValue="+1-1234567890"
                       fieldPlaceholder={formatMessage({ id: 'sys.contactNo' })}
-                      allowUpdate />
+                      allowUpdate
+                    />
                     <FormItem
                       label={<FormattedMessage id="sys.deliveryAddr" />}
                       fieldName="acct-delivery-addr"
                       fieldType="text"
                       fieldValue="Address Line 1"
-                      fieldPlaceholder={formatMessage({ id: 'sys.deliveryAddr' })}
-                      allowUpdate />
+                      fieldPlaceholder={formatMessage({
+                        id: 'sys.deliveryAddr'
+                      })}
+                      allowUpdate
+                    />
                     <FormItem
                       label={<FormattedMessage id="sys.billingAddr" />}
                       fieldName="acct-delivery-addr"
                       fieldType="text"
                       fieldValue="Address Line 2"
-                      fieldPlaceholder={formatMessage({ id: 'sys.billingAddr' })}
-                      allowUpdate />
+                      fieldPlaceholder={formatMessage({
+                        id: 'sys.billingAddr'
+                      })}
+                      allowUpdate
+                    />
                     <FormGroup check row>
                       <Col sm={{ size: 10, offset: 2 }}>
                         <Button color="primary">
@@ -137,11 +146,21 @@ class Account extends Component {
               <Table style={{ backgroundColor: '#fff' }} responsive>
                 <thead>
                   <tr>
-                    <th><FormattedMessage id="sys.orderNumber" /></th>
-                    <th><FormattedMessage id="sys.orderDate" /></th>
-                    <th><FormattedMessage id="sys.amount" /></th>
-                    <th><FormattedMessage id="sys.payBy" /></th>
-                    <th><FormattedMessage id="sys.orderStatus" /></th>
+                    <th>
+                      <FormattedMessage id="sys.orderNumber" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="sys.orderDate" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="sys.amount" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="sys.payBy" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="sys.orderStatus" />
+                    </th>
                   </tr>
                 </thead>
                 <tbody>

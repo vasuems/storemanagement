@@ -8,11 +8,11 @@ import Footer from '../components/footer';
 import Product from '../components/product';
 
 class ProductList extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchProducts());
   }
@@ -43,10 +43,11 @@ class ProductList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return ({
-    products: state.productReducer.products
-  })
-}
+const mapStateToProps = state => ({
+  products: state.productReducer.products
+});
 
-export default connect(mapStateToProps, null)(ProductList);
+export default connect(
+  mapStateToProps,
+  null
+)(ProductList);
