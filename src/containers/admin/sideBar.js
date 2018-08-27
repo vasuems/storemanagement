@@ -7,6 +7,7 @@ import OrderList from './orderList';
 import ProductList from './productList';
 import Payment from './payment';
 import ProductCategoryList from './productCategoryList';
+import Setting from './setting';
 import NavBar from './navigation';
 
 const sideBarStyle = {
@@ -65,6 +66,8 @@ class SideBar extends Component {
                 return <Payment />;
               case /categories/.test(path):
                 return <ProductCategoryList />;
+              case /settings/.test(path):
+                return <Setting />;
             }
           })(this.state.path)}
         </Sidebar>

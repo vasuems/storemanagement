@@ -148,3 +148,8 @@ export const cart = [
     productQuantity: 3
   }
 ];
+
+export const settings = {
+  siteName: 'LF Commerce',
+  siteLogo: ''
+}
