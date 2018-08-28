@@ -19,12 +19,22 @@ class OrderList extends Component {
             <Table condensed responsive style={{ backgroundColor: '#fff' }}>
               <thead>
                 <tr>
-                  <th><FormattedMessage id="sys.orderNumber" /></th>
-                  <th><FormattedMessage id="sys.orderedBy" /></th>
-                  <th><FormattedMessage id="sys.orderDate" /></th>
-                  <th><FormattedMessage id="sys.payBy" /></th>
-                  <th><FormattedMessage id="sys.orderStatus" /></th>
-                  <th></th>
+                  <th>
+                    <FormattedMessage id="sys.orderNumber" />
+                  </th>
+                  <th>
+                    <FormattedMessage id="sys.orderedBy" />
+                  </th>
+                  <th>
+                    <FormattedMessage id="sys.orderDate" />
+                  </th>
+                  <th>
+                    <FormattedMessage id="sys.payBy" />
+                  </th>
+                  <th>
+                    <FormattedMessage id="sys.orderStatus" />
+                  </th>
+                  <th />
                 </tr>
               </thead>
               <tbody>
