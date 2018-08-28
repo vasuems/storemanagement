@@ -152,4 +152,4 @@ export const cart = [
 export const settings = {
   siteName: 'LF Commerce',
   siteLogo: ''
-}
+};

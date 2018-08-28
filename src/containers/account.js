@@ -12,8 +12,6 @@ import {
   Col,
   Form,
   FormGroup,
-  ListGroup,
-  ListGroupItem,
   Table
 } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
@@ -79,6 +77,18 @@ class Account extends Component {
                 }}
               >
                 <FormattedMessage id="sys.myOrders" />
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({
+                  active: this.state.activeTab === 'my-pwd'
+                })}
+                onClick={() => {
+                  this.toggle('my-pwd');
+                }}
+              >
+                <FormattedMessage id="sys.pwd" />
               </NavLink>
             </NavItem>
           </Nav>
@@ -187,6 +197,31 @@ class Account extends Component {
                   />
                 </tbody>
               </Table>
+            </TabPane>
+            <TabPane tabId="my-pwd">
+              <Row>
+                <Col sm="12">
+                  <Form style={{ backgroundColor: '#fff', padding: 30 }}>
+                    <FormItem
+                      label={<FormattedMessage id="sys.currentPwd" />}
+                      fieldName="acct-pwd"
+                      fieldType="password"
+                    />
+                    <FormItem
+                      label={<FormattedMessage id="sys.newPwd" />}
+                      fieldName="acct-new-pwd"
+                      fieldType="password"
+                    />
+                    <FormGroup check row>
+                      <Col sm={{ size: 10, offset: 2 }}>
+                        <Button color="primary">
+                          <FormattedMessage id="sys.submit" />
+                        </Button>
+                      </Col>
+                    </FormGroup>
+                  </Form>
+                </Col>
+              </Row>
             </TabPane>
           </TabContent>
         </Container>

@@ -18,11 +18,13 @@ import ProductImage from '../components/productImage';
 
 class ProductDetail extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchProductDetail());
+    const { dispatch } = this.props;
+    dispatch(fetchProductDetail());
   }
 
   onCheckoutClick = () => {
-    this.props.history.push('/cart');
+    const { history } = this.props;
+    history.push('/cart');
   };
 
   render() {

@@ -13,9 +13,7 @@ import {
   fetchFeaturedProducts,
   fetchProductDetail
 } from './product';
-import {
-  fetchSiteSettings
-} from './admin/setting';
+import { fetchSiteSettings } from './admin/setting';
 import { fetchCart } from './cart';
 
 export default function* rootSaga() {

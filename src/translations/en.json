@@ -15,6 +15,8 @@
   "sys.myCart": "My Shopping Cart",
   "sys.email": "Email",
   "sys.pwd": "Password",
+  "sys.currentPwd": "Current password",
+  "sys.newPwd": "New password",
   "sys.fName": "First Name",
   "sys.lName": "Last Name",
   "sys.payments": "Payments",
@@ -50,5 +52,7 @@
   "sys.shipTo": "Ship to",
   "sys.shippingBy": "Shipping by",
   "sys.orderedBy": "Ordered By",
-  "sys.settings": "Settings"
+  "sys.settings": "Settings",
+  "sys.save": "Save",
+  "sys.siteName": "Site name"
 }

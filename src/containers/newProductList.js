@@ -7,10 +7,12 @@ import Product from '../components/product';
 
 class NewProductList extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchNewProducts());
+    const { dispatch } = this.props;
+    dispatch(fetchNewProducts());
   }
 
   render() {
+    const { newProducts } = this.props;
     return (
       <div>
         <Container>
@@ -18,7 +20,7 @@ class NewProductList extends Component {
             <FormattedMessage id="title.new" />
           </div>
           <Row className="show-grid">
-            {this.props.newProducts.map(product => (
+            {newProducts.map(product => (
               <Col key={product.productURL} md={3}>
                 <Product
                   productName={product.productName}

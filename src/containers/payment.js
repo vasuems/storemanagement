@@ -22,10 +22,12 @@ class Payment extends Component {
   }
 
   onCheckoutClick = () => {
-    this.props.history.push('/checkout');
+    const { history } = this.props;
+    history.push('/checkout');
   };
 
   render() {
+    const { items } = this.props;
     return (
       <div>
         <Navigation />
@@ -39,7 +41,7 @@ class Payment extends Component {
           <Row>
             <Col md={12}>
               <ListGroup>
-                {this.props.items.map(cartItem => (
+                {items.map(cartItem => (
                   <ListGroupItem key={cartItem.productName}>
                     <CartItem
                       productImage={cartItem.productImage}
