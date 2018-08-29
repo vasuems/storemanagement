@@ -20,7 +20,7 @@ import Navigation from './navigation';
 import Footer from '../components/footer';
 import FormItem from '../components/formItem';
 import OrderTableItem from '../components/orderTableItem';
-import { fetchCart } from '../actions';
+import { fetchAccountSettings } from '../actions';
 
 class Account extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class Account extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchCart());
+    dispatch(fetchAccountSettings());
   }
 
   onCheckoutClick = () => {
@@ -49,7 +49,7 @@ class Account extends Component {
 
   render() {
     const { formatMessage } = this.props.intl;
-
+    const { settings } = this.props;
     return (
       <div>
         <Navigation />
@@ -101,7 +101,7 @@ class Account extends Component {
                       label={<FormattedMessage id="sys.name" />}
                       fieldName="acct-name"
                       fieldType="text"
-                      fieldValue="Nick Chen"
+                      fieldValue={settings.name}
                       fieldPlaceholder={formatMessage({ id: 'sys.name' })}
                       disable
                     />
@@ -232,7 +232,10 @@ class Account extends Component {
 }
 
 const mapStateToProps = state => ({
-  settings: {}
+  settings: state.acctSettingReducer.settings
 });
 
-export default connect(mapStateToProps, null)(injectIntl(Account));
+export default connect(
+  mapStateToProps,
+  null
+)(injectIntl(Account));

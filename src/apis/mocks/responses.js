@@ -153,3 +153,8 @@ export const settings = {
   siteName: 'LF Commerce',
   siteLogo: ''
 };
+
+export const accountSettings = {
+  name: 'Nick Chen',
+  email: 'nick.chen@example.com'
+};

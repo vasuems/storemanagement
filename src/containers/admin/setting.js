@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, FormGroup, Col, Label, Input, FormText, Button } from 'reactstrap';
-import FormItem from '../../components/formItem';
+import {
+  Form,
+  FormGroup,
+  Col,
+  Label,
+  Input,
+  FormText,
+  Button
+} from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import FormItem from '../../components/formItem';
 import { fetchSiteSettings } from '../../actions';
 
 class Setting extends Component {
@@ -34,7 +42,9 @@ class Setting extends Component {
           />
           <FormGroup check row>
             <Col sm={{ size: 10, offset: 2 }}>
-              <Button color="primary"><FormattedMessage id="sys.save" /></Button>
+              <Button color="primary">
+                <FormattedMessage id="sys.save" />
+              </Button>
             </Col>
           </FormGroup>
         </Form>
