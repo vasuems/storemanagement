@@ -174,19 +174,15 @@ class Account extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    orders.map((order) => {
-                      return (
-                        <OrderTableItem
-                          number={order.orderNumber}
-                          date={order.orderedOn}
-                          amount={order.amount}
-                          payment={order.paymentBy}
-                          status={order.orderStatus}
-                        />
-                      )
-                    })
-                  }
+                  {orders.map(order => (
+                    <OrderTableItem
+                      number={order.orderNumber}
+                      date={order.orderedOn}
+                      amount={order.amount}
+                      payment={order.paymentBy}
+                      status={order.orderStatus}
+                    />
+                  ))}
                 </tbody>
               </Table>
             </TabPane>
