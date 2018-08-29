@@ -3,11 +3,11 @@ import {
   fetchAccountSettingsSuccess,
   fetchAccountSettingsFailed
 } from '../actions';
-import { accountSettings } from '../apis/mocks/responses';
+import { accountSettings, orders } from '../apis/mocks/responses';
 
 export function* fetchAccountSettings(action) {
   try {
-    yield put(fetchAccountSettingsSuccess(accountSettings));
+    yield put(fetchAccountSettingsSuccess({orders, accountSettings}));
   } catch (error) {
     yield put(fetchAccountSettingsFailed());
   }

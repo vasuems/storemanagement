@@ -158,3 +158,27 @@ export const accountSettings = {
   name: 'Nick Chen',
   email: 'nick.chen@example.com'
 };
+
+export const orders = [
+  {
+    orderNumber: '123456',
+    orderedOn: '2018-08-01 13:30:59',
+    amount: 120.00,
+    paymentBy: 'PayPal',
+    orderStatus: 'Out for delivery'
+  },
+  {
+    orderNumber: '123457',
+    orderedOn: '2018-08-02 09:11:59',
+    amount: 23.50,
+    paymentBy: 'Cash On Delivery',
+    orderStatus: 'In transit'
+  },
+  {
+    orderNumber: '123458',
+    orderedOn: '2018-08-03 10:20:59',
+    amount: 11.30,
+    paymentBy: 'Cash On Delivery',
+    orderStatus: 'Pending'
+  }
+];

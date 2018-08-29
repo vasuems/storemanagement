@@ -49,7 +49,7 @@ class Account extends Component {
 
   render() {
     const { formatMessage } = this.props.intl;
-    const { settings } = this.props;
+    const { settings, orders } = this.props;
     return (
       <div>
         <Navigation />
@@ -174,27 +174,19 @@ class Account extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <OrderTableItem
-                    number="123456"
-                    date="2018-08-01 13:30:59"
-                    amount="120.00"
-                    payment="PayPal"
-                    status="Out for delivery"
-                  />
-                  <OrderTableItem
-                    number="123457"
-                    date="2018-08-02 09:11:59"
-                    amount="23.50"
-                    payment="Cash On Delivery"
-                    status="In transit"
-                  />
-                  <OrderTableItem
-                    number="123458"
-                    date="2018-08-03 10:20:59"
-                    amount="11.30"
-                    payment="Cash On Delivery"
-                    status="Pending"
-                  />
+                  {
+                    orders.map((order) => {
+                      return (
+                        <OrderTableItem
+                          number={order.orderNumber}
+                          date={order.orderedOn}
+                          amount={order.amount}
+                          payment={order.paymentBy}
+                          status={order.orderStatus}
+                        />
+                      )
+                    })
+                  }
                 </tbody>
               </Table>
             </TabPane>
@@ -232,7 +224,8 @@ class Account extends Component {
 }
 
 const mapStateToProps = state => ({
-  settings: state.acctSettingReducer.settings
+  settings: state.acctSettingReducer.settings,
+  orders: state.acctSettingReducer.orders
 });
 
 export default connect(
