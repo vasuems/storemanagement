@@ -231,10 +231,8 @@ class Account extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    account: null
-  };
-}
+const mapStateToProps = state => ({
+  settings: {}
+});
 
-export default connect(mapStateToProps)(injectIntl(Account));
+export default connect(mapStateToProps, null)(injectIntl(Account));

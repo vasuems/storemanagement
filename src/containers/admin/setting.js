@@ -17,7 +17,8 @@ class Setting extends Component {
 
   render() {
     const { formatMessage } = this.props.intl;
-
+    console.log(this.props);
+    const { settings } = this.props;
     return (
       <div className="content-body">
         <h3>
@@ -28,7 +29,7 @@ class Setting extends Component {
             label={<FormattedMessage id="sys.siteName" />}
             fieldName="site-name"
             fieldType="text"
-            fieldValue="LF Commerce"
+            fieldValue={settings.siteName}
             fieldPlaceholder={formatMessage({ id: 'sys.siteName' })}
           />
           <FormGroup check row>

@@ -5,7 +5,8 @@ import {
   FETCH_FEATURED_PRODUCTS,
   FETCH_PRODUCT_DETAIL,
   FETCH_CART,
-  FETCH_SITE_SETTINGS
+  FETCH_SITE_SETTINGS,
+  FETCH_ACCOUNT_SETTINGS
 } from '../actions';
 import {
   fetchProducts,
@@ -15,6 +16,7 @@ import {
 } from './product';
 import { fetchSiteSettings } from './admin/setting';
 import { fetchCart } from './cart';
+import { fetchAccountSettings } from './account';
 
 export default function* rootSaga() {
   yield all([
@@ -23,6 +25,7 @@ export default function* rootSaga() {
     takeLatest(FETCH_FEATURED_PRODUCTS, fetchFeaturedProducts),
     takeLatest(FETCH_PRODUCT_DETAIL, fetchProductDetail),
     takeLatest(FETCH_CART, fetchCart),
-    takeLatest(FETCH_SITE_SETTINGS, fetchSiteSettings)
+    takeLatest(FETCH_SITE_SETTINGS, fetchSiteSettings),
+    takeLatest(FETCH_ACCOUNT_SETTINGS, fetchAccountSettings)
   ]);
 }
