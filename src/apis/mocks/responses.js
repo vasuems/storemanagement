@@ -156,7 +156,10 @@ export const settings = {
 
 export const accountSettings = {
   name: 'Nick Chen',
-  email: 'nick.chen@example.com'
+  email: 'nick.chen@example.com',
+  contactNo: '+1-1234567890',
+  deliveryAddress: 'Address Line 1',
+  billingAddress: 'Address Line 2'
 };
 
 export const orders = [

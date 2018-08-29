@@ -104,11 +104,8 @@ You will need to follow the naming convention if it's a new feature:
 
 or **fix/xxx-xxx-xx** if it's a bug or other type of fixing branch.
 
-### 2. Always send your PR to **master** branch.
 
-You should always BRANCH OUT from **master** branch and send PR back to **master** when it's ready for review.
-
-### 3. Always run eslint
+### 2. Always run eslint
 
 Before creating a PR, you should run:
 ```console

@@ -15,6 +15,7 @@ import {
   Table
 } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import { Field, reduxForm } from 'redux-form';
 import classnames from 'classnames';
 import Navigation from './navigation';
 import Footer from '../components/footer';
@@ -109,7 +110,7 @@ class Account extends Component {
                       label={<FormattedMessage id="sys.email" />}
                       fieldName="acct-email"
                       fieldType="email"
-                      fieldValue="nick.chen@example.com"
+                      fieldValue={settings.email}
                       fieldPlaceholder={formatMessage({ id: 'sys.email' })}
                       disable
                     />
@@ -117,7 +118,7 @@ class Account extends Component {
                       label={<FormattedMessage id="sys.contactNo" />}
                       fieldName="acct-contact"
                       fieldType="text"
-                      fieldValue="+1-1234567890"
+                      fieldValue={settings.contactNo}
                       fieldPlaceholder={formatMessage({ id: 'sys.contactNo' })}
                       allowUpdate
                     />
@@ -125,7 +126,7 @@ class Account extends Component {
                       label={<FormattedMessage id="sys.deliveryAddr" />}
                       fieldName="acct-delivery-addr"
                       fieldType="text"
-                      fieldValue="Address Line 1"
+                      fieldValue={settings.deliveryAddress}
                       fieldPlaceholder={formatMessage({
                         id: 'sys.deliveryAddr'
                       })}
@@ -135,7 +136,7 @@ class Account extends Component {
                       label={<FormattedMessage id="sys.billingAddr" />}
                       fieldName="acct-delivery-addr"
                       fieldType="text"
-                      fieldValue="Address Line 2"
+                      fieldValue={settings.billingAddress}
                       fieldPlaceholder={formatMessage({
                         id: 'sys.billingAddr'
                       })}

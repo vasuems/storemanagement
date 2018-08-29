@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import productReducer from './products/product';
 import featuredProductReducer from './products/featuredProduct';
 import newProductReducer from './products/newProduct';
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   productDetailReducer,
   cartReducer,
   settingReducer,
-  acctSettingReducer
+  acctSettingReducer,
+  form: formReducer
 });
 
 export default rootReducer;
