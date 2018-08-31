@@ -88,29 +88,27 @@ class Dashboard extends Component {
         </h3>
         <Row>
           <Col md={6} className="text-center">
-            <Bar
-              data={data}
-              width={100}
-              height={200}
-              options={{
-                maintainAspectRatio: false
-              }}
-            />
+            <div className="chart-container">
+              <Bar
+                data={data}
+                height={220}
+              />
+            </div>
           </Col>
           <Col md={6} className="text-center">
-            <Bubble data={data2} />
+            <div className="chart-container">
+              <Bubble data={data2} height={220} />
+            </div>
           </Col>
           <Col md={6} className="text-center">
-            <Line data={data3} />
+            <div className="chart-container">
+              <Line data={data3} height={220} />
+            </div>
           </Col>
           <Col md={6} className="text-center">
-            <Pie data={data4} />
-          </Col>
-          <Col md={6} className="text-center">
-            <Pie data={data4} />
-          </Col>
-          <Col md={6} className="text-center">
-            <Pie data={data4} />
+            <div className="chart-container">
+              <Pie data={data4} height={220} />
+            </div>
           </Col>
         </Row>
       </div>

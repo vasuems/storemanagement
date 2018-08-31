@@ -25,7 +25,6 @@ class Setting extends Component {
 
   render() {
     const { formatMessage } = this.props.intl;
-    console.log(this.props);
     const { settings } = this.props;
     return (
       <div className="content-body">

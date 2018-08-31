@@ -193,3 +193,8 @@ a, a:hover, a:link, a:active, a:visited{
 .nav-link{
   cursor: pointer;
 }
+.chart-container{
+  background: #fff;
+  margin: 10px 0;
+  padding: 20px
+}

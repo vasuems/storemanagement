@@ -54,5 +54,6 @@
   "sys.orderedBy": "Ordered By",
   "sys.settings": "Settings",
   "sys.save": "Save",
-  "sys.siteName": "Site name"
+  "sys.siteName": "Site name",
+  "sys.addNew": "Add New"
 }
