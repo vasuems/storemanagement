@@ -3,7 +3,7 @@ const response = require('./responses');
 
 const router = express.Router();
 
-router.get('/authentication', (req, res) => {
+router.get('/auth', (req, res) => {
   res.send({ data: { accessToken: '123', refreshToken: '456' } });
 });
 
