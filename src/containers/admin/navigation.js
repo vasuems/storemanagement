@@ -9,7 +9,7 @@ import {
   DropdownToggle,
   DropdownItem,
   NavbarBrand,
-  Container
+  Container,
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 

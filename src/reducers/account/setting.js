@@ -2,7 +2,7 @@ import { FETCH_ACCOUNT_SETTINGS_SUCCESS } from '../../actions';
 
 const initialState = {
   settings: {},
-  orders: []
+  orders: [],
 };
 
 export default function acctSettingReducer(state = initialState, action) {
@@ -11,7 +11,7 @@ export default function acctSettingReducer(state = initialState, action) {
       return {
         ...state,
         settings: action.value.accountSettings,
-        orders: action.value.orders
+        orders: action.value.orders,
       };
     default:
       return state;

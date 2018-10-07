@@ -7,12 +7,12 @@ import {
   fetchFeaturedProductsSuccess,
   fetchFeaturedProductsFailed,
   fetchProductDetailSuccess,
-  fetchProductDetailFailed
+  fetchProductDetailFailed,
 } from '../actions';
 import {
   newProducts,
   featuredProducts,
-  productDetail
+  productDetail,
 } from '../apis/mocks/responses';
 
 export function* fetchProducts(action) {

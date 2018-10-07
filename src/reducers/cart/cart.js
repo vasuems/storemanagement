@@ -1,7 +1,7 @@
 import { FETCH_CART_SUCCESS } from '../../actions';
 
 const initialState = {
-  cart: []
+  cart: [],
 };
 
 export default function cartReducer(state = initialState, action) {

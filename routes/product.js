@@ -10,7 +10,7 @@ router.get('/authentication', (req, res) => {
 router.get('/products/:cat', (req, res) => {
   res.send({
     data: [...response.newProducts, ...response.featuredProducts],
-    page: 1
+    page: 1,
   });
 });
 

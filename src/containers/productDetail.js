@@ -7,7 +7,7 @@ import {
   Button,
   FormGroup,
   Label,
-  Input
+  Input,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -91,7 +91,7 @@ class ProductDetail extends Component {
 
 function mapStateToProps(state) {
   return {
-    productDetail: state.productDetailReducer.productDetail
+    productDetail: state.productDetailReducer.productDetail,
   };
 }
 

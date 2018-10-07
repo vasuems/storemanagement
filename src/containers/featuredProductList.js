@@ -42,7 +42,7 @@ class FeaturedProductList extends Component {
 
 function mapStateToProps(state) {
   return {
-    featuredProducts: state.featuredProductReducer.featuredProducts
+    featuredProducts: state.featuredProductReducer.featuredProducts,
   };
 }
 

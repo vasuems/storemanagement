@@ -8,7 +8,7 @@ import {
   FiBarChart2,
   FiGrid,
   FiDollarSign,
-  FiHome
+  FiHome,
 } from 'react-icons/fi';
 
 const SideBarContent = props => (

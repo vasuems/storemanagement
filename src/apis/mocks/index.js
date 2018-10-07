@@ -6,5 +6,5 @@ const prefix = 'http://localhost:3000/api/v1';
 const mock = new MockAdapter(axios);
 
 mock.onGet(`${prefix}/products`, { params: { pageNo, pageSize } }).reply(200, {
-  newArrivals
+  newArrivals,
 });

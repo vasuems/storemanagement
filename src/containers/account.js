@@ -12,7 +12,7 @@ import {
   Col,
   Form,
   FormGroup,
-  Table
+  Table,
 } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { Field, reduxForm } from 'redux-form';
@@ -27,7 +27,7 @@ class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: 'my-acct'
+      activeTab: 'my-acct',
     };
   }
 
@@ -43,7 +43,7 @@ class Account extends Component {
   toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
-        activeTab: tab
+        activeTab: tab,
       });
     }
   };
@@ -59,7 +59,7 @@ class Account extends Component {
             <NavItem>
               <NavLink
                 className={classnames({
-                  active: this.state.activeTab === 'my-acct'
+                  active: this.state.activeTab === 'my-acct',
                 })}
                 onClick={() => {
                   this.toggle('my-acct');
@@ -71,7 +71,7 @@ class Account extends Component {
             <NavItem>
               <NavLink
                 className={classnames({
-                  active: this.state.activeTab === 'my-orders'
+                  active: this.state.activeTab === 'my-orders',
                 })}
                 onClick={() => {
                   this.toggle('my-orders');
@@ -83,7 +83,7 @@ class Account extends Component {
             <NavItem>
               <NavLink
                 className={classnames({
-                  active: this.state.activeTab === 'my-pwd'
+                  active: this.state.activeTab === 'my-pwd',
                 })}
                 onClick={() => {
                   this.toggle('my-pwd');
@@ -128,7 +128,7 @@ class Account extends Component {
                       fieldType="text"
                       fieldValue={settings.deliveryAddress}
                       fieldPlaceholder={formatMessage({
-                        id: 'sys.deliveryAddr'
+                        id: 'sys.deliveryAddr',
                       })}
                       allowUpdate
                     />
@@ -138,7 +138,7 @@ class Account extends Component {
                       fieldType="text"
                       fieldValue={settings.billingAddress}
                       fieldPlaceholder={formatMessage({
-                        id: 'sys.billingAddr'
+                        id: 'sys.billingAddr',
                       })}
                       allowUpdate
                     />
@@ -222,7 +222,7 @@ class Account extends Component {
 
 const mapStateToProps = state => ({
   settings: state.acctSettingReducer.settings,
-  orders: state.acctSettingReducer.orders
+  orders: state.acctSettingReducer.orders,
 });
 
 export default connect(

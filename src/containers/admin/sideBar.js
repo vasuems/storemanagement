@@ -13,7 +13,7 @@ import NavBar from './navigation';
 const sideBarStyle = {
   width: 220,
   background: '#333',
-  marginTop: 56
+  marginTop: 56,
 };
 
 class SideBar extends Component {
@@ -21,14 +21,14 @@ class SideBar extends Component {
     super(props);
 
     this.state = {
-      path: 'dashboard'
+      path: 'dashboard',
     };
   }
 
   componentDidMount() {
     window.onpopstate = e => {
       this.setState({
-        path: e.state
+        path: e.state,
       });
     };
   }
@@ -37,7 +37,7 @@ class SideBar extends Component {
     window.history.pushState(path, '', `/admin/#/${path}`);
 
     this.setState({
-      path
+      path,
     });
   };
 

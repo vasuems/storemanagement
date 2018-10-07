@@ -7,7 +7,7 @@ import {
   Label,
   Input,
   FormText,
-  Button
+  Button,
 } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import FormItem from '../../components/formItem';
@@ -53,7 +53,7 @@ class Setting extends Component {
 }
 
 const mapStateToProps = state => ({
-  settings: state.settingReducer.settings
+  settings: state.settingReducer.settings,
 });
 
 export default connect(

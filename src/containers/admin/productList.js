@@ -14,10 +14,13 @@ class ProductList extends Component {
             </h3>
           </Col>
           <Col md={6}>
-            <Button color="danger" className="pull-right">+ <FormattedMessage id="sys.addNew" /></Button>
+            <Button color="danger" className="pull-right">
+              +<FormattedMessage id="sys.addNew" />
+            </Button>
           </Col>
-        </Row><br />
-        <Row>         
+        </Row>
+        <br />
+        <Row>
           <Col md={12}>
             <Table condensed responsive style={{ backgroundColor: '#fff' }}>
               <thead>
@@ -36,16 +39,14 @@ class ProductList extends Component {
                   <td>Product 1</td>
                   <td>asf ads fasdfasd</td>
                   <td>
-                    <ToggleButton
-value={false} onToggle={() => {}} />
+                    <ToggleButton value={false} onToggle={() => {}} />
                   </td>
                 </tr>
                 <tr>
                   <td>Product 2</td>
                   <td>asf ads fasdfasd</td>
                   <td>
-                    <ToggleButton
-value={false} onToggle={() => {}} />
+                    <ToggleButton value={false} onToggle={() => {}} />
                   </td>
                 </tr>
               </tbody>

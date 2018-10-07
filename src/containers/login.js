@@ -7,7 +7,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  Button
+  Button,
 } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
@@ -15,13 +15,13 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: props.show
+      modal: props.show,
     };
   }
 
   toggle = () => {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
     });
   };
 

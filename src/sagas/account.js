@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import {
   fetchAccountSettingsSuccess,
-  fetchAccountSettingsFailed
+  fetchAccountSettingsFailed,
 } from '../actions';
 import { accountSettings, orders } from '../apis/mocks/responses';
 

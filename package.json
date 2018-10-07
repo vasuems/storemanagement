@@ -36,6 +36,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "eslint": "./node_modules/.bin/eslint --fix",
+    "prettier": "prettier --single-quote --trailing-comma=es5 --write \"./**/*.js\"",
     "server": "nodemon app.js",
     "add-db-dev": "db-migrate db:create davinci --config db/mysql.json -e dev",
     "migrate-db-dev": "db-migrate up --config db/mysql.json -e dev",

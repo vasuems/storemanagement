@@ -14,7 +14,7 @@ import {
   Container,
   Input,
   Collapse,
-  NavbarToggler
+  NavbarToggler,
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { FiUser, FiShoppingCart, FiLogOut } from 'react-icons/fi';
@@ -26,19 +26,19 @@ class Navigation extends Component {
     super(props);
     this.state = {
       showLogin: true,
-      showMenu: false
+      showMenu: false,
     };
   }
 
   openLogin = (e, data) => {
     this.setState({
-      showLogin: !this.state.showLogin
+      showLogin: !this.state.showLogin,
     });
   };
 
   toggle = () => {
     this.setState({
-      showMenu: !this.state.showMenu
+      showMenu: !this.state.showMenu,
     });
   };
 

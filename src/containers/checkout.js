@@ -9,7 +9,7 @@ import {
   Button,
   Card,
   CardBody,
-  CardHeader
+  CardHeader,
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
@@ -64,10 +64,8 @@ class Checkout extends Component {
             <Col md={4}>
               <Card body>
                 <b>
-                  <FormattedMessage id="sys.payBy" />
-{' '}
-:
-</b>
+                  <FormattedMessage id="sys.payBy" /> :
+                </b>
                 <CardBody>
                   <Input type="radio" name="payment-method" />
                   &nbsp;PayPal
@@ -83,10 +81,8 @@ class Checkout extends Component {
               <br />
               <Card body>
                 <b>
-                  <FormattedMessage id="sys.shippingBy" />
-{' '}
-:
-</b>
+                  <FormattedMessage id="sys.shippingBy" /> :
+                </b>
                 <CardBody>
                   <Input type="radio" name="shipping-method" />
                   &nbsp;Normal mail
@@ -117,7 +113,7 @@ class Checkout extends Component {
 
 function mapStateToProps(state) {
   return {
-    cart: state.cartReducer.cart
+    cart: state.cartReducer.cart,
   };
 }
 

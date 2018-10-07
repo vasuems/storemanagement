@@ -32,8 +32,7 @@ class Payment extends Component {
                   </td>
                   <td>your.paypal@example.com</td>
                   <td>
-                    <ToggleButton
-value onToggle={() => {}} />
+                    <ToggleButton value onToggle={() => {}} />
                   </td>
                 </tr>
                 <tr>
@@ -42,8 +41,7 @@ value onToggle={() => {}} />
                   </td>
                   <td>your.paypal@example.com</td>
                   <td>
-                    <ToggleButton
-value onToggle={() => {}} />
+                    <ToggleButton value onToggle={() => {}} />
                   </td>
                 </tr>
                 <tr>
@@ -52,8 +50,7 @@ value onToggle={() => {}} />
                   </td>
                   <td>your.paypal@example.com</td>
                   <td>
-                    <ToggleButton
-value onToggle={() => {}} />
+                    <ToggleButton value onToggle={() => {}} />
                   </td>
                 </tr>
                 <tr>
@@ -65,16 +62,14 @@ value onToggle={() => {}} />
                   </td>
                   <td>000-123456-1</td>
                   <td>
-                    <ToggleButton
-value={false} onToggle={() => {}} />
+                    <ToggleButton value={false} onToggle={() => {}} />
                   </td>
                 </tr>
                 <tr>
                   <td>Bank Transfer</td>
                   <td>000-123456-1</td>
                   <td>
-                    <ToggleButton
-value onToggle={() => {}} />
+                    <ToggleButton value onToggle={() => {}} />
                   </td>
                 </tr>
               </tbody>

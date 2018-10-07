@@ -29,8 +29,7 @@ class CustomerList extends Component {
                   <td>Nick Chen</td>
                   <td>nick.chen@example.com</td>
                   <td>
-                    <ToggleButton
-value onToggle={() => {}} />
+                    <ToggleButton value onToggle={() => {}} />
                   </td>
                 </tr>
               </tbody>

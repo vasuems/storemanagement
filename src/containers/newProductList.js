@@ -39,7 +39,7 @@ class NewProductList extends Component {
 
 function mapStateToProps(state) {
   return {
-    newProducts: state.newProductReducer.newProducts
+    newProducts: state.newProductReducer.newProducts,
   };
 }
 

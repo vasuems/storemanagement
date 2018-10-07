@@ -5,7 +5,7 @@ import {
   ListGroupItem,
   Row,
   Col,
-  Button
+  Button,
 } from 'reactstrap';
 
 class CartItemList extends Component {

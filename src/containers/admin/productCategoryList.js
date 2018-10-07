@@ -14,9 +14,12 @@ class ProductCategoryList extends Component {
             </h3>
           </Col>
           <Col md={6}>
-            <Button color="danger" className="pull-right">+ <FormattedMessage id="sys.addNew" /></Button>
+            <Button color="danger" className="pull-right">
+              +<FormattedMessage id="sys.addNew" />
+            </Button>
           </Col>
-        </Row><br />
+        </Row>
+        <br />
         <Row>
           <Col md={12}>
             <Table condensed responsive style={{ backgroundColor: '#fff' }}>
@@ -32,8 +35,7 @@ class ProductCategoryList extends Component {
                 <tr>
                   <td>Sports</td>
                   <td>
-                    <ToggleButton
-value onToggle={() => {}} />
+                    <ToggleButton value onToggle={() => {}} />
                   </td>
                 </tr>
               </tbody>

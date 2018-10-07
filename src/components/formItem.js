@@ -10,7 +10,7 @@ const FormItem = props => {
     fieldValue,
     fieldPlaceholder,
     allowUpdate,
-    disable
+    disable,
   } = props;
   return (
     <FormGroup row>

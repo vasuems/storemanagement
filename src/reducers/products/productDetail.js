@@ -1,7 +1,7 @@
 import { FETCH_PRODUCT_DETAIL_SUCCESS } from '../../actions';
 
 const initialState = {
-  productDetail: null
+  productDetail: null,
 };
 
 export default function productDetailReducer(state = initialState, action) {

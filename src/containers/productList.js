@@ -43,7 +43,7 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.productReducer.products
+  products: state.productReducer.products,
 });
 
 export default connect(

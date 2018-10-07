@@ -6,7 +6,7 @@ import {
   ListGroupItem,
   Row,
   Col,
-  Button
+  Button,
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
@@ -82,7 +82,7 @@ class Payment extends Component {
 
 function mapStateToProps(state) {
   return {
-    items: []
+    items: [],
   };
 }
 

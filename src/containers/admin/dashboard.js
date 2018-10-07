@@ -15,9 +15,9 @@ class Dashboard extends Component {
           borderWidth: 1,
           hoverBackgroundColor: 'rgba(255,99,132,0.4)',
           hoverBorderColor: 'rgba(255,99,132,1)',
-          data: [65, 59, 80, 81, 56, 55, 40]
-        }
-      ]
+          data: [65, 59, 80, 81, 56, 55, 40],
+        },
+      ],
     };
     const data2 = {
       labels: ['January'],
@@ -41,9 +41,9 @@ class Dashboard extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [{ x: 10, y: 20, r: 5 }]
-        }
-      ]
+          data: [{ x: 10, y: 20, r: 5 }],
+        },
+      ],
     };
     const data3 = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -67,9 +67,9 @@ class Dashboard extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [65, 59, 80, 81, 56, 55, 40]
-        }
-      ]
+          data: [65, 59, 80, 81, 56, 55, 40],
+        },
+      ],
     };
     const data4 = {
       labels: ['Red', 'Green', 'Yellow'],
@@ -77,9 +77,9 @@ class Dashboard extends Component {
         {
           data: [300, 50, 100],
           backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-        }
-      ]
+          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+        },
+      ],
     };
     return (
       <div className="content-body">
@@ -89,25 +89,22 @@ class Dashboard extends Component {
         <Row>
           <Col md={6} className="text-center">
             <div className="chart-container">
-              <Bar
-                data={data}
-                height={220}
-              />
+              <Bar data={data} height={200} />
             </div>
           </Col>
           <Col md={6} className="text-center">
             <div className="chart-container">
-              <Bubble data={data2} height={220} />
+              <Bubble data={data2} height={200} />
             </div>
           </Col>
           <Col md={6} className="text-center">
             <div className="chart-container">
-              <Line data={data3} height={220} />
+              <Line data={data3} height={200} />
             </div>
           </Col>
           <Col md={6} className="text-center">
             <div className="chart-container">
-              <Pie data={data4} height={220} />
+              <Pie data={data4} height={200} />
             </div>
           </Col>
         </Row>

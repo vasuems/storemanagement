@@ -1,7 +1,7 @@
 import { FETCH_SITE_SETTINGS_SUCCESS } from '../../actions';
 
 const initialState = {
-  settings: {}
+  settings: {},
 };
 
 export default function settingReducer(state = initialState, action) {
