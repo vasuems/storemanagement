@@ -12,7 +12,10 @@
     "enzyme-adapter-react-16": "^1.2.0",
     "enzyme-to-json": "^3.3.4",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
     "knex": "^0.15.2",
+    "md5": "^2.2.1",
+    "moment": "^2.22.2",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.3",
     "react": "^16.4.2",
@@ -35,7 +38,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "eslint": "./node_modules/.bin/eslint --fix",
+    "eslint": "./node_modules/.bin/eslint",
     "prettier": "prettier --single-quote --trailing-comma=es5 --write \"./**/*.js\"",
     "server": "nodemon app.js",
     "add-db-dev": "db-migrate db:create davinci --config db/mysql.json -e dev",
@@ -44,12 +47,10 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
-    "eslint": "^5.4.0",
+    "eslint": "^5.6.1",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.11.1",
     "prettier": "1.14.2"
   }

@@ -9,23 +9,29 @@
   "parserOptions": {
     "ecmaVersion": 2017
   },
-  "extends": ["airbnb", "plugin:prettier/recommended"],
-  "plugins": ["prettier"],
+  "extends": ["airbnb", "eslint:recommended"],
   "rules": {
     "indent": [2, 2],
-    "quotes": ["error", "single", { "avoidEscape": true }],
+    "quotes": [2, "single"],
     "semi": [
-        "error",
-        "always"
+      2,
+      "always"
     ],
-    "prettier/prettier": ["error", { "singleQuote": true }],
     "class-methods-use-this": 0,
     "import/no-named-as-default": 0,
     "react/jsx-filename-extension": [
-      "error",
+      2,
       {
         "extensions": [".js"]
       }
+    ],
+    "comma-dangle": [
+      2, 
+      "always-multiline"
+    ],
+    "func-names": [
+      2,
+      "never"
     ]
   }
 }
