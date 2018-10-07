@@ -41,7 +41,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "eslint": "./node_modules/.bin/eslint",
+    "eslint": "./node_modules/.bin/eslint --fix",
     "prettier": "prettier --single-quote --trailing-comma=es5 --write \"./**/*.js\"",
     "server": "nodemon app.js"
   },
