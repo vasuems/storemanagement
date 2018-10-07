@@ -1,27 +1,16 @@
-const fs = require('fs');
+'user strict';
 
-const sql = fs.readFileSync(`${__dirname}/davinci.sql`);
+const mysql = require('mysql');
 
-const knex = require('knex')({
-  dialect: 'mysql',
-  connection: {
+function MySQL() {}
+
+MySQL.prototype.connect = function() {
+  return mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'password',
+    password: '',
     database: 'davinci',
-    multipleStatements: true,
-  },
-});
-
-knex
-  .raw('CREATE DATABASE IF NOT EXISTS davinci;')
-  .then(() => {
-    knex.raw(sql);
-    console.log('Finished database setup.');
-  })
-  .catch(err => {
-    console.log('Unable to setup database.');
-  })
-  .finally(() => {
-    process.exit();
   });
+};
+
+module.exports = MySQL;

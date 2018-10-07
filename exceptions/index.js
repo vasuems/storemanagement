@@ -1,3 +1,5 @@
+'user strict';
+
 const util = require('util');
 
 function Exception(msg) {

@@ -1,3 +1,5 @@
+'user strict';
+
 const md5 = require('md5');
 const moment = require('moment');
 const jwt = require('jsonwebtoken');

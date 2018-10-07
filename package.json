@@ -43,10 +43,7 @@
     "eject": "react-scripts eject",
     "eslint": "./node_modules/.bin/eslint",
     "prettier": "prettier --single-quote --trailing-comma=es5 --write \"./**/*.js\"",
-    "server": "nodemon app.js",
-    "add-db-dev": "db-migrate db:create davinci --config db/mysql.json -e dev",
-    "migrate-db-dev": "db-migrate up --config db/mysql.json -e dev",
-    "remove-db-dev": "db-migrate db:drop davinci --config db/mysql.json -e dev"
+    "server": "nodemon app.js"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

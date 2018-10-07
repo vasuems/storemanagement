@@ -58,7 +58,4 @@ app.post('/auth', async (req, res) => {
   }
 });
 
-app.use('/api', product);
-app.use('/api', site);
-
 app.listen(8080, () => console.log('Running on port 8080!'));
