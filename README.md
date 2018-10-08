@@ -9,16 +9,7 @@
   <img src="https://img.shields.io/badge/MySQL-5.7.+-blue.svg">
 </p>
 
-The goal of this project is to develop an open source ecommerce system written in ReactJS + ExpressJS. LF Commerce will provide a Plug-And-Play experience to users with minimum programming background. 
-
-## Development plan by Sep 2018
-
-- [ ] Order Listing components (Admin dashboard)
-- [ ] Customer Listing components (Admin dashboard)
-- [ ] Product Listing components (Admin dashboard)
-- [ ] Customer account management(React)
-- [ ] Customer checkout(React)
-- [x] DB Migration
+The goal of this project is to develop an open source ecommerce system written in ReactJS + ExpressJS. 
 
 
 ![Alt Screenshot](./screenshot.png "Screenshot")
