@@ -1,52 +1,61 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Container, Row, Col } from 'reactstrap';
+import { Table, Row, Col, Button } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import { fetchProducts } from '../actions';
-import Navigation from './navigation';
-import Footer from '../components/footer';
-import Product from '../components/product';
+import ToggleButton from 'react-toggle-button';
 
 class ProductList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchProducts());
-  }
-
   render() {
-    const { products } = this.props;
     return (
-      <div>
-        <Navigation />
-        <Container className="padding-top-80">
-          <Row className="show-grid">
-            {products.map(product => (
-              <Col key={product.productURL} md={3}>
-                <Product
-                  productName={product.productName}
-                  productURL={product.productURL}
-                  productImage={product.productImage}
-                  productPrice={product.productPrice}
-                />
-              </Col>
-            ))}
-          </Row>
-        </Container>
-        <Footer />
+      <div className="content-body">
+        <Row>
+          <Col md={6}>
+            <h3>
+              <FormattedMessage id="sys.products" />
+            </h3>
+          </Col>
+          <Col md={6}>
+            <Button color="danger" className="pull-right">
+              +<FormattedMessage id="sys.addNew" />
+            </Button>
+          </Col>
+        </Row>
+        <br />
+        <Row>
+          <Col md={12}>
+            <Table condensed responsive style={{ backgroundColor: '#fff' }}>
+              <thead>
+                <tr>
+                  <th>
+                    <FormattedMessage id="sys.name" />
+                  </th>
+                  <th>
+                    <FormattedMessage id="sys.desc" />
+                  </th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Product 1</td>
+                  <td>asf ads fasdfasd</td>
+                  <td>
+                    <ToggleButton value={false} onToggle={() => {}} />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Product 2</td>
+                  <td>asf ads fasdfasd</td>
+                  <td>
+                    <ToggleButton value={false} onToggle={() => {}} />
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  products: state.productReducer.products,
-});
-
-export default connect(
-  mapStateToProps,
-  null
-)(ProductList);
+export default ProductList;

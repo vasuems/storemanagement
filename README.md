@@ -12,9 +12,6 @@
 The goal of this project is to develop an open source ecommerce system written in ReactJS + ExpressJS. 
 
 
-![Alt Screenshot](./screenshot.png "Screenshot")
-
-
 ## Installation
 
 **Yarn**
@@ -67,14 +64,10 @@ Your contribution is appreicated. For the purpose of having good project managem
 │   │   ├── mocks            # Mocked API response
 │   ├── components           # React components
 │   |   ├── __tests__        # Unit test for components
-│   |   ├── admin            # React components for admin dashboard
 │   ├── containers           # React containers
 │   |   ├── __tests__        # Unit test for containers
-│   |   ├── admin            # React container components for admin dashboard
 │   ├── reducers             # React containers
 │   |   ├── __tests__        # Unit test for reducers
-│   |   ├── cart             # Reducers for cart components
-│   |   ├── products         # Reducers for product components
 │   ├── sagas                # Redux saga files
 │   |   ├── __tests__        # Unit test for sagas
 │   ├── translations         # All language translation .json files

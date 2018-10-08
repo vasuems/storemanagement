@@ -1,89 +1,84 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  Container,
-  ListGroup,
-  ListGroupItem,
-  Row,
-  Col,
-  Button,
-} from 'reactstrap';
+import { Table, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import { withRouter } from 'react-router-dom';
-import Navigation from './navigation';
-import Footer from '../components/footer';
-import CartItem from '../components/cartItem';
-import { fetchCart } from '../actions';
+import { FaCcPaypal, FaCcStripe, FaBtc } from 'react-icons/fa';
+import ToggleButton from 'react-toggle-button';
 
 class Payment extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchCart());
-  }
-
-  onCheckoutClick = () => {
-    const { history } = this.props;
-    history.push('/checkout');
-  };
-
   render() {
-    const { items } = this.props;
     return (
-      <div>
-        <Navigation />
-        <Container
-          className="padding-top-80"
-          style={{ position: 'relative', height: '100%', minHeight: '100%' }}
-        >
-          <div className="lead">
-            <FormattedMessage id="sys.checkout" />
-          </div>
-          <Row>
-            <Col md={12}>
-              <ListGroup>
-                {items.map(cartItem => (
-                  <ListGroupItem key={cartItem.productName}>
-                    <CartItem
-                      productImage={cartItem.productImage}
-                      productName={cartItem.productName}
-                      productURL={cartItem.productURL}
-                      productPrice={cartItem.productPrice}
-                      productQuantity={cartItem.productQuantity}
+      <div className="content-body">
+        <h3>
+          <FormattedMessage id="sys.payments" />
+        </h3>
+        <Row>
+          <Col md={12}>
+            <Table condensed responsive style={{ backgroundColor: '#fff' }}>
+              <thead>
+                <tr>
+                  <th>
+                    <FormattedMessage id="sys.name" />
+                  </th>
+                  <th>
+                    <FormattedMessage id="sys.acctNo" />
+                  </th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <FaCcPaypal size="3em" />
+                  </td>
+                  <td>your.paypal@example.com</td>
+                  <td>
+                    <ToggleButton value onToggle={() => {}} />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <FaCcStripe size="3em" />
+                  </td>
+                  <td>your.paypal@example.com</td>
+                  <td>
+                    <ToggleButton value onToggle={() => {}} />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <FaBtc size="3em" />
+                  </td>
+                  <td>your.paypal@example.com</td>
+                  <td>
+                    <ToggleButton value onToggle={() => {}} />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img
+                      src="https://www.wirecard.com/uploads/tx_neimagefinder/wirecard-logo-white-black-download-72dpi.png"
+                      width="60"
                     />
-                  </ListGroupItem>
-                ))}
-              </ListGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12} className="text-right">
-              <div>
-                <strong>
-                  Subtotal:
-                  <span className="price">$123.16</span>
-                </strong>
-              </div>
-              <br />
-              <Button
-                color="primary"
-                className="pull-right"
-                onClick={this.onCheckoutClick}
-              >
-                <FormattedMessage id="sys.pay" />
-              </Button>
-            </Col>
-          </Row>
-          <Footer />
-        </Container>
+                  </td>
+                  <td>000-123456-1</td>
+                  <td>
+                    <ToggleButton value={false} onToggle={() => {}} />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Bank Transfer</td>
+                  <td>000-123456-1</td>
+                  <td>
+                    <ToggleButton value onToggle={() => {}} />
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    items: [],
-  };
-}
-
-export default connect(mapStateToProps)(withRouter(Payment));
+export default Payment;
