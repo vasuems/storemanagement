@@ -18,7 +18,7 @@ function User(code, name, email, password, salt, joinedOn, role) {
   this.role = role || 'user';
 }
 
-function Contact(userId, number, type, areaCode, countryId){
+function Contact(userId, number, type, areaCode, countryId) {
   this.userId = userId;
   this.number = number;
   this.type = type;
@@ -29,33 +29,30 @@ function Contact(userId, number, type, areaCode, countryId){
 User.prototype.getUser = function(id, db) {
   return new Promise((resolve, reject) => {
     db.connect();
-    db.query(
-      `select * from user where id=${id}`,
-      (error, results, fields) => {
-        if (error) {
-          reject(new NoRecordFoundError('No user found.'));
-        } else {
-          const { code, name, email, joinedOn } = results[0];
-          const user = new User(code, name, email, '', '', joinedOn);
+    db.query(`select * from user where id=${id}`, (error, results) => {
+      if (error) {
+        reject(new NoRecordFoundError('No user found.'));
+      } else {
+        const { code, name, email, joinedOn } = results[0];
+        const user = new User(code, name, email, '', '', joinedOn);
 
-          db.query(
-            `select user_id as userId, number, type, area_code as areaCode, country_id as countryId from user_contact where user_id='${id}' and status=1`,
-            (error, results, fields) => {
-              db.end();
-              if (error) {
-                reject(new NoRecordFoundError('No user found.'));
-              } else {
-                const contacts = results.map((contact) => {
-                  const { userId, number, type, areaCode, countryId } = contact;
-                  return new Contact(userId, number, type, areaCode, countryId);
-                });        
-                resolve({user, contacts});
-              }
+        db.query(
+          `select user_id as userId, number, type, area_code as areaCode, country_id as countryId from user_contact where user_id='${id}' and status=1`,
+          (error, results) => {
+            db.end();
+            if (error) {
+              reject(new NoRecordFoundError('No user found.'));
+            } else {
+              const contacts = results.map(contact => {
+                const { userId, number, type, areaCode, countryId } = contact;
+                return new Contact(userId, number, type, areaCode, countryId);
+              });
+              resolve({ user, contacts });
             }
-          );          
-        }
+          }
+        );
       }
-    );
+    });
   });
 };
 
@@ -74,7 +71,7 @@ User.prototype.addUser = function(user, db) {
       }
       db.query(
         `insert into user(code, name, email, password, salt, joined_on, role) values('${code}', '${name}', '${email}', '${password}', '${salt}', '${joinedOn}', '${role}')`,
-        (error, results, fields) => {
+        error => {
           if (error) {
             reject(new BadRequestError('Invalide user data.'));
           } else {
@@ -88,15 +85,27 @@ User.prototype.addUser = function(user, db) {
   });
 };
 
-User.prototype.addContact = function(contact, db){
+User.prototype.deleteUser = function(id, db) {
+  return new Promise((resolve, reject) => {
+    db.connect();
+    db.query(`update user set status=0 where id=${id}`, error => {
+      if (error) {
+        reject(new BadRequestError('User deleting failed.'));
+      } else {
+        resolve('User deleted.');
+      }
+    });
+  });
+};
+
+User.prototype.addContact = function(contact, db) {
   return new Promise((resolve, reject) => {
     if (contact instanceof Contact) {
-      const { userId, number, type,
-        areaCode, countryId } = contact;
+      const { userId, number, type, areaCode, countryId } = contact;
       db.connect();
       db.query(
         `insert into user_contact(user_id, number, type, area_code, country_id) values(${userId}, '${number}', '${type}', '${areaCode}', ${countryId})`,
-        (error, results, fields) => {
+        error => {
           if (error) {
             reject(new BadRequestError('Invalide user contact data.'));
           } else {
@@ -104,13 +113,48 @@ User.prototype.addContact = function(contact, db){
           }
         }
       );
-    }else{
+    } else {
       reject(new BadRequestError('Invalide user contact data.'));
     }
   });
 };
 
-User.prototype.deleteUser = function(id, db) {};
+User.prototype.updateContact = function(id, contact, db) {
+  return new Promise((resolve, reject) => {
+    if (contact instanceof Contact) {
+      const { userId, number, type, areaCode, countryId } = contact;
+      db.connect();
+      db.query(
+        `update user_contact set number='${number}', type='${type}', area_code='${areaCode}', country_id=${countryId} where id=${id}`,
+        error => {
+          if (error) {
+            reject(new BadRequestError('Invalide user contact data.'));
+          } else {
+            resolve(new Contact(userId, number, type, areaCode, countryId));
+          }
+        }
+      );
+    } else {
+      reject(new BadRequestError('Invalide user contact data.'));
+    }
+  });
+};
+
+User.prototype.deleteContact = function(id, db) {
+  return new Promise((resolve, reject) => {
+    db.connect();
+    db.query(
+      `update user_contact set status=0 where id=${id}`,
+      error => {
+        if (error) {
+          reject(new BadRequestError('Contact deleting failed.'));
+        } else {
+          resolve('Contact deleted.');
+        }
+      }
+    );
+  });
+};
 
 module.exports = {
   User,

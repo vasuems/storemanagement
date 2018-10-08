@@ -25,4 +25,3 @@ knex
   .finally(() => {
     process.exit();
   });
-  

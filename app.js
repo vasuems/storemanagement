@@ -33,6 +33,20 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
+const userCodeVerifier = (req, res, next) => {
+  try {
+    const decoded = jwt.verify(req.headers.authorization, env.tokenSecret);
+    if (!decoded || decoded.data.code !== req.params.code) {
+      throw new UnauthorisedError('Invalid user ID.');
+    }
+
+    res.locals.id = decoded.data.id;
+    next();
+  } catch (err) {
+    res.status(err.statusCode).send(err);
+  }
+};
+
 app.use(bodyParser.json());
 
 app.post('/auth', async (req, res) => {
@@ -78,23 +92,91 @@ app.post('/accounts', async (req, res) => {
   }
 });
 
-app.get('/accounts/:code', authMiddleware, async (req, res) => {
-  try {
-    const decoded = jwt.verify(req.headers.authorization, env.tokenSecret);
+app.get(
+  '/accounts/:code',
+  [authMiddleware, userCodeVerifier],
+  async (req, res) => {
+    try {
+      const user = new User();
+      const mysql = new MySQL();
+      const db = mysql.connect();
 
-    if(!decoded || decoded.data.code !== req.params.code){
-      throw new UnauthorisedError('Invalid user ID.');
+      const data = await user.getUser(res.locals.id, db);
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
     }
- 
-    const user = new User();
-    const mysql = new MySQL();
-    const db = mysql.connect();
-
-    const data = await user.getUser(decoded.data.id, db);
-    res.send(data);
-  } catch (err) {
-    res.status(err.statusCode).send(err);
   }
-});
+);
+
+app.post(
+  '/accounts/:code/contacts',
+  [authMiddleware, userCodeVerifier],
+  async (req, res) => {
+    try {
+      const user = new User();
+      const mysql = new MySQL();
+      const db = mysql.connect();
+
+      const data = await user.addContact(
+        new Contact(
+          res.locals.id,
+          req.body.number,
+          req.body.type,
+          req.body.areaCode,
+          req.body.countryId
+        ),
+        db
+      );
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.put(
+  '/accounts/:code/contacts',
+  [authMiddleware, userCodeVerifier],
+  async (req, res) => {
+    try {
+      const user = new User();
+      const mysql = new MySQL();
+      const db = mysql.connect();
+
+      const data = await user.updateContact(
+        req.body.id,
+        new Contact(
+          res.locals.id,
+          req.body.number,
+          req.body.type,
+          req.body.areaCode,
+          req.body.countryId
+        ),
+        db
+      );
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.delete(
+  '/accounts/:code/contacts/:id',
+  [authMiddleware, userCodeVerifier],
+  async (req, res) => {
+    try {
+      const user = new User();
+      const mysql = new MySQL();
+      const db = mysql.connect();
+
+      const data = await user.deleteContact(req.params.id, db);
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
 
 app.listen(8080, () => console.log('Running on port 8080!'));
