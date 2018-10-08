@@ -10,8 +10,7 @@ import {
   Button,
 } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import FormItem from '../../components/formItem';
-import { fetchSiteSettings } from '../../actions';
+import { fetchSiteSettings } from '../actions';
 
 class Setting extends Component {
   constructor(props) {
@@ -32,13 +31,6 @@ class Setting extends Component {
           <FormattedMessage id="sys.settings" />
         </h3>
         <Form style={{ backgroundColor: '#fff', padding: 20 }}>
-          <FormItem
-            label={<FormattedMessage id="sys.siteName" />}
-            fieldName="site-name"
-            fieldType="text"
-            fieldValue={settings.siteName}
-            fieldPlaceholder={formatMessage({ id: 'sys.siteName' })}
-          />
           <FormGroup check row>
             <Col sm={{ size: 10, offset: 2 }}>
               <Button color="primary">

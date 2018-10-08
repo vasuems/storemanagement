@@ -1,4 +1,4 @@
-import { FETCH_SITE_SETTINGS_SUCCESS } from '../../actions';
+import { FETCH_SITE_SETTINGS_SUCCESS } from '../actions';
 
 const initialState = {
   settings: {},

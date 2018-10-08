@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Sidebar from 'react-sidebar';
-import SideBarContent from '../../components/admin/sideBar';
+import SideBarContent from '../components/sideBar';
 import Dashboard from './dashboard';
 import CustomerList from './customerList';
 import OrderList from './orderList';
@@ -21,7 +21,7 @@ class SideBar extends Component {
     super(props);
 
     this.state = {
-      path: 'dashboard',
+      path: 'home',
     };
   }
 
@@ -34,7 +34,7 @@ class SideBar extends Component {
   }
 
   onPathChange = path => {
-    window.history.pushState(path, '', `/admin/#/${path}`);
+    window.history.pushState(path, '', `/dashboard/#/${path}`);
 
     this.setState({
       path,
@@ -54,7 +54,7 @@ class SideBar extends Component {
         >
           {(path => {
             switch (true) {
-              case /dashboard/.test(path):
+              case /home/.test(path):
                 return <Dashboard />;
               case /customers/.test(path):
                 return <CustomerList />;

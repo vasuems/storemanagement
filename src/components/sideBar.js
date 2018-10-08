@@ -18,7 +18,7 @@ const SideBarContent = props => (
       <Button
         color="link"
         onClick={() => {
-          props.onPathChange('dashboard');
+          props.onPathChange('home');
         }}
       >
         <FiHome className="sidebar-icon" />

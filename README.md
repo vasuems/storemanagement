@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/MySQL-5.7.+-blue.svg">
 </p>
 
-The goal of this project is to develop an open source ecommerce system written in ReactJS + ExpressJS. 
+An ecommerce dashboard written in ReactJS + ExpressJS. 
 
 
 ## Installation

@@ -1,19 +1,9 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import productReducer from './products/product';
-import featuredProductReducer from './products/featuredProduct';
-import newProductReducer from './products/newProduct';
-import productDetailReducer from './products/productDetail';
-import settingReducer from './admin/setting';
-import acctSettingReducer from './account/setting';
+import settingReducer from './setting';
 
 const rootReducer = combineReducers({
-  productReducer,
-  featuredProductReducer,
-  newProductReducer,
-  productDetailReducer,
   settingReducer,
-  acctSettingReducer,
   form: formReducer,
 });
 
