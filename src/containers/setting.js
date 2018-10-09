@@ -51,7 +51,7 @@ class Setting extends Component {
                 className={classnames({ active: this.state.activeTab === '1' })}
                 onClick={() => { this.toggle('1'); }}
               >
-                <SettingForm />
+                <FormattedMessage id="sys.basicInfo" />
               </NavLink>
             </NavItem>
             <NavItem>
@@ -63,11 +63,11 @@ class Setting extends Component {
               </NavLink>
             </NavItem>
           </Nav>
-          <TabContent activeTab={this.state.activeTab}>
+          <TabContent activeTab={this.state.activeTab} className="bg-white padding-v20 padding-h20">
             <TabPane tabId="1">
               <Row>
                 <Col sm="12">
-                  <h4>Tab 1 Contents</h4>
+                  <SettingForm onSubmit={() => {}} />
                 </Col>
               </Row>
             </TabPane>
@@ -78,11 +78,7 @@ class Setting extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  settings: state.settingReducer.settings,
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   null
 )(injectIntl(Setting));

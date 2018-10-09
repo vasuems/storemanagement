@@ -14,10 +14,6 @@ import {
 import { FormattedMessage } from 'react-intl';
 
 class Navigation extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="admin-navbar">

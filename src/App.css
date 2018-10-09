@@ -232,3 +232,7 @@ a, a:hover, a:link, a:active, a:visited{
   padding-top: 20px;
   padding-bottom: 20px;
 }
+.padding-h20{
+  padding-left: 20px;
+  padding-right: 20px;
+}

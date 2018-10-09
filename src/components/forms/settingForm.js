@@ -3,22 +3,20 @@ import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Col, Form, FormGroup, Label, Button } from 'reactstrap';
 
-let SettingForm = props => {
-  const { handleSubmit } = props;
+const SettingForm = props => {
+  const { onSubmit } = props;
   return(
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={onSubmit}>
       <FormGroup row>
         <Label for="siteName" sm={2}><FormattedMessage id="sys.siteName" /></Label>
         <Col sm={10}>
-          <Field type="text" name="siteName" id="siteName" placeholder="with a placeholder" />
+          <Field component="input" name="siteName" className="form-control" id="siteName" value="" />
         </Col>
       </FormGroup>
     </Form>
   );
 };
 
-SettingForm = reduxForm({
-  form: 'acctSettings',
+export default reduxForm({
+  form: 'siteSettings',
 })(SettingForm);
-
-export default SettingForm;
