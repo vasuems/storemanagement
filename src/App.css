@@ -1,7 +1,9 @@
 #root{
+  width: 100%;
   height: 100%;
 }
 #root > div{
+  width: inherit;
   height: inherit;
 }
 #search-bar{
@@ -127,13 +129,11 @@ a, a:hover, a:link, a:active, a:visited{
   color: #999;
 }
 .btn-link{
-  text-decoration: none !important;
-  color: #fafafa;
-  font-weight: 200;
+  color: #666;
   font-size: 14px;
 }
 .btn-link:hover{
-  color: #fafafa;
+  color: #333;
 }
 .sidebar-link:hover{
   color: #fafafa;
@@ -197,4 +197,31 @@ a, a:hover, a:link, a:active, a:visited{
   background: #fff;
   margin: 10px 0;
   padding: 20px
+}
+.login-page{
+  height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.login-box{
+  display: flex;
+  flex: .9;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#login-form .form-control, #login-form .btn{
+  border-radius: 0;
+}
+#login-form{
+  text-align: center;
+}
+#login-site-name{
+  text-align: center;
+  font-weight: bold;
+}
+.padding-v20{
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

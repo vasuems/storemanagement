@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import Home from './containers/home';
 import AdminDashboard from './containers/sideBar';
+import { inherits } from 'util';
 
 const App = () => {
   return (
@@ -12,7 +13,6 @@ const App = () => {
           path="/dashboard"
           exact
           render={() => <Redirect to="/dashboard/#/home" />}
-          component={AdminDashboard}
         />
         <Route path="/dashboard/#/home" exact component={AdminDashboard} />
       </div>

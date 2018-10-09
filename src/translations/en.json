@@ -1,4 +1,5 @@
 {
+  "sys.siteName": "LF Commerce",
   "title.featured": "Featured Products",
   "title.new": "New Products",
   "prod.size": "Size",
@@ -15,6 +16,7 @@
   "sys.myCart": "My Shopping Cart",
   "sys.email": "Email",
   "sys.pwd": "Password",
+  "sys.forgotPwd": "Forgot password?",
   "sys.currentPwd": "Current password",
   "sys.newPwd": "New password",
   "sys.fName": "First Name",
@@ -54,6 +56,5 @@
   "sys.orderedBy": "Ordered By",
   "sys.settings": "Settings",
   "sys.save": "Save",
-  "sys.siteName": "Site name",
   "sys.addNew": "Add New"
 }
