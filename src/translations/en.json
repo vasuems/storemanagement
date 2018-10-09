@@ -1,5 +1,6 @@
 {
-  "sys.siteName": "LF Commerce",
+  "site.name": "Site name",
+  "sys.siteName": "Site name",
   "title.featured": "Featured Products",
   "title.new": "New Products",
   "prod.size": "Size",

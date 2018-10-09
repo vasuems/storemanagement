@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Form,
-  FormGroup,
+  TabContent,
+  TabPane,
   Col,
-  Label,
-  Input,
-  FormText,
+  Row,
+  Nav,
+  NavItem,
+  NavLink,
   Button,
 } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import classnames from 'classnames';
 import { fetchSiteSettings } from '../actions';
+import SettingForm from '../components/forms/settingForm';
 
 class Setting extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      activeTab: '1',
+    };
   }
 
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchSiteSettings());
+  }
+
+  toggle = (tab) => {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
   }
 
   render() {
@@ -30,15 +44,35 @@ class Setting extends Component {
         <h3>
           <FormattedMessage id="sys.settings" />
         </h3>
-        <Form style={{ backgroundColor: '#fff', padding: 20 }}>
-          <FormGroup check row>
-            <Col sm={{ size: 10, offset: 2 }}>
-              <Button color="primary">
-                <FormattedMessage id="sys.save" />
-              </Button>
-            </Col>
-          </FormGroup>
-        </Form>
+        <div>
+          <Nav tabs>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === '1' })}
+                onClick={() => { this.toggle('1'); }}
+              >
+                <SettingForm />
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === '2' })}
+                onClick={() => { this.toggle('2'); }}
+              >
+                Moar Tabs
+              </NavLink>
+            </NavItem>
+          </Nav>
+          <TabContent activeTab={this.state.activeTab}>
+            <TabPane tabId="1">
+              <Row>
+                <Col sm="12">
+                  <h4>Tab 1 Contents</h4>
+                </Col>
+              </Row>
+            </TabPane>
+          </TabContent>
+        </div>
       </div>
     );
   }

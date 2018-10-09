@@ -23,7 +23,7 @@ class Navigation extends Component {
       <div className="admin-navbar">
         <Container fluid>
           <Navbar light expand="md" fixed>
-            <NavbarBrand href="/dashboard">LFCommerce</NavbarBrand>
+            <NavbarBrand href="/dashboard">LF Commerce</NavbarBrand>
             <Nav className="ml-auto">
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
