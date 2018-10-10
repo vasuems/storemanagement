@@ -60,7 +60,7 @@ class Setting extends Component {
                 className={classnames({ active: this.state.activeTab === '1' })}
                 onClick={() => { this.toggle('1'); }}
               >
-                <FormattedMessage id="sys.basicInfo" />
+                <b><FormattedMessage id="sys.basicInfo" /></b>
               </NavLink>
             </NavItem>
             <NavItem>
@@ -68,7 +68,7 @@ class Setting extends Component {
                 className={classnames({ active: this.state.activeTab === '2' })}
                 onClick={() => { this.toggle('2'); }}
               >
-                <FormattedMessage id="sys.apiKeys" />
+                <b><FormattedMessage id="sys.apiKeys" /></b>
               </NavLink>
             </NavItem>
           </Nav>

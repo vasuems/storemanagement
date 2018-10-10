@@ -19,6 +19,12 @@ const ApiSettingForm = props => {
           <Field component="input" name="lazadaApiKey" className="form-control" id="lazadaApiKey" value="" />
         </Col>
       </FormGroup>
+      <FormGroup row>
+        <Label for="shopifyApiKey" sm={2}>Shopify</Label>
+        <Col sm={10}>
+          <Field component="input" name="shopifyApiKey" className="form-control" id="shopifyApiKey" value="" />
+        </Col>
+      </FormGroup>
       <Button color="primary"><FormattedMessage id="sys.save" /></Button>
     </Form>
   );
