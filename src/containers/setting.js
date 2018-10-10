@@ -14,6 +14,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { fetchSiteSettings } from '../actions';
 import SettingForm from '../components/forms/settingForm';
+import ApiSettingForm from '../components/forms/apiSettingForm';
 
 class Setting extends Component {
   constructor(props) {
@@ -34,6 +35,14 @@ class Setting extends Component {
         activeTab: tab
       });
     }
+  }
+
+  handleSettingSubmit = values => {
+    console.log(values);
+  }
+
+  handleApiSettingSubmit = values => {
+    console.log(values);
   }
 
   render() {
@@ -59,7 +68,7 @@ class Setting extends Component {
                 className={classnames({ active: this.state.activeTab === '2' })}
                 onClick={() => { this.toggle('2'); }}
               >
-                Moar Tabs
+                <FormattedMessage id="sys.apiKeys" />
               </NavLink>
             </NavItem>
           </Nav>
@@ -67,7 +76,14 @@ class Setting extends Component {
             <TabPane tabId="1">
               <Row>
                 <Col sm="12">
-                  <SettingForm onSubmit={() => {}} />
+                  <SettingForm onSubmit={this.handleSettingSubmit} />
+                </Col>
+              </Row>
+            </TabPane>
+            <TabPane tabId="2">
+              <Row>
+                <Col sm="12">
+                  <ApiSettingForm onSubmit={this.handleApiSettingSubmit} />
                 </Col>
               </Row>
             </TabPane>
