@@ -61,5 +61,6 @@
   "sys.basicInfo": "Basic info",
   "sys.usa": "United States",
   "sys.sg": "Singapore",
-  "sys.apiKeys": "API keys"
+  "sys.apiKey": "API key",
+  "sys.secret": "Secret"
 }

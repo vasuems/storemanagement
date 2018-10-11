@@ -18,11 +18,8 @@ const renderField = ({
   meta: { touched, error },
 }) => (
   <div>
-    <Label>{label}</Label>
-    <div>
-      <Input {...input} placeholder={label} type={type} />
-      {touched && (error && <span className="text-danger">{error}</span>)}
-    </div>
+    <Input {...input} placeholder={label} type={type} />
+    {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
 
@@ -36,7 +33,7 @@ const SettingForm = props => {
           <Field component={renderField} name="siteName" className="form-control" id="siteName" value="" />
         </Col>
       </FormGroup>
-      <Button color="primary"><FormattedMessage id="sys.save" /></Button>
+      <Button color="danger"><FormattedMessage id="sys.save" /></Button>
     </Form>
   );
 };

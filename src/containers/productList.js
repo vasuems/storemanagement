@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Row, Col, Button } from 'reactstrap';
+import { Table, Row, Col, Button, Input, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
 
@@ -51,6 +51,39 @@ class ProductList extends Component {
                 </tr>
               </tbody>
             </Table>
+            <Pagination aria-label="Page navigation example">
+              <PaginationItem disabled>
+                <PaginationLink previous href="#" />
+              </PaginationItem>
+              <PaginationItem active>
+                <PaginationLink href="#">
+                  1
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">
+                  2
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">
+                  3
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">
+                  4
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">
+                  5
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink next href="#" />
+              </PaginationItem>
+            </Pagination>
           </Col>
         </Row>
       </div>

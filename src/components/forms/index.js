@@ -1,9 +1,9 @@
 import SettingForm from './settingForm';
-import ApiSettingForm from './apiSettingForm';
+import EtsySettingForm from './etsySettingForm';
 import ChangePasswordForm from './changePwdForm';
 
 export {
   SettingForm,
-  ApiSettingForm,
+  EtsySettingForm,
   ChangePasswordForm,
 };

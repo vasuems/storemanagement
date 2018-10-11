@@ -21,11 +21,8 @@ const renderField = ({
   meta: { touched, error },
 }) => (
   <div>
-    <Label>{label}</Label>
-    <div>
-      <Input {...input} placeholder={label} type={type} />
-      {touched && (error && <span className="text-danger">{error}</span>)}
-    </div>
+    <Input {...input} placeholder={label} type={type} />
+    {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
 
@@ -45,7 +42,7 @@ const ChangePasswordForm = props => {
           <Field component={renderField} type="password" name="newPwd" className="form-control" id="newPwd" value="" />
         </Col>
       </FormGroup>      
-      <Button color="primary"><FormattedMessage id="sys.save" /></Button>
+      <Button color="danger"><FormattedMessage id="sys.save" /></Button>
     </Form>
   );
 };
