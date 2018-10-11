@@ -13,8 +13,7 @@ import {
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { fetchSiteSettings } from '../actions';
-import SettingForm from '../components/forms/settingForm';
-import ApiSettingForm from '../components/forms/apiSettingForm';
+import { SettingForm, ApiSettingForm, ChangePasswordForm } from '../components/forms';
 
 class Setting extends Component {
   constructor(props) {
@@ -71,6 +70,14 @@ class Setting extends Component {
                 <b><FormattedMessage id="sys.apiKeys" /></b>
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === '3' })}
+                onClick={() => { this.toggle('3'); }}
+              >
+                <b><FormattedMessage id="sys.pwd" /></b>
+              </NavLink>
+            </NavItem>
           </Nav>
           <TabContent activeTab={this.state.activeTab} className="bg-white padding-v20 padding-h20">
             <TabPane tabId="1">
@@ -84,6 +91,13 @@ class Setting extends Component {
               <Row>
                 <Col sm="12">
                   <ApiSettingForm onSubmit={this.handleApiSettingSubmit} />
+                </Col>
+              </Row>
+            </TabPane>
+            <TabPane tabId="3">
+              <Row>
+                <Col sm="12">
+                  <ChangePasswordForm onSubmit={this.handleApiSettingSubmit} />
                 </Col>
               </Row>
             </TabPane>
