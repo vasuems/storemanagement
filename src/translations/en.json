@@ -61,6 +61,9 @@
   "sys.basicInfo": "Basic info",
   "sys.usa": "United States",
   "sys.sg": "Singapore",
+  "sys.appId": "App ID",
+  "sys.devId": "Dev ID",
+  "sys.certId": "Cert ID",
   "sys.apiKey": "API key",
   "sys.secret": "Secret"
 }

@@ -13,7 +13,7 @@ import {
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { fetchSiteSettings } from '../actions';
-import { SettingForm, EtsySettingForm, ChangePasswordForm } from '../components/forms';
+import { SettingForm, EbaySettingForm, ChangePasswordForm } from '../components/forms';
 
 class Setting extends Component {
   constructor(props) {
@@ -67,7 +67,7 @@ class Setting extends Component {
                 className={classnames({ active: this.state.activeTab === '2' })}
                 onClick={() => { this.toggle('2'); }}
               >
-                <b>Etsy</b>
+                <b>Ebay</b>
               </NavLink>
             </NavItem>
             <NavItem>
@@ -90,7 +90,7 @@ class Setting extends Component {
             <TabPane tabId="2">
               <Row>
                 <Col sm="12">
-                  <EtsySettingForm onSubmit={this.handleEtsySettingSubmit} />
+                  <EbaySettingForm onSubmit={this.handleEtsySettingSubmit} />
                 </Col>
               </Row>
             </TabPane>
