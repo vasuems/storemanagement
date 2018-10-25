@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Table, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
+import { fetchOrders } from '../actions';
 
 class OrderList extends Component {
   constructor(props) {
     super(props);
     this.state = { activePage: 1 };
+  }
+
+  componentDidMount(){
+    const { dispatch } = this.props;
+    dispatch(fetchOrders());
   }
 
   render() {
@@ -45,23 +52,7 @@ class OrderList extends Component {
                   <td>Table cell</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>1102</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>1103</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
+                </tr>                
               </tbody>
             </Table>
             <Pagination aria-label="Page navigation example">
@@ -104,4 +95,8 @@ class OrderList extends Component {
   }
 }
 
-export default OrderList;
+const mapStateToProps = state => ({
+  orders: state.orderReducer.orders,
+});
+
+export default connect(mapStateToProps, null)(OrderList);

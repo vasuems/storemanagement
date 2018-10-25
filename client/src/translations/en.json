@@ -62,5 +62,6 @@
   "sys.usa": "United States",
   "sys.sg": "Singapore",
   "sys.apiKey": "API key",
-  "sys.secret": "Secret"
+  "sys.secret": "Secret",
+  "sys.view": "View"
 }

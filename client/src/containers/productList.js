@@ -15,7 +15,8 @@ class ProductList extends Component {
           </Col>
           <Col md={6}>
             <Button color="danger" className="pull-right">
-              +<FormattedMessage id="sys.addNew" />
+              +
+              <FormattedMessage id="sys.addNew" />
             </Button>
           </Col>
         </Row>
