@@ -63,7 +63,7 @@ class Setting extends Component {
                 </a>
               </BreadcrumbItem>
               <BreadcrumbItem active>
-                <FormattedMessage id="sys.prodCats" />
+                <FormattedMessage id="sys.settings" />
               </BreadcrumbItem>
             </Breadcrumb>
           </Col>

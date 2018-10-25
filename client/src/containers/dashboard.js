@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { Bar, Bubble, Line, Pie } from 'react-chartjs-2';
+import { fetchDashboardData } from '../actions';
 
 class Dashboard extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchDashboardData());
+  }
+
   render() {
     const data = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -113,4 +120,8 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  data: state.dashboardReducer.data,
+});
+
+export default connect(mapStateToProps, null)(Dashboard);

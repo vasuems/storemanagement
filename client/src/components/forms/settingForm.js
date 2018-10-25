@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Col, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const validate = values => {
   const errors = {};

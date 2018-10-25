@@ -20,6 +20,7 @@ class CustomerList extends Component {
     const { dispatch } = this.props;
     dispatch(fetchCustomers());
   }
+
   render() {
     const { customers } = this.props;
     return (
