@@ -8,12 +8,11 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Button,
 } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { fetchSiteSettings } from '../actions';
-import { SettingForm, EbaySettingForm, ChangePasswordForm } from '../components/forms';
+import { SettingForm, ChangePasswordForm } from '../components/forms';
 
 class Setting extends Component {
   constructor(props) {
@@ -84,13 +83,6 @@ class Setting extends Component {
               <Row>
                 <Col sm="12">
                   <SettingForm onSubmit={this.handleSettingSubmit} />
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane tabId="2">
-              <Row>
-                <Col sm="12">
-                  <EbaySettingForm onSubmit={this.handleEtsySettingSubmit} />
                 </Col>
               </Row>
             </TabPane>

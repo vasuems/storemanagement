@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Row, Col } from 'reactstrap';
+import { Table, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
+import { fetchCustomers } from '../actions';
+import { CustomerListItem } from '../components';
 
 class CustomerList extends Component {
+  componentDidMount(){
+    const { dispatch } = this.props;
+    dispatch(fetchCustomers());
+  }
   render() {
+    const { customers } = this.props;
     return (
       <div className="content-body">
         <h3>
@@ -22,19 +29,59 @@ class CustomerList extends Component {
                   <th>
                     <FormattedMessage id="sys.email" />
                   </th>
+                  <th>
+                    <FormattedMessage id="sys.contactNo" />
+                  </th>
                   <th />
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Nick Chen</td>
-                  <td>nick.chen@example.com</td>
-                  <td>
-                    <ToggleButton value onToggle={() => {}} />
-                  </td>
-                </tr>
+                {
+                  customers.map(customer => {
+                    return (
+                      <CustomerListItem 
+                        name={customer.number}
+                        email={customer.email}
+                        contact={customer.contact}
+                      />
+                    );
+                  })
+                }
               </tbody>
             </Table>
+            <Pagination aria-label="Page navigation example">
+              <PaginationItem disabled>
+                <PaginationLink previous href="#" />
+              </PaginationItem>
+              <PaginationItem active>
+                <PaginationLink href="#">
+                  1
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">
+                  2
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">
+                  3
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">
+                  4
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">
+                  5
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink next href="#" />
+              </PaginationItem>
+            </Pagination>
           </Col>
         </Row>
       </div>
@@ -43,7 +90,7 @@ class CustomerList extends Component {
 }
 
 const mapStateToProps = state => ({
-  
-})
+  customers: state.customerReducer.customers,
+});
 
-export default connect()(CustomerList);
+export default connect(mapStateToProps, null)(CustomerList);

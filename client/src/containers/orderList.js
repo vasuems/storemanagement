@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Table, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { fetchOrders } from '../actions';
+import { OrderListItem } from '../components';
 
 class OrderList extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class OrderList extends Component {
   }
 
   render() {
+    const { orders } = this.props;
     return (
       <div className="content-body">
         <h3>
@@ -45,14 +47,19 @@ class OrderList extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1101</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>                
+                {
+                  orders.map(order => {
+                    return (
+                      <OrderListItem 
+                        number={order.number}
+                        customer={order.customer}
+                        date={order.date}
+                        payment={order.payment}
+                        status={order.status}
+                      />
+                    );
+                  })
+                }
               </tbody>
             </Table>
             <Pagination aria-label="Page navigation example">
