@@ -55,9 +55,6 @@ const ChangePasswordForm = props => {
           />
         </Col>
       </FormGroup>
-      <Button color="danger">
-        <FormattedMessage id="sys.save" />
-      </Button>
     </Form>
   );
 };

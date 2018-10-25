@@ -8,9 +8,15 @@ import {
   Nav,
   NavItem,
   NavLink,
+  Button,
+  Breadcrumb,
+  BreadcrumbItem,
 } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
+import {
+  FiSave,
+} from 'react-icons/fi';
 import { fetchSiteSettings } from '../actions';
 import { SettingForm, ChangePasswordForm } from '../components/forms';
 
@@ -48,9 +54,26 @@ class Setting extends Component {
     const { settings } = this.props;
     return (
       <div className="content-body">
-        <h3>
-          <FormattedMessage id="sys.settings" />
-        </h3>
+        <Row>
+          <Col md={6}>
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <a href="/dashboard">
+                  <FormattedMessage id="sys.dashboard" />
+                </a>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>
+                <FormattedMessage id="sys.prodCats" />
+              </BreadcrumbItem>
+            </Breadcrumb>
+          </Col>
+          <Col md={6}>
+            <Button size="sm" color="primary" className="pull-right">
+              <FiSave />&nbsp;
+              <FormattedMessage id="sys.save" />
+            </Button>
+          </Col>
+        </Row>
         <div>
           <Nav tabs>
             <NavItem>
@@ -72,16 +95,6 @@ class Setting extends Component {
                   this.toggle('2');
                 }}
               >
-                <b>Ebay</b>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === '3' })}
-                onClick={() => {
-                  this.toggle('3');
-                }}
-              >
                 <b>
                   <FormattedMessage id="sys.pwd" />
                 </b>
@@ -99,7 +112,7 @@ class Setting extends Component {
                 </Col>
               </Row>
             </TabPane>
-            <TabPane tabId="3">
+            <TabPane tabId="2">
               <Row>
                 <Col sm="12">
                   <ChangePasswordForm onSubmit={this.handleApiSettingSubmit} />

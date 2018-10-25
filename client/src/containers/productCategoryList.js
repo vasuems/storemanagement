@@ -1,25 +1,42 @@
 import React, { Component } from 'react';
-import { Table, Row, Col, Button } from 'reactstrap';
+import { connect } from 'react-redux';
+import { Table, Row, Col, Button, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
+import {
+  FiPlusCircle,
+} from 'react-icons/fi';
 import ToggleButton from 'react-toggle-button';
+import { fetchProductCategories} from '../actions';
 
 class ProductCategoryList extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchProductCategories());
+  }
+
   render() {
     return (
       <div className="content-body">
         <Row>
           <Col md={6}>
-            <h3>
-              <FormattedMessage id="sys.prodCats" />
-            </h3>
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <a href="/dashboard">
+                  <FormattedMessage id="sys.dashboard" />
+                </a>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>
+                <FormattedMessage id="sys.prodCats" />
+              </BreadcrumbItem>
+            </Breadcrumb>
           </Col>
           <Col md={6}>
-            <Button color="danger" className="pull-right">
-              +<FormattedMessage id="sys.addNew" />
+            <Button size="sm" color="primary" className="pull-right">
+              <FiPlusCircle />&nbsp;
+              <FormattedMessage id="sys.addNew" />
             </Button>
           </Col>
         </Row>
-        <br />
         <Row>
           <Col md={12}>
             <Table condensed responsive style={{ backgroundColor: '#fff' }}>
@@ -47,4 +64,8 @@ class ProductCategoryList extends Component {
   }
 }
 
-export default ProductCategoryList;
+const mapStateToProps = state => ({
+  products: state.orderReducer.products,
+});
+
+export default connect(mapStateToProps, null)(ProductCategoryList);

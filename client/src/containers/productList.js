@@ -92,12 +92,6 @@ class ProductList extends Component {
                 <PaginationLink href="#">3</PaginationLink>
               </PaginationItem>
               <PaginationItem>
-                <PaginationLink href="#">4</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">5</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
                 <PaginationLink next href="#" />
               </PaginationItem>
             </Pagination>

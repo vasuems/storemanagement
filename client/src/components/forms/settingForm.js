@@ -35,10 +35,7 @@ const SettingForm = props => {
             value=""
           />
         </Col>
-      </FormGroup>
-      <Button color="danger">
-        <FormattedMessage id="sys.save" />
-      </Button>
+      </FormGroup>      
     </Form>
   );
 };
