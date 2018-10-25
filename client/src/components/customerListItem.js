@@ -8,7 +8,11 @@ const CustomerListItem = props => {
       <td>{props.name}</td>
       <td>{props.email}</td>
       <td>{props.contact}</td>
-      <td><Button color="link"><FormattedMessage id="sys.view" /></Button></td>
+      <td>
+        <Button color="link">
+          <FormattedMessage id="sys.view" />
+        </Button>
+      </td>
     </tr>
   );
 };

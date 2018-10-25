@@ -1,13 +1,13 @@
-import { FETCH_ORDERS_SUCCESS } from '../actions';
+import { FETCH_PRODUCTS_SUCCESS } from '../actions';
 
 const initialState = {
-  orders: [],
+  products: [],
 };
 
 export default function orderReducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_ORDERS_SUCCESS:
-      return { ...state, orders: action.value };
+    case FETCH_PRODUCTS_SUCCESS:
+      return { ...state, products: action.value };
     default:
       return state;
   }

@@ -10,16 +10,11 @@ const validate = values => {
   }
   if (!values.newPwd) {
     errors.newPwd = 'Required';
-  } 
+  }
   return errors;
 };
 
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error },
-}) => (
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <Input {...input} placeholder={label} type={type} />
     {touched && (error && <span className="text-danger">{error}</span>)}
@@ -28,21 +23,41 @@ const renderField = ({
 
 const ChangePasswordForm = props => {
   const { handleSubmit } = props;
-  return(
+  return (
     <Form onSubmit={handleSubmit}>
       <FormGroup row>
-        <Label for="currentPwd" sm={2}><FormattedMessage id="sys.currentPwd" /></Label>
+        <Label for="currentPwd" sm={2}>
+          <FormattedMessage id="sys.currentPwd" />
+        </Label>
         <Col sm={10}>
-          <Field component={renderField} type="password" name="currentPwd" className="form-control" id="currentPwd" value="" />
+          <Field
+            component={renderField}
+            type="password"
+            name="currentPwd"
+            className="form-control"
+            id="currentPwd"
+            value=""
+          />
         </Col>
       </FormGroup>
       <FormGroup row>
-        <Label for="newPwd" sm={2}><FormattedMessage id="sys.newPwd" /></Label>
+        <Label for="newPwd" sm={2}>
+          <FormattedMessage id="sys.newPwd" />
+        </Label>
         <Col sm={10}>
-          <Field component={renderField} type="password" name="newPwd" className="form-control" id="newPwd" value="" />
+          <Field
+            component={renderField}
+            type="password"
+            name="newPwd"
+            className="form-control"
+            id="newPwd"
+            value=""
+          />
         </Col>
-      </FormGroup>      
-      <Button color="danger"><FormattedMessage id="sys.save" /></Button>
+      </FormGroup>
+      <Button color="danger">
+        <FormattedMessage id="sys.save" />
+      </Button>
     </Form>
   );
 };

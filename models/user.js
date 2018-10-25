@@ -143,16 +143,13 @@ User.prototype.updateContact = function(id, contact, db) {
 User.prototype.deleteContact = function(id, db) {
   return new Promise((resolve, reject) => {
     db.connect();
-    db.query(
-      `update user_contact set status=0 where id=${id}`,
-      error => {
-        if (error) {
-          reject(new BadRequestError('Contact deleting failed.'));
-        } else {
-          resolve('Contact deleted.');
-        }
+    db.query(`update user_contact set status=0 where id=${id}`, error => {
+      if (error) {
+        reject(new BadRequestError('Contact deleting failed.'));
+      } else {
+        resolve('Contact deleted.');
       }
-    );
+    });
   });
 };
 

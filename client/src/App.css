@@ -236,3 +236,7 @@ a, a:hover, a:link, a:active, a:visited{
   padding-left: 20px;
   padding-right: 20px;
 }
+.breadcrumb{
+  background: transparent;
+  padding: 0;
+}

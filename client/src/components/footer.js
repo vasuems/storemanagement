@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 
 const Footer = () => (
-  <Container id="footer">    
+  <Container id="footer">
     <div className="text-center copyright">
       <span>Copyright &copy; 2018</span>
       &nbsp;&nbsp;

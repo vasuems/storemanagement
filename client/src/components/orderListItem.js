@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from 'reactstrap';
+import { Button } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 
 const OrderListItem = props => {
@@ -10,7 +10,11 @@ const OrderListItem = props => {
       <td>{props.date}</td>
       <td>{props.payment}</td>
       <td>{props.status}</td>
-      <td><Button color="link"><FormattedMessage id="sys.view" /></Button></td>
+      <td>
+        <Button color="link">
+          <FormattedMessage id="sys.view" />
+        </Button>
+      </td>
     </tr>
   );
 };

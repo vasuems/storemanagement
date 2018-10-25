@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import {
+  Table,
+  Row,
+  Col,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Breadcrumb,
+  BreadcrumbItem,
+} from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
 import { fetchCustomers } from '../actions';
 import { CustomerListItem } from '../components';
 
 class CustomerList extends Component {
-  componentDidMount(){
+  componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchCustomers());
   }
@@ -15,9 +24,16 @@ class CustomerList extends Component {
     const { customers } = this.props;
     return (
       <div className="content-body">
-        <h3>
-          <FormattedMessage id="sys.customers" />
-        </h3>
+        <Breadcrumb>
+          <BreadcrumbItem>
+            <a href="/dashboard">
+              <FormattedMessage id="sys.dashboard" />
+            </a>
+          </BreadcrumbItem>
+          <BreadcrumbItem active>
+            <FormattedMessage id="sys.customers" />
+          </BreadcrumbItem>
+        </Breadcrumb>
         <Row>
           <Col md={12}>
             <Table condensed responsive style={{ backgroundColor: '#fff' }}>
@@ -36,17 +52,15 @@ class CustomerList extends Component {
                 </tr>
               </thead>
               <tbody>
-                {
-                  customers.map(customer => {
-                    return (
-                      <CustomerListItem 
-                        name={customer.number}
-                        email={customer.email}
-                        contact={customer.contact}
-                      />
-                    );
-                  })
-                }
+                {customers.map(customer => {
+                  return (
+                    <CustomerListItem
+                      name={customer.number}
+                      email={customer.email}
+                      contact={customer.contact}
+                    />
+                  );
+                })}
               </tbody>
             </Table>
             <Pagination aria-label="Page navigation example">
@@ -54,29 +68,19 @@ class CustomerList extends Component {
                 <PaginationLink previous href="#" />
               </PaginationItem>
               <PaginationItem active>
-                <PaginationLink href="#">
-                  1
-                </PaginationLink>
+                <PaginationLink href="#">1</PaginationLink>
               </PaginationItem>
               <PaginationItem>
-                <PaginationLink href="#">
-                  2
-                </PaginationLink>
+                <PaginationLink href="#">2</PaginationLink>
               </PaginationItem>
               <PaginationItem>
-                <PaginationLink href="#">
-                  3
-                </PaginationLink>
+                <PaginationLink href="#">3</PaginationLink>
               </PaginationItem>
               <PaginationItem>
-                <PaginationLink href="#">
-                  4
-                </PaginationLink>
+                <PaginationLink href="#">4</PaginationLink>
               </PaginationItem>
               <PaginationItem>
-                <PaginationLink href="#">
-                  5
-                </PaginationLink>
+                <PaginationLink href="#">5</PaginationLink>
               </PaginationItem>
               <PaginationItem>
                 <PaginationLink next href="#" />
@@ -93,4 +97,7 @@ const mapStateToProps = state => ({
   customers: state.customerReducer.customers,
 });
 
-export default connect(mapStateToProps, null)(CustomerList);
+export default connect(
+  mapStateToProps,
+  null
+)(CustomerList);

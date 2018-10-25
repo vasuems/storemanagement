@@ -54,20 +54,20 @@ class SideBar extends Component {
         >
           {(path => {
             switch (true) {
-            case /home/.test(path):
-              return <Dashboard />;
-            case /customers/.test(path):
-              return <CustomerList />;
-            case /orders/.test(path):
-              return <OrderList />;
-            case /products/.test(path):
-              return <ProductList />;
-            case /payments/.test(path):
-              return <Payment />;
-            case /categories/.test(path):
-              return <ProductCategoryList />;
-            case /settings/.test(path):
-              return <Setting />;
+              case /home/.test(path):
+                return <Dashboard />;
+              case /customers/.test(path):
+                return <CustomerList />;
+              case /orders/.test(path):
+                return <OrderList />;
+              case /products/.test(path):
+                return <ProductList />;
+              case /payments/.test(path):
+                return <Payment />;
+              case /categories/.test(path):
+                return <ProductCategoryList />;
+              case /settings/.test(path):
+                return <Setting />;
             }
           })(this.state.path)}
         </Sidebar>

@@ -7,16 +7,11 @@ const validate = values => {
   const errors = {};
   if (!values.siteName) {
     errors.siteName = 'Required';
-  } 
+  }
   return errors;
 };
 
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error },
-}) => (
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <Input {...input} placeholder={label} type={type} />
     {touched && (error && <span className="text-danger">{error}</span>)}
@@ -25,15 +20,25 @@ const renderField = ({
 
 const SettingForm = props => {
   const { handleSubmit } = props;
-  return(
+  return (
     <Form onSubmit={handleSubmit}>
       <FormGroup row>
-        <Label for="siteName" sm={2}><FormattedMessage id="sys.siteName" /></Label>
+        <Label for="siteName" sm={2}>
+          <FormattedMessage id="sys.siteName" />
+        </Label>
         <Col sm={10}>
-          <Field component={renderField} name="siteName" className="form-control" id="siteName" value="" />
+          <Field
+            component={renderField}
+            name="siteName"
+            className="form-control"
+            id="siteName"
+            value=""
+          />
         </Col>
       </FormGroup>
-      <Button color="danger"><FormattedMessage id="sys.save" /></Button>
+      <Button color="danger">
+        <FormattedMessage id="sys.save" />
+      </Button>
     </Form>
   );
 };

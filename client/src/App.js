@@ -8,7 +8,7 @@ const App = () => {
     <Router>
       <div>
         <Route exact path="/" component={Home} />
-        <Route 
+        <Route
           path="/dashboard"
           exact
           render={() => <Redirect to="/dashboard/#/home" />}

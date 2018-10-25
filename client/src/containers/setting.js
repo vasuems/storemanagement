@@ -27,21 +27,21 @@ class Setting extends Component {
     dispatch(fetchSiteSettings());
   }
 
-  toggle = (tab) => {
+  toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab,
       });
     }
-  }
+  };
 
   handleSettingSubmit = values => {
     console.log(values);
-  }
+  };
 
   handleEtsySettingSubmit = values => {
     console.log(values);
-  }
+  };
 
   render() {
     const { formatMessage } = this.props.intl;
@@ -56,15 +56,21 @@ class Setting extends Component {
             <NavItem>
               <NavLink
                 className={classnames({ active: this.state.activeTab === '1' })}
-                onClick={() => { this.toggle('1'); }}
+                onClick={() => {
+                  this.toggle('1');
+                }}
               >
-                <b><FormattedMessage id="sys.basicInfo" /></b>
+                <b>
+                  <FormattedMessage id="sys.basicInfo" />
+                </b>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
                 className={classnames({ active: this.state.activeTab === '2' })}
-                onClick={() => { this.toggle('2'); }}
+                onClick={() => {
+                  this.toggle('2');
+                }}
               >
                 <b>Ebay</b>
               </NavLink>
@@ -72,13 +78,20 @@ class Setting extends Component {
             <NavItem>
               <NavLink
                 className={classnames({ active: this.state.activeTab === '3' })}
-                onClick={() => { this.toggle('3'); }}
+                onClick={() => {
+                  this.toggle('3');
+                }}
               >
-                <b><FormattedMessage id="sys.pwd" /></b>
+                <b>
+                  <FormattedMessage id="sys.pwd" />
+                </b>
               </NavLink>
             </NavItem>
           </Nav>
-          <TabContent activeTab={this.state.activeTab} className="bg-white padding-v20 padding-h20">
+          <TabContent
+            activeTab={this.state.activeTab}
+            className="bg-white padding-v20 padding-h20"
+          >
             <TabPane tabId="1">
               <Row>
                 <Col sm="12">
