@@ -1,25 +1,16 @@
 import React, { Component } from 'react';
-import { Table, Row, Col, Button } from 'reactstrap';
+import { connect } from 'react-redux';
+import { Table, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
 
-class ProductCategoryList extends Component {
+class CustomerList extends Component {
   render() {
     return (
       <div className="content-body">
-        <Row>
-          <Col md={6}>
-            <h3>
-              <FormattedMessage id="sys.prodCats" />
-            </h3>
-          </Col>
-          <Col md={6}>
-            <Button color="danger" className="pull-right">
-              +<FormattedMessage id="sys.addNew" />
-            </Button>
-          </Col>
-        </Row>
-        <br />
+        <h3>
+          <FormattedMessage id="sys.customers" />
+        </h3>
         <Row>
           <Col md={12}>
             <Table condensed responsive style={{ backgroundColor: '#fff' }}>
@@ -28,12 +19,16 @@ class ProductCategoryList extends Component {
                   <th>
                     <FormattedMessage id="sys.name" />
                   </th>
+                  <th>
+                    <FormattedMessage id="sys.email" />
+                  </th>
                   <th />
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Sports</td>
+                  <td>Nick Chen</td>
+                  <td>nick.chen@example.com</td>
                   <td>
                     <ToggleButton value onToggle={() => {}} />
                   </td>
@@ -47,4 +42,8 @@ class ProductCategoryList extends Component {
   }
 }
 
-export default ProductCategoryList;
+const mapStateToProps = state => ({
+  
+})
+
+export default connect()(CustomerList);

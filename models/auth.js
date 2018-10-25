@@ -27,7 +27,7 @@ OAuth2Request.prototype.auth = function(db) {
       `select user.id, code, password, salt, token, user_refresh_token.status as tokenStatus from user left join user_refresh_token on user.id = user_refresh_token.user_id where email='${
         this.username
       }' and user.status=1 `,
-      (error, results, fields) => {
+      (error, results) => {
         // Check if account is valid and active
         if (error || !results[0]) {
           reject(new UnauthorisedError('Not authorised.'));
@@ -53,7 +53,7 @@ OAuth2Request.prototype.auth = function(db) {
                 .utc()
                 .add(1, 'hour')
                 .format('YYYY-MM-DD HH:mm:ss')}')`,
-              (error, results, fields) => {
+              error => {
                 if (error) {
                   db.end();
                   reject(new UnauthorisedError('Not authorised.'));
@@ -65,7 +65,7 @@ OAuth2Request.prototype.auth = function(db) {
                   );
                   db.query(
                     `insert into user_refresh_token(token, user_id) values('${refreshToken}', ${id})`,
-                    (error, results, fields) => {
+                    error => {
                       if (error) {
                         reject(new UnauthorisedError('Not authorised.'));
                       } else {
@@ -97,7 +97,7 @@ OAuth2Request.prototype.validateToken = function(token, db) {
       `select * from user_access_token where token='${token}' and expired_on > '${moment
         .utc()
         .format('YYYY-MM-DD HH:mm:ss')}' order by id desc limit 1`,
-      (error, results, fields) => {
+      (error, results) => {
         if (error || !results[0]) {
           reject(new UnauthorisedError('Unauthorised request.'));
         } else {
@@ -114,7 +114,7 @@ OAuth2Request.prototype.refreshToken = function(token, db) {
     db.connect();
     db.query(
       `select user_id as userId from user_refresh_token where token='${token}' and status=1 order by id desc limit 1`,
-      (error, results, fields) => {
+      (error, results) => {
         if (error) {
           db.end();
           reject(new UnauthorisedError('Unauthorised request.'));
@@ -122,12 +122,12 @@ OAuth2Request.prototype.refreshToken = function(token, db) {
           const userId = results[0].userId;
           db.query(
             `select id, code, salt from user where id='${userId}' and status=1`,
-            (error, results, fields) => {
+            (error, results) => {
               if (error) {
                 db.end();
                 reject(new UnauthorisedError('Unauthorised request.'));
               } else {
-                const { code, salt } = results[0];
+                const { code } = results[0];
                 const accessToken = jwt.sign(
                   {
                     data: {
@@ -143,7 +143,7 @@ OAuth2Request.prototype.refreshToken = function(token, db) {
                     .utc()
                     .add(1, 'hour')
                     .format('YYYY-MM-DD HH:mm:ss')}')`,
-                  (error, results, fields) => {
+                  error => {
                     db.end();
                     if (error) {
                       reject(new UnauthorisedError('Unauthorised request.'));
