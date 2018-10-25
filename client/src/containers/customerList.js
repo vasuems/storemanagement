@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Table, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
@@ -41,4 +42,8 @@ class CustomerList extends Component {
   }
 }
 
-export default CustomerList;
+const mapStateToProps = state => ({
+  
+})
+
+export default connect()(CustomerList);
