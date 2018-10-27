@@ -6,7 +6,7 @@ import {
   FiPlusCircle,
 } from 'react-icons/fi';
 import ToggleButton from 'react-toggle-button';
-import { fetchProductCategories} from '../actions';
+import { fetchProductCategories} from '../../actions';
 
 class ProductCategoryList extends Component {
   componentDidMount() {

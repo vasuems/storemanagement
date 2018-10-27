@@ -11,8 +11,8 @@ import {
   BreadcrumbItem,
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import { fetchOrders } from '../actions';
-import { OrderListItem } from '../components';
+import { fetchOrders } from '../../actions';
+import { OrderListItem } from '../../components';
 
 class OrderList extends Component {
   constructor(props) {
@@ -39,10 +39,10 @@ class OrderList extends Component {
             <FormattedMessage id="sys.orders" />
           </BreadcrumbItem>
         </Breadcrumb>
-        <Row>
-          <Col md={12}>
-            <Table condensed responsive style={{ backgroundColor: '#fff' }}>
-              <thead>
+        <Row className="table-container">
+          <Col md={12} className="table-content">
+            <Table bordered responsive>
+              <thead className="table-header">
                 <tr>
                   <th>
                     <FormattedMessage id="sys.orderNumber" />

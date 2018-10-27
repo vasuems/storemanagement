@@ -11,7 +11,7 @@ const OrderListItem = props => {
       <td>{props.payment}</td>
       <td>{props.status}</td>
       <td>
-        <Button color="link">
+        <Button size="sm" color="link">
           <FormattedMessage id="sys.view" />
         </Button>
       </td>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { Container, Row, Button } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -15,92 +16,52 @@ const SideBarContent = props => (
   <Container>
     <br />
     <Row className="sidebar-link">
-      <Button
-        color="link"
-        onClick={() => {
-          props.onPathChange('home');
-        }}
-      >
+      <Link to="/dashboard">
         <FiHome className="sidebar-icon" />
         <FormattedMessage id="sys.dashboard" />
-      </Button>
+      </Link>
     </Row>
     <Row className="sidebar-link">
-      <Button
-        color="link"
-        onClick={() => {
-          props.onPathChange('orders');
-        }}
-      >
+      <Link to="/orders">
         <FiShoppingCart className="sidebar-icon" />
         <FormattedMessage id="sys.orders" />
-      </Button>
+      </Link>
     </Row>
     <Row className="sidebar-link">
-      <Button
-        color="link"
-        onClick={() => {
-          props.onPathChange('categories');
-        }}
-      >
+      <Link to="/categories">
         <FiGrid className="sidebar-icon" />
         <FormattedMessage id="sys.prodCats" />
-      </Button>
+      </Link>
     </Row>
     <Row className="sidebar-link">
-      <Button
-        color="link"
-        onClick={() => {
-          props.onPathChange('products');
-        }}
-      >
+      <Link to="/products">
         <FiShoppingBag className="sidebar-icon" />
         <FormattedMessage id="sys.products" />
-      </Button>
+      </Link>
     </Row>
     <Row className="sidebar-link">
-      <Button
-        color="link"
-        onClick={() => {
-          props.onPathChange('customers');
-        }}
-      >
+      <Link to="/customers">
         <FiUsers className="sidebar-icon" />
         <FormattedMessage id="sys.customers" />
-      </Button>
+      </Link>
     </Row>
     <Row className="sidebar-link">
-      <Button
-        color="link"
-        onClick={() => {
-          props.onPathChange('payments');
-        }}
-      >
+      <Link to="/payments">
         <FiDollarSign className="sidebar-icon" />
         <FormattedMessage id="sys.payments" />
-      </Button>
+      </Link>
     </Row>
     <Row className="sidebar-link">
-      <Button
-        color="link"
-        onClick={() => {
-          props.onPathChange('reports');
-        }}
-      >
+      <Link to="/reports">
         <FiBarChart2 className="sidebar-icon" />
         <FormattedMessage id="sys.reports" />
-      </Button>
+      </Link>
     </Row>
     <Row className="sidebar-link">
-      <Button
-        color="link"
-        onClick={() => {
-          props.onPathChange('settings');
-        }}
-      >
+      <Link to="/settings">
         <FiBarChart2 className="sidebar-icon" />
         <FormattedMessage id="sys.settings" />
-      </Button>
+      </Link>
     </Row>
   </Container>
 );

@@ -16,7 +16,7 @@ import ToggleButton from 'react-toggle-button';
 import {
   FiPlusCircle,
 } from 'react-icons/fi';
-import { fetchProducts } from '../actions';
+import { fetchProducts } from '../../actions';
 
 class ProductList extends Component {
   componentDidMount() {
@@ -47,10 +47,10 @@ class ProductList extends Component {
             </Button>
           </Col>
         </Row>
-        <Row>
-          <Col md={12}>
-            <Table condensed responsive style={{ backgroundColor: '#fff' }}>
-              <thead>
+        <Row className="table-container">
+          <Col md={12} className="table-content">
+            <Table bordered responsive>
+              <thead className="table-header">
                 <tr>
                   <th>
                     <FormattedMessage id="sys.name" />

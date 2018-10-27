@@ -35,10 +35,10 @@ class CustomerList extends Component {
             <FormattedMessage id="sys.customers" />
           </BreadcrumbItem>
         </Breadcrumb>
-        <Row>
-          <Col md={12}>
-            <Table condensed responsive style={{ backgroundColor: '#fff' }}>
-              <thead>
+        <Row style={{padding: 20}}>
+          <Col md={12} style={{background: '#fff', padding: 20}}>
+            <Table bordered responsive size="sm">
+              <thead style={{background: '#eee'}}>
                 <tr>
                   <th>
                     <FormattedMessage id="sys.name" />
