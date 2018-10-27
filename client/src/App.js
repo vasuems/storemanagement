@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Container, Col, Row, Button } from 'reactstrap';
+import { Col } from 'reactstrap';
 import Home from './containers/home';
 import Dashboard from './containers/dashboard';
 import CustomerList from './containers/customerList';
@@ -12,46 +12,69 @@ import SideBarContent from './components/sideBar';
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     exact: true,
     sidebar: () => <SideBarContent />,
-    main: () => <Dashboard />
+    main: () => <Dashboard />,
   },
   {
-    path: "/dashboard",
+    path: '/dashboard',
+    exact: true,
     sidebar: () => <SideBarContent />,
-    main: () => <Dashboard />
+    main: () => <Dashboard />,
   },
   {
-    path: "/orders",
+    path: '/orders',
+    exact: true,
     sidebar: () => <SideBarContent />,
-    main: () => <OrderList />
+    main: () => <OrderList />,
   },
   {
-    path: "/categories",
+    path: '/orders/:id',
     sidebar: () => <SideBarContent />,
-    main: () => <ProductCategoryList />
+    main: () => <OrderDetails />,
   },
   {
-    path: "/customers",
+    path: '/categories',
+    exact: true,
     sidebar: () => <SideBarContent />,
-    main: () => <CustomerList />
+    main: () => <ProductCategoryList />,
   },
   {
-    path: "/products",
+    path: '/customers',
+    exact: true,
     sidebar: () => <SideBarContent />,
-    main: () => <ProductList />
+    main: () => <CustomerList />,
   },
   {
-    path: "/payments",
+    path: '/products',
+    exact: true,
     sidebar: () => <SideBarContent />,
-    main: () => <Payment />
+    main: () => <ProductList />,
   },
   {
-    path: "/settings",
+    path: '/products/:id',
     sidebar: () => <SideBarContent />,
-    main: () => <Setting />
-  }
+    main: () => <ProductList />,
+  },
+  {
+    path: '/products/new',
+    exact: true,
+    sidebar: () => <SideBarContent />,
+    main: () => <ProductList />,
+  },
+  {
+    path: '/payments',
+    exact: true,
+    sidebar: () => <SideBarContent />,
+    main: () => <Payment />,
+  },
+  {
+    path: '/settings',
+    exact: true,
+    sidebar: () => <SideBarContent />,
+    main: () => <Setting />,
+  },
 ];
 
 const App = () => {
@@ -62,7 +85,7 @@ const App = () => {
         <div>
           <NavBar />
           <div style={{display: 'flex', height: '100%'}}>
-            <Col md={2} style={{background: '#333', marginTop: 56, position: 'fixed', height: '100%'}}>
+            <Col md={2} className="sidebar">
               {routes.map((route, index) => (
                 // You can render a <Route> in as many places
                 // as you want in your app. It will render along
@@ -79,7 +102,7 @@ const App = () => {
                 />
               ))}
             </Col>  
-            <Col md={{ size: 10, offset: 2 }}  style={{paddingLeft: 0}}>
+            <Col md={{ size: 10, offset: 2 }} style={{padding: 0}}>
               {routes.map((route, index) => (
                 // Render more <Route>s with the same paths as
                 // above, but different components this time.

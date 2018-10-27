@@ -119,11 +119,17 @@ a, a:hover, a:link, a:active, a:visited{
   text-decoration: none;
 }
 .content-body{
-  padding: 80px 20px 0 20px;
+  padding: 10px 20px;
 }
 .copyright{
   font-size: 12px;
   color: #999;
+}
+.sidebar{
+  background: #333; 
+  margin-top: 56px;
+  position: fixed;
+  height: 100%;
 }
 .sidebar-link a{
   color: #ddd;
@@ -234,9 +240,12 @@ a, a:hover, a:link, a:active, a:visited{
   padding-right: 20px;
 }
 .breadcrumb{
-  background: transparent;
-  padding: 0 0 0 5px;
-  
+  margin-top: 56px;
+  background: #fff;
+}
+.breadcrumb-item button{
+  padding: 0;
+  color: #007bff;
 }
 .pagination{
   margin: 0;

@@ -69,7 +69,8 @@ class Setting extends Component {
           </Col>
           <Col md={6}>
             <Button size="sm" color="primary" className="pull-right">
-              <FiSave />&nbsp;
+              <FiSave />
+&nbsp;
               <FormattedMessage id="sys.save" />
             </Button>
           </Col>

@@ -90,7 +90,7 @@ class Dashboard extends Component {
     };
     return (
       <div className="content-body">
-        <h3>
+        <h3 style={{marginTop: 70}}>
           <FormattedMessage id="sys.dashboard" />
         </h3>
         <Row>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { Container, Row, Button } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import {

@@ -16,49 +16,45 @@ class ProductCategoryList extends Component {
 
   render() {
     return (
-      <div className="content-body">
-        <Row>
-          <Col md={6}>
-            <Breadcrumb>
-              <BreadcrumbItem>
-                <a href="/dashboard">
-                  <FormattedMessage id="sys.dashboard" />
-                </a>
-              </BreadcrumbItem>
-              <BreadcrumbItem active>
-                <FormattedMessage id="sys.prodCats" />
-              </BreadcrumbItem>
-            </Breadcrumb>
-          </Col>
-          <Col md={6}>
-            <Button size="sm" color="primary" className="pull-right">
-              <FiPlusCircle />&nbsp;
-              <FormattedMessage id="sys.addNew" />
+      <div>
+        <Breadcrumb>
+          <BreadcrumbItem>
+            <Button color="link" onClick={()=>this.props.history.push(`/dashboard`)}>
+              <FormattedMessage id="sys.dashboard" />
             </Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={12}>
-            <Table condensed responsive style={{ backgroundColor: '#fff' }}>
-              <thead>
-                <tr>
-                  <th>
-                    <FormattedMessage id="sys.name" />
-                  </th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Sports</td>
-                  <td>
-                    <ToggleButton value onToggle={() => {}} />
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
-          </Col>
-        </Row>
+          </BreadcrumbItem>
+          <BreadcrumbItem active>
+            <FormattedMessage id="sys.prodCats" />
+          </BreadcrumbItem>
+        </Breadcrumb>
+        <div className="content-body">
+          <Row className="table-container">
+            <Col md={12} className="table-content">
+              <Button size="sm" color="primary" className="pull-right">
+                <FiPlusCircle />&nbsp;
+                <FormattedMessage id="sys.addNew" />
+              </Button><br /><br />
+              <Table bordered responsive>
+                <thead className="table-header">
+                  <tr>
+                    <th>
+                      <FormattedMessage id="sys.name" />
+                    </th>
+                    <th />
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sports</td>
+                    <td>
+                      <ToggleButton value onToggle={() => {}} />
+                    </td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
+        </div>
       </div>
     );
   }
