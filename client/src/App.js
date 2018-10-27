@@ -4,7 +4,7 @@ import { Col } from 'reactstrap';
 import Home from './containers/home';
 import Dashboard from './containers/dashboard';
 import CustomerList from './containers/customerList';
-import { OrderList, OrderDetails, ProductList, ProductCategoryList } from './containers';
+import { OrderList, OrderDetails, ProductList, ProductCategoryList, NewProduct } from './containers';
 import Payment from './containers/payment';
 import Setting from './containers/setting';
 import NavBar from './containers/navigation';
@@ -53,16 +53,16 @@ const routes = [
     main: () => <ProductList />,
   },
   {
-    path: '/products/:id',
+    path: '/products/new',
     sidebar: () => <SideBarContent />,
-    main: () => <ProductList />,
+    main: () => <NewProduct />,
   },
   {
-    path: '/products/new',
-    exact: true,
+    path: '/product-details:id',
     sidebar: () => <SideBarContent />,
     main: () => <ProductList />,
   },
+ 
   {
     path: '/payments',
     exact: true,

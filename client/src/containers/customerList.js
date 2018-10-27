@@ -37,7 +37,7 @@ class CustomerList extends Component {
         </Breadcrumb>
         <Row style={{padding: 20}}>
           <Col md={12} style={{background: '#fff', padding: 20}}>
-            <Table bordered responsive size="sm">
+            <Table bordered responsive>
               <thead style={{background: '#eee'}}>
                 <tr>
                   <th>

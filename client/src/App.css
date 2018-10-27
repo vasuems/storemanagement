@@ -20,6 +20,7 @@
   height: 80px;
 }
 .sidebar-link{
+  padding-left: 20px;
   height: 40px;
   line-height: 40px;
 }
@@ -130,6 +131,7 @@ a, a:hover, a:link, a:active, a:visited{
   margin-top: 56px;
   position: fixed;
   height: 100%;
+  padding: 0;
 }
 .sidebar-link a{
   color: #ddd;

@@ -11,6 +11,9 @@ import {
   Breadcrumb,
   BreadcrumbItem,
 } from 'reactstrap';
+import {
+  withRouter
+} from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
 import {
@@ -40,7 +43,7 @@ class ProductList extends Component {
         <div className="content-body">
           <Row className="table-container">            
             <Col md={12} className="table-content">
-              <Button size="sm" color="primary" className="pull-right">
+              <Button size="sm" color="primary" className="pull-right" onClick={()=>this.props.history.push(`/products/new`)}>
                 <FiPlusCircle />&nbsp;
                 <FormattedMessage id="sys.addNew" />
               </Button><br /><br />
@@ -105,4 +108,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(ProductList);
+)(withRouter(ProductList));

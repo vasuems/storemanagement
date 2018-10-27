@@ -1,8 +1,6 @@
 {
   "site.name": "LF Commerce",
   "sys.siteName": "Site name",
-  "title.featured": "Featured Products",
-  "title.new": "New Products",
   "prod.size": "Size",
   "prod.qty": "Quantity",
   "sys.close": "Close",
@@ -24,6 +22,7 @@
   "sys.lName": "Last Name",
   "sys.payments": "Payments",
   "sys.products": "Products",
+  "sys.newProduct": "New product",
   "sys.dashboard": "Dashboard",
   "sys.customers": "Customers",
   "sys.reports": "Reports",
