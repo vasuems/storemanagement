@@ -53,32 +53,29 @@ yarn test [test_directory]
 Your contribution is appreicated. For the purpose of having good project management, I encourage you to understand the project structure and *way of working* before you start to contribute to this project.
 
 ```
-.
-├── build                    # React Front-end build directory
-├── docs                     # Static files for Github page, https://ccwukong.github.io/lfcommerce
-├── public                   # Static public assets and uploads
-├── routes                   # The endpoints/routes of ExpressJS
-├── src                      # ReactJS source code
-│   ├── actions              # Actions and Action creators of Redux
-│   ├── apis                 # Files for REST APIs
-│   │   ├── mocks            # Mocked API response
-│   ├── components           # React components
-│   |   ├── __tests__        # Unit test for components
-│   ├── containers           # React containers
-│   |   ├── __tests__        # Unit test for containers
-│   ├── reducers             # React containers
-│   |   ├── __tests__        # Unit test for reducers
-│   ├── sagas                # Redux saga files
-│   |   ├── __tests__        # Unit test for sagas
-│   ├── translations         # All language translation .json files
-│   └── App.css              # Your customized styles should be added here
-│   └── App.js               # ** Where React webapp routes configured.
-│   └── index.js             # React webapp start point
-└── .travis.yml              # Travis CI config file
-└── .eslintrc.json           # **Don't change settings here.
-└── package.json             # All project dependancies
-└── app.js                   # Server application start point
-└── README.md                # **Don't change contents here.
+├── client                       # The web frontend written in ReactJS
+│   ├── public                   # Static public assets and uploads
+│   ├── src                      # ReactJS source code
+│   │   ├── actions              # Actions and Action creators of Redux
+│   │   ├── apis                 # Files for REST APIs
+│   │   │   ├── mocks            # Mocked API response
+│   │   ├── components           # React components
+│   │   |   ├── __tests__        # Unit test for components
+│   │   ├── containers           # React containers
+│   │   |   ├── __tests__        # Unit test for containers
+│   │   ├── reducers             # React containers
+│   │   |   ├── __tests__        # Unit test for reducers
+│   │   ├── sagas                # Redux saga files
+│   │   |   ├── __tests__        # Unit test for sagas
+│   │   ├── translations         # All language translation .json files
+│   │   └── App.css              # Your customized styles should be added here
+│   │   └── App.js               # ** Where React webapp routes configured.
+│   │   └── index.js             # React webapp start point
+└── .travis.yml                  # Travis CI config file
+└── .eslintrc.json               # **Don't change settings here.
+└── package.json                 # All project dependancies
+└── app.js                       # Restful APIs written in ExpressJS
+└── README.md                    # **Don't change contents here.
 ```
 
 ### 1. Always work on your own feature or bugfix branch.
