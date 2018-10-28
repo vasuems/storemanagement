@@ -4,6 +4,7 @@ import { Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { Bar, Bubble, Line, Pie } from 'react-chartjs-2';
 import { fetchDashboardData } from '../actions';
+import { Tile } from '../components';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -93,6 +94,32 @@ class Dashboard extends Component {
         <h3 style={{ marginTop: 70 }}>
           <FormattedMessage id="sys.dashboard" />
         </h3>
+        <Row>
+          <Col md={3}>
+            <Tile 
+              title="Products"
+              backgroundColor="#fcae05"
+              fontColor="#fff" />
+          </Col>
+          <Col md={3}>
+            <Tile 
+              title="Orders" 
+              backgroundColor="#ff4c28"
+              fontColor="#fff" />
+          </Col>
+          <Col md={3}>
+            <Tile 
+              title="Customers"
+              backgroundColor="#666"
+              fontColor="#fff" />
+          </Col>
+          <Col md={3}>
+            <Tile 
+              title="Shipments"
+              backgroundColor="#12b772"
+              fontColor="#fff" />
+          </Col>
+        </Row>
         <Row>
           <Col md={6} className="text-center">
             <div className="chart-container">
