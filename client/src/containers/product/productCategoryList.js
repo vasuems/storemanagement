@@ -8,6 +8,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
 } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { FiPlusCircle } from 'react-icons/fi';
 import ToggleButton from 'react-toggle-button';
@@ -42,7 +43,7 @@ class ProductCategoryList extends Component {
                 size="sm"
                 color="primary"
                 className="pull-right"
-                onPress={() => this.props.history.push('/categories/new')}
+                onClick={() => this.props.history.push('/categories/new')}
               >
                 <FiPlusCircle />
                 &nbsp;
@@ -83,4 +84,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(ProductCategoryList);
+)(withRouter(ProductCategoryList));

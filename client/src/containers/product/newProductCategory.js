@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
 import { FiPlusCircle } from 'react-icons/fi';
+import { NewProductCategoryForm } from '../../components/forms';
 
 class NewProductCategory extends Component {
   componentDidMount() {
@@ -38,13 +39,12 @@ class NewProductCategory extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <Button size="sm" color="primary" className="pull-right">
+              <NewProductCategoryForm onSubmit={()=>{}} />
+              <Button size="sm" color="primary">
                 <FiPlusCircle />
                 &nbsp;
-                <FormattedMessage id="sys.addNew" />
+                <FormattedMessage id="sys.save" />
               </Button>
-              <br />
-              <br />
             </Col>
           </Row>
         </div>
