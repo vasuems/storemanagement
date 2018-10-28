@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Col, Form, FormGroup, Label, Button, Input } from 'reactstrap';
+import { fetchProductParentCategories } from '../../actions';
 
 const validate = values => {
   const errors = {};
@@ -22,9 +24,10 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 );
 
 const NewProductCategoryForm = props => {
-  const { handleSubmit } = props;
+  const { onSubmit, categories } = props;
+  console.log(categories);
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={onSubmit}>
       <FormGroup row>
         <Label for="categoryName" sm={2}>
           <FormattedMessage id="sys.categoryName" />
@@ -40,18 +43,18 @@ const NewProductCategoryForm = props => {
         </Col>
       </FormGroup>
       <FormGroup row>
-        <Label for="newPwd" sm={2}>
-          <FormattedMessage id="sys.newPwd" />
+        <Label for="parentCategory" sm={2}>
+          <FormattedMessage id="sys.parentCategory" />
         </Label>
         <Col sm={10}>
-          <Field
-            component={renderField}
-            type="password"
-            name="newPwd"
-            className="form-control"
-            id="newPwd"
-            value=""
-          />
+          <select>
+            <option value="">Select</option>
+            {categories.map(cat => {
+              return (
+                <option key={cat.id} value={cat.id}>{cat.name}</option>
+              );
+            })}
+          </select>
         </Col>
       </FormGroup>
     </Form>

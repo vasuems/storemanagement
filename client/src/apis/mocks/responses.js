@@ -188,3 +188,21 @@ export const orders = [
     status: 'Pending',
   },
 ];
+
+export const categories = [
+  {
+    id: '123',
+    name: 'Kidz',
+    parent: null,
+  },
+  {
+    id: '321',
+    name: 'Cloth',
+    parent: null,
+  },
+  {
+    id: '456',
+    name: 'Food',
+    parent: null,
+  },
+];

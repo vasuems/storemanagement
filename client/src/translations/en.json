@@ -25,6 +25,7 @@
   "sys.newProduct": "New product",
   "sys.newProductCat": "New product category",
   "sys.categoryName": "Category name",
+  "sys.parentCategory": "Parent category",
   "sys.dashboard": "Dashboard",
   "sys.customers": "Customers",
   "sys.reports": "Reports",
