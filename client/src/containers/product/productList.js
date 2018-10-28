@@ -11,14 +11,10 @@ import {
   Breadcrumb,
   BreadcrumbItem,
 } from 'reactstrap';
-import {
-  withRouter
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
-import {
-  FiPlusCircle,
-} from 'react-icons/fi';
+import { FiPlusCircle } from 'react-icons/fi';
 import { fetchProducts } from '../../actions';
 
 class ProductList extends Component {
@@ -32,7 +28,10 @@ class ProductList extends Component {
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Button color="link" onClick={()=>this.props.history.push(`/dashboard`)}>
+            <Button
+              color="link"
+              onClick={() => this.props.history.push('/dashboard')}
+            >
               <FormattedMessage id="sys.dashboard" />
             </Button>
           </BreadcrumbItem>
@@ -41,12 +40,20 @@ class ProductList extends Component {
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="content-body">
-          <Row className="table-container">            
+          <Row className="table-container">
             <Col md={12} className="table-content">
-              <Button size="sm" color="primary" className="pull-right" onClick={()=>this.props.history.push(`/products/new`)}>
-                <FiPlusCircle />&nbsp;
+              <Button
+                size="sm"
+                color="primary"
+                className="pull-right"
+                onClick={() => this.props.history.push('/products/new')}
+              >
+                <FiPlusCircle />
+                &nbsp;
                 <FormattedMessage id="sys.addNew" />
-              </Button><br /><br />
+              </Button>
+              <br />
+              <br />
               <Table bordered responsive>
                 <thead className="table-header">
                   <tr>
@@ -96,7 +103,7 @@ class ProductList extends Component {
             </Col>
           </Row>
         </div>
-      </div> 
+      </div>
     );
   }
 }

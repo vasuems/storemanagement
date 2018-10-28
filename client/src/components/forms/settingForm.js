@@ -35,7 +35,7 @@ const SettingForm = props => {
             value=""
           />
         </Col>
-      </FormGroup>      
+      </FormGroup>
     </Form>
   );
 };

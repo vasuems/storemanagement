@@ -1,8 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import {
-  fetchSiteSettingsSuccess,
-  fetchSiteSettingsFailed,
-} from '../actions';
+import { fetchSiteSettingsSuccess, fetchSiteSettingsFailed } from '../actions';
 import { settings } from '../apis/mocks/responses';
 
 export function* fetchSiteSettings(action) {

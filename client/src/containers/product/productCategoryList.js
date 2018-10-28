@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Row, Col, Button, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { FormattedMessage } from 'react-intl';
 import {
-  FiPlusCircle,
-} from 'react-icons/fi';
+  Table,
+  Row,
+  Col,
+  Button,
+  Breadcrumb,
+  BreadcrumbItem,
+} from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
+import { FiPlusCircle } from 'react-icons/fi';
 import ToggleButton from 'react-toggle-button';
-import { fetchProductCategories} from '../../actions';
+import { fetchProductCategories } from '../../actions';
 
 class ProductCategoryList extends Component {
   componentDidMount() {
@@ -19,7 +24,10 @@ class ProductCategoryList extends Component {
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Button color="link" onClick={()=>this.props.history.push(`/dashboard`)}>
+            <Button
+              color="link"
+              onClick={() => this.props.history.push('/dashboard')}
+            >
               <FormattedMessage id="sys.dashboard" />
             </Button>
           </BreadcrumbItem>
@@ -30,10 +38,18 @@ class ProductCategoryList extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <Button size="sm" color="primary" className="pull-right">
-                <FiPlusCircle />&nbsp;
+              <Button
+                size="sm"
+                color="primary"
+                className="pull-right"
+                onPress={() => this.props.history.push('/categories/new')}
+              >
+                <FiPlusCircle />
+                &nbsp;
                 <FormattedMessage id="sys.addNew" />
-              </Button><br /><br />
+              </Button>
+              <br />
+              <br />
               <Table bordered responsive>
                 <thead className="table-header">
                   <tr>
@@ -64,4 +80,7 @@ const mapStateToProps = state => ({
   products: state.orderReducer.products,
 });
 
-export default connect(mapStateToProps, null)(ProductCategoryList);
+export default connect(
+  mapStateToProps,
+  null
+)(ProductCategoryList);

@@ -4,9 +4,16 @@ import { Col } from 'reactstrap';
 import Home from './containers/home';
 import Dashboard from './containers/dashboard';
 import CustomerList from './containers/customerList';
-import { OrderList, OrderDetails, ProductList, ProductCategoryList, NewProduct } from './containers';
-import Payment from './containers/payment';
-import Setting from './containers/setting';
+import {
+  OrderList,
+  OrderDetails,
+  ProductList,
+  ProductCategoryList,
+  NewProduct,
+  Payment,
+  Setting,
+  NewProductCategory,
+} from './containers';
 import NavBar from './containers/navigation';
 import SideBarContent from './components/sideBar';
 
@@ -41,6 +48,12 @@ const routes = [
     main: () => <ProductCategoryList />,
   },
   {
+    path: '/categories/new',
+    exact: true,
+    sidebar: () => <SideBarContent />,
+    main: () => <NewProductCategory />,
+  },
+  {
     path: '/customers',
     exact: true,
     sidebar: () => <SideBarContent />,
@@ -58,13 +71,18 @@ const routes = [
     main: () => <NewProduct />,
   },
   {
-    path: '/product-details:id',
+    path: '/product-details/:id',
     sidebar: () => <SideBarContent />,
     main: () => <ProductList />,
   },
- 
   {
     path: '/payments',
+    exact: true,
+    sidebar: () => <SideBarContent />,
+    main: () => <Payment />,
+  },
+  {
+    path: '/reports',
     exact: true,
     sidebar: () => <SideBarContent />,
     main: () => <Payment />,
@@ -84,7 +102,7 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <div>
           <NavBar />
-          <div style={{display: 'flex', height: '100%'}}>
+          <div style={{ display: 'flex', height: '100%' }}>
             <Col md={2} className="sidebar">
               {routes.map((route, index) => (
                 // You can render a <Route> in as many places
@@ -101,8 +119,8 @@ const App = () => {
                   component={route.sidebar}
                 />
               ))}
-            </Col>  
-            <Col md={{ size: 10, offset: 2 }} style={{padding: 0}}>
+            </Col>
+            <Col md={{ size: 10, offset: 2 }} style={{ padding: 0 }}>
               {routes.map((route, index) => (
                 // Render more <Route>s with the same paths as
                 // above, but different components this time.

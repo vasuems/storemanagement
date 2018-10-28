@@ -17,8 +17,7 @@
     "uniqid": "^5.0.3"
   },
   "scripts": {
-    "eslint": "./node_modules/.bin/eslint --fix",
-    "prettier": "prettier --single-quote --trailing-comma=es5 --write \"./**/*.js\"",
+    "lint:client": "./node_modules/.bin/eslint --fix client/src/ && prettier --single-quote --trailing-comma=es5 --write \"./client/src/**/*.js\"",
     "client": "cd client && yarn start",
     "server": "nodemon app.js"
   },

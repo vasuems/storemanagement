@@ -1,8 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import {
-  fetchOrdersSuccess,
-  fetchOrdersFailed,
-} from '../actions';
+import { fetchOrdersSuccess, fetchOrdersFailed } from '../actions';
 import { orders } from '../apis/mocks/responses';
 
 export function* fetchOrders(action) {

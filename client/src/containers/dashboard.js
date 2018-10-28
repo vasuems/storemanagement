@@ -90,7 +90,7 @@ class Dashboard extends Component {
     };
     return (
       <div className="content-body">
-        <h3 style={{marginTop: 70}}>
+        <h3 style={{ marginTop: 70 }}>
           <FormattedMessage id="sys.dashboard" />
         </h3>
         <Row>
@@ -124,4 +124,7 @@ const mapStateToProps = state => ({
   data: state.dashboardReducer.data,
 });
 
-export default connect(mapStateToProps, null)(Dashboard);
+export default connect(
+  mapStateToProps,
+  null
+)(Dashboard);

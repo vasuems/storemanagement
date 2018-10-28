@@ -11,9 +11,7 @@ import {
   BreadcrumbItem,
   Button,
 } from 'reactstrap';
-import {
-  withRouter
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { fetchOrders } from '../../actions';
 import { OrderListItem } from '../../components';
@@ -29,9 +27,9 @@ class OrderList extends Component {
     dispatch(fetchOrders());
   }
 
-  onViewClick = (id) => {
+  onViewClick = id => {
     this.props.history.push(`/orders/${id}`);
-  }
+  };
 
   render() {
     const { orders } = this.props;
@@ -39,7 +37,10 @@ class OrderList extends Component {
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Button color="link" onClick={()=>this.props.history.push(`/dashboard`)}>
+            <Button
+              color="link"
+              onClick={() => this.props.history.push('/dashboard')}
+            >
               <FormattedMessage id="sys.dashboard" />
             </Button>
           </BreadcrumbItem>

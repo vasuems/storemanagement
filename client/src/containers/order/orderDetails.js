@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  withRouter
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import {
   Table,
   Row,
@@ -14,17 +12,25 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
 class OrderDetails extends Component {
-  render(){
+  render() {
     return (
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Button color="link" onClick={()=>this.props.history.push(`/dashboard`)}>
+            <Button
+              color="link"
+              onClick={() => this.props.history.push('/dashboard')}
+            >
               <FormattedMessage id="sys.dashboard" />
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <Button color="link" onClick={()=>this.props.history.push(`/orders`)}><FormattedMessage id="sys.orders" /></Button>
+            <Button
+              color="link"
+              onClick={() => this.props.history.push('/orders')}
+            >
+              <FormattedMessage id="sys.orders" />
+            </Button>
           </BreadcrumbItem>
           <BreadcrumbItem active>
             <FormattedMessage id="sys.orderDetails" />
@@ -64,4 +70,7 @@ class OrderDetails extends Component {
   }
 }
 
-export default connect(null, null)(withRouter(OrderDetails));
+export default connect(
+  null,
+  null
+)(withRouter(OrderDetails));

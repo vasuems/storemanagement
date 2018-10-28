@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  Table,
-  Row,
-  Col,
-  Button,
-  Breadcrumb,
-  BreadcrumbItem,
-} from 'reactstrap';
+import { Row, Col, Button, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
 import { FiPlusCircle } from 'react-icons/fi';
 
-class NewProduct extends Component {
+class NewProductCategory extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
   }
@@ -39,7 +32,7 @@ class NewProduct extends Component {
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem active>
-            <FormattedMessage id="sys.newProduct" />
+            <FormattedMessage id="sys.newProductCat" />
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="content-body">
@@ -63,4 +56,4 @@ class NewProduct extends Component {
 export default connect(
   null,
   null
-)(withRouter(NewProduct));
+)(withRouter(NewProductCategory));
