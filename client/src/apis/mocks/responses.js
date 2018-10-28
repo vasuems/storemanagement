@@ -193,16 +193,19 @@ export const categories = [
   {
     id: '123',
     name: 'Kidz',
+    active: true,
     parent: null,
   },
   {
     id: '321',
     name: 'Cloth',
+    active: true,
     parent: null,
   },
   {
     id: '456',
     name: 'Food',
+    active: true,
     parent: null,
   },
 ];

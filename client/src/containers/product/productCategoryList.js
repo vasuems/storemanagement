@@ -12,6 +12,7 @@ import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { FiPlusCircle } from 'react-icons/fi';
 import ToggleButton from 'react-toggle-button';
+import { CategoryListItem } from '../../components';
 import { fetchProductCategories } from '../../actions';
 
 class ProductCategoryList extends Component {
@@ -21,6 +22,7 @@ class ProductCategoryList extends Component {
   }
 
   render() {
+    const { categories } = this.props;
     return (
       <div>
         <Breadcrumb>
@@ -57,16 +59,27 @@ class ProductCategoryList extends Component {
                     <th>
                       <FormattedMessage id="sys.name" />
                     </th>
+                    <th>
+                      <FormattedMessage id="sys.parent" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="sys.status" />
+                    </th>
                     <th />
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Sports</td>
-                    <td>
-                      <ToggleButton value onToggle={() => {}} />
-                    </td>
-                  </tr>
+                  {categories.map(cat => {
+                    return (
+                      <CategoryListItem
+                        id={cat.number}
+                        name={cat.name}
+                        parent={cat.parent}
+                        status={cat.active}
+                        onClick={this.onViewClick}
+                      />
+                    );
+                  })}
                 </tbody>
               </Table>
             </Col>
@@ -78,7 +91,7 @@ class ProductCategoryList extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.orderReducer.products,
+  categories: state.productReducer.categories,
 });
 
 export default connect(

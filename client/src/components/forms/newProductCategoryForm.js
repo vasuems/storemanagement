@@ -25,7 +25,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
 const NewProductCategoryForm = props => {
   const { onSubmit, categories } = props;
-  console.log(categories);
+
   return (
     <Form onSubmit={onSubmit}>
       <FormGroup row>
@@ -47,14 +47,13 @@ const NewProductCategoryForm = props => {
           <FormattedMessage id="sys.parentCategory" />
         </Label>
         <Col sm={10}>
-          <select>
-            <option value="">Select</option>
+          <Input type="select" name="selectCat">
             {categories.map(cat => {
               return (
                 <option key={cat.id} value={cat.id}>{cat.name}</option>
               );
             })}
-          </select>
+          </Input>
         </Col>
       </FormGroup>
     </Form>

@@ -29,9 +29,9 @@ class NewProductCategory extends Component {
           <BreadcrumbItem>
             <Button
               color="link"
-              onClick={() => this.props.history.push('/products')}
+              onClick={() => this.props.history.push('/categories')}
             >
-              <FormattedMessage id="sys.products" />
+              <FormattedMessage id="sys.prodCats" />
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem active>

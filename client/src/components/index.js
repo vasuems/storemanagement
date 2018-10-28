@@ -1,4 +1,5 @@
 import OrderListItem from './order/orderListItem';
+import CategoryListItem from './product/categoryListItem';
 import CustomerListItem from './customerListItem';
 
-export { OrderListItem, CustomerListItem };
+export { OrderListItem, CustomerListItem, CategoryListItem };

@@ -69,5 +69,9 @@
   "sys.certId": "Cert ID",
   "sys.apiKeys": "API keys",
   "sys.secret": "Secret",
-  "sys.view": "View"
+  "sys.view": "View",
+  "sys.status": "Status",
+  "sys.parent": "Parent",
+  "sys.active": "Active",
+  "sys.inactive": "Inactives"
 }
