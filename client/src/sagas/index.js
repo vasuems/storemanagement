@@ -5,6 +5,6 @@ import { fetchProductCategories } from './product';
 export default function* rootSaga() {
   yield all([
     call(fetchOrders), 
-    call(fetchProductCategories)
+    call(fetchProductCategories),
   ]);
 }

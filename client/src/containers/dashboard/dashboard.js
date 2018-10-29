@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { Bar, Bubble, Line, Pie } from 'react-chartjs-2';
-import { fetchDashboardData } from '../actions';
-import { Tile } from '../components';
+import { FaShoppingCart, FaBoxes, FaTruck, FaUsers } from 'react-icons/fa';
+import { fetchDashboardData } from '../../actions';
+import { Tile } from '../../components';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -97,27 +98,35 @@ class Dashboard extends Component {
         <Row>
           <Col md={3}>
             <Tile 
-              title="Products"
+              title="200 Products"
               backgroundColor="#fcae05"
-              fontColor="#fff" />
+              icon={<FaShoppingCart color="#fff" size={18} />}
+              fontColor="#fff"
+            />
           </Col>
           <Col md={3}>
             <Tile 
-              title="Orders" 
+              title="100 Orders" 
               backgroundColor="#ff4c28"
-              fontColor="#fff" />
+              icon={<FaBoxes color="#fff" size={18} />}
+              fontColor="#fff"
+            />
           </Col>
           <Col md={3}>
             <Tile 
-              title="Customers"
+              title="2K Customers"
               backgroundColor="#666"
-              fontColor="#fff" />
+              icon={<FaUsers color="#fff" size={18} />}
+              fontColor="#fff"
+            />
           </Col>
           <Col md={3}>
             <Tile 
-              title="Shipments"
+              title="2 Shipments"
               backgroundColor="#12b772"
-              fontColor="#fff" />
+              icon={<FaTruck color="#fff" size={18} />}
+              fontColor="#fff"
+            />
           </Col>
         </Row>
         <Row>

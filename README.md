@@ -63,7 +63,7 @@ Your contribution is appreicated. For the purpose of having good project managem
 │   │   |   ├── __tests__        # Unit test for components
 │   │   ├── containers           # React containers
 │   │   |   ├── __tests__        # Unit test for containers
-│   │   ├── reducers             # React containers
+│   │   ├── reducers             # React reducers
 │   │   |   ├── __tests__        # Unit test for reducers
 │   │   ├── sagas                # Redux saga files
 │   │   |   ├── __tests__        # Unit test for sagas

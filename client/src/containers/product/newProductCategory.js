@@ -43,7 +43,8 @@ class NewProductCategory extends Component {
             <Col md={12} className="table-content">
               <NewProductCategoryForm 
                 onSubmit={()=>{}}
-                categories={this.props.categories} />
+                categories={this.props.categories}
+              />
               <Button size="sm" color="primary">
                 <FiPlusCircle />
                 &nbsp;
@@ -60,7 +61,7 @@ class NewProductCategory extends Component {
 const mapStateToProps = state => {
   return {
     categories: state.productReducer.categories,
-  }
+  };
 };
 
 export default connect(

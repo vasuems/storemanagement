@@ -3,7 +3,7 @@ import { FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCT_CATEGORIES_SUCCESS } from '../act
 const initialState = {
   products: [],
   categories: [],
-}
+};
 
 export default function productReducer(state = initialState, action) {
   switch (action.type) {

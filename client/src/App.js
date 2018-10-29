@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Col } from 'reactstrap';
 import Home from './containers/home';
-import Dashboard from './containers/dashboard';
+import Dashboard from './containers/dashboard/dashboard';
 import CustomerList from './containers/customerList';
 import {
   OrderList,
