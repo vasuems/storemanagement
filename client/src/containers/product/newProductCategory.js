@@ -4,7 +4,7 @@ import { Row, Col, Button, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
-import { FiPlusCircle } from 'react-icons/fi';
+import { FiSave } from 'react-icons/fi';
 import { fetchProductCategories } from '../../actions';
 import NewProductCategoryForm from '../../components/forms/newProductCategoryForm';
 
@@ -46,7 +46,7 @@ class NewProductCategory extends Component {
                 categories={this.props.categories}
               />
               <Button size="sm" color="primary">
-                <FiPlusCircle />
+                <FiSave />
                 &nbsp;
                 <FormattedMessage id="sys.save" />
               </Button>

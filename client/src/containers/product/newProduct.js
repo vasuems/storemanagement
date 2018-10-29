@@ -11,7 +11,8 @@ import {
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
-import { FiPlusCircle } from 'react-icons/fi';
+import { FiSave } from 'react-icons/fi';
+import { NewProductForm } from '../../components/forms';
 
 class NewProduct extends Component {
   componentDidMount() {
@@ -45,13 +46,12 @@ class NewProduct extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <Button size="sm" color="primary" className="pull-right">
-                <FiPlusCircle />
+              <NewProductForm />
+              <Button size="sm" color="primary">
+                <FiSave />
                 &nbsp;
-                <FormattedMessage id="sys.addNew" />
+                <FormattedMessage id="sys.save" />
               </Button>
-              <br />
-              <br />
             </Col>
           </Row>
         </div>
