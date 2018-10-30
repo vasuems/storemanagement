@@ -74,5 +74,6 @@
   "sys.status": "Status",
   "sys.parent": "Parent",
   "sys.active": "Active",
-  "sys.inactive": "Inactives"
+  "sys.inactive": "Inactives",
+  "sys.sku": "SKU"
 }

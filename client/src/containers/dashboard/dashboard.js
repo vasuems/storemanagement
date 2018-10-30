@@ -128,7 +128,7 @@ class Dashboard extends Component {
               fontColor="#fff"
             />
           </Col>
-        </Row>
+        </Row><br />
         <Row>
           <Col md={6} className="text-center">
             <div className="chart-container">
