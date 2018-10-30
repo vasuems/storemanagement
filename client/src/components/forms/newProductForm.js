@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { Col, Form, FormGroup, Label, Button, Input } from 'reactstrap';
+import { Col, Form, FormGroup, Label, InputGroupAddon, Input, InputGroup } from 'reactstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { fetchProductParentCategories } from '../../actions';
@@ -94,6 +94,17 @@ const NewProductForm = props => {
             id="sku"
             value=""
           />
+        </Col>
+      </FormGroup>
+      <FormGroup row>
+        <Label for="price" sm={2}>
+          <FormattedMessage id="sys.price" />
+        </Label>
+        <Col sm={10}>
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">SGD</InputGroupAddon>
+            <Input type="number" placeholder="0.00" step="0.01" />
+          </InputGroup>
         </Col>
       </FormGroup>
     </Form>

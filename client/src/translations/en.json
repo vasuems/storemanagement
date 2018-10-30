@@ -56,6 +56,7 @@
   "sys.orderNumber": "Order number",
   "sys.orderDetails": "Order details",
   "sys.amount": "Amount",
+  "sys.price": "Price",
   "sys.shipTo": "Ship to",
   "sys.shippingBy": "Shipping by",
   "sys.orderedBy": "Ordered by",
