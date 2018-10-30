@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { Col, Form, FormGroup, Label, InputGroupAddon, Input, InputGroup } from 'reactstrap';
+import { Col, Row, Form, Card, CardHeader, CardBody, FormGroup, Label, InputGroupAddon, Input, InputGroup } from 'reactstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { fetchProductParentCategories } from '../../actions';
@@ -45,7 +45,8 @@ const renderTextArea = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <ReactQuill 
       modules={modules}
-      formats={formats} />
+      formats={formats}
+      style={{height: 180}} />
   </div>
 );
 
@@ -54,59 +55,114 @@ const NewProductForm = props => {
 
   return (
     <Form onSubmit={onSubmit}>
-      <FormGroup row>
-        <Label for="productName" sm={2}>
-          <FormattedMessage id="sys.productName" />
-        </Label>
-        <Col sm={10}>
-          <Field
-            component={renderField}
-            name="productName"
-            className="form-control"
-            id="productName"
-            value=""
-          />
+      <Row>
+        <Col md={6}>
+          <Card>
+            <CardHeader><FormattedMessage id="sys.basicInfo" /></CardHeader>
+            <CardBody>
+              <FormGroup row>
+                <Label for="productName" sm={3}>
+                  <FormattedMessage id="sys.productName" />
+                </Label>
+                <Col sm={9}>
+                  <Field
+                    component={renderField}
+                    name="productName"
+                    className="form-control"
+                    id="productName"
+                    value=""
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="description" sm={3}>
+                  <FormattedMessage id="sys.desc" />
+                </Label>
+                <Col sm={9}>
+                  <Field
+                    component={renderTextArea}
+                    name="description"
+                    className="form-control"
+                    id="description"
+                    value=""
+                  />
+                </Col>
+              </FormGroup><br /><br /><br />
+              <FormGroup row>
+                <Label for="sku" sm={3}>
+                  <FormattedMessage id="sys.sku" />
+                </Label>
+                <Col sm={9}>
+                  <Field
+                    component={renderField}
+                    name="sku"
+                    className="form-control"
+                    id="sku"
+                    value=""
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="parentCategory" sm={3}>
+                  <FormattedMessage id="sys.parentCategory" />
+                </Label>
+                <Col sm={9}>
+                  <Input type="select" name="selectCat">
+                    {categories.map(cat => {
+                      return (
+                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                      );
+                    })}
+                  </Input>
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="price" sm={3}>
+                  <FormattedMessage id="sys.price" />
+                </Label>
+                <Col sm={9}>
+                  <InputGroup>
+                    <InputGroupAddon addonType="prepend">SGD</InputGroupAddon>
+                    <Input type="number" placeholder="0.00" step="0.01" />
+                  </InputGroup>
+                </Col>
+              </FormGroup>
+            </CardBody>
+          </Card>
         </Col>
-      </FormGroup>
-      <FormGroup row>
-        <Label for="description" sm={2}>
-          <FormattedMessage id="sys.desc" />
-        </Label>
-        <Col sm={10}>
-          <Field
-            component={renderTextArea}
-            name="description"
-            className="form-control"
-            id="description"
-            value=""
-          />
+        <Col md={6}>
+          <Card>
+            <CardHeader><FormattedMessage id="sys.inventory" /></CardHeader>
+            <CardBody>
+              <FormGroup row>
+                <Label for="qty" sm={3}>
+                  <FormattedMessage id="sys.qty" />
+                </Label>
+                <Col sm={9}>
+                  <InputGroup>
+                    <Input type="number" placeholder="0" />
+                  </InputGroup>
+                </Col>
+              </FormGroup>
+            </CardBody>
+          </Card><br />
+          <Card>
+            <CardHeader><FormattedMessage id="sys.shipping" /></CardHeader>
+            <CardBody>
+              <FormGroup row>
+                <Label for="qty" sm={3}>
+                  <FormattedMessage id="sys.qty" />
+                </Label>
+                <Col sm={9}>
+                  <InputGroup>
+                    <Input type="number" placeholder="0" />
+                  </InputGroup>
+                </Col>
+              </FormGroup>
+            </CardBody>
+          </Card>
         </Col>
-      </FormGroup>
-      <FormGroup row>
-        <Label for="sku" sm={2}>
-          <FormattedMessage id="sys.sku" />
-        </Label>
-        <Col sm={10}>
-          <Field
-            component={renderField}
-            name="sku"
-            className="form-control"
-            id="sku"
-            value=""
-          />
-        </Col>
-      </FormGroup>
-      <FormGroup row>
-        <Label for="price" sm={2}>
-          <FormattedMessage id="sys.price" />
-        </Label>
-        <Col sm={10}>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">SGD</InputGroupAddon>
-            <Input type="number" placeholder="0.00" step="0.01" />
-          </InputGroup>
-        </Col>
-      </FormGroup>
+      </Row>
     </Form>
   );
 };

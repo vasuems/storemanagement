@@ -46,7 +46,8 @@ class NewProduct extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <NewProductForm />
+              <NewProductForm
+                categories={[]} />
               <Button size="sm" color="primary">
                 <FiSave />
                 &nbsp;
