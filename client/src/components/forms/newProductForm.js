@@ -56,7 +56,7 @@ const NewProductForm = props => {
   return (
     <Form onSubmit={onSubmit}>
       <Row>
-        <Col md={6}>
+        <Col md={7}>
           <Card>
             <CardHeader><FormattedMessage id="sys.basicInfo" /></CardHeader>
             <CardBody>
@@ -103,8 +103,8 @@ const NewProductForm = props => {
                 </Col>
               </FormGroup>
               <FormGroup row>
-                <Label for="parentCategory" sm={3}>
-                  <FormattedMessage id="sys.parentCategory" />
+                <Label for="category" sm={3}>
+                  <FormattedMessage id="sys.category" />
                 </Label>
                 <Col sm={9}>
                   <Input type="select" name="selectCat">
@@ -130,24 +130,9 @@ const NewProductForm = props => {
             </CardBody>
           </Card>
         </Col>
-        <Col md={6}>
+        <Col md={5}>
           <Card>
             <CardHeader><FormattedMessage id="sys.inventory" /></CardHeader>
-            <CardBody>
-              <FormGroup row>
-                <Label for="qty" sm={3}>
-                  <FormattedMessage id="sys.qty" />
-                </Label>
-                <Col sm={9}>
-                  <InputGroup>
-                    <Input type="number" placeholder="0" />
-                  </InputGroup>
-                </Col>
-              </FormGroup>
-            </CardBody>
-          </Card><br />
-          <Card>
-            <CardHeader><FormattedMessage id="sys.shipping" /></CardHeader>
             <CardBody>
               <FormGroup row>
                 <Label for="qty" sm={3}>

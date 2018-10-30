@@ -120,7 +120,7 @@ a, a:hover, a:link, a:active, a:visited{
   text-decoration: none;
 }
 .content-body{
-  padding: 10px 20px;
+  padding: 0px 16px;
 }
 .copyright{
   font-size: 12px;
@@ -264,4 +264,7 @@ a, a:hover, a:link, a:active, a:visited{
 }
 table{
   font-size: 15px;
+}
+.sub-menu{
+  margin-left: 10px;
 }

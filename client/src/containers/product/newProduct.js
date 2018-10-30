@@ -43,16 +43,19 @@ class NewProduct extends Component {
             <FormattedMessage id="sys.newProduct" />
           </BreadcrumbItem>
         </Breadcrumb>
+       
         <div className="content-body">
+          <div style={{overflow: 'hidden', marginBottom: 10}}>
+            <Button size="sm" color="primary" className="pull-right">
+              <FiSave />
+              &nbsp;
+              <FormattedMessage id="sys.save" />
+            </Button>
+          </div>
           <Row className="table-container">
             <Col md={12} className="table-content">
               <NewProductForm
-                categories={[]} />
-              <Button size="sm" color="primary">
-                <FiSave />
-                &nbsp;
-                <FormattedMessage id="sys.save" />
-              </Button>
+                categories={[]} /><br />              
             </Col>
           </Row>
         </div>
