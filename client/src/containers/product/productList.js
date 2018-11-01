@@ -24,6 +24,10 @@ class ProductList extends Component {
     dispatch(fetchProducts());
   }
 
+  onViewClick = id => {
+    this.props.history.push(`/products/${id}`);
+  };
+
   render() {
     const { products } = this.props;
     return (
