@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Row, Collapse } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
@@ -15,20 +16,26 @@ import {
   FaCaretLeft,
   FaCaretDown,
 } from 'react-icons/fa';
-
+import { productMenuOpen, productMenuClose } from '../actions';
 
 class SideBarContent extends Component{
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.state = { collapse: false };
   }
 
-  toggle() {
-    this.setState({ collapse: !this.state.collapse });
+  toggle = () => {
+    const { dispatch, productMenu } = this.props;
+
+    if(productMenu){
+      dispatch(productMenuClose());
+    }else{
+      dispatch(productMenuOpen());
+    }
   }
 
   render(){
+    const { productMenu } = this.props;
     return <Container>
       <br />
       <Row className="sidebar-link">
@@ -50,12 +57,12 @@ class SideBarContent extends Component{
         </div>
         <div style={{color: '#ddd', marginRight: 10, cursor: 'pointer'}}>
         {
-          this.state.collapse?<FaCaretDown />:<FaCaretLeft />
+          productMenu?<FaCaretDown />:<FaCaretLeft />
         }
         </div>
       </Row>
       
-      <Collapse isOpen={this.state.collapse}>
+      <Collapse isOpen={productMenu}>
         <Row className="sidebar-link sub-menu">
           <Link to="/categories">
             <FiGrid className="sidebar-icon" />
@@ -92,4 +99,8 @@ class SideBarContent extends Component{
   }
 };
 
-export default SideBarContent;
+const mapStateToProps = state => ({
+  productMenu: state.pathReducer.productMenu
+});
+
+export default connect(mapStateToProps, null)(SideBarContent);

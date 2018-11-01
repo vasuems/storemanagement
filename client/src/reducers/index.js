@@ -4,6 +4,7 @@ import orderReducer from './order';
 import customerReducer from './customer';
 import dashboardReducer from './dashboard';
 import productReducer from './product';
+import pathReducer from './path';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   customerReducer,
   dashboardReducer,
   productReducer,
+  pathReducer,
 });
 
 export default rootReducer;
