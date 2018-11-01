@@ -16,6 +16,7 @@ import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
 import { FiPlusCircle } from 'react-icons/fi';
 import { fetchProducts } from '../../actions';
+import ProductListItem from '../../components/product/productListItem';
 
 class ProductList extends Component {
   componentDidMount() {
@@ -24,6 +25,7 @@ class ProductList extends Component {
   }
 
   render() {
+    const { products } = this.props;
     return (
       <div>
         <Breadcrumb>
@@ -58,29 +60,34 @@ class ProductList extends Component {
                 <thead className="table-header">
                   <tr>
                     <th>
-                      <FormattedMessage id="sys.name" />
+                      <FormattedMessage id="sys.sku" />
                     </th>
                     <th>
                       <FormattedMessage id="sys.desc" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="sys.price" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="sys.status" />
                     </th>
                     <th />
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Product 1</td>
-                    <td>asf ads fasdfasd</td>
-                    <td>
-                      <ToggleButton value={false} onToggle={() => {}} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Product 2</td>
-                    <td>asf ads fasdfasd</td>
-                    <td>
-                      <ToggleButton value={false} onToggle={() => {}} />
-                    </td>
-                  </tr>
+                  {
+                    products.map(product => {
+                      return (
+                        <ProductListItem
+                          name={product.name}
+                          sku={product.sku}
+                          description={product.description}
+                          price={product.price}
+                          status={product.active}
+                        />
+                      )
+                    })
+                  }
                 </tbody>
               </Table>
               <Pagination aria-label="Page navigation example">
@@ -109,7 +116,7 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.orderReducer.products,
+  products: state.productReducer.products,
 });
 
 export default connect(

@@ -1,107 +1,80 @@
-export const newProducts = [
+export const products = [
   {
-    productName: 'Test Product 1',
-    productURL: '/products/test-product-1',
-    productImage: 'https://i.ebayimg.com/images/g/JBsAAOSwVLRaXsz4/s-l500.png',
-    productPrice: '$290.00',
-  },
-  {
-    productName: 'Test Product 2',
-    productURL: '/products/test-product-2',
-    productImage: 'https://i.ebayimg.com/images/g/J~cAAOSw5cNYK7I-/s-l1600.jpg',
-    productPrice: '$19.90',
-  },
-  {
-    productName: 'Test Product 3',
-    productURL: '/products/test-product-3',
-    productImage: 'https://i.ebayimg.com/images/g/-I4AAOSwXiZbbINY/s-l1600.jpg',
-    productPrice: '$29.90',
-  },
-  {
-    productName: 'Test Product 4',
-    productURL: '/products/test-product-4',
-    productImage: 'https://i.ebayimg.com/images/g/kSIAAOSwrnRaYJ3X/s-l1600.png',
-    productPrice: '$999.00',
-  },
-  {
-    productName: 'Test Product 5',
-    productURL: '/products/test-product-5',
-    productImage: 'https://i.ebayimg.com/images/g/fBYAAOSwO9RbKfju/s-l1600.jpg',
-    productPrice: '$120.90',
-  },
-  {
-    productName: 'Test Product 6',
-    productURL: '/products/test-product-6',
-    productImage: 'https://i.ebayimg.com/images/g/zY8AAOSwCcZaTOf0/s-l1600.jpg',
-    productPrice: '$238.00',
-  },
-  {
-    productName: 'Test Product 7',
-    productURL: '/products/test-product-7',
-    productImage: 'https://i.ebayimg.com/images/g/nXgAAOSwea5bd2bo/s-l1600.jpg',
-    productPrice: '$450.00',
-  },
-  {
-    productName: 'Test Product 8',
-    productURL: '/products/test-product-8',
-    productImage: 'https://i.ebayimg.com/images/g/lEwAAOSw0sZbcgc1/s-l1600.jpg',
-    productPrice: '$1,140.00',
-  },
-];
-
-export const featuredProducts = [
-  {
-    productName: 'Test Product 1',
-    productURL: '/products/test-product-1',
-    productImage:
+    name: 'Test Product 1',
+    sku: 'asdfasasdfasdfasdfasddfasd1',
+    url: '/products/test-product-1',
+    description: 'afsdf ajkfha ksdfjkdsfkjadhs faskjf aksdhfk jasdhf',
+    coverImage:
       'https://image.spreadshirtmedia.com/image-server/v1/products/1003716746/views/1,width=800,height=800,appearanceId=1,backgroundColor=fff,version=1485256808/i-eat-ass-t-shirt-men-s-t-shirt.jpg',
-    productPrice: '$12.90',
+    price: '$12.90',
+    active: true,
   },
   {
-    productName: 'Test Product 2',
-    productURL: '/products/test-product-2',
-    productImage: 'https://i.ebayimg.com/images/g/lNoAAOSwTM5Y524t/s-l1600.jpg',
-    productPrice: '$19.90',
+    name: 'Test Product 2',
+    sku: 'asdfasdfasdfasdfasdfasdasd2',
+    url: '/products/test-product-2',
+    description: 'afsdf ajkfha ksdfjkdsfkj asdfas asdf adhs faskjf aksdhfk asdf asdf as dfas',
+    coverImage: 'https://i.ebayimg.com/images/g/lNoAAOSwTM5Y524t/s-l1600.jpg',
+    price: '$19.90',
+    active: true,
   },
   {
-    productName: 'Test Product 3',
-    productURL: '/products/test-product-3',
-    productImage:
+    name: 'Test Product 3',
+    sku: 'asdfasdasdfasdfasdffasd3',
+    url: '/products/test-product-3',
+    description: 'afsdf ajkfha ksdfjkdsfkjadhs faskjf aksdhfk jasdhf123',
+    coverImage:
       'https://www.uncommongoods.com/images/items/40400/40465_1_1200px.jpg',
-    productPrice: '$22.90',
+    price: '$22.90',
+    active: true,
   },
   {
-    productName: 'Test Product 4',
-    productURL: '/products/test-product-4',
-    productImage:
+    name: 'Test Product 4',
+    sku: 'asdfasasdfasdfadsfdfasd4',
+    url: '/products/test-product-4',
+    description: 'a afsdf ajkfha ksdfjkdsfkjadhs faskjf aksdhfk jasdhf asdfjasdf',
+    coverImage:
       'https://admin.chronostore.nyc//media/catalog/product/5/t/5th-ave_19554_chronostore_6.jpg',
-    productPrice: '$11,200.00',
+    price: '$11,200.00',
+    active: true,
   },
   {
-    productName: 'Test Product 5',
-    productURL: '/products/test-product-5',
-    productImage:
+    name: 'Test Product 5',
+    sku: 'asdfasdfasd5',
+    url: '/products/test-product-5',
+    description: '123 afsdf 455 ajkfha ksdfjkdsfkjadhs faskjf aksdhfk jasdhf',
+    coverImage:
       'https://s-media-cache-ak0.pinimg.com/736x/e5/b8/fa/e5b8fa101264808f877497808f25f08b.jpg',
-    productPrice: '$12.90',
+    price: '$12.90',
+    active: true,
   },
   {
-    productName: 'Test Product 6',
-    productURL: '/products/test-product-6',
-    productImage:
+    name: 'Test Product 6',
+    sku: 'asdfasdfasd6',
+    url: '/products/test-product-6',
+    description: 'adsf ajkfha ksdfjkdsfkjadhs faskjf aksdhfk jasdhf adsfads',
+    coverImage:
       'http://assets.teenvogue.com/photos/57dfbfe5046b3a2e2a7364bd/master/pass/Kylie-Armytee.jpg',
-    productPrice: '$12.90',
+    price: '$12.90',
+    active: true,
   },
   {
-    productName: 'Test Product 7',
-    productURL: '/products/test-product-7',
-    productImage: 'https://i.ebayimg.com/images/g/lAIAAOSwYvFZMYHW/s-l1600.jpg',
-    productPrice: '$1,429.00',
+    name: 'Test Product 7',
+    sku: 'asdfasasdfasdfasdfasdfasd7',
+    url: '/products/test-product-7',
+    description: 'afs ksjkdsfkjadhs faskjf aksdhfk jasdhf',
+    coverImage: 'https://i.ebayimg.com/images/g/lAIAAOSwYvFZMYHW/s-l1600.jpg',
+    price: '$1,429.00',
+    active: true,
   },
   {
-    productName: 'Test Product 8',
-    productURL: '/products/test-product-8',
-    productImage: 'https://i.ebayimg.com/images/g/MnIAAOSwQTVV8xSM/s-l1600.jpg',
-    productPrice: '$120.00',
+    name: 'Test Product 8',
+    sku: 'asdfasdfasdfasdfasdasdfasdfasd8',
+    url: '/products/test-product-8',
+    description: 'afsdf ajkfha 123 faskjf aksdhfk jasdhf',
+    coverImage: 'https://i.ebayimg.com/images/g/MnIAAOSwQTVV8xSM/s-l1600.jpg',
+    price: '$120.00',
+    active: true,
   },
 ];
 
