@@ -13,6 +13,7 @@ import {
   Payment,
   Setting,
   NewProductCategory,
+  ProductDetails,
 } from './containers';
 import NavBar from './containers/navigation';
 import SideBarContent from './components/sideBar';
@@ -48,7 +49,7 @@ const routes = [
     main: () => <ProductCategoryList />,
   },
   {
-    path: '/categories/new',
+    path: '/new-category',
     exact: true,
     sidebar: () => <SideBarContent />,
     main: () => <NewProductCategory />,
@@ -66,14 +67,14 @@ const routes = [
     main: () => <ProductList />,
   },
   {
-    path: '/products/new',
+    path: '/new-product',
     sidebar: () => <SideBarContent />,
     main: () => <NewProduct />,
   },
   {
-    path: '/product-details/:id',
+    path: '/products/:id',
     sidebar: () => <SideBarContent />,
-    main: () => <ProductList />,
+    main: () => <ProductDetails />,
   },
   {
     path: '/payments',

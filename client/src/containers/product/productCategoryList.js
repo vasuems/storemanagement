@@ -49,7 +49,7 @@ class ProductCategoryList extends Component {
                 size="sm"
                 color="primary"
                 className="pull-right"
-                onClick={() => this.props.history.push('/categories/new')}
+                onClick={() => this.props.history.push('/new-category')}
               >
                 <FiPlusCircle />
                 &nbsp;

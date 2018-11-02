@@ -57,6 +57,7 @@
   "sys.orderStatus": "Order status",
   "sys.orderNumber": "Order number",
   "sys.orderDetails": "Order details",
+  "sys.productDetails": "Product details",
   "sys.amount": "Amount",
   "sys.price": "Price",
   "sys.shipTo": "Ship to",

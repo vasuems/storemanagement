@@ -52,7 +52,7 @@ class ProductList extends Component {
                 size="sm"
                 color="primary"
                 className="pull-right"
-                onClick={() => this.props.history.push('/products/new')}
+                onClick={() => this.props.history.push('/new-product')}
               >
                 <FiPlusCircle />
                 &nbsp;
@@ -88,6 +88,7 @@ class ProductList extends Component {
                           description={product.description}
                           price={product.price}
                           status={product.active}
+                          onClick={this.onViewClick}
                         />
                       )
                     })
