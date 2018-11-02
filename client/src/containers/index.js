@@ -6,7 +6,7 @@ import NewProductCategory from './product/newProductCategory';
 import NewProduct from './product/newProduct';
 import Payment from './payment/payment';
 import Setting from './setting/setting';
-import ProductDetails from './product/productDetails'
+import ProductDetails from './product/productDetails';
 
 export {
   OrderList,

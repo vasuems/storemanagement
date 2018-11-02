@@ -90,7 +90,7 @@ class ProductList extends Component {
                           status={product.active}
                           onClick={this.onViewClick}
                         />
-                      )
+                      );
                     })
                   }
                 </tbody>

@@ -37,8 +37,7 @@ class ProductDetails extends Component{
         </Breadcrumb>
         <div className="content-body">
           <Row className="table-container">
-            <Col md={12} className="table-content">
-            </Col>
+            <Col md={12} className="table-content" />
           </Row>
         </div>
       </div>

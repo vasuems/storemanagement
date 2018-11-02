@@ -55,7 +55,9 @@ class NewProduct extends Component {
           <Row className="table-container">
             <Col md={12} className="table-content">
               <NewProductForm
-                categories={[]} /><br />              
+                categories={[]}
+              />
+              <br />              
             </Col>
           </Row>
         </div>

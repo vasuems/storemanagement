@@ -7,7 +7,12 @@ const ProductListItem = props => {
   return (
     <tr>
       <td>{props.sku}</td>
-      <td><b>{props.name}</b><br />{props.description}...</td>
+      <td>
+        <b>{props.name}</b>
+        <br />
+        {props.description}
+...
+      </td>
       <td>{props.price}</td>
       <td>{props.status ? formatMessage({ id: 'sys.active' }): formatMessage({ id: 'sys.inactive' })}</td>
       <td>

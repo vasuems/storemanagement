@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  Table,
   Row,
   Col,
   Breadcrumb,
@@ -38,31 +37,7 @@ class OrderDetails extends Component {
         </Breadcrumb>
         <div className="content-body">
           <Row className="table-container">
-            <Col md={12} className="table-content">
-              <Table bordered responsive>
-                <thead className="table-header">
-                  <tr>
-                    <th>
-                      <FormattedMessage id="sys.orderNumber" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.orderedBy" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.orderDate" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.payBy" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.orderStatus" />
-                    </th>
-                    <th />
-                  </tr>
-                </thead>
-                <tbody />
-              </Table>
-            </Col>
+            <Col md={12} className="table-content" />
           </Row>
         </div>
       </div>

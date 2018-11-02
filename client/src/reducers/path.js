@@ -6,11 +6,11 @@ const initialState = {
 
 export default function pathReducer(state = initialState, action) {
   switch (action.type) {
-    case PRODUCT_MENU_OPEN:
-      return { ...state, productMenu: true };
-    case PRODUCT_MENU_CLOSE:
-      return { ...state, productMenu: false };
-    default:
-      return state;
+  case PRODUCT_MENU_OPEN:
+    return { ...state, productMenu: true };
+  case PRODUCT_MENU_CLOSE:
+    return { ...state, productMenu: false };
+  default:
+    return state;
   }
 }

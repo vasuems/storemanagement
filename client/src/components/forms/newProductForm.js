@@ -23,7 +23,7 @@ const modules = {
     ['bold', 'italic', 'underline','strike', 'blockquote'],
     [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
     ['link', 'image', 'video'],
-    ['clean']
+    ['clean'],
   ],
 };
 
@@ -31,7 +31,7 @@ const formats = [
   'header',
   'bold', 'italic', 'underline', 'strike', 'blockquote',
   'list', 'bullet', 'indent',
-  'link', 'image', 'video'
+  'link', 'image', 'video',
 ];
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
@@ -46,7 +46,8 @@ const renderTextArea = ({ input, label, type, meta: { touched, error } }) => (
     <ReactQuill 
       modules={modules}
       formats={formats}
-      style={{height: 180}} />
+      style={{height: 180}}
+    />
   </div>
 );
 
@@ -87,7 +88,10 @@ const NewProductForm = props => {
                     value=""
                   />
                 </Col>
-              </FormGroup><br /><br /><br />
+              </FormGroup>
+              <br />
+              <br />
+              <br />
               <FormGroup row>
                 <Label for="sku" sm={3}>
                   <FormattedMessage id="sys.sku" />
