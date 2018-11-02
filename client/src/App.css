@@ -265,6 +265,9 @@ a, a:hover, a:link, a:active, a:visited{
 table{
   font-size: 15px;
 }
+table .btn-link{
+  padding: 0;
+}
 .sub-menu{
   margin-left: 10px;
 }
