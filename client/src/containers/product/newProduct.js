@@ -12,7 +12,7 @@ import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
 import { FiSave } from 'react-icons/fi';
-import { NewProductForm } from '../../components/forms';
+import { ProductForm } from '../../components/forms';
 
 class NewProduct extends Component {
   componentDidMount() {
@@ -54,7 +54,7 @@ class NewProduct extends Component {
           </div>
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <NewProductForm
+              <ProductForm
                 categories={[]}
               />
               <br />              

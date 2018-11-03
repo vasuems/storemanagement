@@ -10,6 +10,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { fetchProductDetails } from '../../actions';
+import { ProductForm } from '../../components/forms';
 
 class ProductDetails extends Component{
   componentDidMount(){
@@ -20,6 +21,7 @@ class ProductDetails extends Component{
 
   render(){
     const { productDetails } = this.props;
+
     return(
       <div>
         <Breadcrumb>
@@ -46,7 +48,10 @@ class ProductDetails extends Component{
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              {productDetails.name}
+              <ProductForm 
+                categories={[]}
+                productDetails={productDetails}
+              />
             </Col>
           </Row>
         </div>

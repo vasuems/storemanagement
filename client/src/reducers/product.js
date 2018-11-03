@@ -18,7 +18,6 @@ export default function productReducer(state = initialState, action) {
   case FETCH_PRODUCTS_SUCCESS:
     return { ...state, products: action.value };
   case FETCH_PRODUCT_DETAILS_SUCCESS:
-    console.log(action.value);
     return { ...state, productDetails: action.value };
   case FETCH_PRODUCT_CATEGORIES_SUCCESS:
     return { ...state, categories: action.value };
