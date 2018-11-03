@@ -83,6 +83,8 @@ class ProductList extends Component {
                     products.map(product => {
                       return (
                         <ProductListItem
+                          key={product.id}
+                          id={product.id}
                           name={product.name}
                           sku={product.sku}
                           description={product.description}

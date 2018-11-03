@@ -45,6 +45,10 @@ class OrderDetails extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  productDetails: state.productReducer.productDetails,
+});
+
 export default connect(
   null,
   null

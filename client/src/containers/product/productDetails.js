@@ -9,9 +9,17 @@ import {
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import { fetchProductDetails } from '../../actions';
 
 class ProductDetails extends Component{
+  componentDidMount(){
+    const { dispatch } = this.props;
+
+    dispatch(fetchProductDetails());
+  }
+
   render(){
+    const { productDetails } = this.props;
     return(
       <div>
         <Breadcrumb>
@@ -37,7 +45,9 @@ class ProductDetails extends Component{
         </Breadcrumb>
         <div className="content-body">
           <Row className="table-container">
-            <Col md={12} className="table-content" />
+            <Col md={12} className="table-content">
+              {productDetails.name}
+            </Col>
           </Row>
         </div>
       </div>

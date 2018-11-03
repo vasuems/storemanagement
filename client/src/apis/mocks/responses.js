@@ -1,5 +1,6 @@
 export const products = [
   {
+    id: 'asdfa1234123asdfa4',
     name: 'Test Product 1',
     sku: 'asdfasasdfasdfasdfasddfasd1',
     url: '/products/test-product-1',
@@ -10,6 +11,7 @@ export const products = [
     active: true,
   },
   {
+    id: '12341324234',
     name: 'Test Product 2',
     sku: 'asdfasdfasdfasdfasdfasdasd2',
     url: '/products/test-product-2',
@@ -19,6 +21,7 @@ export const products = [
     active: true,
   },
   {
+    id: '1asdfads2341234',
     name: 'Test Product 3',
     sku: 'asdfasdasdfasdfasdffasd3',
     url: '/products/test-product-3',
@@ -29,6 +32,7 @@ export const products = [
     active: true,
   },
   {
+    id: '12341aadfas234',
     name: 'Test Product 4',
     sku: 'asdfasasdfasdfadsfdfasd4',
     url: '/products/test-product-4',
@@ -39,6 +43,7 @@ export const products = [
     active: true,
   },
   {
+    id: '12adsfadsf341234',
     name: 'Test Product 5',
     sku: 'asdfasdfasd5',
     url: '/products/test-product-5',
@@ -49,6 +54,7 @@ export const products = [
     active: true,
   },
   {
+    id: '12341234234',
     name: 'Test Product 6',
     sku: 'asdfasdfasd6',
     url: '/products/test-product-6',
@@ -59,6 +65,7 @@ export const products = [
     active: true,
   },
   {
+    id: '12341234',
     name: 'Test Product 7',
     sku: 'asdfasasdfasdfasdfasdfasd7',
     url: '/products/test-product-7',
@@ -68,6 +75,7 @@ export const products = [
     active: true,
   },
   {
+    id: '12a341234a',
     name: 'Test Product 8',
     sku: 'asdfasdfasdfasdfasdasdfasdfasd8',
     url: '/products/test-product-8',
@@ -78,18 +86,18 @@ export const products = [
   },
 ];
 
-export const productDetail = {
-  productName: 'Test Product 1',
-  productDescription:
+export const productDetails = {
+  name: 'Test Product 1',
+  description:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et ' +
     'dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ' +
     'commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat ' +
     'nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt ' +
     'mollit anim id est laborum.',
-  productPrice: '$12.90',
-  productImage:
+  price: '$12.90',
+  coverImage:
     'http://images.shirts.com/products/4311/13-14/womens-star-wars-poster-tshirt-front.jpg',
-  productThumbnails: [
+  thumbnails: [
     'https://theawesomer.com/photos/2012/10/101112_addict_star_wars_3.jpg',
     'http://www.fabricflavours.com/Data/Products/00000571/NXSW04-STAR-WARS-A-NEW-HOPE-T-SHIRT-zoom.jpg',
   ],
