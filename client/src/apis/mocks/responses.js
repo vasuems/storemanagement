@@ -95,7 +95,8 @@ export const productDetails = {
     'commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat ' +
     'nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt ' +
     'mollit anim id est laborum.',
-  price: '$12.90',
+  price: 12.90,
+  quantity: 10,
   coverImage:
     'http://images.shirts.com/products/4311/13-14/womens-star-wars-poster-tshirt-front.jpg',
   thumbnails: [

@@ -50,7 +50,6 @@ class ProductDetails extends Component{
             <Col md={12} className="table-content">
               <ProductForm 
                 categories={[]}
-                productDetails={productDetails}
               />
             </Col>
           </Row>

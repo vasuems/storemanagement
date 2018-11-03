@@ -53,6 +53,20 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
   </div>
 );
 
+const renderDecimalField = ({ input, label, type, meta: { touched, error } }) => (
+  <div>
+    <Input {...input} placeholder={label} type={type} placeholder="0.00" step=".01" />
+    {touched && (error && <span className="text-danger">{error}</span>)}
+  </div>
+);
+
+const renderNumberField = ({ input, label, type, meta: { touched, error } }) => (
+  <div>
+    <Input {...input} placeholder={label} type={type} placeholder="0" />
+    {touched && (error && <span className="text-danger">{error}</span>)}
+  </div>
+);
+
 const renderTextArea = ({ input, label, type, meta: { touched, error } }) => {
   return (
     <div>
@@ -78,15 +92,15 @@ class ProductForm extends Component{
               <CardHeader><FormattedMessage id="sys.basicInfo" /></CardHeader>
               <CardBody>
                 <FormGroup row>
-                  <Label for="productName" sm={3}>
+                  <Label for="name" sm={3}>
                     <FormattedMessage id="sys.productName" />
                   </Label>
                   <Col sm={9}>
                     <Field
                       component={renderField}
-                      name="productName"
+                      name="name"
                       className="form-control"
-                      id="productName"
+                      id="name"
                     />
                   </Col>
                 </FormGroup>
@@ -140,7 +154,12 @@ class ProductForm extends Component{
                   <Col sm={9}>
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">SGD</InputGroupAddon>
-                      <Input type="number" placeholder="0.00" step="0.01" />
+                      <Field 
+                        component={renderDecimalField}
+                        type="number"
+                        name="price"
+                        id="price"                                               
+                      />
                     </InputGroup>
                   </Col>
                 </FormGroup>
@@ -157,7 +176,12 @@ class ProductForm extends Component{
                   </Label>
                   <Col sm={9}>
                     <InputGroup>
-                      <Input type="number" placeholder="0" />
+                      <Field 
+                        component={renderNumberField}
+                        type="number"
+                        name="quantity"
+                        id="quantity"                                               
+                      />
                     </InputGroup>
                   </Col>
                 </FormGroup>
@@ -175,11 +199,16 @@ ProductForm = reduxForm({
   validate,
 })(ProductForm);
 
-export default connect(state => ({ 
-  initialValues: {
-    productName: state.productReducer.productDetails.name,
-    description: state.productReducer.productDetails.description,
-    sku: state.productReducer.productDetails.sku,
-  },
-  enableReinitialize: true,
-}))(ProductForm);
+export default connect(state => {
+  const { name, description, sku, price, quantity } = state.productReducer.productDetails;
+  return { 
+    initialValues: {
+      name,
+      description,
+      sku,
+      price,
+      quantity,
+    },
+    enableReinitialize: true,
+  }
+})(ProductForm);
