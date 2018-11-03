@@ -2,7 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { Col, Row, Form, Card, CardHeader, CardBody, FormGroup, Label, InputGroupAddon, Input, InputGroup } from 'reactstrap';
+import { 
+  Col,
+  Row,
+  Form,
+  Card,
+  CardHeader,
+  CardBody,
+  FormGroup,
+  Label,
+  InputGroupAddon,
+  Input,
+  InputGroup,
+} from 'reactstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -41,15 +53,18 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
   </div>
 );
 
-const renderTextArea = ({ input, label, type, meta: { touched, error } }) => (
-  <div>
-    <ReactQuill 
-      modules={modules}
-      formats={formats}
-      style={{height: 180}}
-    />
-  </div>
-);
+const renderTextArea = ({ input, label, type, meta: { touched, error } }) => {
+  return (
+    <div>
+      <ReactQuill 
+        modules={modules}
+        formats={formats}
+        style={{height: 180}}
+        value={input.value}
+      />
+    </div>
+  )
+};
 
 class ProductForm extends Component{
   render(){
