@@ -21,6 +21,7 @@
   },
   "scripts": {
     "lint:client": "./node_modules/.bin/eslint --fix client/src/ && prettier --single-quote --trailing-comma=es5 --write \"./client/src/**/*.js\"",
+    "build:client": "cd client && yarn build",
     "client": "cd client && yarn start",
     "server": "nodemon app.js"
   },

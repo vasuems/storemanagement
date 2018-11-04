@@ -138,6 +138,7 @@ class Order extends Component {
                 <TabPane tabId="2">
                   <OrderShippingItem 
                     courier="Fedex Express"
+                    trackingId="asa3djfa123lksdfj23432sdf"
                     datetime="2018-11-11 11:11:00"
                     location="Singapore logistics center"
                     status="Processing"
@@ -145,12 +146,14 @@ class Order extends Component {
                   />
                   <OrderShippingItem 
                     courier="Fedex Express"
+                    trackingId="234adsf9asdf31asdf"
                     datetime="2018-11-10 07:10:00"
                     location="Malaysia logistic center"
                     status="Shipped out"
                   />
                   <OrderShippingItem 
                     courier="Fedex Express"
+                    trackingId="Not available"
                     datetime="2018-11-08 16:30:00"
                     location="Seller"
                     status="Dispatched"

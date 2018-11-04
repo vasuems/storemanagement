@@ -86,6 +86,7 @@ class OrderList extends Component {
                 <tbody>
                   {orders.map(order => (
                     <OrderListItem
+                      key={order.id}
                       number={order.number}
                       customer={order.customer}
                       date={order.date}

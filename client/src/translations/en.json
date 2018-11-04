@@ -86,5 +86,6 @@
   "sys.active": "Active",
   "sys.inactive": "Inactives",
   "sys.sku": "SKU",
-  "sys.handledBy": "Handled by"
+  "sys.handledBy": "Handled by",
+  "sys.trackingId": "Tracking ID"
 }
