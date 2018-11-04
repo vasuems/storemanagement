@@ -11,13 +11,11 @@ import {
   NavLink,
   TabPane,
   TabContent,
-  Card,
-  CardTitle,
-  CardText,
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
+import { OrderInfoItem, OrderShippingItem } from '../../components';
 
 class Order extends Component {
   constructor(props) {
@@ -38,6 +36,7 @@ class Order extends Component {
 
   render() {
     const { history } = this.props;
+    const { formatMessage } = this.props.intl;
     return (
       <div>
         <Breadcrumb>
@@ -85,28 +84,76 @@ class Order extends Component {
               <TabContent activeTab={this.state.activeTab} style={{backgroundColor: '#fff', padding: 15}}>
                 <TabPane tabId="1">
                   <Row>
-                    <Col sm="12">
-                      <h4>Tab 1 Contents</h4>
+                    <Col md={6}>
+                      <OrderInfoItem 
+                        title={formatMessage({ id: 'sys.productName' })}
+                        content="Product 1"
+                      />
+                      <OrderInfoItem 
+                        title={formatMessage({ id: 'sys.desc' })}
+                        content="adsf asdfkajsdlfk jalsdjf alkdjsf lkajsdlk jaslkdjf laksdj lkajsdlfkjasdlkf jaksdjflasdjflajsdlf ajsdlk jfalksdj falkdslk lasdjlfjalskd fjalkdsj flkadjslkfjadlskjfalkds fjkdalsfajdslk jf"
+                      />
+                      <OrderInfoItem 
+                        title={formatMessage({ id: 'sys.category' })}
+                        content="Kitchen"
+                      />
+                      <OrderInfoItem 
+                        title={formatMessage({ id: 'sys.sku' })}
+                        content="sku-sdfjaksdjflkasdjf "
+                      />
+                      <OrderInfoItem 
+                        title={formatMessage({ id: 'sys.price' })}
+                        content="SGD $100.10"
+                      />
+                      <OrderInfoItem 
+                        title={formatMessage({ id: 'sys.qty' })}
+                        content="2"
+                      />
+                      <OrderInfoItem 
+                        title={formatMessage({ id: 'sys.subTotal' })}
+                        content="SGD $200.20"
+                      />
+                    </Col>
+                    <Col md={6}>
+                      <OrderInfoItem 
+                        title={formatMessage({ id: 'sys.customerName' })}
+                        content="Nick Chen"
+                      />
+                      <OrderInfoItem 
+                        title={formatMessage({ id: 'sys.customerContact' })}
+                        content="+65-99999999"
+                      />
+                      <OrderInfoItem 
+                        title={formatMessage({ id: 'sys.deliveryAddr' })}
+                        content="BLK 666, Bugis, Singapore, 100666"
+                      />
+                      <OrderInfoItem 
+                        title={formatMessage({ id: 'sys.billingAddr' })}
+                        content="Not provided"
+                      />
                     </Col>
                   </Row>
                 </TabPane>
                 <TabPane tabId="2">
-                  <Row>
-                    <Col sm="6">
-                      <Card body>
-                        <CardTitle>Special Title Treatment</CardTitle>
-                        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                        <Button>Go somewhere</Button>
-                      </Card>
-                    </Col>
-                    <Col sm="6">
-                      <Card body>
-                        <CardTitle>Special Title Treatment</CardTitle>
-                        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                        <Button>Go somewhere</Button>
-                      </Card>
-                    </Col>
-                  </Row>
+                  <OrderShippingItem 
+                    courier="Fedex Express"
+                    datetime="2018-11-11 11:11:00"
+                    location="Singapore logistics center"
+                    status="Processing"
+                    statusColor="green"
+                  />
+                  <OrderShippingItem 
+                    courier="Fedex Express"
+                    datetime="2018-11-10 07:10:00"
+                    location="Malaysia logistic center"
+                    status="Shipped out"
+                  />
+                  <OrderShippingItem 
+                    courier="Fedex Express"
+                    datetime="2018-11-08 16:30:00"
+                    location="Seller"
+                    status="Dispatched"
+                  />
                 </TabPane>
               </TabContent>
             </Col>
@@ -120,4 +167,4 @@ class Order extends Component {
 export default connect(
   null,
   null
-)(withRouter(Order));
+)(injectIntl(withRouter(Order)));

@@ -262,7 +262,7 @@ a, a:hover, a:link, a:active, a:visited{
 .table-header{
   background: #eee;
 }
-table{
+.content-body{
   font-size: 15px;
 }
 table .btn-link{

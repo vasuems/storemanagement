@@ -17,7 +17,7 @@ class Navigation extends Component {
     return (
       <div className="admin-navbar">
         <Container fluid>
-          <Navbar light expand="md" fixed>
+          <Navbar light expand="md">
             <NavbarBrand href="/dashboard">LF Commerce</NavbarBrand>
             <Nav className="ml-auto">
               <UncontrolledDropdown nav inNavbar>
