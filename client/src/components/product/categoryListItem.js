@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
@@ -20,6 +21,15 @@ const CategoryListItem = (props) => {
       </td>
     </tr>
   );
+};
+
+CategoryListItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  parent: PropTypes.string,
+  status: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default injectIntl(CategoryListItem);

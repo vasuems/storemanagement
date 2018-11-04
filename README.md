@@ -31,13 +31,13 @@ npm install
 **Yarn**
 
 ```console
-yarn start
+yarn client
 ```
 
 **NPM**
 
 ```console
-npm start
+npm run client
 ```
 
 ## Unit Test
@@ -90,7 +90,7 @@ or **fix/xxx-xxx-xx** if it's a bug or other type of fixing branch.
 
 Before creating a PR, you should run:
 ```console
-yarn eslint
+yarn lint:client
 ```
 to make sure all formatting or other issues have been properly fixed.
 

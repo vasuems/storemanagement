@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import {
   Row,
@@ -163,6 +164,11 @@ class Order extends Component {
     );
   }
 }
+
+Order.propTypes = {
+  history: PropTypes.object.isRequired,
+  intl: PropTypes.object.isRequired,
+};
 
 export default connect(
   null,

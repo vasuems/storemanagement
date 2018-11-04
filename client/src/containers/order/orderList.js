@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Table,
@@ -11,10 +12,13 @@ import {
   BreadcrumbItem,
   Button,
 } from 'reactstrap';
+import DatePicker from "react-datepicker";
+import moment from "moment";
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { fetchOrders } from '../../actions';
 import { OrderListItem } from '../../components';
+import "react-datepicker/dist/react-datepicker.css";
 
 class OrderList extends Component {
   constructor(props) {
@@ -51,6 +55,13 @@ class OrderList extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
+              <div>
+                <FormattedMessage id="sys.orderDate" />:&nbsp;
+                <DatePicker
+                  dateFormat="YYYY-MM-DD"
+                  selected={moment()}
+                />
+              </div><br />
               <Table bordered responsive>
                 <thead className="table-header">
                   <tr>
@@ -115,6 +126,14 @@ class OrderList extends Component {
     );
   }
 }
+
+OrderList.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  orders: PropTypes.array.isRequired,
+  intl: PropTypes.object.isRequired,
+};
+
 
 const mapStateToProps = state => ({
   orders: state.orderReducer.orders,
