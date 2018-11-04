@@ -10,11 +10,17 @@ import {
   PaginationLink,
   Breadcrumb,
   BreadcrumbItem,
+  InputGroup,
+  Input,
+  InputGroupAddon,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
-import { FiPlusCircle } from 'react-icons/fi';
+import { 
+  FiPlusCircle,
+  FiSearch,
+} from 'react-icons/fi';
 import { fetchProducts } from '../../actions';
 import ProductListItem from '../../components/product/productListItem';
 
@@ -30,6 +36,7 @@ class ProductList extends Component {
 
   render() {
     const { products } = this.props;
+    const { formatMessage } = this.props.intl;
     return (
       <div>
         <Breadcrumb>
@@ -48,17 +55,26 @@ class ProductList extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <Button
-                size="sm"
-                color="primary"
-                className="pull-right form-btn"
-                onClick={() => this.props.history.push('/new-product')}
-              >
-                <FiPlusCircle />
-                &nbsp;
-                <FormattedMessage id="sys.addNew" />
-              </Button>
-              <br />
+              <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <div>
+                  <InputGroup size="sm">
+                    <Input placeholder={formatMessage({ id: 'sys.search' })} />
+                    <InputGroupAddon addonType="append">
+                      <Button color="secondary"><FiSearch /></Button>
+                    </InputGroupAddon>
+                  </InputGroup>
+                </div>
+                <Button
+                  size="sm"
+                  color="primary"
+                  className="pull-right form-btn"
+                  onClick={() => this.props.history.push('/new-product')}
+                >
+                  <FiPlusCircle />
+                  &nbsp;
+                  <FormattedMessage id="sys.addNew" />
+                </Button>
+              </div>
               <br />
               <Table bordered responsive>
                 <thead className="table-header">
@@ -127,4 +143,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(withRouter(ProductList));
+)(injectIntl(withRouter(ProductList)));

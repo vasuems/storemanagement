@@ -11,11 +11,17 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   Button,
+  InputGroup,
+  Input,
+  InputGroupAddon,
 } from 'reactstrap';
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
+import {
+  FiSearch,
+} from 'react-icons/fi';
 import { fetchOrders } from '../../actions';
 import { OrderListItem } from '../../components';
 import "react-datepicker/dist/react-datepicker.css";
@@ -37,6 +43,7 @@ class OrderList extends Component {
 
   render() {
     const { orders } = this.props;
+    const { formatMessage } = this.props.intl;
     return (
       <div>
         <Breadcrumb>
@@ -55,12 +62,22 @@ class OrderList extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <div>
-                <FormattedMessage id="sys.orderDate" />:&nbsp;
-                <DatePicker
-                  dateFormat="YYYY-MM-DD"
-                  selected={moment()}
-                />
+              <div style={{display: 'flex', justifyContent: 'space-between'}}>                
+                <div>
+                  <InputGroup size="sm">
+                    <Input placeholder={formatMessage({ id: 'sys.search' })} />
+                    <InputGroupAddon addonType="append">
+                      <Button color="secondary"><FiSearch /></Button>
+                    </InputGroupAddon>
+                  </InputGroup>
+                </div>
+                <div>
+                  <FormattedMessage id="sys.orderDate" />:&nbsp;
+                  <DatePicker
+                    dateFormat="YYYY-MM-DD"
+                    selected={moment()}
+                  />
+                </div>
               </div><br />
               <Table bordered responsive>
                 <thead className="table-header">
@@ -143,4 +160,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(withRouter(OrderList));
+)(injectIntl(withRouter(OrderList)));

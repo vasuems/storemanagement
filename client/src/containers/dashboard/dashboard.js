@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col } from 'reactstrap';
+import { Card, CardTitle, Table, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import {
-  Bar, Bubble, Line, Pie,
+  Line, Pie,
 } from 'react-chartjs-2';
-import {
-  FaShoppingCart, FaBoxes, FaTruck, FaUsers,
-} from 'react-icons/fa';
 import { fetchDashboardData } from '../../actions';
 import { FeedItem } from '../../components';
 
@@ -24,7 +21,7 @@ class Dashboard extends Component {
         <h3 style={{ marginTop: 70 }}>
           <FormattedMessage id="sys.dashboard" />
         </h3>
-        <Row>
+        <Row style={{marginTop: 15}}>
           <Col md={9}>
             <Row>
               <Col md={6} className="text-center">
@@ -61,7 +58,33 @@ class Dashboard extends Component {
             />
           </Col>
           <Col md={3}>
-            dsafjdsfkajsldkfjakl
+            <Card body style={{borderTop: '2px solid red', padding: 0}}>
+              <CardTitle style={{padding: 10}}><FormattedMessage id="sys.shipToday" /></CardTitle>
+              <Table hover>
+                <tbody>
+                  <tr>
+                    <td>#123456</td>
+                    <td>John Doe</td>
+                  </tr>
+                  <tr>
+                    <td>#2342343</td>
+                    <td>Helen Will</td>
+                  </tr>
+                  <tr>
+                    <td>#22343</td>
+                    <td>Jack Lee</td>
+                  </tr>
+                  <tr>
+                    <td>#223423</td>
+                    <td>Jack Lee</td>
+                  </tr>
+                  <tr>
+                    <td>#223431</td>
+                    <td>Jack Lee</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Card>
           </Col>
         </Row>
       </div>

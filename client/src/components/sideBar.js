@@ -78,13 +78,6 @@ class SideBarContent extends Component {
             </Link>
           </Row>
         </Collapse>
-
-        <Row className="sidebar-link">
-          <Link to="/payments">
-            <FiDollarSign className="sidebar-icon" />
-            <FormattedMessage id="sys.payments" />
-          </Link>
-        </Row>
         <Row className="sidebar-link">
           <Link to="/reports">
             <FiBarChart2 className="sidebar-icon" />

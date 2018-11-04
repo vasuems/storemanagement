@@ -78,9 +78,7 @@ class Setting extends Component {
                     this.toggle('1');
                   }}
                 >
-                  <b>
-                    <FormattedMessage id="sys.basicInfo" />
-                  </b>
+                  <FormattedMessage id="sys.basicInfo" />
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -92,9 +90,7 @@ class Setting extends Component {
                     this.toggle('2');
                   }}
                 >
-                  <b>
-                    <FormattedMessage id="sys.pwd" />
-                  </b>
+                  <FormattedMessage id="sys.pwd" />
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -106,9 +102,7 @@ class Setting extends Component {
                     this.toggle('3');
                   }}
                 >
-                  <b>
-                    <FormattedMessage id="sys.apiKeys" />
-                  </b>
+                  <FormattedMessage id="sys.apiKeys" />
                 </NavLink>
               </NavItem>
             </Nav>

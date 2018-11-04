@@ -87,5 +87,8 @@
   "sys.inactive": "Inactives",
   "sys.sku": "SKU",
   "sys.handledBy": "Handled by",
-  "sys.trackingId": "Tracking ID"
+  "sys.trackingId": "Tracking ID",
+  "sys.invoice": "Invoice",
+  "sys.search": "Search",
+  "sys.shipToday": "Ship today"
 }

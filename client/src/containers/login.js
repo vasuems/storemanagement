@@ -39,12 +39,14 @@ class Login extends Component {
               <Input
                 type="email"
                 placeholder={formatMessage({ id: 'sys.email' })}
+                value="admin@test.com"
               />
             </FormGroup>
             <FormGroup controlId="formHorizontalPassword">
               <Input
                 type="password"
                 placeholder={formatMessage({ id: 'sys.pwd' })}
+                value="password"
               />
             </FormGroup>
             <FormGroup>

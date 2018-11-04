@@ -25,12 +25,14 @@ class Home extends Component {
                 name="email"
                 id="email"
                 placeholder={formatMessage({ id: 'sys.email' })}
+                value="admin@test.com"
               />
               <Input
                 type="password"
                 name="password"
                 id="password"
                 placeholder={formatMessage({ id: 'sys.pwd' })}
+                value="password"
               />
               <Button block onClick={this.login}>
                 <FormattedMessage id="sys.signin" />
