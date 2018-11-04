@@ -53,15 +53,13 @@ class CustomerList extends Component {
                 </tr>
               </thead>
               <tbody>
-                {customers.map(customer => {
-                  return (
-                    <CustomerListItem
-                      name={customer.number}
-                      email={customer.email}
-                      contact={customer.contact}
-                    />
-                  );
-                })}
+                {customers.map(customer => (
+                  <CustomerListItem
+                    name={customer.number}
+                    email={customer.email}
+                    contact={customer.contact}
+                  />
+                ))}
               </tbody>
             </Table>
             <Pagination aria-label="Page navigation example">

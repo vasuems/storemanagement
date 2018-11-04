@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Col, Form, Input, Button } from 'reactstrap';
+import {
+  Col, Form, Input, Button,
+} from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import Footer from '../components/footer';
 
@@ -7,6 +9,7 @@ class Home extends Component {
   login = () => {
     window.location.href = '/dashboard';
   };
+
   render() {
     const { formatMessage } = this.props.intl;
     return (

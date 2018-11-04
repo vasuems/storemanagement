@@ -27,7 +27,7 @@ class OrderList extends Component {
     dispatch(fetchOrders());
   }
 
-  onViewClick = id => {
+  onViewClick = (id) => {
     this.props.history.push(`/orders/${id}`);
   };
 
@@ -73,18 +73,16 @@ class OrderList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.map(order => {
-                    return (
-                      <OrderListItem
-                        number={order.number}
-                        customer={order.customer}
-                        date={order.date}
-                        payment={order.payment}
-                        status={order.status}
-                        onClick={this.onViewClick}
-                      />
-                    );
-                  })}
+                  {orders.map(order => (
+                    <OrderListItem
+                      number={order.number}
+                      customer={order.customer}
+                      date={order.date}
+                      payment={order.payment}
+                      status={order.status}
+                      onClick={this.onViewClick}
+                    />
+                  ))}
                 </tbody>
               </Table>
               <Pagination aria-label="Page navigation example">

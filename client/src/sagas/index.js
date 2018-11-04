@@ -4,7 +4,7 @@ import { fetchProductCategories, fetchProducts, fetchProductDetails } from './pr
 
 export default function* rootSaga() {
   yield all([
-    call(fetchOrders), 
+    call(fetchOrders),
     call(fetchProductCategories),
     call(fetchProducts),
     call(fetchProductDetails),

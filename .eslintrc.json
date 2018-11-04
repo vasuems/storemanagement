@@ -9,8 +9,13 @@
   "parserOptions": {
     "ecmaVersion": 2017
   },
-  "extends": ["airbnb", "eslint:recommended"],
+  "extends": ["airbnb-base"],
+  "plugins": [
+    "react"
+  ],
   "rules": {
+    "no-unused-vars": 0,
+    "max-len": [1, 120, 2, { "ignoreComments": true}],
     "indent": [2, 2],
     "quotes": [2, "single"],
     "semi": [

@@ -19,7 +19,7 @@ import {
 } from 'react-icons/fa';
 import { productMenuOpen, productMenuClose } from '../actions';
 
-class SideBarContent extends Component{
+class SideBarContent extends Component {
   constructor(props) {
     super(props);
     this.state = { collapse: false };
@@ -28,14 +28,14 @@ class SideBarContent extends Component{
   toggle = () => {
     const { dispatch, productMenu } = this.props;
 
-    if(productMenu){
+    if (productMenu) {
       dispatch(productMenuClose());
-    }else{
+    } else {
       dispatch(productMenuOpen());
     }
   }
 
-  render(){
+  render() {
     const { productMenu } = this.props;
     return (
       <Container>
@@ -52,18 +52,18 @@ class SideBarContent extends Component{
             <FormattedMessage id="sys.orders" />
           </Link>
         </Row>
-        <Row className="sidebar-link" onClick={this.toggle} style={{display: 'flex', justifyContent: 'space-between'}}>
-          <div style={{cursor: 'pointer'}}>
+        <Row className="sidebar-link" onClick={this.toggle} style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ cursor: 'pointer' }}>
             <FiMenu className="sidebar-icon" />
-            <span style={{color: '#ddd', fontSize: 14}}><FormattedMessage id="sys.inventory" /></span>
+            <span style={{ color: '#ddd', fontSize: 14 }}><FormattedMessage id="sys.inventory" /></span>
           </div>
-          <div style={{color: '#ddd', marginRight: 10, cursor: 'pointer'}}>
+          <div style={{ color: '#ddd', marginRight: 10, cursor: 'pointer' }}>
             {
-              productMenu?<FaCaretDown />:<FaCaretLeft />
+              productMenu ? <FaCaretDown /> : <FaCaretLeft />
             }
           </div>
         </Row>
-      
+
         <Collapse isOpen={productMenu}>
           <Row className="sidebar-link sub-menu">
             <Link to="/categories">
@@ -78,7 +78,7 @@ class SideBarContent extends Component{
             </Link>
           </Row>
         </Collapse>
-      
+
         <Row className="sidebar-link">
           <Link to="/payments">
             <FiDollarSign className="sidebar-icon" />

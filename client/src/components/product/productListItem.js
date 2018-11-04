@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
-const ProductListItem = props => {
+const ProductListItem = (props) => {
   const { formatMessage } = props.intl;
   return (
     <tr>
@@ -14,7 +14,7 @@ const ProductListItem = props => {
 ...
       </td>
       <td>{props.price}</td>
-      <td>{props.status ? formatMessage({ id: 'sys.active' }): formatMessage({ id: 'sys.inactive' })}</td>
+      <td>{props.status ? formatMessage({ id: 'sys.active' }) : formatMessage({ id: 'sys.inactive' })}</td>
       <td>
         <Button
           size="sm"

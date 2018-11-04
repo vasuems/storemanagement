@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { 
+import {
   Col,
   Row,
   Form,
@@ -18,7 +18,7 @@ import {
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
   if (!values.categoryName) {
     errors.categoryName = 'Required';
@@ -31,9 +31,9 @@ const validate = values => {
 
 const modules = {
   toolbar: [
-    [{ 'header': [1, 2, false] }],
-    ['bold', 'italic', 'underline','strike', 'blockquote'],
-    [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+    [{ header: [1, 2, false] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
     ['link', 'image', 'video'],
     ['clean'],
   ],
@@ -46,42 +46,48 @@ const formats = [
   'link', 'image', 'video',
 ];
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({
+  input, label, type, meta: { touched, error },
+}) => (
   <div>
     <Input {...input} placeholder={label} type={type} />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
 
-const renderDecimalField = ({ input, label, type, meta: { touched, error } }) => (
+const renderDecimalField = ({
+  input, label, type, meta: { touched, error },
+}) => (
   <div>
     <Input {...input} placeholder={label} type={type} placeholder="0.00" step=".01" />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
 
-const renderNumberField = ({ input, label, type, meta: { touched, error } }) => (
+const renderNumberField = ({
+  input, label, type, meta: { touched, error },
+}) => (
   <div>
     <Input {...input} placeholder={label} type={type} placeholder="0" />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
 
-const renderTextArea = ({ input, label, type, meta: { touched, error } }) => {
-  return (
-    <div>
-      <ReactQuill 
-        modules={modules}
-        formats={formats}
-        style={{height: 180}}
-        value={input.value}
-      />
-    </div>
-  )
-};
+const renderTextArea = ({
+  input, label, type, meta: { touched, error },
+}) => (
+  <div>
+    <ReactQuill
+      modules={modules}
+      formats={formats}
+      style={{ height: 180 }}
+      value={input.value}
+    />
+  </div>
+);
 
-class ProductForm extends Component{
-  render(){
+class ProductForm extends Component {
+  render() {
     const { onSubmit, categories, currencies } = this.props;
 
     return (
@@ -139,11 +145,9 @@ class ProductForm extends Component{
                   </Label>
                   <Col sm={9}>
                     <Input type="select" name="selectCat">
-                      {categories.map(cat => {
-                        return (
-                          <option key={cat.id} value={cat.id}>{cat.name}</option>
-                        );
-                      })}
+                      {categories.map(cat => (
+                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                      ))}
                     </Input>
                   </Col>
                 </FormGroup>
@@ -155,18 +159,16 @@ class ProductForm extends Component{
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">
                         <Input type="select" name="currency">
-                          {currencies.map(currency => {
-                            return (
-                              <option key={currency.id} value={currency.id}>{currency.currency}</option>
-                            );
-                          })}
+                          {currencies.map(currency => (
+                            <option key={currency.id} value={currency.id}>{currency.currency}</option>
+                          ))}
                         </Input>
                       </InputGroupAddon>
-                      <Field 
+                      <Field
                         component={renderDecimalField}
                         type="number"
                         name="price"
-                        id="price"                                               
+                        id="price"
                       />
                     </InputGroup>
                   </Col>
@@ -184,11 +186,11 @@ class ProductForm extends Component{
                   </Label>
                   <Col sm={9}>
                     <InputGroup>
-                      <Field 
+                      <Field
                         component={renderNumberField}
                         type="number"
                         name="quantity"
-                        id="quantity"                                               
+                        id="quantity"
                       />
                     </InputGroup>
                   </Col>
@@ -200,16 +202,18 @@ class ProductForm extends Component{
       </Form>
     );
   }
-};
+}
 
 ProductForm = reduxForm({
   form: 'productForm',
   validate,
 })(ProductForm);
 
-export default connect(state => {
-  const { name, description, sku, price, quantity } = state.productReducer.productDetails;
-  return { 
+export default connect((state) => {
+  const {
+    name, description, sku, price, quantity,
+  } = state.productReducer.productDetails;
+  return {
     initialValues: {
       name,
       description,
@@ -218,5 +222,5 @@ export default connect(state => {
       quantity,
     },
     enableReinitialize: true,
-  }
+  };
 })(ProductForm);

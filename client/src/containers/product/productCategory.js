@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Button, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import {
+  Row, Col, Button, Breadcrumb, BreadcrumbItem,
+} from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
@@ -38,7 +40,7 @@ class ProductCategory extends Component {
             <FormattedMessage id="sys.productCat" />
           </BreadcrumbItem>
         </Breadcrumb>
-        <div className="content-body">          
+        <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
               <Button size="sm" color="primary" className="pull-right form-btn">
@@ -46,10 +48,10 @@ class ProductCategory extends Component {
                 &nbsp;
                 <FormattedMessage id="sys.save" />
               </Button><br /><br />
-              <ProductCategoryForm 
-                onSubmit={()=>{}}
+              <ProductCategoryForm
+                onSubmit={() => {}}
                 categories={this.props.categories}
-              />              
+              />
             </Col>
           </Row>
         </div>
@@ -58,11 +60,9 @@ class ProductCategory extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    categories: state.productReducer.categories,
-  };
-};
+const mapStateToProps = state => ({
+  categories: state.productReducer.categories,
+});
 
 export default connect(
   mapStateToProps,

@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import { Bar, Bubble, Line, Pie } from 'react-chartjs-2';
-import { FaShoppingCart, FaBoxes, FaTruck, FaUsers } from 'react-icons/fa';
+import {
+  Bar, Bubble, Line, Pie,
+} from 'react-chartjs-2';
+import {
+  FaShoppingCart, FaBoxes, FaTruck, FaUsers,
+} from 'react-icons/fa';
 import { fetchDashboardData } from '../../actions';
 import { Tile } from '../../components';
 
@@ -97,7 +101,7 @@ class Dashboard extends Component {
         </h3>
         <Row>
           <Col md={3}>
-            <Tile 
+            <Tile
               title="200 Products"
               backgroundColor="#fcae05"
               icon={<FaShoppingCart color="#fff" size={18} />}
@@ -105,15 +109,15 @@ class Dashboard extends Component {
             />
           </Col>
           <Col md={3}>
-            <Tile 
-              title="100 Orders" 
+            <Tile
+              title="100 Orders"
               backgroundColor="#ff4c28"
               icon={<FaBoxes color="#fff" size={18} />}
               fontColor="#fff"
             />
           </Col>
           <Col md={3}>
-            <Tile 
+            <Tile
               title="2K Customers"
               backgroundColor="#666"
               icon={<FaUsers color="#fff" size={18} />}
@@ -121,7 +125,7 @@ class Dashboard extends Component {
             />
           </Col>
           <Col md={3}>
-            <Tile 
+            <Tile
               title="2 Shipments"
               backgroundColor="#12b772"
               icon={<FaTruck color="#fff" size={18} />}

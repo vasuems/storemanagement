@@ -21,8 +21,6 @@ class Product extends Component{
   }
 
   render(){
-    const { productDetails } = this.props;
-
     return(
       <div>
         <Breadcrumb>
@@ -67,7 +65,7 @@ class Product extends Component{
 }
 
 const mapStateToProps = state => ({
-  productDetails: state.productReducer.productDetails,
+  categories: state.productReducer.categories,
 });
 
 export default connect(mapStateToProps, null)(withRouter(Product));

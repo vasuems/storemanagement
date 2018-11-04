@@ -21,7 +21,7 @@ class ProductCategoryList extends Component {
     dispatch(fetchProductCategories());
   }
 
-  onViewClick = id => {
+  onViewClick = (id) => {
     this.props.history.push(`/categories/${id}`);
   };
 
@@ -73,17 +73,15 @@ class ProductCategoryList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {categories.map(cat => {
-                    return (
-                      <CategoryListItem
-                        id={cat.id}
-                        name={cat.name}
-                        parent={cat.parent}
-                        status={cat.active}
-                        onClick={this.onViewClick}
-                      />
-                    );
-                  })}
+                  {categories.map(cat => (
+                    <CategoryListItem
+                      id={cat.id}
+                      name={cat.name}
+                      parent={cat.parent}
+                      status={cat.active}
+                      onClick={this.onViewClick}
+                    />
+                  ))}
                 </tbody>
               </Table>
             </Col>

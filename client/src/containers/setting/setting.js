@@ -32,7 +32,7 @@ class Setting extends Component {
     dispatch(fetchSiteSettings());
   }
 
-  toggle = tab => {
+  toggle = (tab) => {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab,
@@ -40,11 +40,11 @@ class Setting extends Component {
     }
   };
 
-  handleSettingSubmit = values => {
+  handleSettingSubmit = (values) => {
     console.log(values);
   };
 
-  handleEtsySettingSubmit = values => {
+  handleEtsySettingSubmit = (values) => {
     console.log(values);
   };
 

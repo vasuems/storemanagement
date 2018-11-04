@@ -24,7 +24,7 @@ class ProductList extends Component {
     dispatch(fetchProducts());
   }
 
-  onViewClick = id => {
+  onViewClick = (id) => {
     this.props.history.push(`/products/${id}`);
   };
 
@@ -80,20 +80,18 @@ class ProductList extends Component {
                 </thead>
                 <tbody>
                   {
-                    products.map(product => {
-                      return (
-                        <ProductListItem
-                          key={product.id}
-                          id={product.id}
-                          name={product.name}
-                          sku={product.sku}
-                          description={product.description}
-                          price={product.price}
-                          status={product.active}
-                          onClick={this.onViewClick}
-                        />
-                      );
-                    })
+                    products.map(product => (
+                      <ProductListItem
+                        key={product.id}
+                        id={product.id}
+                        name={product.name}
+                        sku={product.sku}
+                        description={product.description}
+                        price={product.price}
+                        status={product.active}
+                        onClick={this.onViewClick}
+                      />
+                    ))
                   }
                 </tbody>
               </Table>
