@@ -193,3 +193,45 @@ export const categories = [
     parent: null,
   },
 ];
+
+export const dashboard = {
+  orders: 100,
+  products: 200,
+  shippments: 32,
+  customers: 123,
+  weeklySales: {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    datasets: [
+      {
+        label: 'Weekly Sales',
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(75,192,192,0.2)',
+        borderColor: 'rgba(75,192,192,1)',
+        hoverBackgroundColor: 'rgba(75,192,192,0.4)',
+        hoverBorderColor: 'rgba(75,192,192,1)',
+        data: [365000, 159000, 180000, 281000, 516000, 155000, 1330000],
+      },
+      {
+        label: 'Weekly Profit',
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(66, 134, 244,0.2)',
+        borderColor: 'rgba(66, 134, 244,1)',
+        hoverBackgroundColor: 'rgba(66, 134, 244,0.4)',
+        hoverBorderColor: 'rgba(66, 134, 244,1)',
+        data: [25000, 19000, 8000, 21000, 56000, 1500, 330000],
+      },
+    ],
+  },
+  categoryProducts: {
+    labels: ['Food', 'Kitchen', 'Toys', 'Clothing', 'Electronics'],
+    datasets: [
+      {
+        data: [300, 50, 139, 590, 1010],
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#6e717a', '#23873d'],
+        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#6e717a', '#23873d'],
+      },
+    ],
+  },
+};
