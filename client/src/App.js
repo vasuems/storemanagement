@@ -11,7 +11,7 @@ import {
   ProductCategoryList,
   Payment,
   Setting,
-  NewProductCategory,
+  ProductCategory,
   Product,
 } from './containers';
 import NavBar from './containers/navigation';
@@ -48,10 +48,14 @@ const routes = [
     main: () => <ProductCategoryList />,
   },
   {
-    path: '/new-category',
-    exact: true,
+    path: '/categories/:id',
     sidebar: () => <SideBarContent />,
-    main: () => <NewProductCategory />,
+    main: () => <ProductCategory />,
+  },
+  {
+    path: '/new-category',
+    sidebar: () => <SideBarContent />,
+    main: () => <ProductCategory />,
   },
   {
     path: '/customers',

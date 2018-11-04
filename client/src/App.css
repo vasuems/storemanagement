@@ -271,3 +271,6 @@ table .btn-link{
 .sub-menu{
   margin-left: 10px;
 }
+.form-btn svg{
+  margin-top: -2px;
+}

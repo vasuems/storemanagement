@@ -8,7 +8,7 @@ import { FiSave } from 'react-icons/fi';
 import { fetchProductCategories } from '../../actions';
 import ProductCategoryForm from '../../components/forms/productCategoryForm';
 
-class NewProductCategory extends Component {
+class ProductCategory extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchProductCategories());
@@ -35,21 +35,21 @@ class NewProductCategory extends Component {
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem active>
-            <FormattedMessage id="sys.newProductCat" />
+            <FormattedMessage id="sys.productCat" />
           </BreadcrumbItem>
         </Breadcrumb>
-        <div className="content-body">
+        <div className="content-body">          
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <ProductCategoryForm 
-                onSubmit={()=>{}}
-                categories={this.props.categories}
-              />
-              <Button size="sm" color="primary">
+              <Button size="sm" color="primary" className="pull-right form-btn">
                 <FiSave />
                 &nbsp;
                 <FormattedMessage id="sys.save" />
-              </Button>
+              </Button><br /><br />
+              <ProductCategoryForm 
+                onSubmit={()=>{}}
+                categories={this.props.categories}
+              />              
             </Col>
           </Row>
         </div>
@@ -67,4 +67,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   null
-)(withRouter(NewProductCategory));
+)(withRouter(ProductCategory));

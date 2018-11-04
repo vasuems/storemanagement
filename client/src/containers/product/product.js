@@ -7,6 +7,7 @@ import {
   Row,
   Col,
 } from 'reactstrap';
+import { FiSave } from 'react-icons/fi';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { fetchProductDetails } from '../../actions';
@@ -48,6 +49,11 @@ class Product extends Component{
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
+              <Button size="sm" color="primary" className="pull-right form-btn">
+                <FiSave />
+                &nbsp;
+                <FormattedMessage id="sys.save" />
+              </Button><br /><br />
               <ProductForm 
                 categories={[]}
                 currencies={[{id: 1, currency: 'SGD'}]}

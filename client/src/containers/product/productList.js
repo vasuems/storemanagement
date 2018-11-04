@@ -51,7 +51,7 @@ class ProductList extends Component {
               <Button
                 size="sm"
                 color="primary"
-                className="pull-right"
+                className="pull-right form-btn"
                 onClick={() => this.props.history.push('/new-product')}
               >
                 <FiPlusCircle />
