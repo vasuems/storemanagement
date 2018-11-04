@@ -96,6 +96,7 @@ export const productDetails = {
     'nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt ' +
     'mollit anim id est laborum.',
   price: 12.90,
+  currency: 'SGD',
   quantity: 10,
   coverImage:
     'http://images.shirts.com/products/4311/13-14/womens-star-wars-poster-tshirt-front.jpg',

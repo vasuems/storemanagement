@@ -21,7 +21,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
   </div>
 );
 
-const NewProductCategoryForm = props => {
+const ProductCategoryForm = props => {
   const { onSubmit, categories } = props;
 
   return (
@@ -36,7 +36,6 @@ const NewProductCategoryForm = props => {
             name="categoryName"
             className="form-control"
             id="categoryName"
-            value=""
           />
         </Col>
       </FormGroup>
@@ -59,6 +58,6 @@ const NewProductCategoryForm = props => {
 };
 
 export default reduxForm({
-  form: 'newProductCategoryForm',
+  form: 'productCategoryForm',
   validate,
-})(NewProductCategoryForm);
+})(ProductCategoryForm);

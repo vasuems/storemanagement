@@ -9,11 +9,10 @@ import {
   OrderDetails,
   ProductList,
   ProductCategoryList,
-  NewProduct,
   Payment,
   Setting,
   NewProductCategory,
-  ProductDetails,
+  Product,
 } from './containers';
 import NavBar from './containers/navigation';
 import SideBarContent from './components/sideBar';
@@ -69,12 +68,12 @@ const routes = [
   {
     path: '/new-product',
     sidebar: () => <SideBarContent />,
-    main: () => <NewProduct />,
+    main: () => <Product />,
   },
   {
     path: '/products/:id',
     sidebar: () => <SideBarContent />,
-    main: () => <ProductDetails />,
+    main: () => <Product />,
   },
   {
     path: '/payments',

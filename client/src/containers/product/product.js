@@ -12,7 +12,7 @@ import { FormattedMessage } from 'react-intl';
 import { fetchProductDetails } from '../../actions';
 import { ProductForm } from '../../components/forms';
 
-class ProductDetails extends Component{
+class Product extends Component{
   componentDidMount(){
     const { dispatch } = this.props;
 
@@ -50,6 +50,7 @@ class ProductDetails extends Component{
             <Col md={12} className="table-content">
               <ProductForm 
                 categories={[]}
+                currencies={[{id: 1, currency: 'SGD'}]}
               />
             </Col>
           </Row>
@@ -63,4 +64,4 @@ const mapStateToProps = state => ({
   productDetails: state.productReducer.productDetails,
 });
 
-export default connect(mapStateToProps, null)(withRouter(ProductDetails));
+export default connect(mapStateToProps, null)(withRouter(Product));

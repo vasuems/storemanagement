@@ -82,7 +82,7 @@ const renderTextArea = ({ input, label, type, meta: { touched, error } }) => {
 
 class ProductForm extends Component{
   render(){
-    const { onSubmit, categories } = this.props;
+    const { onSubmit, categories, currencies } = this.props;
 
     return (
       <Form onSubmit={onSubmit}>
@@ -153,7 +153,15 @@ class ProductForm extends Component{
                   </Label>
                   <Col sm={9}>
                     <InputGroup>
-                      <InputGroupAddon addonType="prepend">SGD</InputGroupAddon>
+                      <InputGroupAddon addonType="prepend">
+                        <Input type="select" name="currency">
+                          {currencies.map(currency => {
+                            return (
+                              <option key={currency.id} value={currency.id}>{currency.currency}</option>
+                            );
+                          })}
+                        </Input>
+                      </InputGroupAddon>
                       <Field 
                         component={renderDecimalField}
                         type="number"

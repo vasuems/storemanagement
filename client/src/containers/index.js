@@ -3,10 +3,9 @@ import OrderDetails from './order/orderDetails';
 import ProductList from './product/productList';
 import ProductCategoryList from './product/productCategoryList';
 import NewProductCategory from './product/newProductCategory';
-import NewProduct from './product/newProduct';
 import Payment from './payment/payment';
 import Setting from './setting/setting';
-import ProductDetails from './product/productDetails';
+import Product from './product/product';
 
 export {
   OrderList,
@@ -14,8 +13,7 @@ export {
   ProductList,
   NewProductCategory,
   ProductCategoryList,
-  NewProduct,
   Payment,
   Setting,
-  ProductDetails,
+  Product,
 };

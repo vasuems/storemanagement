@@ -1,6 +1,6 @@
 import SettingForm from './settingForm';
 import ChangePasswordForm from './changePwdForm';
-import NewProductCategoryForm from './newProductCategoryForm';
+import ProductCategoryForm from './productCategoryForm';
 import ProductForm from './productForm';
 
-export { SettingForm, ChangePasswordForm, NewProductCategoryForm, ProductForm };
+export { SettingForm, ChangePasswordForm, ProductCategoryForm, ProductForm };

@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import ToggleButton from 'react-toggle-button';
 import { FiSave } from 'react-icons/fi';
 import { fetchProductCategories } from '../../actions';
-import NewProductCategoryForm from '../../components/forms/newProductCategoryForm';
+import ProductCategoryForm from '../../components/forms/productCategoryForm';
 
 class NewProductCategory extends Component {
   componentDidMount() {
@@ -41,7 +41,7 @@ class NewProductCategory extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <NewProductCategoryForm 
+              <ProductCategoryForm 
                 onSubmit={()=>{}}
                 categories={this.props.categories}
               />
