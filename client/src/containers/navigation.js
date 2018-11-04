@@ -9,8 +9,13 @@ import {
   DropdownItem,
   NavbarBrand,
   Container,
+  NavItem,
+  Badge,
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
+import {
+  FaRegBell,
+} from 'react-icons/fa';
 
 class Navigation extends Component {
   render() {
@@ -20,7 +25,13 @@ class Navigation extends Component {
           <Navbar light expand="md">
             <NavbarBrand href="/dashboard">LF Commerce</NavbarBrand>
             <Nav className="ml-auto">
-              <UncontrolledDropdown nav inNavbar>
+              <NavItem>
+                <NavLink href="#">
+                  <FaRegBell size={18} />
+                  <Badge color="danger">1</Badge>
+                </NavLink>
+              </NavItem>
+              <UncontrolledDropdown nav inNavbar>                
                 <DropdownToggle nav caret>
                   Nick Chen
                 </DropdownToggle>
