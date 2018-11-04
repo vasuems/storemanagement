@@ -9,7 +9,7 @@
   "parserOptions": {
     "ecmaVersion": 2017
   },
-  "extends": ["airbnb-base"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "plugins": [
     "react"
   ],

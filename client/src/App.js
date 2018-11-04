@@ -6,7 +6,7 @@ import Dashboard from './containers/dashboard/dashboard';
 import CustomerList from './containers/customerList';
 import {
   OrderList,
-  OrderDetails,
+  Order,
   ProductList,
   ProductCategoryList,
   Payment,
@@ -39,7 +39,7 @@ const routes = [
   {
     path: '/orders/:id',
     sidebar: () => <SideBarContent />,
-    main: () => <OrderDetails />,
+    main: () => <Order />,
   },
   {
     path: '/categories',

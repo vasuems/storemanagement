@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 
@@ -20,5 +21,14 @@ const OrderListItem = props => (
     </td>
   </tr>
 );
+
+OrderListItem.propTypes = {
+  number: PropTypes.string.isRequired,
+  customer: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  payment: PropTypes.string.isRequired,
+  status: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default OrderListItem;

@@ -1,5 +1,5 @@
 import OrderList from './order/orderList';
-import OrderDetails from './order/orderDetails';
+import Order from './order/order';
 import ProductList from './product/productList';
 import ProductCategoryList from './product/productCategoryList';
 import ProductCategory from './product/productCategory';
@@ -9,7 +9,7 @@ import Product from './product/product';
 
 export {
   OrderList,
-  OrderDetails,
+  Order,
   ProductList,
   ProductCategory,
   ProductCategoryList,

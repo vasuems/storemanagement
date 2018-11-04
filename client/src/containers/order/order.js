@@ -9,12 +9,33 @@ import {
   Nav,
   NavItem,
   NavLink,
+  TabPane,
+  TabContent,
+  Card,
+  CardTitle,
+  CardText,
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 
 class Order extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeTab: '1',
+    };
+  }
+
+  toggle = (tab) => {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab,
+      });
+    }
+  }
+
   render() {
     const { history } = this.props;
     return (
@@ -41,15 +62,15 @@ class Order extends Component {
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="content-body">
-          <Row className="table-container">
-            <Col md={12} className="table-content">
+          <Row>
+            <Col md={12}>
               <Nav tabs>
                 <NavItem>
                   <NavLink
                     className={classnames({ active: this.state.activeTab === '1' })}
                     onClick={() => { this.toggle('1'); }}
                   >
-                    Tab1
+                    <FormattedMessage id="sys.orderDetails" />
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -57,11 +78,11 @@ class Order extends Component {
                     className={classnames({ active: this.state.activeTab === '2' })}
                     onClick={() => { this.toggle('2'); }}
                   >
-                    Moar Tabs
+                    <FormattedMessage id="sys.shipping" />
                   </NavLink>
                 </NavItem>
               </Nav>
-              <TabContent activeTab={this.state.activeTab}>
+              <TabContent activeTab={this.state.activeTab} style={{backgroundColor: '#fff', padding: 15}}>
                 <TabPane tabId="1">
                   <Row>
                     <Col sm="12">
