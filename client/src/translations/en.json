@@ -106,5 +106,11 @@
   "sys.yearly": "Yearly",
   "sys.profit": "Profit",
   "sys.downloadInvoice": "Download invoice",
-  "sys.printInvoice": "Print invoice"
+  "sys.printInvoice": "Print invoice",
+  "sys.socialMedia": "Social media",
+  "sys.facebook": "Facebook",
+  "sys.twitter": "Twitter",
+  "sys.currency": "Currency",
+  "sys.lang": "Language",
+  "sys.country": "Country"
 }

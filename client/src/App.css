@@ -45,19 +45,18 @@ html, body{
   width: 60px;
   display:inline-block;
 }
-.admin-navbar .dropdown-item{
-  padding: 5px 0;
-}
 a, a:hover, a:link, a:active, a:visited{
   text-decoration: none;
   color:#000;
 }
-
 .dropdown-menu {
   padding: 0 !important;
 }
 .dropdown-menu li a{
   padding: 8px 0 10px 10px;
+}
+.dropdown-menu .dropdown-item{
+  padding: 0;
 }
 .sub-nav{
   border: 0;
@@ -147,13 +146,7 @@ a, a:hover, a:link, a:active, a:visited{
 .sidebar-link a:hover{
   color: #ccc;
 }
-.btn-link{
-  color: #666;
-  font-size: 14px;
-}
-.btn-link:hover{
-  color: #333;
-}
+
 .sidebar-link:hover{
   color: #fafafa;
   background-color: #666;
@@ -204,6 +197,11 @@ a, a:hover, a:link, a:active, a:visited{
   font-size: 14px;
   font-weight: 300;
 }
+
+.dropdown-menu .nav-link:active{
+  background-color: #eee;
+}
+
 .dropdown-menu .nav-link-icon{
   font-size: 16px;
   font-weight: 300;

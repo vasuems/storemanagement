@@ -42,7 +42,7 @@ class Navigation extends Component {
                     </NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="/logout">
+                    <NavLink href="/">
                       <FormattedMessage id="sys.logout" />
                     </NavLink>
                   </DropdownItem>

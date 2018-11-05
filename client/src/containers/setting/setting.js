@@ -118,7 +118,12 @@ class Setting extends Component {
                       &nbsp;
                       <FormattedMessage id="sys.save" />
                     </Button><br /><br />
-                    <SettingForm onSubmit={this.handleSettingSubmit} />
+                    <SettingForm 
+                      onSubmit={this.handleSettingSubmit}
+                      currencies={[{id: 1, name: 'SGD'}, {id: 2, name: 'USD'}, {id: 3, name: 'MYR'}]}
+                      countries={[{id: 1, name: 'Singapore'}, {id: 2, name: 'United States'}, {id: 3, name: 'Malaysia'}]}
+                      languages={[{id: 1, name: 'English'}, {id: 2, name: '简体中文'}, {id: 3, name: 'Malay'}]}
+                    />
                   </Col>
                 </Row>
               </TabPane>

@@ -7,11 +7,16 @@ import {
   Button,
   Breadcrumb,
   BreadcrumbItem,
+  InputGroup,
+  Input,
+  InputGroupAddon,
+  Pagination,
+  PaginationItem,
+  PaginationLink
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
-import { FiPlusCircle } from 'react-icons/fi';
-import ToggleButton from 'react-toggle-button';
+import { injectIntl, FormattedMessage } from 'react-intl';
+import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import { CategoryListItem } from '../../components';
 import { fetchProductCategories } from '../../actions';
 
@@ -27,6 +32,7 @@ class ProductCategoryList extends Component {
 
   render() {
     const { categories } = this.props;
+    const { formatMessage } = this.props.intl;
     return (
       <div>
         <Breadcrumb>
@@ -45,17 +51,26 @@ class ProductCategoryList extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <Button
-                size="sm"
-                color="primary"
-                className="pull-right form-btn"
-                onClick={() => this.props.history.push('/new-category')}
-              >
-                <FiPlusCircle />
-                &nbsp;
-                <FormattedMessage id="sys.addNew" />
-              </Button>
-              <br />
+              <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <div>
+                  <InputGroup size="sm">
+                    <Input placeholder={formatMessage({ id: 'sys.search' })} />
+                    <InputGroupAddon addonType="append">
+                      <Button color="secondary"><FiSearch /></Button>
+                    </InputGroupAddon>
+                  </InputGroup>
+                </div>
+                <Button
+                  size="sm"
+                  color="primary"
+                  className="pull-right form-btn"
+                  onClick={() => this.props.history.push('/new-category')}
+                >
+                  <FiPlusCircle />
+                  &nbsp;
+                  <FormattedMessage id="sys.addNew" />
+                </Button>
+              </div>
               <br />
               <Table bordered responsive>
                 <thead className="table-header">
@@ -75,6 +90,7 @@ class ProductCategoryList extends Component {
                 <tbody>
                   {categories.map(cat => (
                     <CategoryListItem
+                      key={cat.id}
                       id={cat.id}
                       name={cat.name}
                       parent={cat.parent}
@@ -84,6 +100,23 @@ class ProductCategoryList extends Component {
                   ))}
                 </tbody>
               </Table>
+              <Pagination aria-label="Page navigation example">
+                <PaginationItem disabled>
+                  <PaginationLink previous href="#" />
+                </PaginationItem>
+                <PaginationItem active>
+                  <PaginationLink href="#">1</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">2</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">3</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink next href="#" />
+                </PaginationItem>
+              </Pagination>
             </Col>
           </Row>
         </div>
@@ -99,4 +132,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(withRouter(ProductCategoryList));
+)(injectIntl(withRouter(ProductCategoryList)));

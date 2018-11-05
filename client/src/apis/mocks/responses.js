@@ -222,6 +222,8 @@ export const cart = [
 export const settings = {
   siteName: 'LF Commerce',
   siteLogo: '',
+  facebook: 'https://facebook.com/test',
+  twitter: 'https://twitter.com/test',
 };
 
 export const accountSettings = {
