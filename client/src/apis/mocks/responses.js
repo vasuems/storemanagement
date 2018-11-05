@@ -86,6 +86,49 @@ export const products = [
   },
 ];
 
+export const salesReportProducts = [
+  {
+    id: 'asdfa1234123asdfa4',
+    name: 'Test Product 1',
+    sku: 'asdfasasdfasdfasdfasddfasd1',
+    currency: 'SGD',
+    price: 12.90,
+    quantity: 2,
+    amount: 12.90*2,
+    profit: 12.90*2*0.2,
+  },
+  {
+    id: '12341324234',
+    name: 'Test Product 2',
+    sku: 'asdfasdfasdfasdfasdfasdasd2',
+    currency: 'SGD',
+    price: 32.10,
+    quantity: 312,
+    amount: 32.10*312,
+    profit: 32.10*312*0.2,
+  },
+  {
+    id: '1asdfads2341234',
+    name: 'Test Product 3',
+    sku: 'asdfasdasdfasdfasdffasd3',
+    currency: 'SGD',
+    price: 100.00,
+    quantity: 102,
+    amount: 100.00*102,
+    profit: 100.00*102*0.2,
+  },
+  {
+    id: '12341aadfas234',
+    name: 'Test Product 4',
+    sku: 'asdfasasdfasdfadsfdfasd4',
+    currency: 'SGD',
+    price: 99.90,
+    quantity: 12102,
+    amount: 99.90*12102,
+    profit: 99.90*12102*0.3,
+  },
+];
+
 export const productDetails = {
   name: 'Test Product 1',
   sku: 'asdfasdfasd5',

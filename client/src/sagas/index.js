@@ -1,6 +1,7 @@
 import { call, all } from 'redux-saga/effects';
 import { fetchOrders } from './order';
 import { fetchProductCategories, fetchProducts, fetchProductDetails } from './product';
+import { fetchSalesReportProducts } from './report';
 import { fetchDashboardData } from './dashboard';
 
 export default function* rootSaga() {
@@ -10,5 +11,6 @@ export default function* rootSaga() {
     call(fetchProducts),
     call(fetchProductDetails),
     call(fetchDashboardData),
+    call(fetchSalesReportProducts),
   ]);
 }

@@ -161,10 +161,10 @@ class SalesReportList extends Component {
                             id={product.id}
                             name={product.name}
                             sku={product.sku}
-                            price={product.price}
+                            price={product.currency + ' $' + product.price.toFixed(2)}
                             quantity={product.quantity}
-                            amount={product.amount}
-                            profit={product.profit}
+                            amount={product.currency + ' $' + product.amount.toFixed(2)}
+                            profit={product.currency + ' $' + product.profit.toFixed(2)}
                           />
                         ))
                       }
@@ -198,7 +198,7 @@ class SalesReportList extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.productReducer.products,
+  products: state.reportReducer.products,
 });
 
 export default connect(
