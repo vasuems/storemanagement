@@ -19,6 +19,10 @@ import {
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
+import { 
+  FiDownload,
+  FiPrinter,
+} from 'react-icons/fi';
 import { OrderInfoItem, OrderShippingItem } from '../../components';
 
 class Order extends Component {
@@ -87,6 +91,31 @@ class Order extends Component {
               </Nav>
               <TabContent activeTab={this.state.activeTab} style={{backgroundColor: '#fff', padding: 15}}>
                 <TabPane tabId="1">
+                  <Row>
+                    <Col md={12}>
+                      <Button
+                        size="sm"
+                        color="dark"
+                        className="pull-right form-btn"
+                        onClick={() => this.props.history.push('/new-product')}
+                      >
+                        <FiDownload />
+                        &nbsp;
+                        <FormattedMessage id="sys.downloadInvoice" />
+                      </Button>
+                      <Button
+                        size="sm"
+                        color="danger"
+                        className="pull-right form-btn"
+                        onClick={() => this.props.history.push('/new-product')}
+                        style={{ marginRight: 10 }}
+                      >
+                        <FiPrinter />
+                        &nbsp;
+                        <FormattedMessage id="sys.printInvoice" />
+                      </Button>
+                    </Col>
+                  </Row><br />
                   <Row>
                     <Col md={7}>
                       <CardTitle><FormattedMessage id="sys.products" /></CardTitle>

@@ -104,5 +104,7 @@
   "sys.monthly": "Monthly",
   "sys.quaterly": "Quaterly",
   "sys.yearly": "Yearly",
-  "sys.profit": "Profit"
+  "sys.profit": "Profit",
+  "sys.downloadInvoice": "Download invoice",
+  "sys.printInvoice": "Print invoice"
 }

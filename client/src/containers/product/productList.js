@@ -16,7 +16,6 @@ import {
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import ToggleButton from 'react-toggle-button';
 import { 
   FiPlusCircle,
   FiSearch,
