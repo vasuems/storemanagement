@@ -79,10 +79,13 @@ class ProductList extends Component {
                 <thead className="table-header">
                   <tr>
                     <th>
-                      <FormattedMessage id="sys.sku" />
+                      <FormattedMessage id="sys.thumbnail" />
                     </th>
                     <th>
-                      <FormattedMessage id="sys.desc" />
+                      <FormattedMessage id="sys.name" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="sys.sku" />
                     </th>
                     <th>
                       <FormattedMessage id="sys.price" />
@@ -99,9 +102,10 @@ class ProductList extends Component {
                       <ProductListItem
                         key={product.id}
                         id={product.id}
+                        coverImage={product.coverImage}
                         name={product.name}
                         sku={product.sku}
-                        description={product.description}
+                        currency={product.currency}
                         price={product.price}
                         status={product.active}
                         onClick={this.onViewClick}

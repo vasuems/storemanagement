@@ -281,3 +281,7 @@ table .btn-link{
 .btn-link-active{
   text-decoration: underline;
 }
+.thumbnail{
+  width: 64px;
+  height: 64px;
+}

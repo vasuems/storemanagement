@@ -112,5 +112,6 @@
   "sys.twitter": "Twitter",
   "sys.currency": "Currency",
   "sys.lang": "Language",
-  "sys.country": "Country"
+  "sys.country": "Country",
+  "sys.thumbnail": "Thumbnail"
 }

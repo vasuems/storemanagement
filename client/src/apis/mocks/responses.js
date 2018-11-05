@@ -7,7 +7,8 @@ export const products = [
     description: 'afsdf ajkfha ksdfjkdsfkjadhs faskjf aksdhfk jasdhf',
     coverImage:
       'https://image.spreadshirtmedia.com/image-server/v1/products/1003716746/views/1,width=800,height=800,appearanceId=1,backgroundColor=fff,version=1485256808/i-eat-ass-t-shirt-men-s-t-shirt.jpg',
-    price: '$12.90',
+    price: 12.90,
+    currency: 'SGD',
     active: true,
   },
   {
@@ -17,7 +18,8 @@ export const products = [
     url: '/products/test-product-2',
     description: 'afsdf ajkfha ksdfjkdsfkj asdfas asdf adhs faskjf aksdhfk asdf asdf as dfas',
     coverImage: 'https://i.ebayimg.com/images/g/lNoAAOSwTM5Y524t/s-l1600.jpg',
-    price: '$19.90',
+    price: 19.90,
+    currency: 'SGD',
     active: true,
   },
   {
@@ -28,7 +30,8 @@ export const products = [
     description: 'afsdf ajkfha ksdfjkdsfkjadhs faskjf aksdhfk jasdhf123',
     coverImage:
       'https://www.uncommongoods.com/images/items/40400/40465_1_1200px.jpg',
-    price: '$22.90',
+    price: 22.90,
+    currency: 'SGD',
     active: true,
   },
   {
@@ -39,7 +42,8 @@ export const products = [
     description: 'a afsdf ajkfha ksdfjkdsfkjadhs faskjf aksdhfk jasdhf asdfjasdf',
     coverImage:
       'https://admin.chronostore.nyc//media/catalog/product/5/t/5th-ave_19554_chronostore_6.jpg',
-    price: '$11,200.00',
+    price: 11200.00,
+    currency: 'SGD',
     active: true,
   },
   {
@@ -50,7 +54,8 @@ export const products = [
     description: '123 afsdf 455 ajkfha ksdfjkdsfkjadhs faskjf aksdhfk jasdhf',
     coverImage:
       'https://s-media-cache-ak0.pinimg.com/736x/e5/b8/fa/e5b8fa101264808f877497808f25f08b.jpg',
-    price: '$12.90',
+    price: 12.90,
+    currency: 'SGD',
     active: true,
   },
   {
@@ -61,7 +66,8 @@ export const products = [
     description: 'adsf ajkfha ksdfjkdsfkjadhs faskjf aksdhfk jasdhf adsfads',
     coverImage:
       'http://assets.teenvogue.com/photos/57dfbfe5046b3a2e2a7364bd/master/pass/Kylie-Armytee.jpg',
-    price: '$12.90',
+    price: 12.90,
+    currency: 'SGD',
     active: true,
   },
   {
@@ -71,7 +77,8 @@ export const products = [
     url: '/products/test-product-7',
     description: 'afs ksjkdsfkjadhs faskjf aksdhfk jasdhf',
     coverImage: 'https://i.ebayimg.com/images/g/lAIAAOSwYvFZMYHW/s-l1600.jpg',
-    price: '$1,429.00',
+    price: 1429.00,
+    currency: 'SGD',
     active: true,
   },
   {
@@ -81,7 +88,8 @@ export const products = [
     url: '/products/test-product-8',
     description: 'afsdf ajkfha 123 faskjf aksdhfk jasdhf',
     coverImage: 'https://i.ebayimg.com/images/g/MnIAAOSwQTVV8xSM/s-l1600.jpg',
-    price: '$120.00',
+    price: 120.00,
+    currency: 'SGD',
     active: true,
   },
 ];
