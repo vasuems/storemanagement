@@ -144,7 +144,7 @@ class Order extends Component {
                       </Col>
                     </Col>
                     <Col md={5}>
-                      <CardTitle><FormattedMessage id="sys.shippingInfo" /></CardTitle>
+                      <CardTitle><FormattedMessage id="sys.customerInfo" /></CardTitle>
                       <Card body>
                         <OrderInfoItem 
                           title={formatMessage({ id: 'sys.customerName' })}
