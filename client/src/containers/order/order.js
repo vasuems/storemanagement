@@ -12,6 +12,9 @@ import {
   NavLink,
   TabPane,
   TabContent,
+  Card,
+  CardTitle,
+  Table,
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
@@ -85,53 +88,81 @@ class Order extends Component {
               <TabContent activeTab={this.state.activeTab} style={{backgroundColor: '#fff', padding: 15}}>
                 <TabPane tabId="1">
                   <Row>
-                    <Col md={6}>
-                      <OrderInfoItem 
-                        title={formatMessage({ id: 'sys.productName' })}
-                        content="Product 1"
-                      />
-                      <OrderInfoItem 
-                        title={formatMessage({ id: 'sys.desc' })}
-                        content="adsf asdfkajsdlfk jalsdjf alkdjsf lkajsdlk jaslkdjf laksdj lkajsdlfkjasdlkf jaksdjflasdjflajsdlf ajsdlk jfalksdj falkdslk lasdjlfjalskd fjalkdsj flkadjslkfjadlskjfalkds fjkdalsfajdslk jf"
-                      />
-                      <OrderInfoItem 
-                        title={formatMessage({ id: 'sys.category' })}
-                        content="Kitchen"
-                      />
-                      <OrderInfoItem 
-                        title={formatMessage({ id: 'sys.sku' })}
-                        content="sku-sdfjaksdjflkasdjf "
-                      />
-                      <OrderInfoItem 
-                        title={formatMessage({ id: 'sys.price' })}
-                        content="SGD $100.10"
-                      />
-                      <OrderInfoItem 
-                        title={formatMessage({ id: 'sys.qty' })}
-                        content="2"
-                      />
-                      <OrderInfoItem 
-                        title={formatMessage({ id: 'sys.subTotal' })}
-                        content="SGD $200.20"
-                      />
+                    <Col md={7}>
+                      <CardTitle><FormattedMessage id="sys.products" /></CardTitle>
+                      <Table bordered>
+                        <thead>
+                          <tr>
+                            <th><FormattedMessage id="sys.productName" /></th>
+                            <th><FormattedMessage id="sys.unitPrice" /></th>
+                            <th><FormattedMessage id="sys.qty" /></th>
+                            <th><FormattedMessage id="sys.amount" /></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Product 1</td>
+                            <td>SGD $10.00</td>
+                            <td>2</td>
+                            <td>SGD $20.00</td>
+                          </tr>
+                          <tr>
+                            <td>Product 2</td>
+                            <td>SGD $31.50</td>
+                            <td>3</td>
+                            <td>SGD $94.50</td>
+                          </tr>
+                          <tr>
+                            <td>Product 3</td>
+                            <td>SGD $1.50</td>
+                            <td>1</td>
+                            <td>SGD $1.50</td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                      <Col md={6} className="pull-right">
+                        <Table borderless size="sm">
+                          <tbody>
+                            <tr>
+                              <td><FormattedMessage id="sys.subTotal" />:</td>
+                              <td>SGD $116.00</td>
+                            </tr>
+                            <tr>
+                              <td><FormattedMessage id="sys.taxIncluded" />:</td>
+                              <td>SGD $8.12</td>
+                            </tr>
+                            <tr>
+                              <td><FormattedMessage id="sys.shipping" />:</td>
+                              <td>SGD $21.60</td>
+                            </tr>
+                            <tr>
+                              <td><b><FormattedMessage id="sys.total" />:</b></td>
+                              <td><b>SGD $137.60</b></td>
+                            </tr>
+                          </tbody>
+                        </Table>
+                      </Col>
                     </Col>
-                    <Col md={6}>
-                      <OrderInfoItem 
-                        title={formatMessage({ id: 'sys.customerName' })}
-                        content="Nick Chen"
-                      />
-                      <OrderInfoItem 
-                        title={formatMessage({ id: 'sys.customerContact' })}
-                        content="+65-99999999"
-                      />
-                      <OrderInfoItem 
-                        title={formatMessage({ id: 'sys.deliveryAddr' })}
-                        content="BLK 666, Bugis, Singapore, 100666"
-                      />
-                      <OrderInfoItem 
-                        title={formatMessage({ id: 'sys.billingAddr' })}
-                        content="Not provided"
-                      />
+                    <Col md={5}>
+                      <CardTitle><FormattedMessage id="sys.shippingInfo" /></CardTitle>
+                      <Card body>
+                        <OrderInfoItem 
+                          title={formatMessage({ id: 'sys.customerName' })}
+                          content="Nick Chen"
+                        />
+                        <OrderInfoItem 
+                          title={formatMessage({ id: 'sys.customerContact' })}
+                          content="+65-99999999"
+                        />
+                        <OrderInfoItem 
+                          title={formatMessage({ id: 'sys.deliveryAddr' })}
+                          content="BLK 666, Bugis, Singapore, 100666"
+                        />
+                        <OrderInfoItem 
+                          title={formatMessage({ id: 'sys.billingAddr' })}
+                          content="Not provided"
+                        />
+                      </Card>
                     </Col>
                   </Row>
                 </TabPane>

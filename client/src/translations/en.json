@@ -37,6 +37,7 @@
   "sys.customerName": "Customer name",
   "sys.customerContact": "Customer contact",
   "sys.reports": "Reports",
+  "sys.salesReports": "Sales reports",
   "sys.orders": "Orders",
   "sys.about": "About",
   "sys.delivery": "Delivery",
@@ -65,9 +66,11 @@
   "sys.productDetails": "Product details",
   "sys.amount": "Amount",
   "sys.price": "Price",
+  "sys.unitPrice": "Unit price",
   "sys.shipTo": "Ship to",
   "sys.shippingBy": "Shipping by",
   "sys.shipping": "Shipping",
+  "sys.shippingInfo": "Shipping info",
   "sys.orderedBy": "Ordered by",
   "sys.settings": "Settings",
   "sys.save": "Save",
@@ -90,5 +93,7 @@
   "sys.trackingId": "Tracking ID",
   "sys.invoice": "Invoice",
   "sys.search": "Search",
-  "sys.shipToday": "Ship today"
+  "sys.shipToday": "Ship today",
+  "sys.tax": "Tax",
+  "sys.taxIncluded": "Tax (Included)"
 }

@@ -6,6 +6,7 @@ import ProductCategory from './product/productCategory';
 import Payment from './payment/payment';
 import Setting from './setting/setting';
 import Product from './product/product';
+import SalesReportList from './report/salesReportList';
 
 export {
   OrderList,
@@ -16,4 +17,5 @@ export {
   Payment,
   Setting,
   Product,
+  SalesReportList,
 };

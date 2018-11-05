@@ -13,6 +13,7 @@ import {
   Setting,
   ProductCategory,
   Product,
+  SalesReportList,
 } from './containers';
 import NavBar from './containers/navigation';
 import SideBarContent from './components/sideBar';
@@ -86,10 +87,10 @@ const routes = [
     main: () => <Payment />,
   },
   {
-    path: '/reports',
+    path: '/sales-reports',
     exact: true,
     sidebar: () => <SideBarContent />,
-    main: () => <Payment />,
+    main: () => <SalesReportList />,
   },
   {
     path: '/settings',
