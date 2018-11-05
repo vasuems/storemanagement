@@ -56,19 +56,19 @@ const renderField = ({
 );
 
 const renderDecimalField = ({
-  input, label, type, meta: { touched, error },
+  input, type, meta: { touched, error },
 }) => (
   <div>
-    <Input {...input} placeholder={label} type={type} placeholder="0.00" step=".01" />
+    <Input {...input} placeholder="0.00" type={type} step=".01" />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
 
 const renderNumberField = ({
-  input, label, type, meta: { touched, error },
+  input, type, meta: { touched, error },
 }) => (
   <div>
-    <Input {...input} placeholder={label} type={type} placeholder="0" />
+    <Input {...input} placeholder="0" type={type} />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );

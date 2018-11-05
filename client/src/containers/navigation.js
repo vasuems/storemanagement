@@ -25,12 +25,25 @@ class Navigation extends Component {
           <Navbar light expand="md">
             <NavbarBrand href="/dashboard">LF Commerce</NavbarBrand>
             <Nav className="ml-auto">
-              <NavItem>
-                <NavLink href="#">
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav>
                   <FaRegBell size={18} />
                   <Badge color="danger">1</Badge>
-                </NavLink>
-              </NavItem>
+                </DropdownToggle>
+                <DropdownMenu style={{marginLeft: -100, width:280}}>
+                  <DropdownItem>
+                    <NavLink href="#" style={{whiteSpace: 'normal'}}>
+                      <b>A new product has been created.</b><br />
+                      <span className="text-muted">Your collegue John Doe has created a new product: sdlfladsjf</span>
+                    </NavLink>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="#">
+                      <b>A new product has been created.</b>
+                    </NavLink>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
               <UncontrolledDropdown nav inNavbar>                
                 <DropdownToggle nav caret>
                   Nick Chen
