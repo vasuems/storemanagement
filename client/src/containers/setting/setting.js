@@ -113,42 +113,42 @@ class Setting extends Component {
               <TabPane tabId="1">
                 <Row>
                   <Col sm="12">
+                    <Button size="sm" color="primary" className="pull-right">
+                      <FiSave />
+                      &nbsp;
+                      <FormattedMessage id="sys.save" />
+                    </Button><br /><br />
                     <SettingForm onSubmit={this.handleSettingSubmit} />
                   </Col>
                 </Row>
-                <Button size="sm" color="primary">
-                  <FiSave />
-                  &nbsp;
-                  <FormattedMessage id="sys.save" />
-                </Button>
               </TabPane>
               <TabPane tabId="2">
                 <Row>
                   <Col sm="12">
+                    <Button size="sm" color="primary" className="pull-right">
+                      <FiSave />
+                      &nbsp;
+                      <FormattedMessage id="sys.save" />
+                    </Button><br /><br />
                     <ChangePasswordForm
                       onSubmit={this.handleApiSettingSubmit}
                     />
                   </Col>
                 </Row>
-                <Button size="sm" color="primary">
-                  <FiSave />
-                  &nbsp;
-                  <FormattedMessage id="sys.save" />
-                </Button>
               </TabPane>
               <TabPane tabId="3">
                 <Row>
                   <Col sm="12">
+                    <Button size="sm" color="primary" className="pull-right">
+                      <FiSave />
+                      &nbsp;
+                      <FormattedMessage id="sys.save" />
+                    </Button><br /><br />
                     <ChangePasswordForm
                       onSubmit={this.handleApiSettingSubmit}
                     />
                   </Col>
-                </Row>
-                <Button size="sm" color="primary">
-                  <FiSave />
-                  &nbsp;
-                  <FormattedMessage id="sys.save" />
-                </Button>
+                </Row>                
               </TabPane>
             </TabContent>
           </div>
@@ -157,6 +157,7 @@ class Setting extends Component {
     );
   }
 }
+
 
 export default connect(
   null,

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -22,29 +23,44 @@ const renderField = ({
   </div>
 );
 
-const SettingForm = (props) => {
-  const { handleSubmit } = props;
-  return (
-    <Form onSubmit={handleSubmit}>
-      <FormGroup row>
-        <Label for="siteName" sm={2}>
-          <FormattedMessage id="sys.siteName" />
-        </Label>
-        <Col sm={10}>
-          <Field
-            component={renderField}
-            name="siteName"
-            className="form-control"
-            id="siteName"
-            value=""
-          />
-        </Col>
-      </FormGroup>
-    </Form>
-  );
-};
+class SettingForm extends Component {
 
-export default reduxForm({
+  render(){
+    const { handleSubmit } = this.props;
+    return (
+      <Form onSubmit={handleSubmit}>
+        <FormGroup row>
+          <Label for="siteName" sm={2}>
+            <FormattedMessage id="sys.siteName" />
+          </Label>
+          <Col sm={10}>
+            <Field
+              component={renderField}
+              name="siteName"
+              className="form-control"
+              id="siteName"
+              value=""
+            />
+          </Col>
+        </FormGroup>
+      </Form>
+    );
+  }
+}
+
+SettingForm = reduxForm({
   form: 'siteSettings',
   validate,
+})(SettingForm);
+
+export default connect((state) => {
+  const {
+    siteName,
+  } = state.settingReducer.settings;
+  return {
+    initialValues: {
+      siteName,
+    },
+    enableReinitialize: true,
+  };
 })(SettingForm);
