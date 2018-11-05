@@ -76,6 +76,12 @@ class OrderList extends Component {
                   <DatePicker
                     dateFormat="YYYY-MM-DD"
                     selected={moment()}
+                    popperModifiers={{
+                      offset: {
+                        enabled: true,
+                        offset: '10px, 10px',
+                      },
+                    }}
                   />
                 </div>
               </div><br />

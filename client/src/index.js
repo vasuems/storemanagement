@@ -8,7 +8,6 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import store from './store';
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
 import './App.css';
 import messages_en from './translations/en.json';
 

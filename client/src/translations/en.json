@@ -39,6 +39,8 @@
   "sys.customerContact": "Customer contact",
   "sys.reports": "Reports",
   "sys.salesReports": "Sales reports",
+  "sys.byProduct": "By product",
+  "sys.byCat": "By category",
   "sys.orders": "Orders",
   "sys.about": "About",
   "sys.delivery": "Delivery",
@@ -96,5 +98,11 @@
   "sys.search": "Search",
   "sys.shipToday": "Ship today",
   "sys.tax": "Tax",
-  "sys.taxIncluded": "Tax (Included)"
+  "sys.taxIncluded": "Tax (Included)",
+  "sys.daily": "Daily",
+  "sys.weekly": "Weekly",
+  "sys.monthly": "Monthly",
+  "sys.quaterly": "Quaterly",
+  "sys.yearly": "Yearly",
+  "sys.profit": "Profit"
 }
