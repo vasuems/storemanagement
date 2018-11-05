@@ -30,8 +30,8 @@ import {
   FiPlusCircle,
   FiSearch,
 } from 'react-icons/fi';
-import { fetchProducts } from '../../actions';
-import SalesReportListItem from '../../components/report/salesReportListItem';
+import { fetchSalesReportProducts, fetchSalesReportCategories } from '../../actions';
+import { SalesReportListProductItem, SalesReportListCategoryItem } from '../../components';
 
 class SalesReportList extends Component {
   constructor(props) {
@@ -45,7 +45,8 @@ class SalesReportList extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchProducts());
+    dispatch(fetchSalesReportProducts());
+    dispatch(fetchSalesReportCategories());
   }
 
   toggle = (tab) => {
@@ -62,11 +63,11 @@ class SalesReportList extends Component {
 
   onFilterSelect = () => {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      dropdownOpen: !this.state.dropdownOpen,
     });
   }
   render() {
-    const { products } = this.props;
+    const { products, categories } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <div>
@@ -156,7 +157,7 @@ class SalesReportList extends Component {
                     <tbody>
                       {
                         products.map(product => (
-                          <SalesReportListItem
+                          <SalesReportListProductItem
                             key={product.id}
                             id={product.id}
                             name={product.name}
@@ -165,6 +166,81 @@ class SalesReportList extends Component {
                             quantity={product.quantity}
                             amount={product.currency + ' $' + product.amount.toFixed(2)}
                             profit={product.currency + ' $' + product.profit.toFixed(2)}
+                          />
+                        ))
+                      }
+                    </tbody>
+                  </Table>
+                  <Pagination aria-label="Page navigation example">
+                    <PaginationItem disabled>
+                      <PaginationLink previous href="#" />
+                    </PaginationItem>
+                    <PaginationItem active>
+                      <PaginationLink href="#">1</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#">2</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#">3</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink next href="#" />
+                    </PaginationItem>
+                  </Pagination>
+                </TabPane>
+                <TabPane tabId="2">
+                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div>
+                      <InputGroup size="sm">
+                        <Input placeholder={formatMessage({ id: 'sys.search' })} />
+                        <InputGroupAddon addonType="append">
+                          <Button color="secondary"><FiSearch /></Button>
+                        </InputGroupAddon>
+                      </InputGroup>
+                    </div>
+                    <div>
+                      <ButtonDropdown direction="left" size="sm" isOpen={this.state.dropdownOpen} toggle={this.onFilterSelect}>
+                        <DropdownToggle caret>
+                          <FormattedMessage id="sys.daily" />
+                        </DropdownToggle>
+                        <DropdownMenu>
+                          <DropdownItem><FormattedMessage id="sys.daily" /></DropdownItem>
+                          <DropdownItem><FormattedMessage id="sys.weekly" /></DropdownItem>
+                          <DropdownItem><FormattedMessage id="sys.monthly" /></DropdownItem>
+                          <DropdownItem><FormattedMessage id="sys.quaterly" /></DropdownItem>
+                          <DropdownItem><FormattedMessage id="sys.yearly" /></DropdownItem>
+                        </DropdownMenu>
+                      </ButtonDropdown>
+                    </div>
+                  </div><br />
+                  <Table bordered responsive>
+                    <thead className="table-header">
+                      <tr>
+                        <th>
+                          <FormattedMessage id="sys.productName" />
+                        </th>
+                        <th>
+                          <FormattedMessage id="sys.qty" />
+                        </th>
+                        <th>
+                          <FormattedMessage id="sys.amount" />
+                        </th>
+                        <th>
+                          <FormattedMessage id="sys.profit" />
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        categories.map(cat => (
+                          <SalesReportListCategoryItem
+                            key={cat.id}
+                            id={cat.id}
+                            name={cat.name}
+                            quantity={cat.quantity}
+                            amount={cat.currency + ' $' + cat.amount.toFixed(2)}
+                            profit={cat.currency + ' $' + cat.profit.toFixed(2)}
                           />
                         ))
                       }
@@ -199,6 +275,7 @@ class SalesReportList extends Component {
 
 const mapStateToProps = state => ({
   products: state.reportReducer.products,
+  categories: state.reportReducer.categories,
 });
 
 export default connect(

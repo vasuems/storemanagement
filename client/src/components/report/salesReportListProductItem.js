@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap';
-const SalesReportListItem = (props) => {
+
+const SalesReportListProductItem = (props) => {
   return (
     <tr>
       <td>{props.name}</td>
@@ -13,4 +14,4 @@ const SalesReportListItem = (props) => {
   );
 };
 
-export default SalesReportListItem;
+export default SalesReportListProductItem;

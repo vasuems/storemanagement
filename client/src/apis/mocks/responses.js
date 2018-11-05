@@ -129,6 +129,49 @@ export const salesReportProducts = [
   },
 ];
 
+export const salesReportCategories = [
+  {
+    id: 'asdfa1234123asdfa4',
+    name: 'Clothing',
+    currency: 'SGD',
+    quantity: 202,
+    amount: 12010.60,
+    profit: 12010.60*0.2,
+  },
+  {
+    id: '12341324234',
+    name: 'Kidz',
+    currency: 'SGD',
+    quantity: 11020,
+    amount: 3200121.00,
+    profit: 3200121.00*0.2,
+  },
+  {
+    id: '1asdfads2341234',
+    name: 'Groceries',
+    currency: 'SGD',
+    quantity: 1020,
+    amount: 123001.15,
+    profit: 123001.15*0.2,
+  },
+  {
+    id: '12341aadfas234',
+    name: 'Bags & Luggages',
+    currency: 'SGD',
+    quantity: 122,
+    amount: 8901.90,
+    profit: 8901.90*0.3,
+  },
+  {
+    id: '12341aadfas234',
+    name: 'Household',
+    currency: 'SGD',
+    quantity: 32100,
+    amount: 190121.50,
+    profit: 190121.50*0.3,
+  },
+];
+
 export const productDetails = {
   name: 'Test Product 1',
   sku: 'asdfasdfasd5',

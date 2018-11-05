@@ -3,6 +3,8 @@ import OrderInfoItem from './order/orderInfoItem';
 import OrderShippingItem from './order/orderShippingItem';
 import CategoryListItem from './product/categoryListItem';
 import CustomerListItem from './customerListItem';
+import SalesReportListProductItem from './report/salesReportListProductItem';
+import SalesReportListCategoryItem from './report/salesReportListCategoryItem';
 import Tile from './dashboard/tile';
 import FeedItem from './dashboard/feedItem';
 
@@ -15,4 +17,6 @@ export {
   OrderInfoItem,
   OrderShippingItem,
   FeedItem,
+  SalesReportListProductItem,
+  SalesReportListCategoryItem,
 };
