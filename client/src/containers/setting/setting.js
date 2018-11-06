@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   TabContent,
@@ -184,6 +185,12 @@ class Setting extends Component {
   }
 }
 
+Setting.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
+  intl: PropTypes.object.isRequired,
+};
 
 export default connect(
   null,

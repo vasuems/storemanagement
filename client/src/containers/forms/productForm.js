@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
@@ -203,6 +204,12 @@ class ProductForm extends Component {
     );
   }
 }
+
+ProductForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  categories: PropTypes.array.isRequired,
+  currencies: PropTypes.array.isRequired,
+};
 
 ProductForm = reduxForm({
   form: 'productForm',

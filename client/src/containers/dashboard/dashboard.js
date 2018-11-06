@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Card, CardTitle, Table, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
@@ -91,6 +92,11 @@ class Dashboard extends Component {
     );
   }
 }
+
+Dashboard.propTypes = {
+  data: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   data: state.dashboardReducer.data,

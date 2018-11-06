@@ -1,8 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import {
-  Col, Row, Form, FormGroup, Label, Card, CardHeader, CardBody, Input,
+  Col,
+  Row,
+  Form,
+  FormGroup,
+  Label,
+  Card,
+  CardHeader,
+  CardBody,
+  Input,
 } from 'reactstrap';
 
 const validate = (values) => {
@@ -67,6 +76,10 @@ const AccountSettingForm = (props) => {
       </Row>
     </Form>
   );
+};
+
+AccountSettingForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default reduxForm({

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
@@ -131,6 +132,13 @@ class StoreSettingForm extends Component {
     );
   }
 }
+
+StoreSettingForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  countries: PropTypes.array.isRequired,
+  currencies: PropTypes.array.isRequired,
+  languages: PropTypes.array.isRequired,
+};
 
 StoreSettingForm = reduxForm({
   form: 'storeSettingForm',

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Row, Col, Button, Breadcrumb, BreadcrumbItem,
@@ -16,13 +17,14 @@ class ProductCategory extends Component {
   }
 
   render() {
+    const { history, categories } = this.props;
     return (
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
             <Button
               color="link"
-              onClick={() => this.props.history.push('/dashboard')}
+              onClick={() => history.push('/dashboard')}
             >
               <FormattedMessage id="sys.dashboard" />
             </Button>
@@ -30,7 +32,7 @@ class ProductCategory extends Component {
           <BreadcrumbItem>
             <Button
               color="link"
-              onClick={() => this.props.history.push('/categories')}
+              onClick={() => history.push('/categories')}
             >
               <FormattedMessage id="sys.prodCats" />
             </Button>
@@ -49,7 +51,7 @@ class ProductCategory extends Component {
               </Button><br /><br />
               <ProductCategoryForm
                 onSubmit={() => {}}
-                categories={this.props.categories}
+                categories={categories}
               />
             </Col>
           </Row>
@@ -58,6 +60,12 @@ class ProductCategory extends Component {
     );
   }
 }
+
+ProductCategory.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
+};
 
 const mapStateToProps = state => ({
   categories: state.productReducer.categories,

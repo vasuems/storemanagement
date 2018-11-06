@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -26,7 +27,6 @@ const renderField = ({
 );
 
 class ProductCategoryForm extends Component{
-
   render(){
     const { onSubmit, categories } = this.props;
 
@@ -60,6 +60,11 @@ class ProductCategoryForm extends Component{
       </Form>
     );
   }
+}
+
+ProductCategoryForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  categories: PropTypes.array.isRequired,
 };
 
 ProductCategoryForm = reduxForm({

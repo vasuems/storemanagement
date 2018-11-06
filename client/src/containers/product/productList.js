@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Table,
@@ -34,7 +35,7 @@ class ProductList extends Component {
   };
 
   render() {
-    const { products } = this.props;
+    const { history, products } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <div>
@@ -42,7 +43,7 @@ class ProductList extends Component {
           <BreadcrumbItem>
             <Button
               color="link"
-              onClick={() => this.props.history.push('/dashboard')}
+              onClick={() => history.push('/dashboard')}
             >
               <FormattedMessage id="sys.dashboard" />
             </Button>
@@ -67,7 +68,7 @@ class ProductList extends Component {
                   size="sm"
                   color="primary"
                   className="pull-right form-btn"
-                  onClick={() => this.props.history.push('/new-product')}
+                  onClick={() => history.push('/new-product')}
                 >
                   <FiPlusCircle />
                   &nbsp;
@@ -139,6 +140,13 @@ class ProductList extends Component {
     );
   }
 }
+
+ProductList.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  products: PropTypes.array.isRequired,
+  intl: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
   products: state.productReducer.products,

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import {
@@ -53,6 +54,11 @@ const PasswordForm = (props) => {
       </Button>
     </Form>
   );
+};
+
+PasswordForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default reduxForm({
