@@ -3,16 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Card, CardTitle, Table, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
+import { withRouter } from 'react-router-dom';
 import {
   Line, Pie,
 } from 'react-chartjs-2';
 import { fetchDashboardData } from '../../actions';
-import { FeedItem } from '../../components';
+import { FeedItem, ShipTodayItem } from '../../components';
 
 class Dashboard extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchDashboardData());
+  }
+
+  onShipTodayItemClick = (id) =>{
+    const { history } = this.props;
+    history.push(`/orders/${id}`);
   }
 
   render() {
@@ -63,26 +69,31 @@ class Dashboard extends Component {
               <CardTitle style={{padding: 10}}><FormattedMessage id="sys.shipToday" /></CardTitle>
               <Table hover>
                 <tbody>
-                  <tr>
-                    <td>#123456</td>
-                    <td>John Doe</td>
-                  </tr>
-                  <tr>
-                    <td>#2342343</td>
-                    <td>Helen Will</td>
-                  </tr>
-                  <tr>
-                    <td>#22343</td>
-                    <td>Jack Lee</td>
-                  </tr>
-                  <tr>
-                    <td>#223423</td>
-                    <td>Jack Lee</td>
-                  </tr>
-                  <tr>
-                    <td>#223431</td>
-                    <td>Jack Lee</td>
-                  </tr>
+                  <ShipTodayItem
+                    orderId="123456"
+                    customerName="John Doe"
+                    onClick={this.onShipTodayItemClick}
+                  />
+                  <ShipTodayItem
+                    orderId="2342343"
+                    customerName="Helen Will"
+                    onClick={this.onShipTodayItemClick}
+                  />
+                  <ShipTodayItem
+                    orderId="22343"
+                    customerName="Jack Lee"
+                    onClick={this.onShipTodayItemClick}
+                  />
+                  <ShipTodayItem
+                    orderId="223423"
+                    customerName="Leo"
+                    onClick={this.onShipTodayItemClick}
+                  />
+                  <ShipTodayItem
+                    orderId="223431"
+                    customerName="Nick Chen"
+                    onClick={this.onShipTodayItemClick}
+                  />
                 </tbody>
               </Table>
             </Card>
@@ -96,6 +107,7 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   data: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -105,4 +117,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(Dashboard);
+)(withRouter(Dashboard));

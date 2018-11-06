@@ -8,6 +8,7 @@ export const products = [
     coverImage:
       'https://image.spreadshirtmedia.com/image-server/v1/products/1003716746/views/1,width=800,height=800,appearanceId=1,backgroundColor=fff,version=1485256808/i-eat-ass-t-shirt-men-s-t-shirt.jpg',
     price: 12.90,
+    quantity: 12,
     currency: 'SGD',
     currencySign: '$',
     active: false,
@@ -20,6 +21,7 @@ export const products = [
     description: 'afsdf ajkfha ksdfjkdsfkj asdfas asdf adhs faskjf aksdhfk asdf asdf as dfas',
     coverImage: 'https://i.ebayimg.com/images/g/lNoAAOSwTM5Y524t/s-l1600.jpg',
     price: 19.90,
+    quantity: 122,
     currency: 'SGD',
     currencySign: '$',
     active: true,
@@ -33,6 +35,7 @@ export const products = [
     coverImage:
       'https://www.uncommongoods.com/images/items/40400/40465_1_1200px.jpg',
     price: 22.90,
+    quantity: 1,
     currency: 'SGD',
     currencySign: '$',
     active: true,
@@ -46,6 +49,7 @@ export const products = [
     coverImage:
       'https://admin.chronostore.nyc//media/catalog/product/5/t/5th-ave_19554_chronostore_6.jpg',
     price: 11200.00,
+    quantity: 26,
     currency: 'SGD',
     currencySign: '$',
     active: true,
@@ -59,6 +63,7 @@ export const products = [
     coverImage:
       'https://s-media-cache-ak0.pinimg.com/736x/e5/b8/fa/e5b8fa101264808f877497808f25f08b.jpg',
     price: 12.90,
+    quantity: 2,
     currency: 'SGD',
     currencySign: '$',
     active: true,
@@ -72,6 +77,7 @@ export const products = [
     coverImage:
       'http://assets.teenvogue.com/photos/57dfbfe5046b3a2e2a7364bd/master/pass/Kylie-Armytee.jpg',
     price: 12.90,
+    quantity: 59,
     currency: 'SGD',
     currencySign: '$',
     active: false,
@@ -84,6 +90,7 @@ export const products = [
     description: 'afs ksjkdsfkjadhs faskjf aksdhfk jasdhf',
     coverImage: 'https://i.ebayimg.com/images/g/lAIAAOSwYvFZMYHW/s-l1600.jpg',
     price: 1429.00,
+    quantity: 1,
     currency: 'SGD',
     currencySign: '$',
     active: true,
@@ -96,6 +103,7 @@ export const products = [
     description: 'afsdf ajkfha 123 faskjf aksdhfk jasdhf',
     coverImage: 'https://i.ebayimg.com/images/g/MnIAAOSwQTVV8xSM/s-l1600.jpg',
     price: 120.00,
+    quantity: 132,
     currency: 'SGD',
     currencySign: '$',
     active: true,

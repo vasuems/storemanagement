@@ -12,6 +12,7 @@ const ProductListItem = (props) => {
       <td>{props.name}</td>
       <td>{props.sku}</td>
       <td>{props.currencySign + numeral(props.price).format('0,0.00')}</td>
+      <td>{props.quantity}</td>
       <td><Badge color={props.status ? 'success' : 'danger'}>{props.status ? formatMessage({ id: 'sys.active' }) : formatMessage({ id: 'sys.inactive' })}</Badge></td>
       <td>
         <Button
@@ -32,6 +33,7 @@ ProductListItem.propTypes = {
   name: PropTypes.string.isRequired,
   sku: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
   currency: PropTypes.string,
   currencySign: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,

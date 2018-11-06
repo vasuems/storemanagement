@@ -38,7 +38,8 @@ class OrderList extends Component {
   }
 
   onViewClick = (id) => {
-    this.props.history.push(`/orders/${id}`);
+    const { history } = this.props;
+    history.push(`/orders/${id}`);
   };
 
   render() {

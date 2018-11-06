@@ -92,6 +92,9 @@ class ProductList extends Component {
                       <FormattedMessage id="sys.price" />
                     </th>
                     <th>
+                      <FormattedMessage id="sys.qty" />
+                    </th>
+                    <th>
                       <FormattedMessage id="sys.status" />
                     </th>
                     <th />
@@ -109,6 +112,7 @@ class ProductList extends Component {
                         currency={product.currency}
                         currencySign={product.currencySign}
                         price={product.price}
+                        quantity={product.quantity}
                         status={product.active}
                         onClick={this.onViewClick}
                       />
