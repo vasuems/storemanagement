@@ -38,9 +38,6 @@ html, body{
 .price{
   color: #b71d1d;
 }
-.badge{
-  border-radius: 50%;
-}
 .quantity-input{
   width: 60px;
   display:inline-block;
@@ -157,12 +154,12 @@ a, a:hover, a:link, a:active, a:visited{
   color: #aaa;
 }
 
+/* Navbar style */
 #nav-avatar .btn{
   background-color: #fff;
   color: #000;
   border: 0;
 }
-
 #nav-avatar .btn.active.focus,
 #nav-avatar .btn.active:focus,
 #nav-avatar .btn.focus,
@@ -175,7 +172,6 @@ a, a:hover, a:link, a:active, a:visited{
   -webkit-box-shadow: none !important;
   box-shadow: none  !important;
 }
-
 .site-navbar, .admin-navbar{
   position: fixed;
   z-index: 9999;
@@ -183,10 +179,14 @@ a, a:hover, a:link, a:active, a:visited{
   box-shadow: 1px 0 3px 1px #ccc;
   background-color: #fff;
 }
-
 .admin-navbar .dropdown-menu{
   left: -30px;
 }
+.admin-navbar .badge{
+  border-radius: 50%;
+}
+
+/* general style */
 .padding-top-20{
   padding-top: 20px;
 }

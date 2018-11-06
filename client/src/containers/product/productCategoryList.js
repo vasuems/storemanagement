@@ -72,19 +72,19 @@ class ProductCategoryList extends Component {
                 </Button>
               </div>
               <br />
-              <Table bordered responsive>
+              <Table responsive>
                 <thead className="table-header">
                   <tr>
-                    <th>
+                    <th width="40%">
                       <FormattedMessage id="sys.name" />
                     </th>
-                    <th>
+                    <th width="40%">
                       <FormattedMessage id="sys.parent" />
                     </th>
-                    <th>
+                    <th width="10%">
                       <FormattedMessage id="sys.status" />
                     </th>
-                    <th />
+                    <th width="10%" />
                   </tr>
                 </thead>
                 <tbody>

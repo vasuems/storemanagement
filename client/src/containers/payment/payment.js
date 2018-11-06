@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Table, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { FaCcPaypal, FaCcStripe, FaBtc } from 'react-icons/fa';
-import ToggleButton from 'react-toggle-button';
 
 class Payment extends Component {
   render() {
@@ -32,7 +31,7 @@ class Payment extends Component {
                   </td>
                   <td>your.paypal@example.com</td>
                   <td>
-                    <ToggleButton value onToggle={() => {}} />
+
                   </td>
                 </tr>
                 <tr>
@@ -41,7 +40,7 @@ class Payment extends Component {
                   </td>
                   <td>your.paypal@example.com</td>
                   <td>
-                    <ToggleButton value onToggle={() => {}} />
+
                   </td>
                 </tr>
                 <tr>
@@ -50,7 +49,6 @@ class Payment extends Component {
                   </td>
                   <td>your.paypal@example.com</td>
                   <td>
-                    <ToggleButton value onToggle={() => {}} />
                   </td>
                 </tr>
                 <tr>
@@ -62,14 +60,12 @@ class Payment extends Component {
                   </td>
                   <td>000-123456-1</td>
                   <td>
-                    <ToggleButton value={false} onToggle={() => {}} />
                   </td>
                 </tr>
                 <tr>
                   <td>Bank Transfer</td>
                   <td>000-123456-1</td>
                   <td>
-                    <ToggleButton value onToggle={() => {}} />
                   </td>
                 </tr>
               </tbody>

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'reactstrap';
+import { Button, Badge } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
 const CategoryListItem = (props) => {
@@ -9,7 +9,7 @@ const CategoryListItem = (props) => {
     <tr>
       <td>{props.name}</td>
       <td>{props.parent}</td>
-      <td>{props.status ? formatMessage({ id: 'sys.active' }) : formatMessage({ id: 'sys.inactive' })}</td>
+      <td><Badge color={props.status ? 'success' : 'danger'}>{props.status ? formatMessage({ id: 'sys.active' }) : formatMessage({ id: 'sys.inactive' })}</Badge></td>
       <td>
         <Button
           size="sm"

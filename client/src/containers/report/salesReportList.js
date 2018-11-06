@@ -27,7 +27,6 @@ import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { 
-  FiPlusCircle,
   FiSearch,
 } from 'react-icons/fi';
 import { fetchSalesReportProducts, fetchSalesReportCategories } from '../../actions';
@@ -131,7 +130,7 @@ class SalesReportList extends Component {
                       </ButtonDropdown>
                     </div>
                   </div><br />
-                  <Table bordered responsive>
+                  <Table responsive>
                     <thead className="table-header">
                       <tr>
                         <th>
@@ -162,10 +161,11 @@ class SalesReportList extends Component {
                             id={product.id}
                             name={product.name}
                             sku={product.sku}
-                            price={product.currency + ' $' + product.price.toFixed(2)}
+                            price={product.price.toFixed(2)}
+                            currencySign={product.currencySign}
                             quantity={product.quantity}
-                            amount={product.currency + ' $' + product.amount.toFixed(2)}
-                            profit={product.currency + ' $' + product.profit.toFixed(2)}
+                            amount={product.amount.toFixed(2)}
+                            profit={product.profit.toFixed(2)}
                           />
                         ))
                       }
@@ -214,7 +214,7 @@ class SalesReportList extends Component {
                       </ButtonDropdown>
                     </div>
                   </div><br />
-                  <Table bordered responsive>
+                  <Table responsive>
                     <thead className="table-header">
                       <tr>
                         <th>
@@ -239,8 +239,9 @@ class SalesReportList extends Component {
                             id={cat.id}
                             name={cat.name}
                             quantity={cat.quantity}
-                            amount={cat.currency + ' $' + cat.amount.toFixed(2)}
-                            profit={cat.currency + ' $' + cat.profit.toFixed(2)}
+                            currencySign={cat.currencySign}
+                            amount={cat.amount.toFixed(2)}
+                            profit={cat.profit.toFixed(2)}
                           />
                         ))
                       }

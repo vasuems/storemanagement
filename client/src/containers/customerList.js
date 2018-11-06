@@ -11,7 +11,6 @@ import {
   BreadcrumbItem,
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import ToggleButton from 'react-toggle-button';
 import { fetchCustomers } from '../actions';
 import { CustomerListItem } from '../components';
 

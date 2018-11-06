@@ -85,7 +85,7 @@ class OrderList extends Component {
                   />
                 </div>
               </div><br />
-              <Table bordered responsive>
+              <Table responsive>
                 <thead className="table-header">
                   <tr>
                     <th>

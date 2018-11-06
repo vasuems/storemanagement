@@ -75,7 +75,7 @@ class ProductList extends Component {
                 </Button>
               </div>
               <br />
-              <Table bordered responsive>
+              <Table responsive>
                 <thead className="table-header">
                   <tr>
                     <th>
@@ -106,6 +106,7 @@ class ProductList extends Component {
                         name={product.name}
                         sku={product.sku}
                         currency={product.currency}
+                        currencySign={product.currencySign}
                         price={product.price}
                         status={product.active}
                         onClick={this.onViewClick}
