@@ -35,24 +35,23 @@ const AccountSettingForm = (props) => {
             <CardHeader><FormattedMessage id="sys.basicInfo" /></CardHeader>
             <CardBody>
               <FormGroup row>
-                <Label for="current-pwd" sm={2}>
-                  <FormattedMessage id="sys.currentPwd" />
+                <Label for="name" sm={3}>
+                  <FormattedMessage id="sys.name" />
                 </Label>
-                <Col sm={10}>
+                <Col sm={9}>
                   <Field
                     component={renderField}
-                    type="password"
-                    name="current-pwd"
+                    name="name"
                     className="form-control"
-                    id="current-pwd"
+                    id="name"
                   />
                 </Col>
               </FormGroup>
               <FormGroup row>
-                <Label for="new-pwd" sm={2}>
+                <Label for="new-pwd" sm={3}>
                   <FormattedMessage id="sys.newPwd" />
                 </Label>
-                <Col sm={10}>
+                <Col sm={9}>
                   <Field
                     component={renderField}
                     type="password"

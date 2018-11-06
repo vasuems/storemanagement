@@ -17,7 +17,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { FiSave } from 'react-icons/fi';
 import { fetchSiteSettings } from '../../actions';
-import { StoreSettingForm, AccountSettingForm, PasswordForm } from '../../components/forms';
+import { StoreSettingForm, AccountSettingForm, PasswordForm } from '../forms';
 
 class Setting extends Component {
   constructor(props) {

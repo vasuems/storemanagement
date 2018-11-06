@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { FiSave } from 'react-icons/fi';
 import { fetchProductCategories } from '../../actions';
-import ProductCategoryForm from '../../components/forms/productCategoryForm';
+import ProductCategoryForm from '../forms/productCategoryForm';
 
 class ProductCategory extends Component {
   componentDidMount() {

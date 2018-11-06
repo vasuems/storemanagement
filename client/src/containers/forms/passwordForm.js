@@ -49,9 +49,7 @@ const PasswordForm = (props) => {
         id="new-pwd"
         className="form-control"
       />
-      <Button size="sm" color="primary" block style={{marginTop: 10}}>
-        <FiSave />
-        &nbsp;
+      <Button color="primary" block style={{marginTop: 10}}>
         <FormattedMessage id="sys.save" />
       </Button>
     </Form>

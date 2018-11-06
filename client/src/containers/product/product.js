@@ -11,7 +11,7 @@ import { FiSave } from 'react-icons/fi';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { fetchProductDetails } from '../../actions';
-import { ProductForm } from '../../components/forms';
+import { ProductForm } from '../forms';
 
 class Product extends Component{
   componentDidMount(){
