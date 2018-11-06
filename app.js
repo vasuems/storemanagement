@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const uniqid = require('uniqid');
 const randomstring = require('randomstring');
@@ -13,6 +14,7 @@ const { MySQL } = require('./db');
 const { UnauthorisedError } = require('./exceptions');
 
 const app = express();
+app.use(cors());
 const mysql = new MySQL();
 
 const authMiddleware = async (req, res, next) => {

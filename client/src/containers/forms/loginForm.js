@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import {
   Form, Input, Button,
 } from 'reactstrap';
-import { FiSave } from 'react-icons/fi';
+import { withRouter } from 'react-router-dom';
+import { submitLoginData } from '../../actions';
 
 const validate = (values) => {
   const errors = {};
@@ -28,22 +30,23 @@ const renderField = ({
 );
 
 class LoginForm extends Component {
-  handleSubmit = () => {
-    window.location.href = '/dashboard';
+  onSubmit = (data) => {
+    const { dispatch } = this.props;
+    dispatch(submitLoginData(data));
   };
 
   render(){
     const { handleSubmit } = this.props;
     const { formatMessage } = this.props.intl;
     return (
-      <Form onSubmit={handleSubmit} id="login-form">
+      <Form onSubmit={handleSubmit(data => this.onSubmit(data))} id="login-form">
         <Field
           component={renderField}
           type="email"
-          name="email"
-          id="email"
+          name="username"
+          id="username"
           placeholder={formatMessage({ id: 'sys.email' })}
-          value="admin@test.com"
+          value="test@test.com"
         />
         <Field
           component={renderField}
@@ -53,7 +56,7 @@ class LoginForm extends Component {
           placeholder={formatMessage({ id: 'sys.pwd' })}
           value="password"
         />
-        <Button block onClick={this.handleSubmit}>
+        <Button type="submit" block>
           <FormattedMessage id="sys.signin" />
         </Button>
         <br />
@@ -66,11 +69,21 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
 };
 
-export default reduxForm({
+LoginForm = reduxForm({
   form: 'loginForm',
   validate,
 })(injectIntl(LoginForm));
+
+const mapStateToProps = state => {
+  console.log(state);
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(withRouter(LoginForm));

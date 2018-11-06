@@ -11,6 +11,12 @@
 
 An ecommerce dashboard written in ReactJS + ExpressJS. 
 
+## Test account
+
+test@test.com
+
+123
+
 
 ## Installation
 

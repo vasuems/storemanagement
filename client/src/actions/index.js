@@ -5,3 +5,4 @@ export * from './product';
 export * from './dashboard';
 export * from './path';
 export * from './report';
+export * from './auth';

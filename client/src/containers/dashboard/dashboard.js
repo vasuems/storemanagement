@@ -65,9 +65,9 @@ class Dashboard extends Component {
             />
           </Col>
           <Col md={3}>
-            <Card body style={{borderTop: '2px solid red', padding: 0}}>
+            <Card body style={{borderTop: '2px solid red', padding: 0, borderRadius: 0}}>
               <CardTitle style={{padding: 10}}><FormattedMessage id="sys.shipToday" /></CardTitle>
-              <Table hover>
+              <Table hover style={{marginBottom: 0}}>
                 <tbody>
                   <ShipTodayItem
                     orderId="123456"
