@@ -1,6 +1,9 @@
 {
   "site.name": "LF Commerce",
   "sys.siteName": "Site name",
+  "sys.storeSettings": "Store settings",
+  "sys.acctSettings": "Account settings",
+  "sys.credentials": "Credentials",
   "sys.size": "Size",
   "sys.qty": "Quantity",
   "sys.total": "Total",
@@ -21,6 +24,7 @@
   "sys.forgotPwd": "Forgot password?",
   "sys.currentPwd": "Current password",
   "sys.newPwd": "New password",
+  "sys.resetPwd": "Reset password",
   "sys.fName": "First Name",
   "sys.lName": "Last Name",
   "sys.payments": "Payments",

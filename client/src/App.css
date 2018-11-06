@@ -16,10 +16,7 @@ html, body{
 #search-bar{
   border-radius: 30px;
 }
-.pull-right{
-  display: block;
-  float: right;
-}
+
 .cart-img{
   width: 80%;
 }
@@ -52,9 +49,7 @@ a, a:hover, a:link, a:active, a:visited{
 .dropdown-menu li a{
   padding: 8px 0 10px 10px;
 }
-.dropdown-menu .dropdown-item{
-  padding: 0;
-}
+
 .sub-nav{
   border: 0;
   background-color:#fff !important;
@@ -83,14 +78,6 @@ a, a:hover, a:link, a:active, a:visited{
   font-size: 30px;
   font-weight: 200;
   margin-bottom:30px;
-}
-
-.no-border{
-  border: 0 !important;
-  border-radius: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
 }
 .panel-body{
   padding: 0;
@@ -155,6 +142,9 @@ a, a:hover, a:link, a:active, a:visited{
 }
 
 /* Navbar style */
+.admin-navbar .dropdown-item{
+  padding: 0;
+}
 #nav-avatar .btn{
   background-color: #fff;
   color: #000;
@@ -186,7 +176,18 @@ a, a:hover, a:link, a:active, a:visited{
   border-radius: 50%;
 }
 
-/* general style */
+/* general page style */
+.pull-right{
+  display: block;
+  float: right;
+}
+.no-border{
+  border: 0 !important;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
 .padding-top-20{
   padding-top: 20px;
 }
@@ -227,11 +228,14 @@ a, a:hover, a:link, a:active, a:visited{
   justify-content: center;
   align-items: center;
 }
-#login-form .form-control, #login-form .btn{
+#login-form .form-control, #login-form .btn, #reset-pwd-form .form-control, #reset-pwd-form .btn{
   border-radius: 0;
 }
-#login-form{
+#login-form, #reset-pwd-form{
   text-align: center;
+}
+#reset-pwd-form{
+  width: 100%;
 }
 #login-site-name{
   text-align: center;

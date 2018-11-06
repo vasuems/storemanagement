@@ -74,7 +74,7 @@ const renderNumberField = ({
 );
 
 const renderTextArea = ({
-  input, label, type, meta: { touched, error },
+  input, type, meta: { touched, error },
 }) => (
   <div>
     <ReactQuill

@@ -17,10 +17,10 @@ const validate = (values) => {
 };
 
 const renderField = ({
-  input, label, type, meta: { touched, error },
+  input, placeholder, type, meta: { touched, error },
 }) => (
   <div>
-    <Input {...input} placeholder={label} type={type} />
+    <Input {...input} placeholder={placeholder} type={type} />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
@@ -31,24 +31,24 @@ const ProductCategoryForm = (props) => {
   return (
     <Form onSubmit={onSubmit}>
       <FormGroup row>
-        <Label for="categoryName" sm={2}>
+        <Label for="category-name" sm={2}>
           <FormattedMessage id="sys.categoryName" />
         </Label>
         <Col sm={10}>
           <Field
             component={renderField}
-            name="categoryName"
+            name="category-name"
             className="form-control"
-            id="categoryName"
+            id="category-name"
           />
         </Col>
       </FormGroup>
       <FormGroup row>
-        <Label for="parentCategory" sm={2}>
+        <Label for="parent-category" sm={2}>
           <FormattedMessage id="sys.parentCategory" />
         </Label>
         <Col sm={10}>
-          <Input type="select" name="selectCat">
+          <Input type="select" name="select-cat">
             {categories.map(cat => (
               <option key={cat.id} value={cat.id}>{cat.name}</option>
             ))}

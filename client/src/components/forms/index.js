@@ -1,8 +1,13 @@
-import SettingForm from './settingForm';
-import ChangePasswordForm from './changePwdForm';
+import StoreSettingForm from './storeSettingForm';
+import AccountSettingForm from './accountSettingForm';
 import ProductCategoryForm from './productCategoryForm';
 import ProductForm from './productForm';
+import PasswordForm from './passwordForm';
 
 export {
-  SettingForm, ChangePasswordForm, ProductCategoryForm, ProductForm,
+  StoreSettingForm,
+  AccountSettingForm,
+  ProductCategoryForm,
+  ProductForm,
+  PasswordForm,
 };

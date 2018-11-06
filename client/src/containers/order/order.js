@@ -146,7 +146,7 @@ class Order extends Component {
                         </tbody>
                       </Table>
                       <Col md={6} className="pull-right">
-                        <Table borderless size="sm">
+                        <Table size="sm">
                           <tbody>
                             <tr>
                               <td><FormattedMessage id="sys.subTotal" />:</td>

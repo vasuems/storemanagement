@@ -23,16 +23,15 @@ const validate = (values) => {
 };
 
 const renderField = ({
-  input, label, type, meta: { touched, error },
+  input, placeholder, type, meta: { touched, error },
 }) => (
   <div>
-    <Input {...input} placeholder={label} type={type} />
+    <Input {...input} placeholder={placeholder} type={type} />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
 
-class SettingForm extends Component {
-
+class StoreSettingForm extends Component {
   render(){
     const { handleSubmit, currencies, countries, languages } = this.props;
     return (
@@ -43,16 +42,15 @@ class SettingForm extends Component {
               <CardHeader><FormattedMessage id="sys.basicInfo" /></CardHeader>
               <CardBody>
                 <FormGroup row>
-                  <Label for="siteName" sm={3}>
+                  <Label for="site-name" sm={3}>
                     <FormattedMessage id="sys.siteName" />
                   </Label>
                   <Col sm={9}>
                     <Field
                       component={renderField}
-                      name="siteName"
+                      name="site-name"
                       className="form-control"
-                      id="siteName"
-                      value=""
+                      id="site-name"
                     />
                   </Col>
                 </FormGroup>
@@ -109,7 +107,6 @@ class SettingForm extends Component {
                       name="facebook"
                       className="form-control"
                       id="facebook"
-                      value=""
                     />
                   </Col>
                 </FormGroup>
@@ -123,7 +120,6 @@ class SettingForm extends Component {
                       name="twitter"
                       className="form-control"
                       id="twitter"
-                      value=""
                     />
                   </Col>
                 </FormGroup>
@@ -136,10 +132,10 @@ class SettingForm extends Component {
   }
 }
 
-SettingForm = reduxForm({
-  form: 'siteSettings',
+StoreSettingForm = reduxForm({
+  form: 'storeSettingForm',
   validate,
-})(SettingForm);
+})(StoreSettingForm);
 
 export default connect((state) => {
   const {
@@ -149,10 +145,10 @@ export default connect((state) => {
   } = state.settingReducer.settings;
   return {
     initialValues: {
-      siteName,
+      'site-name': siteName,
       facebook,
       twitter,
     },
     enableReinitialize: true,
   };
-})(SettingForm);
+})(StoreSettingForm);

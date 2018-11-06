@@ -17,7 +17,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { FiSave } from 'react-icons/fi';
 import { fetchSiteSettings } from '../../actions';
-import { SettingForm, ChangePasswordForm } from '../../components/forms';
+import { StoreSettingForm, AccountSettingForm, PasswordForm } from '../../components/forms';
 
 class Setting extends Component {
   constructor(props) {
@@ -50,14 +50,14 @@ class Setting extends Component {
 
   render() {
     const { formatMessage } = this.props.intl;
-    const { settings } = this.props;
+    const { settings, history } = this.props;
     return (
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
             <Button
               color="link"
-              onClick={() => this.props.history.push('/dashboard')}
+              onClick={() => history.push('/dashboard')}
             >
               <FormattedMessage id="sys.dashboard" />
             </Button>
@@ -78,7 +78,7 @@ class Setting extends Component {
                     this.toggle('1');
                   }}
                 >
-                  <FormattedMessage id="sys.basicInfo" />
+                  <FormattedMessage id="sys.storeSettings" />
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -90,7 +90,7 @@ class Setting extends Component {
                     this.toggle('2');
                   }}
                 >
-                  <FormattedMessage id="sys.pwd" />
+                  <FormattedMessage id="sys.acctSettings" />
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -102,7 +102,19 @@ class Setting extends Component {
                     this.toggle('3');
                   }}
                 >
-                  <FormattedMessage id="sys.apiKeys" />
+                  <FormattedMessage id="sys.credentials" />
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeTab === '4',
+                  })}
+                  onClick={() => {
+                    this.toggle('4');
+                  }}
+                >
+                  <FormattedMessage id="sys.pwd" />
                 </NavLink>
               </NavItem>
             </Nav>
@@ -118,7 +130,7 @@ class Setting extends Component {
                       &nbsp;
                       <FormattedMessage id="sys.save" />
                     </Button><br /><br />
-                    <SettingForm 
+                    <StoreSettingForm 
                       onSubmit={this.handleSettingSubmit}
                       currencies={[{id: 1, name: 'SGD'}, {id: 2, name: 'USD'}, {id: 3, name: 'MYR'}]}
                       countries={[{id: 1, name: 'Singapore'}, {id: 2, name: 'United States'}, {id: 3, name: 'Malaysia'}]}
@@ -135,7 +147,7 @@ class Setting extends Component {
                       &nbsp;
                       <FormattedMessage id="sys.save" />
                     </Button><br /><br />
-                    <ChangePasswordForm
+                    <AccountSettingForm
                       onSubmit={this.handleApiSettingSubmit}
                     />
                   </Col>
@@ -143,13 +155,22 @@ class Setting extends Component {
               </TabPane>
               <TabPane tabId="3">
                 <Row>
-                  <Col sm="12">
+                  <Col md={{size: 4, offSet: 4}}>
                     <Button size="sm" color="primary" className="pull-right">
                       <FiSave />
                       &nbsp;
                       <FormattedMessage id="sys.save" />
                     </Button><br /><br />
-                    <ChangePasswordForm
+                    <PasswordForm
+                      onSubmit={this.handleApiSettingSubmit}
+                    />
+                  </Col>
+                </Row>                
+              </TabPane>
+              <TabPane tabId="4">
+                <Row>
+                  <Col md={{size: 4, offset: 4}}>
+                    <PasswordForm
                       onSubmit={this.handleApiSettingSubmit}
                     />
                   </Col>
