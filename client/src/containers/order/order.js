@@ -119,7 +119,7 @@ class Order extends Component {
                   <Row>
                     <Col md={7}>
                       <CardTitle><FormattedMessage id="sys.products" /></CardTitle>
-                      <Table>
+                      <Table responsive>
                         <thead className="table-header">
                           <tr>
                             <th><FormattedMessage id="sys.productName" /></th>
@@ -146,7 +146,7 @@ class Order extends Component {
                         </tbody>
                       </Table>
                       <Col md={6} className="pull-right">
-                        <Table size="sm">
+                        <Table size="sm" responsive>
                           <tbody>
                             <tr>
                               <td><FormattedMessage id="sys.subTotal" />:</td>

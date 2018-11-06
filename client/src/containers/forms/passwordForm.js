@@ -19,13 +19,12 @@ const validate = (values) => {
 
 const renderField = ({
   input, placeholder, type, meta: { touched, error },
-}) =>{ 
-  return(
-    <div>
-      <Input {...input} placeholder={placeholder} type={type} />
-      {touched && (error && <span className="text-danger">{error}</span>)}
-    </div>
-)};
+}) =>(
+  <div>
+    <Input {...input} placeholder={placeholder} type={type} />
+    {touched && (error && <span className="text-danger">{error}</span>)}
+  </div>
+);
 
 const PasswordForm = (props) => {
   const { handleSubmit } = props;
