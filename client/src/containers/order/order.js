@@ -23,7 +23,7 @@ import {
   FiDownload,
   FiPrinter,
 } from 'react-icons/fi';
-import { OrderInfoItem, OrderShippingItem } from '../../components';
+import { OrderInfoItem, OrderShippingItem, OrderProductListItem } from '../../components';
 
 class Order extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class Order extends Component {
   }
 
   render() {
-    const { history } = this.props;
+    const { history, products } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <div>
@@ -59,7 +59,7 @@ class Order extends Component {
           <BreadcrumbItem>
             <Button
               color="link"
-              onClick={() => this.props.history.push('/orders')}
+              onClick={() => history.push('/orders')}
             >
               <FormattedMessage id="sys.orders" />
             </Button>
@@ -97,7 +97,7 @@ class Order extends Component {
                         size="sm"
                         color="dark"
                         className="pull-right form-btn"
-                        onClick={() => this.props.history.push('/new-product')}
+                        onClick={() => history.push('/new-product')}
                       >
                         <FiDownload />
                         &nbsp;
@@ -107,7 +107,7 @@ class Order extends Component {
                         size="sm"
                         color="danger"
                         className="pull-right form-btn"
-                        onClick={() => this.props.history.push('/new-product')}
+                        onClick={() => history.push('/new-product')}
                         style={{ marginRight: 10 }}
                       >
                         <FiPrinter />
@@ -119,8 +119,8 @@ class Order extends Component {
                   <Row>
                     <Col md={7}>
                       <CardTitle><FormattedMessage id="sys.products" /></CardTitle>
-                      <Table bordered>
-                        <thead>
+                      <Table>
+                        <thead className="table-header">
                           <tr>
                             <th><FormattedMessage id="sys.productName" /></th>
                             <th><FormattedMessage id="sys.unitPrice" /></th>
@@ -129,24 +129,20 @@ class Order extends Component {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>Product 1</td>
-                            <td>SGD $10.00</td>
-                            <td>2</td>
-                            <td>SGD $20.00</td>
-                          </tr>
-                          <tr>
-                            <td>Product 2</td>
-                            <td>SGD $31.50</td>
-                            <td>3</td>
-                            <td>SGD $94.50</td>
-                          </tr>
-                          <tr>
-                            <td>Product 3</td>
-                            <td>SGD $1.50</td>
-                            <td>1</td>
-                            <td>SGD $1.50</td>
-                          </tr>
+                          {
+                            products.map(product => {
+                              return(
+                                <OrderProductListItem 
+                                  key={product.id}
+                                  name={product.name}
+                                  price={product.price.toFixed(2)}
+                                  quantity={product.quantity}
+                                  amount={product.amount.toFixed(2)}
+                                  currencySign={product.currencySign}
+                                />
+                              );
+                            })
+                          }                      
                         </tbody>
                       </Table>
                       <Col md={6} className="pull-right">
@@ -229,11 +225,16 @@ class Order extends Component {
 }
 
 Order.propTypes = {
+  products: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
 };
 
+const mapStateToProps = state => ({
+  products: state.orderReducer.products,
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   null
 )(injectIntl(withRouter(Order)));

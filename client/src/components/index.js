@@ -5,6 +5,7 @@ import CategoryListItem from './product/categoryListItem';
 import CustomerListItem from './customerListItem';
 import SalesReportListProductItem from './report/salesReportListProductItem';
 import SalesReportListCategoryItem from './report/salesReportListCategoryItem';
+import OrderProductListItem from './order/orderProductListItem';
 import Tile from './dashboard/tile';
 import FeedItem from './dashboard/feedItem';
 
@@ -19,4 +20,5 @@ export {
   FeedItem,
   SalesReportListProductItem,
   SalesReportListCategoryItem,
+  OrderProductListItem,
 };

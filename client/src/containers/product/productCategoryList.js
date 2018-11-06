@@ -12,7 +12,7 @@ import {
   InputGroupAddon,
   Pagination,
   PaginationItem,
-  PaginationLink
+  PaginationLink,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';

@@ -15,8 +15,8 @@ import {
   Input,
   InputGroupAddon,
 } from 'reactstrap';
-import DatePicker from "react-datepicker";
-import moment from "moment";
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import {
@@ -24,7 +24,7 @@ import {
 } from 'react-icons/fi';
 import { fetchOrders } from '../../actions';
 import { OrderListItem } from '../../components';
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
 class OrderList extends Component {
   constructor(props) {
@@ -132,12 +132,6 @@ class OrderList extends Component {
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink href="#">3</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">4</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">5</PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink next href="#" />
