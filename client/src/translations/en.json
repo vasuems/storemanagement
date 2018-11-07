@@ -64,6 +64,7 @@
   "sys.billingAddr": "Billing address",
   "sys.update": "Update",
   "sys.contactNo": "Contact No.",
+  "sys.contactInfo": "Contact info",
   "sys.empty": "Empty",
   "sys.submit": "Submit",
   "sys.orderDate": "Order date",
@@ -88,7 +89,8 @@
   "sys.appId": "App ID",
   "sys.devId": "Dev ID",
   "sys.certId": "Cert ID",
-  "sys.apiKeys": "API keys",
+  "sys.apiKey": "API key",
+  "sys.apiSecret": "API secret",
   "sys.secret": "Secret",
   "sys.view": "View",
   "sys.status": "Status",
@@ -117,5 +119,6 @@
   "sys.currency": "Currency",
   "sys.lang": "Language",
   "sys.country": "Country",
-  "sys.thumbnail": "Thumbnail"
+  "sys.thumbnail": "Thumbnail",
+  "sys.company": "Company"
 }

@@ -34,7 +34,7 @@ const renderField = ({
   </div>
 );
 
-const AccountSettingForm = (props) => {
+const CredentialForm = (props) => {
   const { handleSubmit } = props;
   return (
     <Form onSubmit={handleSubmit}>
@@ -92,11 +92,11 @@ const AccountSettingForm = (props) => {
   );
 };
 
-AccountSettingForm.propTypes = {
+CredentialForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };
 
 export default reduxForm({
   form: 'accountSettingForm',
   validate,
-})(AccountSettingForm);
+})(CredentialForm);

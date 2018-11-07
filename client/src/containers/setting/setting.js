@@ -12,13 +12,22 @@ import {
   Button,
   Breadcrumb,
   BreadcrumbItem,
+  Table,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { FiSave } from 'react-icons/fi';
 import { fetchSiteSettings } from '../../actions';
-import { StoreSettingForm, AccountSettingForm, PasswordForm } from '../forms';
+import { 
+  StoreSettingForm,
+  AccountSettingForm,
+  PasswordForm,
+  CredentialForm,
+} from '../forms';
+import {
+  CredentialListItem,
+} from '../../components';
 
 class Setting extends Component {
   constructor(props) {
@@ -156,15 +165,28 @@ class Setting extends Component {
               </TabPane>
               <TabPane tabId="3">
                 <Row>
-                  <Col md={{size: 4, offSet: 4}}>
-                    <Button size="sm" color="primary" className="pull-right">
-                      <FiSave />
-                      &nbsp;
-                      <FormattedMessage id="sys.save" />
-                    </Button><br /><br />
-                    <PasswordForm
-                      onSubmit={this.handleApiSettingSubmit}
-                    />
+                  <Col md={12}>
+                    <Table>
+                      <thead className="table-header">
+                        <tr>
+                          <th><FormattedMessage id="sys.company" /></th>
+                          <th><FormattedMessage id="sys.apiKey" /></th>
+                          <th><FormattedMessage id="sys.apiSecret" /></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <CredentialListItem
+                          logo="http://mediad.publicbroadcasting.net/p/wkar/files/styles/medium/public/201706/10398927_9465478123_740_n.jpg"
+                          apiKey="13adfjkE23hrjkFESfjk2hjk3hkErjkFE122j"
+                          apiSecret="1kE23hrjkESfjasdfjkE23hrjkFESfjk2hjkE23hrjkFESfj3421D"
+                        />
+                        <CredentialListItem
+                          logo="https://cdn.logojoy.com/wp-content/uploads/2017/07/Etsy_logo.png"
+                          apiKey="12323kE23hrjkF4jk2hjk3hDSF3hrjkFESfj"
+                          apiSecret="j23asd12323kE23hrjkF4jk2hjk3hDSF3hrjkFESfjfjkE23hrjk"
+                        />
+                      </tbody>
+                    </Table>
                   </Col>
                 </Row>                
               </TabPane>

@@ -13,7 +13,11 @@ const ProductListItem = (props) => {
       <td>{props.sku}</td>
       <td>{props.currencySign + numeral(props.price).format('0,0.00')}</td>
       <td>{props.quantity}</td>
-      <td><Badge color={props.status ? 'success' : 'danger'}>{props.status ? formatMessage({ id: 'sys.active' }) : formatMessage({ id: 'sys.inactive' })}</Badge></td>
+      <td>
+        <Badge color={props.status ? 'success' : 'danger'}>
+          {props.status ? formatMessage({ id: 'sys.active' }) : formatMessage({ id: 'sys.inactive' })}
+        </Badge>
+      </td>
       <td>
         <Button
           size="sm"

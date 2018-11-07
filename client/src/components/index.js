@@ -9,7 +9,7 @@ import OrderProductListItem from './order/orderProductListItem';
 import ShipTodayItem from './dashboard/shipTodayItem';
 import Tile from './dashboard/tile';
 import FeedItem from './dashboard/feedItem';
-
+import CredentialListItem from './setting/credentialListItem';
 
 export {
   OrderListItem,
@@ -23,4 +23,5 @@ export {
   SalesReportListCategoryItem,
   OrderProductListItem,
   ShipTodayItem,
+  CredentialListItem,
 };
