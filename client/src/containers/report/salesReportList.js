@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Table,
@@ -57,7 +58,8 @@ class SalesReportList extends Component {
   }
 
   onViewClick = (id) => {
-    this.props.history.push(`/products/${id}`);
+    const { history } = this.props;
+    history.push(`/products/${id}`);
   };
 
   onFilterSelect = () => {
@@ -273,6 +275,14 @@ class SalesReportList extends Component {
     );
   }
 }
+
+SalesReportList.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  products: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
+  intl: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
   products: state.reportReducer.products,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Row, Collapse } from 'reactstrap';
@@ -121,6 +122,12 @@ class SideBarContent extends Component {
     );
   }
 }
+
+SideBarContent.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  productMenu: PropTypes.bool.isRequired,
+  reportMenu: PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = state => ({
   productMenu: state.pathReducer.productMenu,
