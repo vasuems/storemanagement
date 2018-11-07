@@ -13,7 +13,7 @@ import messages_en from './translations/en.json';
 
 addLocaleData([...locale_en]);
 
-const LFCommerce = () => (
+const ElfCommerce = () => (
   // TODO: language setting should be dynamic
   <Provider store={store}>
     <IntlProvider locale="en" messages={messages_en}>
@@ -23,5 +23,5 @@ const LFCommerce = () => (
     </IntlProvider>
   </Provider>
 );
-ReactDOM.render(<LFCommerce />, document.getElementById('root'));
+ReactDOM.render(<ElfCommerce />, document.getElementById('root'));
 registerServiceWorker();
