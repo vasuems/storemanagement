@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/MySQL-5.7.+-blue.svg">
 </p>
 
-An ecommerce dashboard written in ReactJS + ExpressJS. 
+An open source ecommerce dashboard written in ReactJS + ExpressJS. Manage your online sellings in one place.
 
 ## Test account
 
