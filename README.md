@@ -59,6 +59,15 @@ cd client && yarn install
 cd client && npm install
 ```
 
+Step 5, create your own config.js in **client** directory with following settings:
+
+```javascript
+const config = {
+  apiDomain: 'YOUR_API_DOMAIN',
+};
+
+export default config;
+```
 
 ## How to run this?
 

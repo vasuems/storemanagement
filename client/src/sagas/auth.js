@@ -1,11 +1,12 @@
 import { call, put } from 'redux-saga/effects';
-import { authSuccess, authFailed } from '../actions';
 import axios from 'axios';
+import { authSuccess, authFailed } from '../actions';
+import config from '../config';
 
 export function* submitLoginData(action) {
   try {
     const { username, password } = action.value;
-    const res = yield axios.post('http://localhost:8080/auth', {
+    const res = yield axios.post(`${config.apiDomain}/auth`, {
       username,
       password,
       grantType: 'password',
