@@ -27,6 +27,7 @@ function BadRequestError(msg) {
 
 function InvalidModelArgumentsError(msg) {
   Exception.call(this, msg);
+  this.statusCode = 400;
 }
 
 util.inherits(NoRecordFoundError, Exception);

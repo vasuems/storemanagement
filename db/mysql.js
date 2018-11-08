@@ -1,15 +1,17 @@
 'user strict';
 
 const mysql = require('mysql');
+const env = require('../env.json');
 
 function MySQL() {}
 
 MySQL.prototype.connect = function() {
+  const { host, user, password, database } = env;
   return mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'davinci',
+    host,
+    user,
+    password,
+    database,
   });
 };
 

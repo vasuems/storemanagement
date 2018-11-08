@@ -20,6 +20,38 @@ Password: 123
 
 ## Installation
 
+Step 1, clone this repo
+
+Step 2, add the ***env.json*** file in root directory with environment settings:
+
+```
+{
+  "tokenSecret": "REPLACE_THIS_WITH_ANY_LONG_RANDOM_STRING",
+  "host": "YOUR_MYSQL_SERVER_CONNECTION_STRING",
+  "user": "YOUR_MYSQL_USER",
+  "password": "YOUR_MYSQL_USER_PASSWORD",
+  "database": "YOUR_MYSQL_DATABASE_NAME"
+}
+```
+Step 3, install all dependancies for ExpressJS
+**Yarn**
+```console
+yarn install
+```
+
+**NPM**
+
+```console
+npm install
+```
+
+Step 4, install all dependancies for ReactJS
+```console
+cd client
+```
+
+then
+
 **Yarn**
 ```console
 yarn install
