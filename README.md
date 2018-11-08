@@ -1,4 +1,4 @@
-# LF Commerce
+# Elf Commerce
 
 <p>
   <img src="https://img.shields.io/badge/React-16.4.2-lightblue.svg">

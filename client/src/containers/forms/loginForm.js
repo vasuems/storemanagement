@@ -32,7 +32,7 @@ const renderField = ({
 class LoginForm extends Component {
   componentDidUpdate(){
     const { auth, history } = this.props;
-    console.log(auth);
+
     if(auth){
       history.push('/dashboard');
     }
