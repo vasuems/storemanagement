@@ -34,6 +34,7 @@ Step 2, add the ***env.json*** file in root directory with environment settings:
 }
 ```
 Step 3, install all dependancies for ExpressJS
+
 **Yarn**
 ```console
 yarn install
@@ -46,15 +47,10 @@ npm install
 ```
 
 Step 4, install all dependancies for ReactJS
-```console
-cd client
-```
-
-then
 
 **Yarn**
 ```console
-yarn install
+cd client && yarn install
 ```
 
 **NPM**
