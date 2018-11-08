@@ -30,6 +30,14 @@ const renderField = ({
 );
 
 class LoginForm extends Component {
+  componentDidUpdate(){
+    const { auth, history } = this.props;
+    console.log(auth);
+    if(auth){
+      history.push('/dashboard');
+    }
+  }
+
   onSubmit = (data) => {
     const { dispatch } = this.props;
     dispatch(submitLoginData(data));
@@ -79,9 +87,9 @@ LoginForm = reduxForm({
   validate,
 })(injectIntl(LoginForm));
 
-const mapStateToProps = state => {
-  console.log(state);
-};
+const mapStateToProps = state => ({
+  auth: state.authReducer.auth,
+});
 
 export default connect(
   mapStateToProps,

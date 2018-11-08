@@ -56,7 +56,7 @@ cd client && yarn install
 **NPM**
 
 ```console
-npm install
+cd client && npm install
 ```
 
 

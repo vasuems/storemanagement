@@ -7,6 +7,7 @@ import productReducer from './product';
 import pathReducer from './path';
 import reportReducer from './report';
 import settingReducer from './setting';
+import authReducer from './auth';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   pathReducer,
   reportReducer,
   settingReducer,
+  authReducer,
 });
 
 export default rootReducer;
