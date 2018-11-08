@@ -90,7 +90,7 @@ User.prototype.deleteUser = function(id, db) {
     db.connect();
     db.query(`update user set status=0 where id=${id}`, error => {
       if (error) {
-        reject(new BadRequestError('User deleting failed.'));
+        reject(new BadRequestError('Deleting user failed.'));
       } else {
         resolve('User deleted.');
       }
