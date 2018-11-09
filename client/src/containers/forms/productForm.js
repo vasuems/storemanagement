@@ -182,16 +182,33 @@ class ProductForm extends Component {
               <CardHeader><FormattedMessage id="sys.inventory" /></CardHeader>
               <CardBody>
                 <FormGroup row>
-                  <Label for="qty" sm={3}>
+                  <Label for="allow-quantity" sm={4}>
+                    <FormattedMessage id="sys.allowQty" />?
+                  </Label>
+                  <Col sm={8}>
+                    <InputGroup>
+                      <Field
+                        component="input"
+                        type="checkbox"
+                        name="allow-quantity"
+                        id="allow-quantity"
+                        style={{width:32, height:32}}
+                      />
+                    </InputGroup>
+                  </Col>
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="qty" sm={4}>
                     <FormattedMessage id="sys.qty" />
                   </Label>
-                  <Col sm={9}>
+                  <Col sm={8}>
                     <InputGroup>
                       <Field
                         component={renderNumberField}
                         type="number"
                         name="quantity"
                         id="quantity"
+                        checked
                       />
                     </InputGroup>
                   </Col>

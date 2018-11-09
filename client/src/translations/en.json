@@ -6,6 +6,7 @@
   "sys.credentials": "Credentials",
   "sys.size": "Size",
   "sys.qty": "Quantity",
+  "sys.allowQty": "Allow quantity",
   "sys.total": "Total",
   "sys.subTotal": "Sub-total",
   "sys.inventory": "Inventory",
