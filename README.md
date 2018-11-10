@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/MySQL-5.7.+-blue.svg">
 </p>
 
-An open source ecommerce dashboard written in ReactJS + ExpressJS. Manage your online selling in one place.
+An open source ecommerce dashboard written in ReactJS + ExpressJS. Manage your online business in one place.
 
 ## Demo account
 
@@ -138,7 +138,7 @@ yarn lint:client
 to make sure all formatting or other issues have been properly fixed.
 
 ...
-TBC
+
 
 ## License
 LF Commerce is [Apache-2.0 licensed.](https://github.com/ccwukong/lfcommerce/blob/master/LICENSE)

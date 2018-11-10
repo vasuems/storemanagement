@@ -8,6 +8,21 @@ const {
   NoRecordFoundError,
 } = require('../exceptions');
 
+
+function Product(code, name, categoryId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage) {
+  this.code = code || '';
+  this.name = name || '';
+  this.categoryId = categoryId || 0;
+  this.sku = sku || '';
+  this.description = description || '';
+  this.quantity = quantity || 0;
+  this.allowQuantity = allowQuantity || true;
+  this.addedOn = addedOn || moment.utc().format('YYYY-MM-DD HH:mm:ss');
+  this.addedBy = addedBy || 0;
+  this.unitPrice = unitPrice || 0.00;
+  this.coverImage = coverImage || '';
+}
+
 function Product(code, name, categoryId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage) {
   this.code = code || '';
   this.name = name || '';
@@ -60,6 +75,7 @@ Product.prototype.addProduct = function(product, db) {
         `insert into product(code, name, category_id, sku, description, quantity, allow_quantity, added_on, added_by, unit_price, cover_image) 
          values('${code}', '${name}', ${categoryId}, '${sku}', '${description}', ${quantity}, ${allowQuantity}, '${addedOn}', ${addedBy}, ${unitPrice}, '${coverImage}')`,
         error => {
+          db.end();
           if (error) {
             reject(new BadRequestError('Invalide product data.'));
           } else {

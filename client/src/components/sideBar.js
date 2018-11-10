@@ -17,6 +17,7 @@ import {
 import {
   FaCaretLeft,
   FaCaretDown,
+  FaWarehouse,
 } from 'react-icons/fa';
 import { 
   productMenuOpen,
@@ -90,6 +91,12 @@ class SideBarContent extends Component {
             <Link to="/products">
               <FiShoppingBag className="sidebar-icon" />
               <FormattedMessage id="sys.products" />
+            </Link>
+          </Row>
+          <Row className="sidebar-link sub-menu">
+            <Link to="/suppliers">
+              <FaWarehouse className="sidebar-icon" />
+              <FormattedMessage id="sys.suppliers" />
             </Link>
           </Row>
         </Collapse>

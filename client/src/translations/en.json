@@ -121,5 +121,7 @@
   "sys.lang": "Language",
   "sys.country": "Country",
   "sys.thumbnail": "Thumbnail",
-  "sys.company": "Company"
+  "sys.company": "Company",
+  "sys.suppliers": "Suppliers",
+  "sys.invalidAuth": "Invalid email or password."
 }

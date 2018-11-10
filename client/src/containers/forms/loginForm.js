@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import {
-  Form, Input, Button,
+  Form, Input, Button, Alert,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { submitLoginData } from '../../actions';
@@ -44,7 +44,7 @@ class LoginForm extends Component {
   };
 
   render(){
-    const { handleSubmit } = this.props;
+    const { handleSubmit, auth } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <Form onSubmit={handleSubmit(data => this.onSubmit(data))} id="login-form">
@@ -67,6 +67,10 @@ class LoginForm extends Component {
         <Button type="submit" block>
           <FormattedMessage id="sys.signin" />
         </Button>
+        {
+          auth === false?<Alert color="danger" style={{marginTop: 20}}><FormattedMessage id="sys.invalidAuth" /></Alert>: null
+        }
+        
         <br />
         <Button color="link">
           <FormattedMessage id="sys.forgotPwd" />
