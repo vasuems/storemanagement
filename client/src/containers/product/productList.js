@@ -22,7 +22,7 @@ import {
   FiSearch,
 } from 'react-icons/fi';
 import { fetchProducts } from '../../actions';
-import ProductListItem from '../../components/product/productListItem';
+import { ProductListItem } from '../../components';
 
 class ProductList extends Component {
   componentDidMount() {

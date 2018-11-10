@@ -2,7 +2,8 @@ import OrderListItem from './order/orderListItem';
 import OrderInfoItem from './order/orderInfoItem';
 import OrderShippingItem from './order/orderShippingItem';
 import CategoryListItem from './product/categoryListItem';
-import CustomerListItem from './customerListItem';
+import SupplierListItem from './supplier/supplierListItem';
+import ProductListItem from './product/productListItem';
 import SalesReportListProductItem from './report/salesReportListProductItem';
 import SalesReportListCategoryItem from './report/salesReportListCategoryItem';
 import OrderProductListItem from './order/orderProductListItem';
@@ -13,7 +14,8 @@ import CredentialListItem from './setting/credentialListItem';
 
 export {
   OrderListItem,
-  CustomerListItem,
+  SupplierListItem,
+  ProductListItem,
   CategoryListItem,
   Tile,
   OrderInfoItem,
