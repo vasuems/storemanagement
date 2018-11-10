@@ -110,6 +110,31 @@ export const products = [
   },
 ];
 
+export const suppliers = [
+  {
+    id: 'asdfa1234123asdfa4',
+    name: 'ABCDEFG export ltd',
+    email: 'contact@example.com',
+    url: 'https://www.example.com',
+    address: 'Shuanglin Road, Guang Dong, China, 100000',
+    logo:
+      'https://image.spreadshirtmedia.com/image-server/v1/products/1003716746/views/1,width=800,height=800,appearanceId=1,backgroundColor=fff,version=1485256808/i-eat-ass-t-shirt-men-s-t-shirt.jpg',
+    contact: '+86-010-123456789',
+    active: true,
+  },
+  {
+    id: 'asdfa1234123asdfa4',
+    name: 'XYZ biz ltd',
+    email: 'contact@xyz-biz.com',
+    url: 'https://www.example-xyz-biz.com',
+    address: 'Chicago, United States, 12345',
+    logo:
+      'https://image.shutterstock.com/image-vector/letter-x-y-z-logo-450w-508630150.jpg',
+    contact: '+1-123456789',
+    active: false,
+  },
+];
+
 export const salesReportProducts = [
   {
     id: 'asdfa1234123asdfa4',

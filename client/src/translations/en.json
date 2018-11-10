@@ -123,5 +123,6 @@
   "sys.thumbnail": "Thumbnail",
   "sys.company": "Company",
   "sys.suppliers": "Suppliers",
-  "sys.invalidAuth": "Invalid email or password."
+  "sys.invalidAuth": "Invalid email or password.",
+  "sys.comLogo": "Company logo"
 }

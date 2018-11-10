@@ -1,6 +1,7 @@
 import OrderList from './order/orderList';
 import Order from './order/order';
 import ProductList from './product/productList';
+import SupplierList from './supplier/supplierList';
 import ProductCategoryList from './product/productCategoryList';
 import ProductCategory from './product/productCategory';
 import Payment from './payment/payment';
@@ -18,4 +19,5 @@ export {
   Setting,
   Product,
   SalesReportList,
+  SupplierList,
 };

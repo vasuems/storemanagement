@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Col, Form, Input, Button,
+  Col,
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { LoginForm } from './forms';

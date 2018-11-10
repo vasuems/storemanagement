@@ -25,6 +25,11 @@ import { fetchSuppliers } from '../../actions';
 import { SupplierListItem } from '../../components';
 
 class SupplierList extends Component{
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchSuppliers());
+  }
+
   render(){
     const { history, suppliers } = this.props;
     const { formatMessage } = this.props.intl;
@@ -71,19 +76,13 @@ class SupplierList extends Component{
                 <thead className="table-header">
                   <tr>
                     <th>
-                      <FormattedMessage id="sys.thumbnail" />
+                      <FormattedMessage id="sys.comLogo" />
                     </th>
                     <th>
                       <FormattedMessage id="sys.name" />
                     </th>
                     <th>
-                      <FormattedMessage id="sys.sku" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.price" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.qty" />
+                      <FormattedMessage id="sys.contactInfo" />
                     </th>
                     <th>
                       <FormattedMessage id="sys.status" />
@@ -93,17 +92,16 @@ class SupplierList extends Component{
                 </thead>
                 <tbody>
                   {
-                    products.map(product => (
-                      <ProductListItem
+                    suppliers.map(product => (
+                      <SupplierListItem
                         key={product.id}
                         id={product.id}
-                        coverImage={product.coverImage}
+                        logo={product.logo}
                         name={product.name}
-                        sku={product.sku}
-                        currency={product.currency}
-                        currencySign={product.currencySign}
-                        price={product.price}
-                        quantity={product.quantity}
+                        url={product.url}
+                        address={product.address}
+                        email={product.email}
+                        contact={product.contact}
                         status={product.active}
                         onClick={this.onViewClick}
                       />
@@ -132,12 +130,12 @@ class SupplierList extends Component{
           </Row>
         </div>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = state => ({
-
+  suppliers: state.supplierReducer.suppliers,
 });
 
 SupplierList.propTypes = {
@@ -147,4 +145,4 @@ SupplierList.propTypes = {
   intl: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, null)(SupplierList);
+export default connect(mapStateToProps, null)(injectIntl(SupplierList));
