@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aws-serverless-express": "^3.3.5",
     "body-parser": "^1.18.3",
     "classnames": "^2.2.6",
     "cors": "^2.8.5",
@@ -21,7 +22,7 @@
     "lint:client": "./node_modules/.bin/eslint --fix client/src/ && prettier --single-quote --trailing-comma=es5 --write \"./client/src/**/*.js\"",
     "build:client": "cd client && yarn build",
     "client": "cd client && yarn start",
-    "server": "nodemon app.js",
+    "server": "nodemon app.local.js",
     "test:server": "./node_modules/mocha/bin/mocha ./models/tests"
   },
   "devDependencies": {
