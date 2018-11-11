@@ -22,7 +22,7 @@
     "build:client": "cd client && yarn build",
     "client": "cd client && yarn start",
     "server": "nodemon app.js",
-    "test": "./node_modules/mocha/bin/mocha"
+    "test:server": "./node_modules/mocha/bin/mocha ./models/tests"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

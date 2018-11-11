@@ -9,7 +9,7 @@ const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 const env = require('./env.json');
 
-const { OAuth2Request, User, Contact } = require('./models');
+const { OAuth2Request, User, Contact, Store } = require('./models');
 const { MySQL } = require('./db');
 const { UnauthorisedError } = require('./exceptions');
 
@@ -180,5 +180,23 @@ app.delete(
     }
   }
 );
+
+app.get(
+  '/stores/:code',
+  authMiddleware,
+  async (req, res) => {
+    try {
+      const store = new Store();
+      const mysql = new MySQL();
+      const db = mysql.connect();
+      const data = await store.get(req.params.code, db);
+      
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 
 app.listen(8080, () => console.log('Running on port 8080!'));

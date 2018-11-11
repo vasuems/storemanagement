@@ -18,16 +18,18 @@ function Store(code, name, description, logo, countryId, language, currencyId) {
   this.currencyId = currencyId || 0;
 }
 
-Store.prototype.get = function(code, db) {
+Store.prototype.get = function(code, db) { 
+  console.log(code);
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
       `select name, code, description, logo, country_id as countryId, language, currency_id as currencyId from store where code='${code}' and status=1`,
-      (error, results) => {
+      (error, results) => {  
         db.end();
         if (error) {
+            
           reject(new NoRecordFoundError('No store found.'));
-        } else {          
+        } else {   
           const { name, code, description, logo, countryId, language, currencyId } = results[0];
           resolve(new Store(code, name, description, logo, countryId, language, currencyId));
         }
@@ -39,28 +41,32 @@ Store.prototype.get = function(code, db) {
 Store.prototype.add = function(store, db) {
   return new Promise((resolve, reject) => {
     if (store instanceof Store) {
-      db.connect();
-      const { code, name, description, logo, countryId, language, currencyId } = store;
+      Object.keys(store).forEach(function(key, index) {
+        if(!store[key]){
+          reject(
+            new InvalidModelArgumentsError(
+              'Not all required fields have a value.'
+            )
+          );
+        }
+      });
 
-      if (!code || !name || !email || !password || !salt) {
-        reject(
-          new InvalidModelArgumentsError(
-            'Not all required fields have a value.'
-          )
-        );
-      }
+      const { code, name, description, logo, countryId, language, currencyId } = store;
+      db.connect();
       db.query(
-        `insert into user(code, name, email, password, salt, joined_on, role) values('${code}', '${name}', '${email}', '${password}', '${salt}', '${joinedOn}', '${role}')`,
+        `insert into store(name, code, description, created_on, logo, country_id, language, currency_id) 
+         values('${name}', '${code}', '${description}', '${ moment.utc().format('YYYY-MM-DD HH:mm:ss')}', '${logo}', ${countryId}, '${language}', ${currencyId})`,
         error => {
+          db.end();
           if (error) {
-            reject(new BadRequestError('Invalide user data.'));
+            reject(new BadRequestError('Invalide store data.'));
           } else {
-            resolve(new User(code, name, email));
+            resolve(new Store(code, name, description, logo, countryId, language, currencyId));
           }
         }
       );
     } else {
-      reject(new BadRequestError('Invalide user data.'));
+      reject(new BadRequestError('Invalide store data.'));
     }
   });
 };

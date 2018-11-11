@@ -59,19 +59,22 @@ User.prototype.get = function(id, db) {
 User.prototype.add = function(user, db) {
   return new Promise((resolve, reject) => {
     if (user instanceof User) {
+      Object.keys(user).forEach(function(key, index) {
+        if(!user[key]){
+          reject(
+            new InvalidModelArgumentsError(
+              'Not all required fields have a value.'
+            )
+          );
+        }
+      });
+
       db.connect();
       const { code, name, email, password, salt, joinedOn, role } = user;
-
-      if (!code || !name || !email || !password || !salt) {
-        reject(
-          new InvalidModelArgumentsError(
-            'Not all required fields have a value.'
-          )
-        );
-      }
       db.query(
         `insert into user(code, name, email, password, salt, joined_on, role) values('${code}', '${name}', '${email}', '${password}', '${salt}', '${joinedOn}', '${role}')`,
         error => {
+          db.end();
           if (error) {
             reject(new BadRequestError('Invalide user data.'));
           } else {
@@ -106,6 +109,7 @@ Contact.prototype.add = function(contact, db) {
       db.query(
         `insert into user_contact(user_id, number, type, area_code, country_id) values(${userId}, '${number}', '${type}', '${areaCode}', ${countryId})`,
         error => {
+          db.end();
           if (error) {
             reject(new BadRequestError('Invalide user contact data.'));
           } else {
@@ -127,6 +131,7 @@ Contact.prototype.update = function(id, contact, db) {
       db.query(
         `update user_contact set number='${number}', type='${type}', area_code='${areaCode}', country_id=${countryId} where id=${id}`,
         error => {
+          db.end();
           if (error) {
             reject(new BadRequestError('Invalide user contact data.'));
           } else {
