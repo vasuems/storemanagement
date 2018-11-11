@@ -61,6 +61,7 @@
   "sys.cod": "Cash On Delivery",
   "sys.myAcct": "My Account",
   "sys.myOrders": "My Orders",
+  "sys.address": "Address",
   "sys.deliveryAddr": "Delivery address",
   "sys.billingAddr": "Billing address",
   "sys.update": "Update",
@@ -124,5 +125,6 @@
   "sys.company": "Company",
   "sys.suppliers": "Suppliers",
   "sys.invalidAuth": "Invalid email or password.",
-  "sys.comLogo": "Company logo"
+  "sys.comLogo": "Company logo",
+  "sys.website": "Website"
 }

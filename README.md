@@ -17,6 +17,8 @@ Username: test@test.com
 
 Password: 123
 
+[Dashboard demo](https://ccwukong.github.io/) (Continue developing)
+
 
 ## Installation
 

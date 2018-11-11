@@ -30,6 +30,10 @@ class SupplierList extends Component{
     dispatch(fetchSuppliers());
   }
 
+  onViewClick = (id) => {
+    this.props.history.push(`/suppliers/${id}`);
+  };
+
   render(){
     const { history, suppliers } = this.props;
     const { formatMessage } = this.props.intl;
@@ -64,7 +68,7 @@ class SupplierList extends Component{
                   size="sm"
                   color="primary"
                   className="pull-right form-btn"
-                  onClick={() => history.push('/new-product')}
+                  onClick={() => history.push('/new-supplier')}
                 >
                   <FiPlusCircle />
                   &nbsp;
@@ -145,4 +149,4 @@ SupplierList.propTypes = {
   intl: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, null)(injectIntl(SupplierList));
+export default connect(mapStateToProps, null)(injectIntl(withRouter(SupplierList)));

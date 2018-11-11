@@ -5,6 +5,7 @@ import ProductForm from './productForm';
 import PasswordForm from './passwordForm';
 import LoginForm from './loginForm';
 import CredentialForm from './credentialForm';
+import SupplierForm from './supplierForm';
 
 export {
   StoreSettingForm,
@@ -14,4 +15,5 @@ export {
   PasswordForm,
   LoginForm,
   CredentialForm,
+  SupplierForm,
 };
