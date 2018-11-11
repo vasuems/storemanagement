@@ -126,5 +126,7 @@
   "sys.suppliers": "Suppliers",
   "sys.invalidAuth": "Invalid email or password.",
   "sys.comLogo": "Company logo",
-  "sys.website": "Website"
+  "sys.supplierLogo": "Supplier logo",
+  "sys.website": "Website",
+  "sys.dragImageFile": "Drag an image file here."
 }

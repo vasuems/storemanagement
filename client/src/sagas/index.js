@@ -5,18 +5,19 @@ import { fetchSalesReportProducts, fetchSalesReportCategories } from './report';
 import { fetchDashboardData } from './dashboard';
 import { fetchSiteSettings } from './setting';
 import { submitLoginData } from './auth';
-import { fetchSuppliers } from './supplier';
+import { fetchSuppliers, fetchSupplierDetails } from './supplier';
 import {
   FETCH_ORDERS,
+  FETCH_ORDER_PRODUCTS,
   FETCH_PRODUCT_CATEGORIES,
   FETCH_PRODUCTS,
-  FETCH_SUPPLIERS,
   FETCH_PRODUCT_DETAILS,
+  FETCH_SUPPLIERS,
+  FETCH_SUPPLIER_DETAILS,
   FETCH_DASHBOARD_DATA,
   FETCH_SALES_REPORT_PRODUCTS,
   FETCH_SALES_REPORT_CATEGORIES,
   FETCH_SITE_SETTINGS,
-  FETCH_ORDER_PRODUCTS,
   SUBMIT_LOGIN_DATA,
 } from '../actions';
 
@@ -33,5 +34,6 @@ export default function* rootSaga() {
     takeEvery(FETCH_ORDER_PRODUCTS, fetchOrderProducts),
     takeEvery(SUBMIT_LOGIN_DATA, submitLoginData),
     takeEvery(FETCH_SUPPLIERS, fetchSuppliers),
+    takeEvery(FETCH_SUPPLIER_DETAILS, fetchSupplierDetails),
   ]);
 }
