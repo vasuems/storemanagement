@@ -1,12 +1,7 @@
 'use strict';
 
-const express = require('express');
-const app = express();
+const app = require('./app');
 
-app.get('/', (req, res) => res.send('Hello world!'));
-
-const port = process.env.PORT || 8080;
-
-app.listen(port, () => 
-  console.log(`Server is listening on port ${port}.`)
+app.listen(8080, () => 
+  console.log(`Server is listening on port 8080.`)
 );

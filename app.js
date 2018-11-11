@@ -7,7 +7,7 @@ const uniqid = require('uniqid');
 const randomstring = require('randomstring');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
-const env = require('./env.json');
+require('dotenv').load();
 
 const { OAuth2Request, User, Contact, Store } = require('./models');
 const { MySQL } = require('./db');
@@ -37,7 +37,7 @@ const authMiddleware = async (req, res, next) => {
 
 const userCodeVerifier = (req, res, next) => {
   try {
-    const decoded = jwt.verify(req.headers.authorization, env.tokenSecret);
+    const decoded = jwt.verify(req.headers.authorization, process.env.tokenSecret);
     if (!decoded || decoded.data.code !== req.params.code) {
       throw new UnauthorisedError('Invalid user ID.');
     }

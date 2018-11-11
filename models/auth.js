@@ -5,7 +5,7 @@ const moment = require('moment');
 const jwt = require('jsonwebtoken');
 
 const { UnauthorisedError } = require('../exceptions');
-const env = require('../env.json');
+require('dotenv').load();
 
 function OAuth2Request(username, password, grantType, scope) {
   this.username = username || '';
@@ -45,7 +45,7 @@ OAuth2Request.prototype.auth = function(db) {
                   expiry: moment.utc().format('YYYY-MM-DD HH:mm:ss'),
                 },
               },
-              env.tokenSecret
+              process.env.tokenSecret
             );
 
             db.query(
@@ -136,7 +136,7 @@ OAuth2Request.prototype.refreshToken = function(token, db) {
                       expiry: moment.utc().format('YYYY-MM-DD HH:mm:ss'),
                     },
                   },
-                  env.tokenSecret
+                  process.env.tokenSecret
                 );
                 db.query(
                   `insert into user_access_token(token, user_id, expired_on) values('${accessToken}', ${userId}, '${moment
