@@ -56,7 +56,6 @@ class Product extends Component{
               </Button><br /><br />
               <ProductForm 
                 categories={[]}
-                currencies={[{id: 1, currency: 'SGD'}]}
               />
             </Col>
           </Row>

@@ -46,7 +46,7 @@ class ProductCategoryList extends Component {
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem active>
-            <FormattedMessage id="sys.prodCats" />
+            <FormattedMessage id="sys.categories" />
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="content-body">

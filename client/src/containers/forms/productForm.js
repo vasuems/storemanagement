@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import {
   Col,
   Row,
@@ -90,13 +90,13 @@ const renderTextArea = ({
 class ProductForm extends Component {
   render() {
     const { onSubmit, categories, currencies } = this.props;
-
+    const { formatMessage } = this.props.intl;
     return (
       <Form onSubmit={onSubmit}>
         <Row>
           <Col md={7}>
             <Card>
-              <CardHeader><FormattedMessage id="sys.basicInfo" /></CardHeader>
+              <CardHeader><FormattedMessage id="sys.productInfo" /></CardHeader>
               <CardBody>
                 <FormGroup row>
                   <Label for="name" sm={3}>
@@ -145,7 +145,7 @@ class ProductForm extends Component {
                     <FormattedMessage id="sys.category" />
                   </Label>
                   <Col sm={9}>
-                    <Input type="select" name="selectCat">
+                    <Input type="select" name="category">
                       {categories.map(cat => (
                         <option key={cat.id} value={cat.id}>{cat.name}</option>
                       ))}
@@ -153,27 +153,42 @@ class ProductForm extends Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label for="price" sm={3}>
-                    <FormattedMessage id="sys.price" />
+                  <Label for="cost" sm={3}>
+                    <FormattedMessage id="sys.costPrice" />
                   </Label>
                   <Col sm={9}>
-                    <InputGroup>
-                      <InputGroupAddon addonType="prepend">
-                        <Input type="select" name="currency">
-                          {currencies.map(currency => (
-                            <option key={currency.id} value={currency.id}>{currency.currency}</option>
-                          ))}
-                        </Input>
-                      </InputGroupAddon>
-                      <Field
-                        component={renderDecimalField}
-                        type="number"
-                        name="price"
-                        id="price"
-                      />
-                    </InputGroup>
+                    <Field
+                      component={renderDecimalField}
+                      type="number"
+                      name="cost"
+                      id="cost"
+                    />
                   </Col>
                 </FormGroup>
+                <FormGroup row>
+                  <Label for="manufacturer" sm={3}>
+                    <FormattedMessage id="sys.manufacturer" />
+                  </Label>
+                  <Col sm={9}>
+                    <Input type="select" name="manufacturer">
+                      {categories.map(cat => (
+                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                      ))}
+                    </Input>
+                  </Col>
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="supplier" sm={3}>
+                    <FormattedMessage id="sys.supplier" />
+                  </Label>
+                  <Col sm={9}>
+                    <Input type="select" name="supplier">
+                      {categories.map(cat => (
+                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                      ))}
+                    </Input>
+                  </Col>
+                </FormGroup>                
               </CardBody>
             </Card>
           </Col>
@@ -196,7 +211,7 @@ class ProductForm extends Component {
                       />
                     </InputGroup>
                   </Col>
-                </FormGroup>
+                </FormGroup>                
                 <FormGroup row>
                   <Label for="qty" sm={4}>
                     <FormattedMessage id="sys.qty" />
@@ -214,6 +229,45 @@ class ProductForm extends Component {
                   </Col>
                 </FormGroup>
               </CardBody>
+            </Card><br />
+            <Card>
+              <CardHeader><FormattedMessage id="sys.price" /></CardHeader>
+              <CardBody>
+                <FormGroup row>
+                  <Label for="price" sm={4}>
+                    <FormattedMessage id="sys.price" />
+                  </Label>
+                  <Col sm={8}>
+                    <Field
+                      component={renderDecimalField}
+                      type="number"
+                      name="price"
+                      id="price"
+                    />
+                  </Col>
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="discount" sm={4}>
+                    <FormattedMessage id="sys.discountBy" />
+                  </Label>
+                  <Col sm={8}>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <Input type="select" name="discountType">
+                          <option value="percent">%</option>
+                          <option value="value">$</option>
+                        </Input>
+                      </InputGroupAddon>
+                      <Field
+                        component={renderDecimalField}
+                        type="number"
+                        name="discount"
+                        id="discount"                        
+                      />
+                    </InputGroup>
+                  </Col>
+                </FormGroup>
+              </CardBody>
             </Card>
           </Col>
         </Row>
@@ -225,7 +279,7 @@ class ProductForm extends Component {
 ProductForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
-  currencies: PropTypes.array.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 ProductForm = reduxForm({
@@ -247,4 +301,4 @@ export default connect((state) => {
     },
     enableReinitialize: true,
   };
-})(ProductForm);
+})(injectIntl(ProductForm));

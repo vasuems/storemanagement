@@ -34,11 +34,11 @@ class ProductCategory extends Component {
               color="link"
               onClick={() => history.push('/categories')}
             >
-              <FormattedMessage id="sys.prodCats" />
+              <FormattedMessage id="sys.categories" />
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem active>
-            <FormattedMessage id="sys.productCat" />
+            <FormattedMessage id="sys.category" />
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="content-body">

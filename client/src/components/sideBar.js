@@ -84,7 +84,7 @@ class SideBarContent extends Component {
           <Row className="sidebar-link sub-menu">
             <Link to="/categories">
               <FiGrid className="sidebar-icon" />
-              <FormattedMessage id="sys.prodCats" />
+              <FormattedMessage id="sys.categories" />
             </Link>
           </Row>
           <Row className="sidebar-link sub-menu">
