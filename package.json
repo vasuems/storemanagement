@@ -21,7 +21,8 @@
     "lint:client": "./node_modules/.bin/eslint --fix client/src/ && prettier --single-quote --trailing-comma=es5 --write \"./client/src/**/*.js\"",
     "build:client": "cd client && yarn build",
     "client": "cd client && yarn start",
-    "server": "nodemon app.js"
+    "server": "nodemon app.js",
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
@@ -30,6 +31,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
+    "mocha": "^5.2.0",
     "prettier": "1.14.2"
   }
 }

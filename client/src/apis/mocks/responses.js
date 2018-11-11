@@ -290,8 +290,8 @@ export const cart = [
 ];
 
 export const settings = {
-  siteName: 'LF Commerce',
-  siteLogo: '',
+  storeName: 'LF Commerce',
+  storeLogo: '',
   facebook: 'https://facebook.com/test',
   twitter: 'https://twitter.com/test',
 };

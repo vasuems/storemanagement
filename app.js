@@ -87,7 +87,7 @@ app.post('/accounts', async (req, res) => {
     const mysql = new MySQL();
     const db = mysql.connect();
 
-    const data = await user.addUser(user, db);
+    const data = await user.add(user, db);
     res.send(data);
   } catch (err) {
     res.status(err.statusCode).send(err);

@@ -43,15 +43,15 @@ class StoreSettingForm extends Component {
               <CardHeader><FormattedMessage id="sys.basicInfo" /></CardHeader>
               <CardBody>
                 <FormGroup row>
-                  <Label for="site-name" sm={3}>
-                    <FormattedMessage id="sys.siteName" />
+                  <Label for="store-name" sm={3}>
+                    <FormattedMessage id="sys.storeName" />
                   </Label>
                   <Col sm={9}>
                     <Field
                       component={renderField}
-                      name="site-name"
+                      name="store-name"
                       className="form-control"
-                      id="site-name"
+                      id="store-name"
                     />
                   </Col>
                 </FormGroup>
@@ -147,13 +147,13 @@ StoreSettingForm = reduxForm({
 
 export default connect((state) => {
   const {
-    siteName,
+    storeName,
     facebook,
     twitter,
   } = state.settingReducer.settings;
   return {
     initialValues: {
-      'site-name': siteName,
+      'store-name': storeName,
       facebook,
       twitter,
     },

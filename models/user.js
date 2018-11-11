@@ -26,7 +26,7 @@ function Contact(userId, number, type, areaCode, countryId) {
   this.countryId = countryId;
 }
 
-User.prototype.getUser = function(id, db) {
+User.prototype.get = function(id, db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(`select * from user where id=${id}`, (error, results) => {
@@ -56,7 +56,7 @@ User.prototype.getUser = function(id, db) {
   });
 };
 
-User.prototype.addUser = function(user, db) {
+User.prototype.add = function(user, db) {
   return new Promise((resolve, reject) => {
     if (user instanceof User) {
       db.connect();
@@ -85,7 +85,7 @@ User.prototype.addUser = function(user, db) {
   });
 };
 
-User.prototype.deleteUser = function(id, db) {
+User.prototype.delete = function(id, db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(`update user set status=0 where id=${id}`, error => {
@@ -98,7 +98,7 @@ User.prototype.deleteUser = function(id, db) {
   });
 };
 
-User.prototype.addContact = function(contact, db) {
+Contact.prototype.add = function(contact, db) {
   return new Promise((resolve, reject) => {
     if (contact instanceof Contact) {
       const { userId, number, type, areaCode, countryId } = contact;
@@ -119,7 +119,7 @@ User.prototype.addContact = function(contact, db) {
   });
 };
 
-User.prototype.updateContact = function(id, contact, db) {
+Contact.prototype.update = function(id, contact, db) {
   return new Promise((resolve, reject) => {
     if (contact instanceof Contact) {
       const { userId, number, type, areaCode, countryId } = contact;
@@ -140,7 +140,7 @@ User.prototype.updateContact = function(id, contact, db) {
   });
 };
 
-User.prototype.deleteContact = function(id, db) {
+Contact.prototype.delete = function(id, db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(`update user_contact set status=0 where id=${id}`, error => {

@@ -1,6 +1,6 @@
 {
   "site.name": "Elf Commerce",
-  "sys.siteName": "Site name",
+  "sys.storeName": "Store name",
   "sys.storeSettings": "Store settings",
   "sys.acctSettings": "Account settings",
   "sys.credentials": "Credentials",
