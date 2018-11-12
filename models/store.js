@@ -52,11 +52,11 @@ Store.prototype.add = function(store, db) {
         }
       });
 
-      const { code, name, description, logo, countryId, language, currencyId } = store;
+      const { code, name, description, logo, countryId, language, currencyId, createdBy } = store;
       db.connect();
       db.query(
-        `insert into store(name, code, description, created_on, logo, country_id, language, currency_id) 
-         values('${name}', '${code}', '${description}', '${ moment.utc().format('YYYY-MM-DD HH:mm:ss')}', '${logo}', ${countryId}, '${language}', ${currencyId})`,
+        `insert into store(name, code, description, created_on, created_by, logo, country_id, language, currency_id) 
+         values('${name}', '${code}', '${description}', '${ moment.utc().format('YYYY-MM-DD HH:mm:ss')}', '${createdBy}', '${logo}', ${countryId}, '${language}', ${currencyId})`,
         error => {
           db.end();
           if (error) {
@@ -75,10 +75,10 @@ Store.prototype.add = function(store, db) {
 Store.prototype.update = function(store, db) {
   return new Promise((resolve, reject) => {
     if (store instanceof Store) {
-      const { code, name, description, logo, countryId, language, currencyId } = store;
+      const { code, name, description, logo, countryId, language, currencyId, createdBy } = store;
       db.connect();
       db.query(
-        `update store set name='${name}', logo='${logo}', description='${description}', currency_id='${currencyId}', language='${language}', country_id=${countryId} where code='${code}' and created_by=${this.createdBy}`,
+        `update store set name='${name}', logo='${logo}', description='${description}', currency_id='${currencyId}', language='${language}', country_id=${countryId} where code='${code}' and created_by='${this.createdBy}'`,
         (error, results) => {
 
           db.end();

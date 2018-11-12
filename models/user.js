@@ -26,10 +26,10 @@ function Contact(userId, number, type, areaCode, countryId) {
   this.countryId = countryId;
 }
 
-User.prototype.get = function(id, db) {
+User.prototype.get = function(code, db) {
   return new Promise((resolve, reject) => {
     db.connect();
-    db.query(`select * from user where id=${id}`, (error, results) => {
+    db.query(`select * from user where code=${code}`, (error, results) => {
       if (error) {
         reject(new NoRecordFoundError('No user found.'));
       } else {
@@ -37,7 +37,7 @@ User.prototype.get = function(id, db) {
         const user = new User(code, name, email, '', '', joinedOn);
 
         db.query(
-          `select user_id as userId, number, type, area_code as areaCode, country_id as countryId from user_contact where user_id='${id}' and status=1`,
+          `select user_id as userId, number, type, area_code as areaCode, country_id as countryId from user_contact where user_id='${code}' and status=1`,
           (error, results) => {
             db.end();
             if (error) {
@@ -88,10 +88,10 @@ User.prototype.add = function(user, db) {
   });
 };
 
-User.prototype.delete = function(id, db) {
+User.prototype.delete = function(code, db) {
   return new Promise((resolve, reject) => {
     db.connect();
-    db.query(`update user set status=0 where id=${id}`, error => {
+    db.query(`update user set status=0 where code=${code}`, error => {
       if (error) {
         reject(new BadRequestError('Deleting user failed.'));
       } else {

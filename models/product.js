@@ -23,24 +23,9 @@ function Product(code, name, categoryId, sku, description, quantity, allowQuanti
   this.coverImage = coverImage || '';
 }
 
-function Product(code, name, categoryId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage) {
-  this.code = code || '';
-  this.name = name || '';
-  this.categoryId = categoryId || 0;
-  this.sku = sku || '';
-  this.description = description || '';
-  this.quantity = quantity || 0;
-  this.allowQuantity = allowQuantity || true;
-  this.addedOn = addedOn || moment.utc().format('YYYY-MM-DD HH:mm:ss');
-  this.addedBy = addedBy || 0;
-  this.unitPrice = unitPrice || 0.00;
-  this.coverImage = coverImage || '';
-}
-
-Product.prototype.getProduct = function(id, db) {
+Product.prototype.get = function(id, db) {
   return new Promise((resolve, reject) => {
     db.connect();
-
     db.query(
       `select user_id as userId, number, type, area_code as areaCode, country_id as countryId from user_contact where user_id='${id}' and status=1`,
       (error, results) => {
@@ -50,15 +35,16 @@ Product.prototype.getProduct = function(id, db) {
         } else {
           const contacts = results.map(contact => {
             const { userId, number, type, areaCode, countryId } = contact;
-            return new Contact(userId, number, type, areaCode, countryId);
+            return new Product(userId, number, type, areaCode, countryId);
           });
           resolve({ user, contacts });
         }
       }
     );
+  });
 }
 
-Product.prototype.addProduct = function(product, db) {
+Product.prototype.add = function(product, db) {
   return new Promise((resolve, reject) => {
     if (product instanceof Product) {
       db.connect();
@@ -89,7 +75,7 @@ Product.prototype.addProduct = function(product, db) {
   });
 }
 
-Product.prototype.deleteProduct = function(id, db) {
+Product.prototype.delete = function(id, db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(`update user set status=0 where id=${id}`, error => {

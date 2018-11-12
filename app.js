@@ -42,21 +42,20 @@ const userCodeVerifier = (req, res, next) => {
       throw new UnauthorisedError('Invalid user ID.');
     }
 
-    res.locals.id = decoded.data.id;
     next();
   } catch (err) {
     res.status(err.statusCode).send(err);
   }
 };
 
-const getUserId = (req, res, next) => {
+const getUserCode = (req, res, next) => {
   try {
     const decoded = jwt.verify(req.headers.authorization, process.env.tokenSecret);
     if (!decoded) {
       throw new UnauthorisedError('Invalid user ID.');
     }
 
-    res.locals.id = decoded.data.id;
+    res.locals.code = decoded.data.code;
     next();
   } catch (err) {
     res.status(err.statusCode).send(err);
@@ -117,7 +116,7 @@ app.get(
       const mysql = new MySQL();
       const db = mysql.connect();
 
-      const data = await user.getUser(res.locals.id, db);
+      const data = await user.get(res.locals.code, db);
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
@@ -136,7 +135,7 @@ app.post(
 
       const data = await user.addContact(
         new Contact(
-          res.locals.id,
+          res.locals.code,
           req.body.number,
           req.body.type,
           req.body.areaCode,
@@ -163,7 +162,7 @@ app.put(
       const data = await user.updateContact(
         req.body.id,
         new Contact(
-          res.locals.id,
+          res.locals.code,
           req.body.number,
           req.body.type,
           req.body.areaCode,
@@ -214,11 +213,11 @@ app.get(
 
 app.put(
   '/stores/:code',
-  [authMiddleware, getUserId],
+  [authMiddleware, getUserCode],
   async (req, res) => {
     try {
       const { code, name, description, logo, countryId, language, currencyId } =  req.body;
-      const store = new Store(code, name, description, logo, countryId, language, currencyId, res.locals.id);
+      const store = new Store(code, name, description, logo, countryId, language, currencyId, res.locals.code);
       const mysql = new MySQL();
       const db = mysql.connect();
       const data = await store.update(store, db);      
