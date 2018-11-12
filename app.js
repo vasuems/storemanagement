@@ -49,6 +49,20 @@ const userCodeVerifier = (req, res, next) => {
   }
 };
 
+const getUserId = (req, res, next) => {
+  try {
+    const decoded = jwt.verify(req.headers.authorization, process.env.tokenSecret);
+    if (!decoded) {
+      throw new UnauthorisedError('Invalid user ID.');
+    }
+
+    res.locals.id = decoded.data.id;
+    next();
+  } catch (err) {
+    res.status(err.statusCode).send(err);
+  }
+};
+
 app.use(bodyParser.json());
 
 app.post('/auth', async (req, res) => {
@@ -191,6 +205,23 @@ app.get(
       const db = mysql.connect();
       const data = await store.get(req.params.code, db);
       
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.put(
+  '/stores/:code',
+  [authMiddleware, getUserId],
+  async (req, res) => {
+    try {
+      const { code, name, description, logo, countryId, language, currencyId } =  req.body;
+      const store = new Store(code, name, description, logo, countryId, language, currencyId, res.locals.id);
+      const mysql = new MySQL();
+      const db = mysql.connect();
+      const data = await store.update(store, db);      
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
