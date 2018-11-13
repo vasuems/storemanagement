@@ -18,7 +18,7 @@ import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { FiSave } from 'react-icons/fi';
-import { fetchSiteSettings } from '../../actions';
+import { fetchStoreSettings } from '../../actions';
 import { 
   StoreSettingForm,
   AccountSettingForm,
@@ -39,7 +39,7 @@ class Setting extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchSiteSettings());
+    dispatch(fetchStoreSettings());
   }
 
   toggle = (tab) => {
@@ -51,10 +51,6 @@ class Setting extends Component {
   };
 
   handleSettingSubmit = (values) => {
-    console.log(values);
-  };
-
-  handleEtsySettingSubmit = (values) => {
     console.log(values);
   };
 
@@ -210,7 +206,6 @@ class Setting extends Component {
 Setting.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
 };
 

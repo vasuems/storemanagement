@@ -1,13 +1,13 @@
-import { FETCH_SITE_SETTINGS_SUCCESS } from '../actions';
+import { FETCH_STORE_SETTINGS_SUCCESS } from '../actions';
 
 const initialState = {
-  settings: {},
+  storeSettings: {},
 };
 
 export default function settingReducer(state = initialState, action) {
   switch (action.type) {
-  case FETCH_SITE_SETTINGS_SUCCESS:
-    return { ...state, settings: action.value };
+  case FETCH_STORE_SETTINGS_SUCCESS:
+    return { ...state, storeSettings: action.value };
   default:
     return state;
   }

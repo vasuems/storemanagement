@@ -12,7 +12,7 @@ export function* submitLoginData(action) {
       grantType: 'password',
       scope: 'profile',
     });
-
+    localStorage.setItem(config.accessTokenKey, res.data.accessToken);
     yield put(authSuccess(res.data));
   } catch (error) {
     yield put(authFailed());

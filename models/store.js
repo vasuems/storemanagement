@@ -8,7 +8,7 @@ const {
   NoRecordFoundError,
 } = require('../exceptions');
 
-function Store(code, name, description, logo, countryId, language, currencyId, createdBy) {
+function Store(code, name, description, logo, countryId, language, currencyId, createdBy, facebook, twitter) {
   this.code = code || '';
   this.name = name || '';
   this.description = description || '';
@@ -17,13 +17,15 @@ function Store(code, name, description, logo, countryId, language, currencyId, c
   this.language = language || 'en';
   this.currencyId = currencyId || 0;
   this.createdBy = createdBy || 0;
+  this.facebook = facebook || '';
+  this.twitter = twitter || '';
 }
 
 Store.prototype.get = function(code, db) { 
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select name, code, description, logo, country_id as countryId, language, currency_id as currencyId 
+      `select name, code, description, logo, country_id as countryId, language, currency_id as currencyId, facebook, twitter 
        from store where code='${code}' and status=1`,
       (error, results) => {  
         db.end();
@@ -31,8 +33,8 @@ Store.prototype.get = function(code, db) {
             
           reject(new NoRecordFoundError('No store found.'));
         } else {   
-          const { name, code, description, logo, countryId, language, currencyId } = results[0];
-          resolve(new Store(code, name, description, logo, countryId, language, currencyId));
+          const { name, code, description, logo, countryId, language, currencyId, facebook, twitter } = results[0];
+          resolve(new Store(code, name, description, logo, countryId, language, currencyId, '', facebook, twitter));
         }
       }
     );
@@ -52,17 +54,17 @@ Store.prototype.add = function(store, db) {
         }
       });
 
-      const { code, name, description, logo, countryId, language, currencyId, createdBy } = store;
+      const { code, name, description, logo, countryId, language, currencyId, createdBy, facebook, twitter } = store;
       db.connect();
       db.query(
-        `insert into store(name, code, description, created_on, created_by, logo, country_id, language, currency_id) 
-         values('${name}', '${code}', '${description}', '${ moment.utc().format('YYYY-MM-DD HH:mm:ss')}', '${createdBy}', '${logo}', ${countryId}, '${language}', ${currencyId})`,
+        `insert into store(name, code, description, created_on, created_by, logo, country_id, language, currency_id, facebook, twitter) 
+         values('${name}', '${code}', '${description}', '${ moment.utc().format('YYYY-MM-DD HH:mm:ss')}', '${createdBy}', '${logo}', ${countryId}, '${language}', ${currencyId}, '${facebook}', '${twitter}')`,
         error => {
           db.end();
           if (error) {
             reject(new BadRequestError('Invalide store data.'));
           } else {
-            resolve(new Store(code, name, description, logo, countryId, language, currencyId));
+            resolve(new Store(code, name, description, logo, countryId, language, currencyId, createdBy, facebook, twitter));
           }
         }
       );
@@ -75,17 +77,17 @@ Store.prototype.add = function(store, db) {
 Store.prototype.update = function(store, db) {
   return new Promise((resolve, reject) => {
     if (store instanceof Store) {
-      const { code, name, description, logo, countryId, language, currencyId, createdBy } = store;
+      const { code, name, description, logo, countryId, language, currencyId, createdBy, facebook, twitter } = store;
       db.connect();
       db.query(
-        `update store set name='${name}', logo='${logo}', description='${description}', currency_id='${currencyId}', language='${language}', country_id=${countryId} where code='${code}' and created_by='${this.createdBy}'`,
+        `update store set name='${name}', logo='${logo}', description='${description}', currency_id='${currencyId}', language='${language}', country_id=${countryId}, facebook='${facebook}', twitter='${twitter}'
+         where code='${code}' and created_by='${createdBy}'`,
         (error, results) => {
-
           db.end();
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide store data.'));
           } else {
-            resolve(new Store(code, name, description, logo, countryId, language, currencyId));
+            resolve(new Store(code, name, description, logo, countryId, language, currencyId, createdBy, facebook, twitter ));
           }
         }
       );

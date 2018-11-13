@@ -14,6 +14,7 @@ import {
   Label,
   Input,
 } from 'reactstrap';
+import { fetchStoreSettings } from '../../actions';
 
 const validate = (values) => {
   const errors = {};
@@ -33,6 +34,10 @@ const renderField = ({
 );
 
 class StoreSettingForm extends Component {
+  componentDidMount(){
+    const { dispatch } = this.props;
+    dispatch(fetchStoreSettings());
+  }
   render(){
     const { handleSubmit, currencies, countries, languages } = this.props;
     return (
@@ -43,15 +48,28 @@ class StoreSettingForm extends Component {
               <CardHeader><FormattedMessage id="sys.basicInfo" /></CardHeader>
               <CardBody>
                 <FormGroup row>
-                  <Label for="store-name" sm={3}>
+                  <Label for="name" sm={3}>
                     <FormattedMessage id="sys.storeName" />
                   </Label>
                   <Col sm={9}>
                     <Field
                       component={renderField}
-                      name="store-name"
+                      name="name"
                       className="form-control"
-                      id="store-name"
+                      id="name"
+                    />
+                  </Col>
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="description" sm={3}>
+                    <FormattedMessage id="sys.desc" />
+                  </Label>
+                  <Col sm={9}>
+                    <Field
+                      component="textarea"
+                      name="description"
+                      className="form-control"
+                      id="description"
                     />
                   </Col>
                 </FormGroup>
@@ -60,11 +78,12 @@ class StoreSettingForm extends Component {
                     <FormattedMessage id="sys.currency" />
                   </Label>
                   <Col sm={9}>
-                    <Input type="select" name="currency">
+                    <Field component="select" name="currency" className="form-control">
+                      <option value="">--</option>
                       {currencies.map(currency => (
                         <option key={currency.id} value={currency.id}>{currency.name}</option>
                       ))}
-                    </Input>
+                    </Field>
                   </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -72,11 +91,12 @@ class StoreSettingForm extends Component {
                     <FormattedMessage id="sys.country" />
                   </Label>
                   <Col sm={9}>
-                    <Input type="select" name="country">
+                    <Field component="select" name="country" className="form-control">
+                      <option value="">--</option>
                       {countries.map(country => (
                         <option key={country.id} value={country.id}>{country.name}</option>
                       ))}
-                    </Input>
+                    </Field>
                   </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -84,11 +104,12 @@ class StoreSettingForm extends Component {
                     <FormattedMessage id="sys.lang" />
                   </Label>
                   <Col sm={9}>
-                    <Input type="select" name="language">
+                    <Field component="select" name="language" className="form-control">
+                      <option value="">--</option>
                       {languages.map(lang => (
                         <option key={lang.id} value={lang.id}>{lang.name}</option>
                       ))}
-                    </Input>
+                    </Field>
                   </Col>
                 </FormGroup>
               </CardBody>
@@ -146,17 +167,8 @@ StoreSettingForm = reduxForm({
 })(StoreSettingForm);
 
 export default connect((state) => {
-  const {
-    storeName,
-    facebook,
-    twitter,
-  } = state.settingReducer.settings;
   return {
-    initialValues: {
-      'store-name': storeName,
-      facebook,
-      twitter,
-    },
+    initialValues: state.settingReducer.storeSettings,
     enableReinitialize: true,
   };
 })(StoreSettingForm);
