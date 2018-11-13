@@ -74,11 +74,11 @@ class StoreSettingForm extends Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label for="currency" sm={3}>
+                  <Label for="currencyId" sm={3}>
                     <FormattedMessage id="sys.currency" />
                   </Label>
                   <Col sm={9}>
-                    <Field component="select" name="currency" className="form-control">
+                    <Field component="select" name="currencyId" id="currencyId" className="form-control">
                       <option value="">--</option>
                       {currencies.map(currency => (
                         <option key={currency.id} value={currency.id}>{currency.name}</option>
@@ -87,11 +87,11 @@ class StoreSettingForm extends Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label for="country" sm={3}>
+                  <Label for="countryId" sm={3}>
                     <FormattedMessage id="sys.country" />
                   </Label>
                   <Col sm={9}>
-                    <Field component="select" name="country" className="form-control">
+                    <Field component="select" name="countryId" id="countryId" className="form-control">
                       <option value="">--</option>
                       {countries.map(country => (
                         <option key={country.id} value={country.id}>{country.name}</option>
@@ -104,7 +104,7 @@ class StoreSettingForm extends Component {
                     <FormattedMessage id="sys.lang" />
                   </Label>
                   <Col sm={9}>
-                    <Field component="select" name="language" className="form-control">
+                    <Field component="select" name="language" id="language" className="form-control">
                       <option value="">--</option>
                       {languages.map(lang => (
                         <option key={lang.id} value={lang.id}>{lang.name}</option>

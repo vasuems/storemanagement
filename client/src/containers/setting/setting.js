@@ -138,9 +138,9 @@ class Setting extends Component {
                     </Button><br /><br />
                     <StoreSettingForm 
                       onSubmit={this.handleSettingSubmit}
-                      currencies={[{id: 1, name: 'SGD'}, {id: 2, name: 'USD'}, {id: 3, name: 'MYR'}]}
-                      countries={[{id: 1, name: 'Singapore'}, {id: 2, name: 'United States'}, {id: 3, name: 'Malaysia'}]}
-                      languages={[{id: 1, name: 'English'}, {id: 2, name: '简体中文'}, {id: 3, name: 'Malay'}]}
+                      currencies={[{id: 3, name: 'SGD'}, {id: 2, name: 'USD'}, {id: 1, name: 'MYR'}]}
+                      countries={[{id: 3, name: 'Singapore'}, {id: 2, name: 'United States'}, {id: 1, name: 'Malaysia'}]}
+                      languages={[{id: 'en', name: 'English'}, {id: 'zh-cn', name: '简体中文'}, {id: 'my', name: 'Malay'}]}
                     />
                   </Col>
                 </Row>
