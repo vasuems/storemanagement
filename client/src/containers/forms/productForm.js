@@ -89,7 +89,7 @@ const renderTextArea = ({
 
 class ProductForm extends Component {
   render() {
-    const { onSubmit, categories, currencies } = this.props;
+    const { onSubmit, categories } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <Form onSubmit={onSubmit}>

@@ -89,6 +89,4 @@ Product.prototype.delete = function(code, db) {
   });
 };
 
-module.exports = {
-  Product,
-};
+module.exports = Product;

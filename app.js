@@ -235,10 +235,10 @@ app.get(
   [authMiddleware, getUserCode],
   async (req, res) => {
     try {
-      const store = new Product();
+      const product = new Product();
       const mysql = new MySQL();
       const db = mysql.connect();
-      const data = await store.update(store, db);      
+      const data = await product.get(req.params.code, db);      
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);

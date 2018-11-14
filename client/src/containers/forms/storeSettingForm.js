@@ -159,6 +159,7 @@ StoreSettingForm.propTypes = {
   countries: PropTypes.array.isRequired,
   currencies: PropTypes.array.isRequired,
   languages: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 StoreSettingForm = reduxForm({
