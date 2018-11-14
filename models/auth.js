@@ -24,9 +24,10 @@ OAuth2Request.prototype.auth = function(db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select code, password, salt, token, user_refresh_token.status as tokenStatus from user left join user_refresh_token on user.code = user_refresh_token.user_id where email='${
-        this.username
-      }' and user.status=1 `,
+      `select code, password, salt, token, user_refresh_token.status as tokenStatus
+       from user
+       left join user_refresh_token on user.code = user_refresh_token.user_id
+       where email='${this.username}' and user.status=1 `,
       (error, results) => {
         // Check if account is valid and active
         if (error || results.length == 0){

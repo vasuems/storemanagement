@@ -9,7 +9,7 @@ const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 require('dotenv').load();
 
-const { OAuth2Request, User, Contact, Store } = require('./models');
+const { OAuth2Request, User, Contact, Store, Product } = require('./models');
 const { MySQL } = require('./db');
 const { UnauthorisedError } = require('./exceptions');
 
@@ -76,6 +76,8 @@ app.post('/auth', async (req, res) => {
       );
 
       const data = await auth.auth(db);
+      //TODO: call another function to get store code
+
       res.send(data);
     } else {
       const auth = new OAuth2Request();
@@ -218,6 +220,22 @@ app.put(
     try {
       const { code, name, description, logo, countryId, language, currencyId } =  req.body;
       const store = new Store(code, name, description, logo, countryId, language, currencyId, res.locals.code);
+      const mysql = new MySQL();
+      const db = mysql.connect();
+      const data = await store.update(store, db);      
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.get(
+  '/products/:code',
+  [authMiddleware, getUserCode],
+  async (req, res) => {
+    try {
+      const store = new Product();
       const mysql = new MySQL();
       const db = mysql.connect();
       const data = await store.update(store, db);      
