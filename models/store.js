@@ -29,8 +29,7 @@ Store.prototype.get = function(code, db) {
        from store where code='${code}' and status=1`,
       (error, results) => {  
         db.end();
-        if (error) {
-            
+        if (error || results.length == 0) {
           reject(new NoRecordFoundError('No store found.'));
         } else {   
           const { name, code, description, logo, countryId, language, currencyId, facebook, twitter } = results[0];
@@ -59,9 +58,9 @@ Store.prototype.add = function(store, db) {
       db.query(
         `insert into store(name, code, description, created_on, created_by, logo, country_id, language, currency_id, facebook, twitter) 
          values('${name}', '${code}', '${description}', '${ moment.utc().format('YYYY-MM-DD HH:mm:ss')}', '${createdBy}', '${logo}', ${countryId}, '${language}', ${currencyId}, '${facebook}', '${twitter}')`,
-        error => {
+        (error, results) => {
           db.end();
-          if (error) {
+          if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide store data.'));
           } else {
             resolve(new Store(code, name, description, logo, countryId, language, currencyId, createdBy, facebook, twitter));
@@ -100,8 +99,8 @@ Store.prototype.update = function(store, db) {
 Store.prototype.delete = function(code, db) {
   return new Promise((resolve, reject) => {
     db.connect();
-    db.query(`update store set status=0 where code=${code}`, error => {
-      if (error) {
+    db.query(`update store set status=0 where code=${code}`, (error, results) => {
+      if (error || results.affectedRows == 0) {
         reject(new BadRequestError('Deleting store failed.'));
       } else {
         resolve('Store deleted.');

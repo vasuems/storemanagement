@@ -1,7 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import { fetchStoreSettingsSuccess, fetchStoreSettingsFailed } from '../actions';
-import { settings } from '../apis/mocks/responses';
 import config from '../config';
 
 export function* fetchStoreSettings(action) {

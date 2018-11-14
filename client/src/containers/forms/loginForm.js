@@ -54,7 +54,6 @@ class LoginForm extends Component {
           name="username"
           id="username"
           placeholder={formatMessage({ id: 'sys.email' })}
-          value="test@test.com"
         />
         <Field
           component={renderField}
@@ -62,7 +61,6 @@ class LoginForm extends Component {
           name="password"
           id="password"
           placeholder={formatMessage({ id: 'sys.pwd' })}
-          value="password"
         />
         <Button type="submit" block>
           <FormattedMessage id="sys.signin" />
@@ -84,6 +82,8 @@ LoginForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
+  auth: PropTypes.bool, 
+  history: PropTypes.object.isRequired,
 };
 
 LoginForm = reduxForm({

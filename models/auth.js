@@ -29,7 +29,7 @@ OAuth2Request.prototype.auth = function(db) {
       }' and user.status=1 `,
       (error, results) => {
         // Check if account is valid and active
-        if (error || !results[0]) {
+        if (error || results.length == 0){
           reject(new UnauthorisedError('Not authorised.'));
         } else {
           const { code, password, salt, token } = results[0];
@@ -96,7 +96,7 @@ OAuth2Request.prototype.validateToken = function(token, db) {
         .utc()
         .format('YYYY-MM-DD HH:mm:ss')}' order by id desc limit 1`,
       (error, results) => {
-        if (error || !results[0]) {
+        if (error || results.length == 0) {
           reject(new UnauthorisedError('Unauthorised request.'));
         } else {
           resolve('Token validated.');
@@ -121,7 +121,7 @@ OAuth2Request.prototype.refreshToken = function(token, db) {
           db.query(
             `select id, code, salt from user where id='${userId}' and status=1`,
             (error, results) => {
-              if (error) {
+              if (error || results.length == 0) {
                 db.end();
                 reject(new UnauthorisedError('Unauthorised request.'));
               } else {
