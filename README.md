@@ -66,6 +66,7 @@ Step 5, create your own config.js in **client** directory with following setting
 ```javascript
 const config = {
   apiDomain: 'YOUR_API_DOMAIN',
+  accessTokenKey: 'THE_KEY_FOR_LOCAL_STORAGE_TO_STORE_ACCESS_TOKEN',
 };
 
 export default config;
