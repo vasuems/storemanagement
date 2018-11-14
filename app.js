@@ -238,7 +238,9 @@ app.get(
       const product = new Product();
       const mysql = new MySQL();
       const db = mysql.connect();
-      const data = await product.get(req.params.code, db);      
+      const data = await product.get(req.params.code, db);
+      
+      //TODO: add store code check here
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
