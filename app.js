@@ -252,4 +252,25 @@ app.get(
   }
 );
 
+app.get(
+  '/stores/:code/products',
+  [authMiddleware, getUserCodes],
+  async (req, res) => {
+    try {
+      const product = new Product();
+      const mysql = new MySQL();
+      const db = mysql.connect();
+      const data = await product.getAllByStoreId(req.params.code, db);
+
+      if(req.params.code !== res.locals.storeCode){
+        throw new UnauthorisedError('Invalid store ID.');
+      }
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 module.exports = app;

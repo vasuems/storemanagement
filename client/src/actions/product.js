@@ -14,8 +14,8 @@ export const FETCH_PRODUCT_PARENT_CATEGORIES = 'FETCH_PRODUCT_PARENT_CATEGORIES'
 export const FETCH_PRODUCT_PARENT_CATEGORIES_SUCCESS = 'FETCH_PRODUCT_PARENT_CATEGORIES_SUCCESS';
 export const FETCH_PRODUCT_PARENT_CATEGORIES_FAILED = 'FETCH_PRODUCT_PARENT_CATEGORIES_FAILED';
 
-export function fetchProducts() {
-  return { type: FETCH_PRODUCTS };
+export function fetchProducts(data) {
+  return { type: FETCH_PRODUCTS, value: data };
 }
 
 export function fetchProductsSuccess(data) {

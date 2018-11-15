@@ -21,7 +21,14 @@ export function* fetchProductCategories(action) {
 
 export function* fetchProducts(action) {
   try {
-    yield put(fetchProductsSuccess(products));
+    const res = yield axios({
+      method: 'get',
+      url: `${config.apiDomain}/stores/${action.value}/products`,
+      headers: {
+        'authorization': localStorage.getItem(config.accessTokenKey),
+      },
+    });
+    yield put(fetchProductsSuccess(res.data));
   } catch (error) {
     yield put(fetchProductsFailed());
   }

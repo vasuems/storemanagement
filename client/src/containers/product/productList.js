@@ -27,7 +27,8 @@ import { ProductListItem } from '../../components';
 class ProductList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchProducts());
+    //TODO: to replace the store ID passing to action creator
+    dispatch(fetchProducts('asdfasdfasdfasd'));
   }
 
   onViewClick = (id) => {
@@ -152,9 +153,11 @@ ProductList.propTypes = {
   intl: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  products: state.productReducer.products,
-});
+const mapStateToProps = state => {
+  return {
+    products: state.productReducer.products,
+  };
+};
 
 export default connect(
   mapStateToProps,

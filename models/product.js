@@ -45,6 +45,29 @@ Product.prototype.get = function(code, db) {
   });
 };
 
+Product.prototype.getAllByStoreId = function(id, db, page=1, pageSize=20) {
+  return new Promise((resolve, reject) => {
+    db.connect();
+    db.query(
+      `select code, name, catigory_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity, added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage
+       from product where store_id='${id}' and status=1 limit ${(page-1)*pageSize}, ${pageSize}`,
+      (error, results) => {
+        db.end();
+        if (error || results.length == 0) {
+          reject(new NoRecordFoundError('No products found.'));
+        } else {
+          const products = results.map(product => {
+            const { code, name, categoryId, storeId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, cost, coverImage } = product;
+            return new Product(code, name, categoryId, storeId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, cost, coverImage);
+          });
+
+          resolve(products);
+        }
+      }
+    );
+  });
+};
+
 Product.prototype.add = function(product, db) {
   return new Promise((resolve, reject) => {
     if (product instanceof Product) {

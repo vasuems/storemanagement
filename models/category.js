@@ -35,60 +35,62 @@ Category.prototype.get = function(id, db) {
       }
     );
   });
-}
+};
 
 Category.prototype.getCategoriesByStoreId = function(id, db, page=1, pageSize=20) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select id, name, parent_id as parentId from categories where store_id='${id}' and status=1`,
+      `select code, name, store_id as storeId, parent_id as parentId from categories where store_id='${id}' and status=1 limit ${(page-1)*pageSize}, ${pageSize}`,
       (error, results) => {
         db.end();
-        if (error) {
+        if (error || results.length == 0) {
           reject(new NoRecordFoundError('No categories found.'));
         } else {
-          const contacts = results.map(contact => {
-            const { id, name, parentId } = contact;
-            return new Category(userId, number, type, areaCode, countryId);
+          const categories = results.map(cat => {
+            const { code, name, storeId, parentId } = cat;
+            return new Category(code, name, storeId, parentId);
           });
-          resolve({ user, contacts });
+          resolve(categories);
         }
       }
     );
   });
-}
+};
 
 
-Category.prototype.add = function(product, db) {
+Category.prototype.add = function(category, db) {
   return new Promise((resolve, reject) => {
-    if (product instanceof Product) {
-      db.connect();
-      const { code, name, categoryId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage } = product;
+    if (category instanceof Category) {
+      Object.keys(category).forEach(function(key, index) {
+        if(!category[key]){
+          reject(
+            new InvalidModelArgumentsError(
+              'Not all required fields have a value.'
+            )
+          );
+        }
+      });
 
-      if (!code || !name || !categoryId || !sku || !description || !quantity|| !allowQuantity|| !addedOn|| !addedBy|| !unitPrice|| !coverImage) {
-        reject(
-          new InvalidModelArgumentsError(
-            'Not all required fields have a value.'
-          )
-        );
-      }
+      const { code, name, storeId, parentId } = category;
+      db.connect();      
       db.query(
-        `insert into product(code, name, category_id, sku, description, quantity, allow_quantity, added_on, added_by, unit_price, cover_image) 
-         values('${code}', '${name}', ${categoryId}, '${sku}', '${description}', ${quantity}, ${allowQuantity}, '${addedOn}', ${addedBy}, ${unitPrice}, '${coverImage}')`,
-        error => {
+        `insert into categories(code, name, store_id, parent_id) 
+         values('${code}', '${name}', '${storeId}', '${parentId}')`,
+        (error, results) => {
           db.end();
-          if (error) {
-            reject(new BadRequestError('Invalide product data.'));
+          if (error || results.affectedRows == 0) {
+            reject(new BadRequestError('Invalide category data.'));
           } else {
-            resolve(new Product(code, name, categoryId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage));
+            resolve(new Category(code, name, storeId, parentId));
           }
         }
       );
     } else {
-      reject(new BadRequestError('Invalide product data.'));
+      reject(new BadRequestError('Invalide category data.'));
     }
   });
-}
+};
 
 Category.prototype.delete = function(id, db) {
   return new Promise((resolve, reject) => {
@@ -101,8 +103,8 @@ Category.prototype.delete = function(id, db) {
       }
     });
   });
-}
+};
 
 module.exports = {
   Category,
-}
+};
