@@ -24,16 +24,17 @@ OAuth2Request.prototype.auth = function(db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select code, password, salt, token, user_refresh_token.status as tokenStatus
+      `select code, password, salt, token, urt.status as tokenStatus, su.store_id as storeCode
        from user
-       left join user_refresh_token on user.code = user_refresh_token.user_id
-       where email='${this.username}' and user.status=1 `,
+       left join user_refresh_token as urt on user.code = urt.user_id
+       left join store_user as su on user.code = su.user_id
+       where email='${this.username}' and user.status=1 and su.status=1`,
       (error, results) => {
         // Check if account is valid and active
         if (error || results.length == 0){
           reject(new UnauthorisedError('Not authorised.'));
         } else {
-          const { code, password, salt, token } = results[0];
+          const { code, password, salt, token, tokenStatus, storeCode } = results[0];
 
           if (password === md5(`${this.password + salt}`)) {
             // If password matched then generating new access token            
@@ -41,6 +42,7 @@ OAuth2Request.prototype.auth = function(db) {
               {
                 data: {
                   code,
+                  storeCode,
                   expiry: moment.utc().format('YYYY-MM-DD HH:mm:ss'),
                 },
               },

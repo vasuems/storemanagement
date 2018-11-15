@@ -9,10 +9,12 @@ const {
 } = require('../exceptions');
 
 
-function Product(code, name, categoryId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage) {
+function Product(code, name, categoryId, storeId, sku, description, quantity, allowQuantity, 
+  addedOn, addedBy, unitPrice, coverImage) {
   this.code = code || '';
   this.name = name || '';
-  this.categoryId = categoryId || 0;
+  this.categoryId = categoryId || '';
+  this.storeId = storeId || '';
   this.sku = sku || '';
   this.description = description || '';
   this.quantity = quantity || 0;
@@ -27,15 +29,15 @@ Product.prototype.get = function(code, db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select code, name, catigory_id as categoryId, sku, description, quantity, allow_quantity as allowQuantity, added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cover_image as coverImage
+      `select code, name, catigory_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity, added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cover_image as coverImage
        from product where code='${code}' and status=1`,
       (error, results) => {
         db.end();
         if (error || results.length == 0) {
           reject(new NoRecordFoundError('No product found.'));
         } else {
-          const { code, name, categoryId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage } = results[0];
-          resolve(new Product(code, name, categoryId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage));
+          const { code, name, categoryId, storeId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage } = results[0];
+          resolve(new Product(code, name, categoryId, storeId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage));
         }
       }
     );
@@ -55,18 +57,18 @@ Product.prototype.add = function(product, db) {
         }
       });
 
-      const { code, name, categoryId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage } = product;
+      const { code, name, categoryId, storeId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage } = product;
       
       db.connect();      
       db.query(
-        `insert into product(code, name, category_id, sku, description, quantity, allow_quantity, added_on, added_by, unit_price, cover_image) 
-         values('${code}', '${name}', ${categoryId}, '${sku}', '${description}', ${quantity}, ${allowQuantity}, '${addedOn}', ${addedBy}, ${unitPrice}, '${coverImage}')`,
+        `insert into product(code, name, category_id, store_id, sku, description, quantity, allow_quantity, added_on, added_by, unit_price, cover_image) 
+         values('${code}', '${name}', ${categoryId}, ${storeId}, '${sku}', '${description}', ${quantity}, ${allowQuantity}, '${addedOn}', ${addedBy}, ${unitPrice}, '${coverImage}')`,
         (error, results) => {
           db.end();
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide product data.'));
           } else {
-            resolve(new Product(code, name, categoryId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage));
+            resolve(new Product(code, name, categoryId, storeId, sku, description, quantity, allowQuantity, addedOn, addedBy, unitPrice, coverImage));
           }
         }
       );

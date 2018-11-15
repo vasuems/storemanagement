@@ -48,7 +48,7 @@ const userCodeVerifier = (req, res, next) => {
   }
 };
 
-const getUserCode = (req, res, next) => {
+const getUserCodes = (req, res, next) => {
   try {
     const decoded = jwt.verify(req.headers.authorization, process.env.tokenSecret);
     if (!decoded) {
@@ -56,6 +56,7 @@ const getUserCode = (req, res, next) => {
     }
 
     res.locals.code = decoded.data.code;
+    res.locals.storeCode = decoded.data.storeCode;
     next();
   } catch (err) {
     res.status(err.statusCode).send(err);
@@ -215,7 +216,7 @@ app.get(
 
 app.put(
   '/stores/:code',
-  [authMiddleware, getUserCode],
+  [authMiddleware, getUserCodes],
   async (req, res) => {
     try {
       const { code, name, description, logo, countryId, language, currencyId } =  req.body;
@@ -232,7 +233,7 @@ app.put(
 
 app.get(
   '/products/:code',
-  [authMiddleware, getUserCode],
+  [authMiddleware, getUserCodes],
   async (req, res) => {
     try {
       const product = new Product();
@@ -240,13 +241,15 @@ app.get(
       const db = mysql.connect();
       const data = await product.get(req.params.code, db);
       
-      //TODO: add store code check here
+      if(data.storeId !== res.locals.storeCode){
+        throw new UnauthorisedError('Invalid product ID.');
+      }
+
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
     }
   }
 );
-
 
 module.exports = app;
