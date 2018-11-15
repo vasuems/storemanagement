@@ -12,12 +12,13 @@ import {
   CardBody,
   FormGroup,
   Label,
-  InputGroupAddon,
   Input,
   InputGroup,
 } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { fetchProductDetails } from '../../actions';
 
 const validate = (values) => {
   const errors = {};
@@ -88,11 +89,21 @@ const renderTextArea = ({
 );
 
 class ProductForm extends Component {
+  componentDidMount(){
+
+    const { dispatch, match: { params: { id } } } = this.props;
+    dispatch(fetchProductDetails(id));
+  }
+
+  onSubmit = (data) => {
+    const { dispatch } = this.props;
+  };
+
   render() {
-    const { onSubmit, categories } = this.props;
+    const { handleSubmit, categories } = this.props;
     const { formatMessage } = this.props.intl;
     return (
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
         <Row>
           <Col md={7}>
             <Card>
@@ -197,10 +208,10 @@ class ProductForm extends Component {
               <CardHeader><FormattedMessage id="sys.inventory" /></CardHeader>
               <CardBody>
                 <FormGroup row>
-                  <Label for="allow-quantity" sm={4}>
+                  <Label for="allow-quantity" sm={5}>
                     <FormattedMessage id="sys.allowQty" />?
                   </Label>
-                  <Col sm={8}>
+                  <Col sm={7}>
                     <InputGroup>
                       <Field
                         component="input"
@@ -213,10 +224,10 @@ class ProductForm extends Component {
                   </Col>
                 </FormGroup>                
                 <FormGroup row>
-                  <Label for="qty" sm={4}>
+                  <Label for="qty" sm={5}>
                     <FormattedMessage id="sys.qty" />
                   </Label>
-                  <Col sm={8}>
+                  <Col sm={7}>
                     <InputGroup>
                       <Field
                         component={renderNumberField}
@@ -248,23 +259,15 @@ class ProductForm extends Component {
                 </FormGroup>
                 <FormGroup row>
                   <Label for="discount" sm={4}>
-                    <FormattedMessage id="sys.discountBy" />
+                    <FormattedMessage id="sys.discountPrice" />
                   </Label>
                   <Col sm={8}>
-                    <InputGroup>
-                      <InputGroupAddon addonType="prepend">
-                        <Input type="select" name="discountType">
-                          <option value="percent">%</option>
-                          <option value="value">$</option>
-                        </Input>
-                      </InputGroupAddon>
-                      <Field
-                        component={renderDecimalField}
-                        type="number"
-                        name="discount"
-                        id="discount"                        
-                      />
-                    </InputGroup>
+                    <Field
+                      component={renderDecimalField}
+                      type="number"
+                      name="discount"
+                      id="discount"               
+                    />
                   </Col>
                 </FormGroup>
               </CardBody>
@@ -277,7 +280,7 @@ class ProductForm extends Component {
 }
 
 ProductForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   intl: PropTypes.object.isRequired,
 };
@@ -287,18 +290,9 @@ ProductForm = reduxForm({
   validate,
 })(ProductForm);
 
-export default connect((state) => {
-  const {
-    name, description, sku, price, quantity,
-  } = state.productReducer.productDetails;
+export default connect(state => {  
   return {
-    initialValues: {
-      name,
-      description,
-      sku,
-      price,
-      quantity,
-    },
+    initialValues: state.productReducer.productDetails,
     enableReinitialize: true,
   };
-})(injectIntl(ProductForm));
+})(injectIntl(withRouter(ProductForm)));

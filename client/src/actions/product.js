@@ -38,8 +38,8 @@ export function fetchProductCategoriesFailed() {
   return { type: FETCH_PRODUCT_CATEGORIES_FAILED };
 }
 
-export function fetchProductDetails() {
-  return { type: FETCH_PRODUCT_DETAILS };
+export function fetchProductDetails(data) {
+  return { type: FETCH_PRODUCT_DETAILS, value: data };
 }
 
 export function fetchProductDetailsSuccess(data) {

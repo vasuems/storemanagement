@@ -1,6 +1,6 @@
 export const products = [
   {
-    id: 'asdfa1234123asdfa4',
+    id: 'asdfasdfa',
     name: 'Test Product 1',
     sku: 'asdfasasdfasdfasdfasddfasd1',
     url: '/products/test-product-1',
@@ -251,6 +251,8 @@ export const productDetails = {
     + 'nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt '
     + 'mollit anim id est laborum.',
   price: 12.90,
+  discount: 12.90,
+  cost: 5.00,
   currency: 'SGD',
   currencySign: '$',
   quantity: 10,

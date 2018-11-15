@@ -240,7 +240,7 @@ app.get(
       const mysql = new MySQL();
       const db = mysql.connect();
       const data = await product.get(req.params.code, db);
-      
+
       if(data.storeId !== res.locals.storeCode){
         throw new UnauthorisedError('Invalid product ID.');
       }

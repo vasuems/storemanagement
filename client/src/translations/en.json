@@ -79,6 +79,7 @@
   "sys.price": "Price",
   "sys.unitPrice": "Unit price",
   "sys.costPrice": "Cost price",
+  "sys.discountPrice": "Discount price",
   "sys.discountBy": "Discount by",
   "sys.shipTo": "Ship to",
   "sys.shippingBy": "Shipping by",
