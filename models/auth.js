@@ -31,13 +31,20 @@ OAuth2Request.prototype.auth = function(db) {
        where email='${this.username}' and user.status=1 and su.status=1`,
       (error, results) => {
         // Check if account is valid and active
-        if (error || results.length == 0){
+        if (error || results.length == 0) {
           reject(new UnauthorisedError('Not authorised.'));
         } else {
-          const { code, password, salt, token, tokenStatus, storeCode } = results[0];
+          const {
+            code,
+            password,
+            salt,
+            token,
+            tokenStatus,
+            storeCode,
+          } = results[0];
 
           if (password === md5(`${this.password + salt}`)) {
-            // If password matched then generating new access token            
+            // If password matched then generating new access token
             const accessToken = jwt.sign(
               {
                 data: {
@@ -48,7 +55,7 @@ OAuth2Request.prototype.auth = function(db) {
               },
               process.env.tokenSecret
             );
-            
+
             db.query(
               `insert into user_access_token(token, user_id, expired_on) values('${accessToken}', '${code}', '${moment
                 .utc()

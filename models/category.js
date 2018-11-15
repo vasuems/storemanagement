@@ -8,7 +8,6 @@ const {
   NoRecordFoundError,
 } = require('../exceptions');
 
-
 function Category(code, name, storeId, parentId) {
   this.code = code || '';
   this.name = name || '';
@@ -37,11 +36,18 @@ Category.prototype.get = function(id, db) {
   });
 };
 
-Category.prototype.getCategoriesByStoreId = function(id, db, page=1, pageSize=20) {
+Category.prototype.getCategoriesByStoreId = function(
+  id,
+  db,
+  page = 1,
+  pageSize = 20
+) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select code, name, store_id as storeId, parent_id as parentId from categories where store_id='${id}' and status=1 limit ${(page-1)*pageSize}, ${pageSize}`,
+      `select code, name, store_id as storeId, parent_id as parentId from categories where store_id='${id}' and status=1 limit ${(page -
+        1) *
+        pageSize}, ${pageSize}`,
       (error, results) => {
         db.end();
         if (error || results.length == 0) {
@@ -58,12 +64,11 @@ Category.prototype.getCategoriesByStoreId = function(id, db, page=1, pageSize=20
   });
 };
 
-
 Category.prototype.add = function(category, db) {
   return new Promise((resolve, reject) => {
     if (category instanceof Category) {
       Object.keys(category).forEach(function(key, index) {
-        if(!category[key]){
+        if (!category[key]) {
           reject(
             new InvalidModelArgumentsError(
               'Not all required fields have a value.'
@@ -73,7 +78,7 @@ Category.prototype.add = function(category, db) {
       });
 
       const { code, name, storeId, parentId } = category;
-      db.connect();      
+      db.connect();
       db.query(
         `insert into categories(code, name, store_id, parent_id) 
          values('${code}', '${name}', '${storeId}', '${parentId}')`,

@@ -21,7 +21,8 @@
   },
   "scripts": {
     "lint:client": "./node_modules/.bin/eslint --fix client/src/ && prettier --single-quote --trailing-comma=es5 --write \"./client/src/**/*.js\"",
-    "lint:server": "./node_modules/.bin/eslint --fix models/ && prettier --single-quote --trailing-comma=es5 --write \"./models/**/*.js\"",
+    "lint:server": "./node_modules/.bin/eslint --fix models/",
+    "prettier:server": "prettier --single-quote --trailing-comma=es5 --write \"./models/**/*.js\"",
     "build:client": "cd client && yarn build",
     "client": "cd client && yarn start",
     "server": "nodemon app.local.js",
@@ -35,6 +36,6 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "mocha": "^5.2.0",
-    "prettier": "1.14.2"
+    "prettier": "1.15.2"
   }
 }

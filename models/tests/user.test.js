@@ -12,7 +12,7 @@ describe('Create a new user object', () => {
       '2018-11-11 20:29:00',
       'user'
     );
-    
+
     assert.equal(user instanceof User, true);
   });
 });

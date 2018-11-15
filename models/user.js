@@ -60,7 +60,7 @@ User.prototype.add = function(user, db) {
   return new Promise((resolve, reject) => {
     if (user instanceof User) {
       Object.keys(user).forEach(function(key, index) {
-        if(!user[key]){
+        if (!user[key]) {
           reject(
             new InvalidModelArgumentsError(
               'Not all required fields have a value.'

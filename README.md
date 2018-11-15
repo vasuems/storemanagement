@@ -144,4 +144,4 @@ to make sure all formatting or other issues have been properly fixed.
 
 
 ## License
-LF Commerce is [Apache-2.0 licensed.](https://github.com/ccwukong/lfcommerce/blob/master/LICENSE)
+Elf Commerce is [Apache-2.0 licensed.](https://github.com/ccwukong/elfcommerce/blob/master/LICENSE)
