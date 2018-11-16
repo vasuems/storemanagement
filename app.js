@@ -36,8 +36,9 @@ const authMiddleware = async (req, res, next) => {
     const auth = new OAuth2Request();
     const res = await auth.validateToken(
       req.headers.authorization,
-      new MySQL().connect()
+      mysql.connect()
     );
+
     next();
   } catch (err) {
     res.status(err.statusCode).send(err);
@@ -115,10 +116,9 @@ app.post('/accounts', async (req, res) => {
       md5(`${req.body.password + salt}`),
       salt
     );
-    const mysql = new MySQL();
     const db = mysql.connect();
-
     const data = await user.add(user, db);
+
     res.send(data);
   } catch (err) {
     res.status(err.statusCode).send(err);
@@ -131,10 +131,9 @@ app.get(
   async (req, res) => {
     try {
       const user = new User();
-      const mysql = new MySQL();
       const db = mysql.connect();
-
       const data = await user.get(res.locals.code, db);
+
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
@@ -148,9 +147,7 @@ app.post(
   async (req, res) => {
     try {
       const user = new User();
-      const mysql = new MySQL();
       const db = mysql.connect();
-
       const data = await user.addContact(
         new Contact(
           res.locals.code,
@@ -161,6 +158,7 @@ app.post(
         ),
         db
       );
+
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
@@ -174,9 +172,7 @@ app.put(
   async (req, res) => {
     try {
       const user = new User();
-      const mysql = new MySQL();
       const db = mysql.connect();
-
       const data = await user.updateContact(
         req.body.id,
         new Contact(
@@ -188,6 +184,7 @@ app.put(
         ),
         db
       );
+
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
@@ -201,10 +198,9 @@ app.delete(
   async (req, res) => {
     try {
       const user = new User();
-      const mysql = new MySQL();
       const db = mysql.connect();
-
       const data = await user.deleteContact(req.params.id, db);
+
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
@@ -215,7 +211,6 @@ app.delete(
 app.get('/stores/:code', authMiddleware, async (req, res) => {
   try {
     const store = new Store();
-    const mysql = new MySQL();
     const db = mysql.connect();
     const data = await store.get(req.params.code, db);
 
@@ -246,9 +241,9 @@ app.put('/stores/:code', [authMiddleware, getUserCodes], async (req, res) => {
       currencyId,
       res.locals.code
     );
-    const mysql = new MySQL();
     const db = mysql.connect();
     const data = await store.update(store, db);
+
     res.send(data);
   } catch (err) {
     res.status(err.statusCode).send(err);
@@ -258,7 +253,6 @@ app.put('/stores/:code', [authMiddleware, getUserCodes], async (req, res) => {
 app.get('/products/:code', [authMiddleware, getUserCodes], async (req, res) => {
   try {
     const product = new Product();
-    const mysql = new MySQL();
     const db = mysql.connect();
     const data = await product.get(req.params.code, db);
 
@@ -278,7 +272,6 @@ app.get(
   async (req, res) => {
     try {
       const product = new Product();
-      const mysql = new MySQL();
       const db = mysql.connect();
       const data = await product.getAllByStoreId(req.params.code, db);
 
@@ -325,7 +318,6 @@ app.post(
         cost,
         coverImage
       );
-      const mysql = new MySQL();
       const db = mysql.connect();
       const data = await product.add(product, db);
 
@@ -342,7 +334,6 @@ app.get(
   async (req, res) => {
     try {
       const category = new Category();
-      const mysql = new MySQL();
       const db = mysql.connect();
       const data = await category.getAllByStoreId(req.params.code, db);
 

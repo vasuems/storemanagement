@@ -15,7 +15,7 @@ import {
   Input,
   InputGroupAddon,
 } from 'reactstrap';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { 
   FiPlusCircle,
@@ -31,13 +31,21 @@ class ProductList extends Component {
     dispatch(fetchProducts('asdfasdfasdfasd'));
   }
 
+  componentDidUpdate(){
+    const { auth, history } = this.props;
+
+    if(auth === false){
+      return <Redirect to='/' />
+    }
+  }
+
   onViewClick = (id) => {
-    this.props.history.push(`/products/${id}`);
+    const { history } = this.props;
+    history.push(`/products/${id}`);
   };
 
   render() {
-    const { history, products } = this.props;
-    const { formatMessage } = this.props.intl;
+    const { history, products, intl: { formatMessage } } = this.props;
     return (
       <div>
         <Breadcrumb>
@@ -156,6 +164,7 @@ ProductList.propTypes = {
 const mapStateToProps = state => {
   return {
     products: state.productReducer.products,
+    auth: state.authReducer.auth,
   };
 };
 

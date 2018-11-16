@@ -101,7 +101,7 @@ Category.prototype.add = function(category, db) {
 Category.prototype.delete = function(code, db) {
   return new Promise((resolve, reject) => {
     db.connect();
-    db.query(`update category set status=0 where id='${code}'`, error => {
+    db.query(`update category set status=0 where code='${code}'`, error => {
       if (error) {
         reject(new BadRequestError('Deleting category failed.'));
       } else {

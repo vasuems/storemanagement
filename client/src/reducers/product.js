@@ -5,12 +5,14 @@ import {
   FETCH_PRODUCT_CATEGORIES_FAILED,
   FETCH_PRODUCT_DETAILS_SUCCESS,
   FETCH_PRODUCT_DETAILS_FAILED,
+  AUTH_FAILED,
 } from '../actions';
 
 const initialState = {
   products: [],
   categories: [],
   productDetails: {},
+  authenticated: true,
 };
 
 export default function productReducer(state = initialState, action) {

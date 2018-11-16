@@ -22,12 +22,6 @@ import SideBarContent from './components/sideBar';
 
 const routes = [
   {
-    path: '/',
-    exact: true,
-    sidebar: () => <SideBarContent />,
-    main: () => <Dashboard />,
-  },
-  {
     path: '/dashboard',
     exact: true,
     sidebar: () => <SideBarContent />,

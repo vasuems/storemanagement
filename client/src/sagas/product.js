@@ -7,6 +7,7 @@ import {
   fetchProductsFailed,
   fetchProductDetailsSuccess,
   fetchProductDetailsFailed,
+  authFailed,
 } from '../actions';
 import { categories, products, productDetails } from '../apis/mocks/responses';
 import config from '../config';
@@ -22,7 +23,11 @@ export function* fetchProductCategories(action) {
     });
     yield put(fetchProductCategoriesSuccess(res.data));
   } catch (error) {
-    yield put(fetchProductCategoriesFailed());
+    if(error.response.status === 401){
+      yield put(authFailed());
+    }else{
+      yield put(fetchProductCategoriesFailed());
+    }
   }
 }
 
@@ -35,9 +40,14 @@ export function* fetchProducts(action) {
         'authorization': localStorage.getItem(config.accessTokenKey),
       },
     });
+
     yield put(fetchProductsSuccess(res.data));
   } catch (error) {
-    yield put(fetchProductsFailed());
+    if(error.response.status === 401){
+      yield put(authFailed());
+    }else{
+      yield put(fetchProductsFailed());
+    }
   }
 }
 
@@ -53,6 +63,10 @@ export function* fetchProductDetails(action) {
 
     yield put(fetchProductDetailsSuccess(productDetails));
   } catch (error) {
-    yield put(fetchProductDetailsFailed());
+    if(error.response.status === 401){
+      yield put(authFailed());
+    }else{
+      yield put(fetchProductDetailsFailed());
+    }
   }
 }
