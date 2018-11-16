@@ -82,7 +82,7 @@ LoginForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
-  auth: PropTypes.bool, 
+  auth: PropTypes.object, 
   history: PropTypes.object.isRequired,
 };
 

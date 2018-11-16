@@ -4,17 +4,18 @@ import { Button, Badge } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
 const CategoryListItem = (props) => {
-  const { formatMessage } = props.intl;
+  const { name, parent, status, id, onClick, intl: { formatMessage } } = props;
+
   return (
     <tr>
-      <td>{props.name}</td>
-      <td>{props.parent}</td>
-      <td><Badge color={props.status ? 'success' : 'danger'}>{props.status ? formatMessage({ id: 'sys.active' }) : formatMessage({ id: 'sys.inactive' })}</Badge></td>
+      <td>{name}</td>
+      <td>{parent}</td>
+      <td><Badge color={status ? 'success' : 'danger'}>{status ? formatMessage({ id: 'sys.active' }) : formatMessage({ id: 'sys.inactive' })}</Badge></td>
       <td>
         <Button
           size="sm"
           color="link"
-          onClick={() => props.onClick(props.id)}
+          onClick={() => onClick(id)}
         >
           <FormattedMessage id="sys.view" />
         </Button>
@@ -27,7 +28,7 @@ CategoryListItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   parent: PropTypes.string,
-  status: PropTypes.number.isRequired,
+  status: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
 };

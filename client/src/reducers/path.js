@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   productMenu: false,
+  reportMenu: false,
 };
 
 export default function pathReducer(state = initialState, action) {

@@ -22,7 +22,7 @@ function Product(
   unitPrice,
   cost,
   coverImage,
-  status
+  status=true
 ) {
   this.code = code || '';
   this.name = name || '';
@@ -37,7 +37,7 @@ function Product(
   this.unitPrice = unitPrice || 0.0;
   this.cost = cost || 0.0;
   this.coverImage = coverImage || '';
-  this.status = status || true;
+  this.status = status ? true : false;
 }
 
 Product.prototype.get = function(code, db) {

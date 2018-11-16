@@ -8,12 +8,12 @@ const {
   NoRecordFoundError,
 } = require('../exceptions');
 
-function Category(code, name, storeId, parentId, status) {
+function Category(code, name, storeId, parentId, status=true) {
   this.code = code || '';
   this.name = name || '';
   this.storeId = storeId || '';
   this.parentId = parentId || '';
-  this.status = status || true;
+  this.status = status ? true : false;
 }
 
 Category.prototype.get = function(code, db) {
@@ -52,7 +52,6 @@ Category.prototype.getAllByStoreId = function(
       (error, results) => {
         db.end();
         if (error || results.length == 0) {
-          console.log(error);
           reject(new NoRecordFoundError('No categories found.'));
         } else {
           const categories = results.map(cat => {
