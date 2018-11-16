@@ -7,6 +7,8 @@ const uniqid = require('uniqid');
 const randomstring = require('randomstring');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
+const shortid = require('shortid');
+const moment = require('moment');
 require('dotenv').load();
 
 const { OAuth2Request, User, Contact, Store, Product } = require('./models');
@@ -37,7 +39,10 @@ const authMiddleware = async (req, res, next) => {
 
 const userCodeVerifier = (req, res, next) => {
   try {
-    const decoded = jwt.verify(req.headers.authorization, process.env.tokenSecret);
+    const decoded = jwt.verify(
+      req.headers.authorization,
+      process.env.tokenSecret
+    );
     if (!decoded || decoded.data.code !== req.params.code) {
       throw new UnauthorisedError('Invalid user ID.');
     }
@@ -50,7 +55,10 @@ const userCodeVerifier = (req, res, next) => {
 
 const getUserCodes = (req, res, next) => {
   try {
-    const decoded = jwt.verify(req.headers.authorization, process.env.tokenSecret);
+    const decoded = jwt.verify(
+      req.headers.authorization,
+      process.env.tokenSecret
+    );
     if (!decoded) {
       throw new UnauthorisedError('Invalid user ID.');
     }
@@ -197,60 +205,65 @@ app.delete(
   }
 );
 
-app.get(
-  '/stores/:code',
-  authMiddleware,
-  async (req, res) => {
-    try {
-      const store = new Store();
-      const mysql = new MySQL();
-      const db = mysql.connect();
-      const data = await store.get(req.params.code, db);
-      
-      res.send(data);
-    } catch (err) {
-      res.status(err.statusCode).send(err);
-    }
+app.get('/stores/:code', authMiddleware, async (req, res) => {
+  try {
+    const store = new Store();
+    const mysql = new MySQL();
+    const db = mysql.connect();
+    const data = await store.get(req.params.code, db);
+
+    res.send(data);
+  } catch (err) {
+    res.status(err.statusCode).send(err);
   }
-);
+});
 
-app.put(
-  '/stores/:code',
-  [authMiddleware, getUserCodes],
-  async (req, res) => {
-    try {
-      const { code, name, description, logo, countryId, language, currencyId } =  req.body;
-      const store = new Store(code, name, description, logo, countryId, language, currencyId, res.locals.code);
-      const mysql = new MySQL();
-      const db = mysql.connect();
-      const data = await store.update(store, db);      
-      res.send(data);
-    } catch (err) {
-      res.status(err.statusCode).send(err);
-    }
+app.put('/stores/:code', [authMiddleware, getUserCodes], async (req, res) => {
+  try {
+    const {
+      code,
+      name,
+      description,
+      logo,
+      countryId,
+      language,
+      currencyId,
+    } = req.body;
+    const store = new Store(
+      code,
+      name,
+      description,
+      logo,
+      countryId,
+      language,
+      currencyId,
+      res.locals.code
+    );
+    const mysql = new MySQL();
+    const db = mysql.connect();
+    const data = await store.update(store, db);
+    res.send(data);
+  } catch (err) {
+    res.status(err.statusCode).send(err);
   }
-);
+});
 
-app.get(
-  '/products/:code',
-  [authMiddleware, getUserCodes],
-  async (req, res) => {
-    try {
-      const product = new Product();
-      const mysql = new MySQL();
-      const db = mysql.connect();
-      const data = await product.get(req.params.code, db);
+app.get('/products/:code', [authMiddleware, getUserCodes], async (req, res) => {
+  try {
+    const product = new Product();
+    const mysql = new MySQL();
+    const db = mysql.connect();
+    const data = await product.get(req.params.code, db);
 
-      if(data.storeId !== res.locals.storeCode){
-        throw new UnauthorisedError('Invalid product ID.');
-      }
-
-      res.send(data);
-    } catch (err) {
-      res.status(err.statusCode).send(err);
+    if (data.storeId !== res.locals.storeCode) {
+      throw new UnauthorisedError('Invalid product ID.');
     }
+
+    res.send(data);
+  } catch (err) {
+    res.status(err.statusCode).send(err);
   }
-);
+});
 
 app.get(
   '/stores/:code/products',
@@ -262,9 +275,52 @@ app.get(
       const db = mysql.connect();
       const data = await product.getAllByStoreId(req.params.code, db);
 
-      if(req.params.code !== res.locals.storeCode){
+      if (req.params.code !== res.locals.storeCode) {
         throw new UnauthorisedError('Invalid store ID.');
       }
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.post(
+  '/stores/:code/products',
+  [authMiddleware, getUserCodes],
+  async (req, res) => {
+    try {
+      const {
+        name,
+        categoryId,
+        storeId,
+        sku,
+        description,
+        quantity,
+        allowQuantity,
+        unitPrice,
+        cost,
+        coverImage,
+      } = req.body;
+      const product = new Product(
+        shortid.generate(),
+        name,
+        categoryId,
+        storeId,
+        sku,
+        description,
+        quantity,
+        allowQuantity,
+        moment.utc().format('YYYY-MM-DD HH:mm:ss'),
+        res.locals.code,
+        unitPrice,
+        cost,
+        coverImage
+      );
+      const mysql = new MySQL();
+      const db = mysql.connect();
+      const data = await product.add(product, db);
 
       res.send(data);
     } catch (err) {

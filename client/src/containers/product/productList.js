@@ -105,8 +105,8 @@ class ProductList extends Component {
                   {
                     products.map(product => (
                       <ProductListItem
-                        key={product.id}
-                        id={product.id}
+                        key={product.code}
+                        id={product.code}
                         coverImage={product.coverImage}
                         name={product.name}
                         sku={product.sku}
@@ -114,7 +114,7 @@ class ProductList extends Component {
                         currencySign={product.currencySign}
                         price={product.price}
                         quantity={product.quantity}
-                        status={product.active}
+                        status={product.status}
                         onClick={this.onViewClick}
                       />
                     ))

@@ -21,7 +21,8 @@ function Product(
   addedBy,
   unitPrice,
   cost,
-  coverImage
+  coverImage,
+  status
 ) {
   this.code = code || '';
   this.name = name || '';
@@ -36,14 +37,15 @@ function Product(
   this.unitPrice = unitPrice || 0.0;
   this.cost = cost || 0.0;
   this.coverImage = coverImage || '';
+  this.status = status || true;
 }
 
 Product.prototype.get = function(code, db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select code, name, catigory_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity, added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage
-       from product where code='${code}' and status=1`,
+      `select code, name, category_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity, added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage, status
+       from product where code='${code}'`,
       (error, results) => {
         db.end();
         if (error || results.length == 0) {
@@ -63,6 +65,7 @@ Product.prototype.get = function(code, db) {
             unitPrice,
             cost,
             coverImage,
+            status,
           } = results[0];
           resolve(
             new Product(
@@ -78,7 +81,8 @@ Product.prototype.get = function(code, db) {
               addedBy,
               unitPrice,
               cost,
-              coverImage
+              coverImage,
+              status
             )
           );
         }
@@ -91,8 +95,8 @@ Product.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select code, name, catigory_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity, added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage
-       from product where store_id='${id}' and status=1 limit ${(page - 1) *
+      `select code, name, category_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity, added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage, status
+       from product where store_id='${id}' limit ${(page - 1) *
         pageSize}, ${pageSize}`,
       (error, results) => {
         db.end();
@@ -171,7 +175,7 @@ Product.prototype.add = function(product, db) {
       db.connect();
       db.query(
         `insert into product(code, name, category_id, store_id, sku, description, quantity, allow_quantity, added_on, added_by, unit_price, cost, cover_image) 
-         values('${code}', '${name}', ${categoryId}, ${storeId}, '${sku}', '${description}', ${quantity}, ${allowQuantity}, '${addedOn}', ${addedBy}, ${unitPrice}, ${cost}, '${coverImage}')`,
+         values('${code}', '${name}', '${categoryId}', '${storeId}', '${sku}', '${description}', ${quantity}, ${allowQuantity}, '${addedOn}', '${addedBy}', ${unitPrice}, ${cost}, '${coverImage}')`,
         (error, results) => {
           db.end();
           if (error || results.affectedRows == 0) {
@@ -191,7 +195,8 @@ Product.prototype.add = function(product, db) {
                 addedBy,
                 unitPrice,
                 cost,
-                coverImage
+                coverImage,
+                true
               )
             );
           }
