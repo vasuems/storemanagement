@@ -118,6 +118,7 @@ Product.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
               unitPrice,
               cost,
               coverImage,
+              status,
             } = product;
             return new Product(
               code,
@@ -132,7 +133,8 @@ Product.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
               addedBy,
               unitPrice,
               cost,
-              coverImage
+              coverImage,
+              status
             );
           });
 

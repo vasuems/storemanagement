@@ -11,7 +11,14 @@ const shortid = require('shortid');
 const moment = require('moment');
 require('dotenv').load();
 
-const { OAuth2Request, User, Contact, Store, Product } = require('./models');
+const {
+  OAuth2Request,
+  User,
+  Contact,
+  Store,
+  Product,
+  Category,
+} = require('./models');
 const { MySQL } = require('./db');
 const { UnauthorisedError } = require('./exceptions');
 
@@ -321,6 +328,27 @@ app.post(
       const mysql = new MySQL();
       const db = mysql.connect();
       const data = await product.add(product, db);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.get(
+  '/stores/:code/categories',
+  [authMiddleware, getUserCodes],
+  async (req, res) => {
+    try {
+      const category = new Category();
+      const mysql = new MySQL();
+      const db = mysql.connect();
+      const data = await category.getAllByStoreId(req.params.code, db);
+
+      if (req.params.code !== res.locals.storeCode) {
+        throw new UnauthorisedError('Invalid store ID.');
+      }
 
       res.send(data);
     } catch (err) {

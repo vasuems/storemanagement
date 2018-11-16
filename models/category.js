@@ -8,18 +8,19 @@ const {
   NoRecordFoundError,
 } = require('../exceptions');
 
-function Category(code, name, storeId, parentId) {
+function Category(code, name, storeId, parentId, status) {
   this.code = code || '';
   this.name = name || '';
-  this.storeId = storeId || 0;
-  this.parentId = parentId || 0;
+  this.storeId = storeId || '';
+  this.parentId = parentId || '';
+  this.status = status || true;
 }
 
-Category.prototype.get = function(id, db) {
+Category.prototype.get = function(code, db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select user_id as userId, number, type, area_code as areaCode, country_id as countryId from user_contact where user_id='${id}' and status=1`,
+      `select code, name, store_id as storeId, parent_id as parentId, status from category where code='${code}'`,
       (error, results) => {
         db.end();
         if (error) {
@@ -36,7 +37,7 @@ Category.prototype.get = function(id, db) {
   });
 };
 
-Category.prototype.getCategoriesByStoreId = function(
+Category.prototype.getAllByStoreId = function(
   id,
   db,
   page = 1,
@@ -45,17 +46,18 @@ Category.prototype.getCategoriesByStoreId = function(
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select code, name, store_id as storeId, parent_id as parentId from categories where store_id='${id}' and status=1 limit ${(page -
+      `select code, name, store_id as storeId, parent_id as parentId, status from category where store_id='${id}' limit ${(page -
         1) *
         pageSize}, ${pageSize}`,
       (error, results) => {
         db.end();
         if (error || results.length == 0) {
+          console.log(error);
           reject(new NoRecordFoundError('No categories found.'));
         } else {
           const categories = results.map(cat => {
-            const { code, name, storeId, parentId } = cat;
-            return new Category(code, name, storeId, parentId);
+            const { code, name, storeId, parentId, status } = cat;
+            return new Category(code, name, storeId, parentId, status);
           });
           resolve(categories);
         }
@@ -80,7 +82,7 @@ Category.prototype.add = function(category, db) {
       const { code, name, storeId, parentId } = category;
       db.connect();
       db.query(
-        `insert into categories(code, name, store_id, parent_id) 
+        `insert into category(code, name, store_id, parent_id) 
          values('${code}', '${name}', '${storeId}', '${parentId}')`,
         (error, results) => {
           db.end();
@@ -97,19 +99,17 @@ Category.prototype.add = function(category, db) {
   });
 };
 
-Category.prototype.delete = function(id, db) {
+Category.prototype.delete = function(code, db) {
   return new Promise((resolve, reject) => {
     db.connect();
-    db.query(`update user set status=0 where id=${id}`, error => {
+    db.query(`update category set status=0 where id='${code}'`, error => {
       if (error) {
-        reject(new BadRequestError('Deleting product failed.'));
+        reject(new BadRequestError('Deleting category failed.'));
       } else {
-        resolve('Product deleted.');
+        resolve('Category deleted.');
       }
     });
   });
 };
 
-module.exports = {
-  Category,
-};
+module.exports = Category;
