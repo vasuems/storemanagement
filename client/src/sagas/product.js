@@ -13,7 +13,14 @@ import config from '../config';
 
 export function* fetchProductCategories(action) {
   try {
-    yield put(fetchProductCategoriesSuccess(categories));
+    const res = yield axios({
+      method: 'get',
+      url: `${config.apiDomain}/stores/${action.value}/categories`,
+      headers: {
+        'authorization': localStorage.getItem(config.accessTokenKey),
+      },
+    });
+    yield put(fetchProductCategoriesSuccess(res.data));
   } catch (error) {
     yield put(fetchProductCategoriesFailed());
   }

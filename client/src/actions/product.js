@@ -26,8 +26,8 @@ export function fetchProductsFailed() {
   return { type: FETCH_PRODUCTS_FAILED };
 }
 
-export function fetchProductCategories() {
-  return { type: FETCH_PRODUCT_CATEGORIES };
+export function fetchProductCategories(data) {
+  return { type: FETCH_PRODUCT_CATEGORIES, value: data };
 }
 
 export function fetchProductCategoriesSuccess(data) {

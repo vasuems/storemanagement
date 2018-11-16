@@ -24,7 +24,8 @@ import { fetchProductCategories } from '../../actions';
 class ProductCategoryList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchProductCategories());
+    //TODO: to replace the store ID passing to action creator
+    dispatch(fetchProductCategories('asdfasdfasdfasd'));
   }
 
   onViewClick = (id) => {
@@ -91,11 +92,11 @@ class ProductCategoryList extends Component {
                 <tbody>
                   {categories.map(cat => (
                     <CategoryListItem
-                      key={cat.id}
-                      id={cat.id}
+                      key={cat.code}
+                      id={cat.code}
                       name={cat.name}
                       parent={cat.parent}
-                      status={cat.active}
+                      status={cat.status}
                       onClick={this.onViewClick}
                     />
                   ))}

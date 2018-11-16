@@ -27,7 +27,7 @@ CategoryListItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   parent: PropTypes.string,
-  status: PropTypes.string.isRequired,
+  status: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
 };
