@@ -8,10 +8,11 @@ const {
   NoRecordFoundError,
 } = require('../exceptions');
 
-function Category(code, name, storeId, parentId, status = true) {
+function Category(code, name, storeId, addedBy, parentId, status = true) {
   this.code = code || '';
   this.name = name || '';
   this.storeId = storeId || '';
+  this.addedBy = addedBy || '';
   this.parentId = parentId || '';
   this.status = status ? true : false;
 }
@@ -24,13 +25,10 @@ Category.prototype.get = function(code, db) {
       (error, results) => {
         db.end();
         if (error) {
-          reject(new NoRecordFoundError('No user found.'));
+          reject(new NoRecordFoundError('No category found.'));
         } else {
-          const contacts = results.map(contact => {
-            const { userId, number, type, areaCode, countryId } = contact;
-            return new Contact(userId, number, type, areaCode, countryId);
-          });
-          resolve({ user, contacts });
+          const { code, name, storeId, parentId, status } = results[0];
+          resolve(new Category(code, name, storeId, '', parentId, status));
         }
       }
     );
@@ -51,7 +49,7 @@ Category.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
         } else {
           const categories = results.map(cat => {
             const { code, name, storeId, parentId, status } = cat;
-            return new Category(code, name, storeId, parentId, status);
+            return new Category(code, name, storeId, '', parentId, status);
           });
           resolve(categories);
         }
@@ -73,11 +71,11 @@ Category.prototype.add = function(category, db) {
         }
       });
 
-      const { code, name, storeId, parentId } = category;
+      const { code, name, storeId, addedBy, parentId } = category;
       db.connect();
       db.query(
-        `insert into category(code, name, store_id, parent_id) 
-         values('${code}', '${name}', '${storeId}', '${parentId}')`,
+        `insert into category(code, name, store_id, added_by, parent_id) 
+         values('${code}', '${name}', '${storeId}', '${addedBy}', '${parentId}')`,
         (error, results) => {
           db.end();
           if (error || results.affectedRows == 0) {

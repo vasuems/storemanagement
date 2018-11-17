@@ -4,6 +4,7 @@ import OrderShippingItem from './order/orderShippingItem';
 import CategoryListItem from './product/categoryListItem';
 import CustomerListItem from './customer/customerListItem';
 import SupplierListItem from './supplier/supplierListItem';
+import ManufactureListItem from './manufacture/manufactureListItem';
 import ProductListItem from './product/productListItem';
 import SalesReportListProductItem from './report/salesReportListProductItem';
 import SalesReportListCategoryItem from './report/salesReportListCategoryItem';
@@ -28,4 +29,5 @@ export {
   OrderProductListItem,
   ShipTodayItem,
   CredentialListItem,
+  ManufactureListItem,
 };

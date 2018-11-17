@@ -18,34 +18,21 @@ import {
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
-import { fetchProducts } from '../../actions';
-import { ProductListItem } from '../../components';
+import { fetchSuppliers } from '../../actions';
+import { ManufactureListItem } from '../../components';
 
-class ProductList extends Component {
+class ManufactureList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    //TODO: to replace the store ID passing to action creator
-    
-    dispatch(fetchProducts('asdfasdfasdfasd'));   
+    dispatch(fetchSuppliers());
   }
 
   onViewClick = id => {
-    const { history } = this.props;
-    history.push(`/products/${id}`);
+    this.props.history.push(`/suppliers/${id}`);
   };
 
   render() {
-    const {
-      history,
-      products,
-      auth,
-      intl: { formatMessage },
-    } = this.props;
-
-    if(auth === false){
-      window.location.href = '/';
-    }
-
+    const { history, manufactures, intl: { formatMessage } } = this.props;
     return (
       <div>
         <Breadcrumb>
@@ -55,7 +42,7 @@ class ProductList extends Component {
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem active>
-            <FormattedMessage id="sys.products" />
+            <FormattedMessage id="sys.suppliers" />
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="content-body">
@@ -76,7 +63,7 @@ class ProductList extends Component {
                   size="sm"
                   color="primary"
                   className="pull-right form-btn"
-                  onClick={() => history.push('/new-product')}
+                  onClick={() => history.push('/new-supplier')}
                 >
                   <FiPlusCircle />
                   &nbsp;
@@ -88,19 +75,13 @@ class ProductList extends Component {
                 <thead className="table-header">
                   <tr>
                     <th>
-                      <FormattedMessage id="sys.thumbnail" />
+                      <FormattedMessage id="sys.comLogo" />
                     </th>
                     <th>
                       <FormattedMessage id="sys.name" />
                     </th>
                     <th>
-                      <FormattedMessage id="sys.sku" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.price" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.qty" />
+                      <FormattedMessage id="sys.contactInfo" />
                     </th>
                     <th>
                       <FormattedMessage id="sys.status" />
@@ -109,18 +90,17 @@ class ProductList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map(product => (
-                    <ProductListItem
-                      key={product.code}
-                      id={product.code}
-                      coverImage={product.coverImage}
-                      name={product.name}
-                      sku={product.sku}
-                      currency={product.currency}
-                      currencySign={product.currencySign}
-                      price={product.price}
-                      quantity={product.quantity}
-                      status={product.status}
+                  {manufactures.map(manufacture => (
+                    <ManufactureListItem
+                      key={manufacture.id}
+                      id={manufacture.id}
+                      logo={manufacture.logo}
+                      name={manufacture.name}
+                      url={manufacture.url}
+                      address={manufacture.address}
+                      email={manufacture.email}
+                      contact={manufacture.contact}
+                      status={manufacture.active}
                       onClick={this.onViewClick}
                     />
                   ))}
@@ -151,22 +131,18 @@ class ProductList extends Component {
   }
 }
 
-ProductList.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  auth: PropTypes.bool.isRequired,
-  history: PropTypes.object.isRequired,
-  products: PropTypes.array.isRequired,
-  intl: PropTypes.object.isRequired,
-};
+const mapStateToProps = state => ({
+  manufactures: state.manufactureReducer.manufactures,
+});
 
-const mapStateToProps = state => {
-  return {
-    products: state.productReducer.products,
-    auth: state.authReducer.auth,
-  };
+ManufactureList.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  manufactures: PropTypes.array.isRequired,
+  history: PropTypes.object.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
 export default withRouter(connect(
   mapStateToProps,
   null
-)(injectIntl(ProductList)));
+)(injectIntl(ManufactureList)));

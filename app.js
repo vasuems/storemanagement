@@ -52,28 +52,28 @@ const userCodeVerifier = (req, res, next) => {
       req.headers.authorization,
       process.env.tokenSecret
     );
-    if (!decoded || decoded.data.code !== req.params.code) {
+    if (!decoded || decoded.data.code !== req.params.accountCode) {
       throw new UnauthorisedError('Invalid user ID.');
     }
 
+    res.locals.auth = decoded.data;
     next();
   } catch (err) {
     res.status(err.statusCode).send(err);
   }
 };
 
-const getUserCodes = (req, res, next) => {
+const storeCodeVerifier = (req, res, next) => {
   try {
     const decoded = jwt.verify(
       req.headers.authorization,
       process.env.tokenSecret
     );
-    if (!decoded) {
-      throw new UnauthorisedError('Invalid user ID.');
+    if (!decoded || decoded.data.storeCode !== req.params.storeCode) {
+      throw new UnauthorisedError('Invalid store ID');
     }
 
-    res.locals.code = decoded.data.code;
-    res.locals.storeCode = decoded.data.storeCode;
+    res.locals.auth = decoded.data;
     next();
   } catch (err) {
     res.status(err.statusCode).send(err);
@@ -158,13 +158,13 @@ app.post('/accounts', async (req, res) => {
 });
 
 app.get(
-  '/accounts/:code',
+  '/accounts/:accountCode',
   [authMiddleware, userCodeVerifier],
   async (req, res) => {
     try {
       const user = new User();
       const db = mysql.connect();
-      const data = await user.get(res.locals.code, db);
+      const data = await user.get(req.params.accountCode, db);
 
       res.send(data);
     } catch (err) {
@@ -173,49 +173,46 @@ app.get(
   }
 );
 
-app.post(
-  '/accounts/:code/contacts',
-  [authMiddleware, userCodeVerifier],
+app.get('/stores/:storeCode',
+  [authMiddleware, storeCodeVerifier],
   async (req, res) => {
     try {
-      const user = new User();
+      const store = new Store();
       const db = mysql.connect();
-      const data = await user.addContact(
-        new Contact(
-          res.locals.code,
-          req.body.number,
-          req.body.type,
-          req.body.areaCode,
-          req.body.countryId
-        ),
-        db
+      const data = await store.get(req.params.storeCode, db);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.put('/stores/:storeCode', 
+  [authMiddleware, storeCodeVerifier], 
+  async (req, res) => {
+    try {
+      const {
+        code,
+        name,
+        description,
+        logo,
+        countryId,
+        language,
+        currencyId,
+      } = req.body;
+      const store = new Store(
+        req.params.storeCode,
+        name,
+        description,
+        logo,
+        countryId,
+        language,
+        currencyId,
+        res.locals.auth.accountCode
       );
-
-      res.send(data);
-    } catch (err) {
-      res.status(err.statusCode).send(err);
-    }
-  }
-);
-
-app.put(
-  '/accounts/:code/contacts',
-  [authMiddleware, userCodeVerifier],
-  async (req, res) => {
-    try {
-      const user = new User();
       const db = mysql.connect();
-      const data = await user.updateContact(
-        req.body.id,
-        new Contact(
-          res.locals.code,
-          req.body.number,
-          req.body.type,
-          req.body.areaCode,
-          req.body.countryId
-        ),
-        db
-      );
+      const data = await store.update(store, db);
 
       res.send(data);
     } catch (err) {
@@ -224,91 +221,16 @@ app.put(
   }
 );
 
-app.delete(
-  '/accounts/:code/contacts/:id',
-  [authMiddleware, userCodeVerifier],
-  async (req, res) => {
-    try {
-      const user = new User();
-      const db = mysql.connect();
-      const data = await user.deleteContact(req.params.id, db);
-
-      res.send(data);
-    } catch (err) {
-      res.status(err.statusCode).send(err);
-    }
-  }
-);
-
-app.get('/stores/:code', authMiddleware, async (req, res) => {
-  try {
-    const store = new Store();
-    const db = mysql.connect();
-    const data = await store.get(req.params.code, db);
-
-    res.send(data);
-  } catch (err) {
-    res.status(err.statusCode).send(err);
-  }
-});
-
-app.put('/stores/:code', [authMiddleware, getUserCodes], async (req, res) => {
-  try {
-    const {
-      code,
-      name,
-      description,
-      logo,
-      countryId,
-      language,
-      currencyId,
-    } = req.body;
-    const store = new Store(
-      code,
-      name,
-      description,
-      logo,
-      countryId,
-      language,
-      currencyId,
-      res.locals.code
-    );
-    const db = mysql.connect();
-    const data = await store.update(store, db);
-
-    res.send(data);
-  } catch (err) {
-    res.status(err.statusCode).send(err);
-  }
-});
-
-app.get('/products/:code', [authMiddleware, getUserCodes], async (req, res) => {
-  try {
-    const product = new Product();
-    const db = mysql.connect();
-    const data = await product.get(req.params.code, db);
-
-    if (data.storeId !== res.locals.storeCode) {
-      throw new UnauthorisedError('Invalid product ID.');
-    }
-
-    res.send(data);
-  } catch (err) {
-    res.status(err.statusCode).send(err);
-  }
-});
-
-app.get(
-  '/stores/:code/products',
-  [authMiddleware, getUserCodes],
+app.get('/stores/:storeCode/products/:productCode', 
+  [authMiddleware, storeCodeVerifier],
   async (req, res) => {
     try {
       const product = new Product();
       const db = mysql.connect();
-      const data = await product.getAllByStoreId(req.params.code, db);
+      const data = await product.get(req.params.productCode, db);
 
-      if (req.params.code !== res.locals.storeCode) {
-        throw new UnauthorisedError('Invalid store ID.');
+      if (data.storeId !== req.params.storeCode) {
+        throw new UnauthorisedError('Invalid product ID.');
       }
 
       res.send(data);
@@ -318,9 +240,25 @@ app.get(
   }
 );
 
+app.get(
+  '/stores/:storeCode/products',
+  [authMiddleware, storeCodeVerifier],
+  async (req, res) => {
+    try {
+      const product = new Product();
+      const db = mysql.connect();
+      const data = await product.getAllByStoreId(req.params.storeCode, db);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 app.post(
-  '/stores/:code/products',
-  [authMiddleware, getUserCodes],
+  '/stores/:storeCode/products',
+  [authMiddleware, storeCodeVerifier],
   async (req, res) => {
     try {
       const {
@@ -345,7 +283,7 @@ app.post(
         quantity,
         allowQuantity,
         moment.utc().format('YYYY-MM-DD HH:mm:ss'),
-        res.locals.code,
+        res.locals.auth.accountCode,
         unitPrice,
         cost,
         coverImage
@@ -361,17 +299,13 @@ app.post(
 );
 
 app.get(
-  '/stores/:code/categories',
-  [authMiddleware, getUserCodes],
+  '/stores/:storeCode/categories',
+  [authMiddleware, storeCodeVerifier],
   async (req, res) => {
     try {
       const category = new Category();
       const db = mysql.connect();
-      const data = await category.getAllByStoreId(req.params.code, db);
-
-      if (req.params.code !== res.locals.storeCode) {
-        throw new UnauthorisedError('Invalid store ID.');
-      }
+      const data = await category.getAllByStoreId(req.params.storeCode, db);
 
       res.send(data);
     } catch (err) {
