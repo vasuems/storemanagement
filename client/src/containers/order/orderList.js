@@ -159,7 +159,9 @@ const mapStateToProps = state => ({
   orders: state.orderReducer.orders,
 });
 
-export default withRouter(connect(
-  mapStateToProps,
-  null
-)(injectIntl(OrderList)));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(injectIntl(OrderList))
+);

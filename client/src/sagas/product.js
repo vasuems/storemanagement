@@ -7,6 +7,8 @@ import {
   fetchProductsFailed,
   fetchProductDetailsSuccess,
   fetchProductDetailsFailed,
+  fetchProductCategoryDetailsSuccess,
+  fetchProductCategoryDetailsFailed,
   authFailed,
 } from '../actions';
 import config from '../config';
@@ -54,7 +56,7 @@ export function* fetchProductDetails(action) {
   try {
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/products/${action.value}`,
+      url: `${config.apiDomain}/stores/${action.value.storeCode}/products/${action.value.productCode}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
@@ -66,6 +68,26 @@ export function* fetchProductDetails(action) {
       yield put(authFailed());
     } else {
       yield put(fetchProductDetailsFailed());
+    }
+  }
+}
+
+export function* fetchProductCategoryDetails(action) {
+  try {
+    const res = yield axios({
+      method: 'get',
+      url: `${config.apiDomain}/stores/${action.value.storeCode}/categories/${action.value.categoryCode}`,
+      headers: {
+        authorization: localStorage.getItem(config.accessTokenKey),
+      },
+    });
+
+    yield put(fetchProductCategoryDetailsSuccess(res.data));
+  } catch (error) {
+    if (error.response.status === 401) {
+      yield put(authFailed());
+    } else {
+      yield put(fetchProductCategoryDetailsFailed());
     }
   }
 }

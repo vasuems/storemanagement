@@ -14,7 +14,12 @@ import {
   FiHome,
   FiSettings,
 } from 'react-icons/fi';
-import { FaCaretLeft, FaCaretDown, FaWarehouse } from 'react-icons/fa';
+import {
+  FaCaretLeft,
+  FaCaretDown,
+  FaWarehouse,
+  FaIndustry,
+} from 'react-icons/fa';
 import {
   productMenuOpen,
   productMenuClose,
@@ -101,7 +106,7 @@ class SideBarContent extends Component {
           </Row>
           <Row className="sidebar-link sub-menu">
             <Link to="/manufactures">
-              <FaWarehouse className="sidebar-icon" />
+              <FaIndustry className="sidebar-icon" />
               <FormattedMessage id="sys.manufactures" />
             </Link>
           </Row>

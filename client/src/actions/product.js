@@ -12,6 +12,12 @@ export const FETCH_PRODUCT_CATEGORIES_SUCCESS =
 export const FETCH_PRODUCT_CATEGORIES_FAILED =
   'FETCH_PRODUCT_CATEGORIES_FAILED';
 
+export const FETCH_PRODUCT_CATEGORY_DETAILS = 'FETCH_PRODUCT_CATEGORY_DETAILS';
+export const FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS =
+  'FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS';
+export const FETCH_PRODUCT_CATEGORY_DETAILS_FAILED =
+  'FETCH_PRODUCT_CATEGORY_DETAILS_FAILED';
+
 export const FETCH_PRODUCT_PARENT_CATEGORIES =
   'FETCH_PRODUCT_PARENT_CATEGORIES';
 export const FETCH_PRODUCT_PARENT_CATEGORIES_SUCCESS =
@@ -53,4 +59,16 @@ export function fetchProductDetailsSuccess(data) {
 
 export function fetchProductDetailsFailed() {
   return { type: FETCH_PRODUCT_DETAILS_FAILED };
+}
+
+export function fetchProductCategoryDetails(data) {
+  return { type: FETCH_PRODUCT_CATEGORY_DETAILS, value: data };
+}
+
+export function fetchProductCategoryDetailsSuccess(data) {
+  return { type: FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS, value: data };
+}
+
+export function fetchProductCategoryDetailsFailed() {
+  return { type: FETCH_PRODUCT_CATEGORY_DETAILS_FAILED };
 }

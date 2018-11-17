@@ -83,35 +83,29 @@ const storeCodeVerifier = (req, res, next) => {
 app.use(bodyParser.json());
 
 // public APIs
-app.get(
-  '/countries',
-  async (req, res) => {
-    try {
-      const utility = new Utility();
-      const db = mysql.connect();
-      const data = await utility.getCountries(db);
+app.get('/countries', async (req, res) => {
+  try {
+    const utility = new Utility();
+    const db = mysql.connect();
+    const data = await utility.getCountries(db);
 
-      res.send(data);
-    } catch (err) {
-      res.status(err.statusCode).send(err);
-    }
+    res.send(data);
+  } catch (err) {
+    res.status(err.statusCode).send(err);
   }
-);
+});
 
-app.get(
-  '/currencies',
-  async (req, res) => {
-    try {
-      const utility = new Utility();
-      const db = mysql.connect();
-      const data = await utility.getCurrencies(db);
+app.get('/currencies', async (req, res) => {
+  try {
+    const utility = new Utility();
+    const db = mysql.connect();
+    const data = await utility.getCurrencies(db);
 
-      res.send(data);
-    } catch (err) {
-      res.status(err.statusCode).send(err);
-    }
+    res.send(data);
+  } catch (err) {
+    res.status(err.statusCode).send(err);
   }
-);
+});
 
 app.post('/auth', async (req, res) => {
   try {
@@ -173,7 +167,8 @@ app.get(
   }
 );
 
-app.get('/stores/:storeCode',
+app.get(
+  '/stores/:storeCode',
   [authMiddleware, storeCodeVerifier],
   async (req, res) => {
     try {
@@ -188,8 +183,9 @@ app.get('/stores/:storeCode',
   }
 );
 
-app.put('/stores/:storeCode', 
-  [authMiddleware, storeCodeVerifier], 
+app.put(
+  '/stores/:storeCode',
+  [authMiddleware, storeCodeVerifier],
   async (req, res) => {
     try {
       const {
@@ -221,7 +217,8 @@ app.put('/stores/:storeCode',
   }
 );
 
-app.get('/stores/:storeCode/products/:productCode', 
+app.get(
+  '/stores/:storeCode/products/:productCode',
   [authMiddleware, storeCodeVerifier],
   async (req, res) => {
     try {
@@ -306,6 +303,22 @@ app.get(
       const category = new Category();
       const db = mysql.connect();
       const data = await category.getAllByStoreId(req.params.storeCode, db);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.get(
+  '/stores/:storeCode/categories/:categoryCode',
+  [authMiddleware, storeCodeVerifier],
+  async (req, res) => {
+    try {
+      const category = new Category();
+      const db = mysql.connect();
+      const data = await category.get(req.params.categoryCode, db);
 
       res.send(data);
     } catch (err) {

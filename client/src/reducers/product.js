@@ -5,14 +5,15 @@ import {
   FETCH_PRODUCT_CATEGORIES_FAILED,
   FETCH_PRODUCT_DETAILS_SUCCESS,
   FETCH_PRODUCT_DETAILS_FAILED,
-  AUTH_FAILED,
+  FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS,
+  FETCH_PRODUCT_CATEGORY_DETAILS_FAILED,
 } from '../actions';
 
 const initialState = {
   products: [],
   categories: [],
   productDetails: {},
-  authenticated: true,
+  categoryDetails: {},
 };
 
 export default function productReducer(state = initialState, action) {
@@ -23,9 +24,12 @@ export default function productReducer(state = initialState, action) {
       return { ...state, productDetails: action.value };
     case FETCH_PRODUCT_CATEGORIES_SUCCESS:
       return { ...state, categories: action.value };
+    case FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS:
+      return { ...state, categoryDetails: action.value };
     case FETCH_PRODUCTS_FAILED:
     case FETCH_PRODUCT_CATEGORIES_FAILED:
     case FETCH_PRODUCT_DETAILS_FAILED:
+    case FETCH_PRODUCT_CATEGORY_DETAILS_FAILED:
     default:
       return state;
   }

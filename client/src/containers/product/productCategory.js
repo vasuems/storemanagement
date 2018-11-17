@@ -5,15 +5,9 @@ import { Row, Col, Button, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { FiSave } from 'react-icons/fi';
-import { fetchProductCategories } from '../../actions';
 import ProductCategoryForm from '../forms/productCategoryForm';
 
 class ProductCategory extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchProductCategories());
-  }
-
   render() {
     const { history, categories } = this.props;
     return (
@@ -44,7 +38,6 @@ class ProductCategory extends Component {
               <br />
               <br />
               <ProductCategoryForm
-                onSubmit={() => {}}
                 categories={categories}
               />
             </Col>

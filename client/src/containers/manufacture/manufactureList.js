@@ -32,7 +32,11 @@ class ManufactureList extends Component {
   };
 
   render() {
-    const { history, manufactures, intl: { formatMessage } } = this.props;
+    const {
+      history,
+      manufactures,
+      intl: { formatMessage },
+    } = this.props;
     return (
       <div>
         <Breadcrumb>
@@ -142,7 +146,9 @@ ManufactureList.propTypes = {
   intl: PropTypes.object.isRequired,
 };
 
-export default withRouter(connect(
-  mapStateToProps,
-  null
-)(injectIntl(ManufactureList)));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(injectIntl(ManufactureList))
+);

@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Col, Form, FormGroup, Label, Button, Input } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
+import { fetchProductCategoryDetails } from '../../actions';
 
 const validate = values => {
   const errors = {};
-  if (!values.categoryName) {
-    errors.categoryName = 'Required';
+  if (!values.name) {
+    errors.name = 'Required';
   }
-  if (!values.newPwd) {
-    errors.newPwd = 'Required';
-  }
+
   return errors;
 };
 
@@ -28,30 +29,46 @@ const renderField = ({
 );
 
 class ProductCategoryForm extends Component {
+  componentDidMount() {
+    const {
+      dispatch,
+      match: {
+        params: { id },
+      },
+    } = this.props;
+
+    //TODO: replace the store ID here
+    dispatch(fetchProductCategoryDetails({storeCode: 'asdfasdfasdfasd', categoryCode: id}));
+  }
+
+  onSubmit = data => {
+    const { dispatch } = this.props;
+  };
+
   render() {
-    const { onSubmit, categories } = this.props;
+    const { handleSubmit, categories } = this.props;
 
     return (
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
         <FormGroup row>
-          <Label for="category-name" sm={2}>
+          <Label for="name" sm={2}>
             <FormattedMessage id="sys.categoryName" />
           </Label>
           <Col sm={10}>
             <Field
               component={renderField}
-              name="category-name"
+              name="name"
               className="form-control"
-              id="category-name"
+              id="name"
             />
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label for="parent-category" sm={2}>
+          <Label for="parent-id" sm={2}>
             <FormattedMessage id="sys.parentCategory" />
           </Label>
           <Col sm={10}>
-            <Input type="select" name="select-cat">
+            <Input type="select" id="parent-id" name="parent-id">
               {categories.map(cat => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
@@ -66,8 +83,11 @@ class ProductCategoryForm extends Component {
 }
 
 ProductCategoryForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object,
 };
 
 ProductCategoryForm = reduxForm({
@@ -75,4 +95,13 @@ ProductCategoryForm = reduxForm({
   validate,
 })(ProductCategoryForm);
 
-export default ProductCategoryForm;
+export default withRouter(connect(state => {
+  const { name, parentId } = state.productReducer.categoryDetails;
+  return {
+    initialValues: {
+      name: name,
+      'parent-id': parentId,
+    },
+    enableReinitialize: true,
+  };
+})(ProductCategoryForm));

@@ -25,8 +25,8 @@ class ProductList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     //TODO: to replace the store ID passing to action creator
-    
-    dispatch(fetchProducts('asdfasdfasdfasd'));   
+
+    dispatch(fetchProducts('asdfasdfasdfasd'));
   }
 
   onViewClick = id => {
@@ -42,7 +42,7 @@ class ProductList extends Component {
       intl: { formatMessage },
     } = this.props;
 
-    if(auth === false){
+    if (auth === false) {
       window.location.href = '/';
     }
 
@@ -166,7 +166,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(
-  mapStateToProps,
-  null
-)(injectIntl(ProductList)));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(injectIntl(ProductList))
+);

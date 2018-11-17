@@ -94,16 +94,16 @@ const renderTextArea = ({ input, type, meta: { touched, error } }) => (
 );
 
 class ProductForm extends Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     const {
       dispatch,
       match: {
         params: { id },
       },
-    } = props;
+    } = this.props;
 
-    dispatch(fetchProductDetails(id));
+    //TODO: replace the store ID here
+    dispatch(fetchProductDetails({storeCode: 'asdfasdfasdfasd', productCode: id}));
   }
 
   onSubmit = data => {
