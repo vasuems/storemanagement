@@ -1,6 +1,10 @@
 import { call, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { fetchStoreSettingsSuccess, fetchStoreSettingsFailed } from '../actions';
+import {
+  fetchStoreSettingsSuccess,
+  fetchStoreSettingsFailed,
+  authFailed,
+} from '../actions';
 import config from '../config';
 
 export function* fetchStoreSettings(action) {
@@ -9,12 +13,16 @@ export function* fetchStoreSettings(action) {
       method: 'get',
       url: `${config.apiDomain}/stores/asdfasdfasdfasd`,
       headers: {
-        'authorization': localStorage.getItem(config.accessTokenKey),
+        authorization: localStorage.getItem(config.accessTokenKey),
       },
     });
 
     yield put(fetchStoreSettingsSuccess(res.data));
   } catch (error) {
-    yield put(fetchStoreSettingsFailed());
+    if (error.response.status === 401) {
+      yield put(authFailed());
+    } else {
+      yield put(fetchStoreSettingsFailed());
+    }
   }
 }

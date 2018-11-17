@@ -22,7 +22,7 @@ function Product(
   unitPrice,
   cost,
   coverImage,
-  status=true
+  status = true
 ) {
   this.code = code || '';
   this.name = name || '';

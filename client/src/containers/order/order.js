@@ -19,11 +19,12 @@ import {
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
-import { 
-  FiDownload,
-  FiPrinter,
-} from 'react-icons/fi';
-import { OrderInfoItem, OrderShippingItem, OrderProductListItem } from '../../components';
+import { FiDownload, FiPrinter } from 'react-icons/fi';
+import {
+  OrderInfoItem,
+  OrderShippingItem,
+  OrderProductListItem,
+} from '../../components';
 
 class Order extends Component {
   constructor(props) {
@@ -34,13 +35,13 @@ class Order extends Component {
     };
   }
 
-  toggle = (tab) => {
+  toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab,
       });
     }
-  }
+  };
 
   render() {
     const { history, products } = this.props;
@@ -49,18 +50,12 @@ class Order extends Component {
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Button
-              color="link"
-              onClick={() => history.push('/dashboard')}
-            >
+            <Button color="link" onClick={() => history.push('/dashboard')}>
               <FormattedMessage id="sys.dashboard" />
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <Button
-              color="link"
-              onClick={() => history.push('/orders')}
-            >
+            <Button color="link" onClick={() => history.push('/orders')}>
               <FormattedMessage id="sys.orders" />
             </Button>
           </BreadcrumbItem>
@@ -74,22 +69,33 @@ class Order extends Component {
               <Nav tabs>
                 <NavItem>
                   <NavLink
-                    className={classnames({ active: this.state.activeTab === '1' })}
-                    onClick={() => { this.toggle('1'); }}
+                    className={classnames({
+                      active: this.state.activeTab === '1',
+                    })}
+                    onClick={() => {
+                      this.toggle('1');
+                    }}
                   >
                     <FormattedMessage id="sys.orderDetails" />
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink
-                    className={classnames({ active: this.state.activeTab === '2' })}
-                    onClick={() => { this.toggle('2'); }}
+                    className={classnames({
+                      active: this.state.activeTab === '2',
+                    })}
+                    onClick={() => {
+                      this.toggle('2');
+                    }}
                   >
                     <FormattedMessage id="sys.shipping" />
                   </NavLink>
                 </NavItem>
               </Nav>
-              <TabContent activeTab={this.state.activeTab} style={{backgroundColor: '#fff', padding: 15}}>
+              <TabContent
+                activeTab={this.state.activeTab}
+                style={{ backgroundColor: '#fff', padding: 15 }}
+              >
                 <TabPane tabId="1">
                   <Row>
                     <Col md={12}>
@@ -115,75 +121,98 @@ class Order extends Component {
                         <FormattedMessage id="sys.printInvoice" />
                       </Button>
                     </Col>
-                  </Row><br />
+                  </Row>
+                  <br />
                   <Row>
                     <Col md={7}>
-                      <CardTitle><FormattedMessage id="sys.products" /></CardTitle>
+                      <CardTitle>
+                        <FormattedMessage id="sys.products" />
+                      </CardTitle>
                       <Table responsive>
                         <thead className="table-header">
                           <tr>
-                            <th><FormattedMessage id="sys.productName" /></th>
-                            <th><FormattedMessage id="sys.unitPrice" /></th>
-                            <th><FormattedMessage id="sys.qty" /></th>
-                            <th><FormattedMessage id="sys.amount" /></th>
+                            <th>
+                              <FormattedMessage id="sys.productName" />
+                            </th>
+                            <th>
+                              <FormattedMessage id="sys.unitPrice" />
+                            </th>
+                            <th>
+                              <FormattedMessage id="sys.qty" />
+                            </th>
+                            <th>
+                              <FormattedMessage id="sys.amount" />
+                            </th>
                           </tr>
                         </thead>
                         <tbody>
-                          {
-                            products.map(product => {
-                              return(
-                                <OrderProductListItem 
-                                  key={product.id}
-                                  name={product.name}
-                                  price={product.price.toFixed(2)}
-                                  quantity={product.quantity}
-                                  amount={product.amount.toFixed(2)}
-                                  currencySign={product.currencySign}
-                                />
-                              );
-                            })
-                          }                      
+                          {products.map(product => {
+                            return (
+                              <OrderProductListItem
+                                key={product.id}
+                                name={product.name}
+                                price={product.price.toFixed(2)}
+                                quantity={product.quantity}
+                                amount={product.amount.toFixed(2)}
+                                currencySign={product.currencySign}
+                              />
+                            );
+                          })}
                         </tbody>
                       </Table>
                       <Col md={6} className="pull-right">
                         <Table size="sm" responsive>
                           <tbody>
                             <tr>
-                              <td><FormattedMessage id="sys.subTotal" />:</td>
+                              <td>
+                                <FormattedMessage id="sys.subTotal" />:
+                              </td>
                               <td>SGD $116.00</td>
                             </tr>
                             <tr>
-                              <td><FormattedMessage id="sys.taxIncluded" />:</td>
+                              <td>
+                                <FormattedMessage id="sys.taxIncluded" />:
+                              </td>
                               <td>SGD $8.12</td>
                             </tr>
                             <tr>
-                              <td><FormattedMessage id="sys.shipping" />:</td>
+                              <td>
+                                <FormattedMessage id="sys.shipping" />:
+                              </td>
                               <td>SGD $21.60</td>
                             </tr>
                             <tr>
-                              <td><b><FormattedMessage id="sys.total" />:</b></td>
-                              <td><b>SGD $137.60</b></td>
+                              <td>
+                                <b>
+                                  <FormattedMessage id="sys.total" />:
+                                </b>
+                              </td>
+                              <td>
+                                <b>SGD $137.60</b>
+                              </td>
                             </tr>
                           </tbody>
                         </Table>
                       </Col>
                     </Col>
                     <Col md={5}>
-                      <CardTitle><FormattedMessage id="sys.customerInfo" /></CardTitle>
+                      <CardTitle>
+                        <FormattedMessage id="sys.customerInfo" />
+                      </CardTitle>
                       <Card body>
-                        <OrderInfoItem 
+                        <OrderInfoItem
                           title={formatMessage({ id: 'sys.customerName' })}
                           content="Nick Chen"
                         />
-                        <OrderInfoItem 
+                        <OrderInfoItem
                           title={formatMessage({ id: 'sys.customerContact' })}
                           content="+65-99999999"
                         />
-                        <OrderInfoItem 
+                        <OrderInfoItem
                           title={formatMessage({ id: 'sys.deliveryAddr' })}
                           content="BLK 666, Bugis, Singapore, 100666"
                         />
-                        <OrderInfoItem 
+                        <OrderInfoItem
                           title={formatMessage({ id: 'sys.billingAddr' })}
                           content="Not provided"
                         />
@@ -192,7 +221,7 @@ class Order extends Component {
                   </Row>
                 </TabPane>
                 <TabPane tabId="2">
-                  <OrderShippingItem 
+                  <OrderShippingItem
                     courier="Fedex Express"
                     trackingId="asa3djfa123lksdfj23432sdf"
                     datetime="2018-11-11 11:11:00"
@@ -200,14 +229,14 @@ class Order extends Component {
                     status="Processing"
                     statusColor="green"
                   />
-                  <OrderShippingItem 
+                  <OrderShippingItem
                     courier="Fedex Express"
                     trackingId="234adsf9asdf31asdf"
                     datetime="2018-11-10 07:10:00"
                     location="Malaysia logistic center"
                     status="Shipped out"
                   />
-                  <OrderShippingItem 
+                  <OrderShippingItem
                     courier="Fedex Express"
                     trackingId="Not available"
                     datetime="2018-11-08 16:30:00"

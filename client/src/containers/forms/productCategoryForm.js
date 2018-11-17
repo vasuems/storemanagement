@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import {
-  Col, Form, FormGroup, Label, Button, Input,
-} from 'reactstrap';
+import { Col, Form, FormGroup, Label, Button, Input } from 'reactstrap';
 
-const validate = (values) => {
+const validate = values => {
   const errors = {};
   if (!values.categoryName) {
     errors.categoryName = 'Required';
@@ -18,7 +16,10 @@ const validate = (values) => {
 };
 
 const renderField = ({
-  input, placeholder, type, meta: { touched, error },
+  input,
+  placeholder,
+  type,
+  meta: { touched, error },
 }) => (
   <div>
     <Input {...input} placeholder={placeholder} type={type} />
@@ -26,8 +27,8 @@ const renderField = ({
   </div>
 );
 
-class ProductCategoryForm extends Component{
-  render(){
+class ProductCategoryForm extends Component {
+  render() {
     const { onSubmit, categories } = this.props;
 
     return (
@@ -52,7 +53,9 @@ class ProductCategoryForm extends Component{
           <Col sm={10}>
             <Input type="select" name="select-cat">
               {categories.map(cat => (
-                <option key={cat.id} value={cat.id}>{cat.name}</option>
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
               ))}
             </Input>
           </Col>

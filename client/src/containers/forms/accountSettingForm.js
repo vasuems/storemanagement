@@ -14,7 +14,7 @@ import {
   Input,
 } from 'reactstrap';
 
-const validate = (values) => {
+const validate = values => {
   const errors = {};
   if (!values.currentPwd) {
     errors.currentPwd = 'Required';
@@ -26,7 +26,10 @@ const validate = (values) => {
 };
 
 const renderField = ({
-  input, placeholder, type, meta: { touched, error },
+  input,
+  placeholder,
+  type,
+  meta: { touched, error },
 }) => (
   <div>
     <Input {...input} placeholder={placeholder} type={type} />
@@ -34,14 +37,16 @@ const renderField = ({
   </div>
 );
 
-const AccountSettingForm = (props) => {
+const AccountSettingForm = props => {
   const { handleSubmit } = props;
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
         <Col md={6}>
           <Card>
-            <CardHeader><FormattedMessage id="sys.basicInfo" /></CardHeader>
+            <CardHeader>
+              <FormattedMessage id="sys.basicInfo" />
+            </CardHeader>
             <CardBody>
               <FormGroup row>
                 <Label for="name" sm={3}>

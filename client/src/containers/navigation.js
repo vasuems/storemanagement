@@ -12,9 +12,7 @@ import {
   Badge,
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import {
-  FaRegBell,
-} from 'react-icons/fa';
+import { FaRegBell } from 'react-icons/fa';
 
 class Navigation extends Component {
   render() {
@@ -22,18 +20,24 @@ class Navigation extends Component {
       <div className="admin-navbar">
         <Container fluid>
           <Navbar light expand="md">
-            <NavbarBrand href="/dashboard"><FormattedMessage id="site.name" /></NavbarBrand>
+            <NavbarBrand href="/dashboard">
+              <FormattedMessage id="site.name" />
+            </NavbarBrand>
             <Nav className="ml-auto">
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav>
                   <FaRegBell size={18} />
                   <Badge color="danger">1</Badge>
                 </DropdownToggle>
-                <DropdownMenu style={{marginLeft: -100, width:280}}>
+                <DropdownMenu style={{ marginLeft: -100, width: 280 }}>
                   <DropdownItem>
-                    <NavLink href="#" style={{whiteSpace: 'normal'}}>
-                      <b>A new product has been created.</b><br />
-                      <span className="text-muted">Your collegue John Doe has created a new product: sdlfladsjf</span>
+                    <NavLink href="#" style={{ whiteSpace: 'normal' }}>
+                      <b>A new product has been created.</b>
+                      <br />
+                      <span className="text-muted">
+                        Your collegue John Doe has created a new product:
+                        sdlfladsjf
+                      </span>
                     </NavLink>
                   </DropdownItem>
                   <DropdownItem>
@@ -43,7 +47,7 @@ class Navigation extends Component {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
-              <UncontrolledDropdown nav inNavbar>                
+              <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Nick Chen
                 </DropdownToggle>

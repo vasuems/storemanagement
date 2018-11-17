@@ -19,9 +19,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import {
-  FiSearch,
-} from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 import { fetchOrders } from '../../actions';
 import { OrderListItem } from '../../components';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -37,7 +35,7 @@ class OrderList extends Component {
     dispatch(fetchOrders());
   }
 
-  onViewClick = (id) => {
+  onViewClick = id => {
     const { history } = this.props;
     history.push(`/orders/${id}`);
   };
@@ -63,17 +61,20 @@ class OrderList extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <div style={{display: 'flex', justifyContent: 'space-between'}}>                
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>
                   <InputGroup size="sm">
                     <Input placeholder={formatMessage({ id: 'sys.search' })} />
                     <InputGroupAddon addonType="append">
-                      <Button color="secondary"><FiSearch /></Button>
+                      <Button color="secondary">
+                        <FiSearch />
+                      </Button>
                     </InputGroupAddon>
                   </InputGroup>
                 </div>
                 <div>
-                  <FormattedMessage id="sys.orderDate" />:&nbsp;
+                  <FormattedMessage id="sys.orderDate" />
+                  :&nbsp;
                   <DatePicker
                     dateFormat="YYYY-MM-DD"
                     selected={moment()}
@@ -85,7 +86,8 @@ class OrderList extends Component {
                     }}
                   />
                 </div>
-              </div><br />
+              </div>
+              <br />
               <Table responsive>
                 <thead className="table-header">
                   <tr>
@@ -152,7 +154,6 @@ OrderList.propTypes = {
   orders: PropTypes.array.isRequired,
   intl: PropTypes.object.isRequired,
 };
-
 
 const mapStateToProps = state => ({
   orders: state.orderReducer.orders,

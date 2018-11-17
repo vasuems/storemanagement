@@ -1,44 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  Button,
-  Row,
-  Col,
-} from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Row, Col } from 'reactstrap';
 import { FiSave } from 'react-icons/fi';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { fetchProductDetails } from '../../actions';
 import { ProductForm } from '../forms';
 
-class Product extends Component{
-  componentDidMount(){
-    const { dispatch } = this.props;
-
-    dispatch(fetchProductDetails());
-  }
-
-  render(){
+class Product extends Component {
+  render() {
     const { history } = this.props;
-    return(
+    return (
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Button
-              color="link"
-              onClick={() => history.push('/dashboard')}
-            >
+            <Button color="link" onClick={() => history.push('/dashboard')}>
               <FormattedMessage id="sys.dashboard" />
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <Button
-              color="link"
-              onClick={() => history.push('/products')}
-            >
+            <Button color="link" onClick={() => history.push('/products')}>
               <FormattedMessage id="sys.products" />
             </Button>
           </BreadcrumbItem>
@@ -53,10 +34,10 @@ class Product extends Component{
                 <FiSave />
                 &nbsp;
                 <FormattedMessage id="sys.save" />
-              </Button><br /><br />
-              <ProductForm 
-                categories={[]}
-              />
+              </Button>
+              <br />
+              <br />
+              <ProductForm categories={[]} />
             </Col>
           </Row>
         </div>
@@ -74,4 +55,7 @@ const mapStateToProps = state => ({
   categories: state.productReducer.categories,
 });
 
-export default connect(mapStateToProps, null)(withRouter(Product));
+export default connect(
+  mapStateToProps,
+  null
+)(withRouter(Product));

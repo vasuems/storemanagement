@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import numeral from 'numeral';
 
 const OrderProductListItem = props => {
-  return(
+  return (
     <tr>
-      <td>{ props.name }</td>
-      <td>{ props.currencySign + numeral(props.price).format('0,0.00') }</td>
-      <td>{ props.quantity }</td>
-      <td>{ props.currencySign + numeral(props.amount).format('0,0.00') }</td>
+      <td>{props.name}</td>
+      <td>{props.currencySign + numeral(props.price).format('0,0.00')}</td>
+      <td>{props.quantity}</td>
+      <td>{props.currencySign + numeral(props.amount).format('0,0.00')}</td>
     </tr>
   );
 };

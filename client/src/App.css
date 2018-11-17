@@ -16,7 +16,6 @@ html, body{
 #search-bar{
   border-radius: 30px;
 }
-
 .cart-img{
   width: 80%;
 }
@@ -49,7 +48,6 @@ a, a:hover, a:link, a:active, a:visited{
 .dropdown-menu li a{
   padding: 8px 0 10px 10px;
 }
-
 .sub-nav{
   border: 0;
   background-color:#fff !important;
@@ -101,7 +99,6 @@ a, a:hover, a:link, a:active, a:visited{
 .padding-bottom-20{
   padding-bottom: 20px;
 }
-
 #footer{
   padding: 20px 0 10px;
 }
@@ -130,7 +127,6 @@ a, a:hover, a:link, a:active, a:visited{
 .sidebar-link a:hover{
   color: #ccc;
 }
-
 .sidebar-link:hover{
   color: #fafafa;
   background-color: #666;
@@ -270,7 +266,7 @@ a, a:hover, a:link, a:active, a:visited{
 .table-header{
   background: #eee;
 }
-.content-body{
+.content-body, .form-control{
   font-size: 15px;
 }
 table .btn-link{

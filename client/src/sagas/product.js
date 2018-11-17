@@ -18,14 +18,14 @@ export function* fetchProductCategories(action) {
       method: 'get',
       url: `${config.apiDomain}/stores/${action.value}/categories`,
       headers: {
-        'authorization': localStorage.getItem(config.accessTokenKey),
+        authorization: localStorage.getItem(config.accessTokenKey),
       },
     });
     yield put(fetchProductCategoriesSuccess(res.data));
   } catch (error) {
-    if(error.response.status === 401){
+    if (error.response.status === 401) {
       yield put(authFailed());
-    }else{
+    } else {
       yield put(fetchProductCategoriesFailed());
     }
   }
@@ -37,15 +37,15 @@ export function* fetchProducts(action) {
       method: 'get',
       url: `${config.apiDomain}/stores/${action.value}/products`,
       headers: {
-        'authorization': localStorage.getItem(config.accessTokenKey),
+        authorization: localStorage.getItem(config.accessTokenKey),
       },
     });
 
     yield put(fetchProductsSuccess(res.data));
   } catch (error) {
-    if(error.response.status === 401){
+    if (error.response.status === 401) {
       yield put(authFailed());
-    }else{
+    } else {
       yield put(fetchProductsFailed());
     }
   }
@@ -57,15 +57,15 @@ export function* fetchProductDetails(action) {
       method: 'get',
       url: `${config.apiDomain}/products/${action.value}`,
       headers: {
-        'authorization': localStorage.getItem(config.accessTokenKey),
+        authorization: localStorage.getItem(config.accessTokenKey),
       },
     });
 
-    yield put(fetchProductDetailsSuccess(productDetails));
+    yield put(fetchProductDetailsSuccess(res.data));
   } catch (error) {
-    if(error.response.status === 401){
+    if (error.response.status === 401) {
       yield put(authFailed());
-    }else{
+    } else {
       yield put(fetchProductDetailsFailed());
     }
   }

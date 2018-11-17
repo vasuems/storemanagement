@@ -8,7 +8,7 @@ const {
   NoRecordFoundError,
 } = require('../exceptions');
 
-function Category(code, name, storeId, parentId, status=true) {
+function Category(code, name, storeId, parentId, status = true) {
   this.code = code || '';
   this.name = name || '';
   this.storeId = storeId || '';
@@ -37,12 +37,7 @@ Category.prototype.get = function(code, db) {
   });
 };
 
-Category.prototype.getAllByStoreId = function(
-  id,
-  db,
-  page = 1,
-  pageSize = 20
-) {
+Category.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(

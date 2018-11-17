@@ -20,7 +20,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { fetchProductDetails } from '../../actions';
 
-const validate = (values) => {
+const validate = values => {
   const errors = {};
   if (!values.categoryName) {
     errors.categoryName = 'Required';
@@ -35,7 +35,12 @@ const modules = {
   toolbar: [
     [{ header: [1, 2, false] }],
     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
+    ],
     ['link', 'image', 'video'],
     ['clean'],
   ],
@@ -43,41 +48,41 @@ const modules = {
 
 const formats = [
   'header',
-  'bold', 'italic', 'underline', 'strike', 'blockquote',
-  'list', 'bullet', 'indent',
-  'link', 'image', 'video',
+  'bold',
+  'italic',
+  'underline',
+  'strike',
+  'blockquote',
+  'list',
+  'bullet',
+  'indent',
+  'link',
+  'image',
+  'video',
 ];
 
-const renderField = ({
-  input, label, type, meta: { touched, error },
-}) => (
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <Input {...input} placeholder={label} type={type} />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
 
-const renderDecimalField = ({
-  input, type, meta: { touched, error },
-}) => (
+const renderDecimalField = ({ input, type, meta: { touched, error } }) => (
   <div>
     <Input {...input} placeholder="0.00" type={type} step=".01" />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
 
-const renderNumberField = ({
-  input, type, meta: { touched, error },
-}) => (
+const renderNumberField = ({ input, type, meta: { touched, error } }) => (
   <div>
     <Input {...input} placeholder="0" type={type} />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
 
-const renderTextArea = ({
-  input, type, meta: { touched, error },
-}) => (
+const renderTextArea = ({ input, type, meta: { touched, error } }) => (
   <div>
     <ReactQuill
       modules={modules}
@@ -89,25 +94,36 @@ const renderTextArea = ({
 );
 
 class ProductForm extends Component {
-  componentDidMount(){
+  constructor(props) {
+    super(props);
+    const {
+      dispatch,
+      match: {
+        params: { id },
+      },
+    } = props;
 
-    const { dispatch, match: { params: { id } } } = this.props;
     dispatch(fetchProductDetails(id));
   }
 
-  onSubmit = (data) => {
+  onSubmit = data => {
     const { dispatch } = this.props;
   };
 
   render() {
-    const { handleSubmit, categories } = this.props;
-    const { formatMessage } = this.props.intl;
+    const {
+      handleSubmit,
+      categories,
+      intl: { formatMessage },
+    } = this.props;
     return (
       <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
         <Row>
           <Col md={7}>
             <Card>
-              <CardHeader><FormattedMessage id="sys.productInfo" /></CardHeader>
+              <CardHeader>
+                <FormattedMessage id="sys.productInfo" />
+              </CardHeader>
               <CardBody>
                 <FormGroup row>
                   <Label for="name" sm={3}>
@@ -158,7 +174,9 @@ class ProductForm extends Component {
                   <Col sm={9}>
                     <Input type="select" name="category">
                       {categories.map(cat => (
-                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                        <option key={cat.id} value={cat.id}>
+                          {cat.name}
+                        </option>
                       ))}
                     </Input>
                   </Col>
@@ -183,7 +201,9 @@ class ProductForm extends Component {
                   <Col sm={9}>
                     <Input type="select" name="manufacturer">
                       {categories.map(cat => (
-                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                        <option key={cat.id} value={cat.id}>
+                          {cat.name}
+                        </option>
                       ))}
                     </Input>
                   </Col>
@@ -195,17 +215,21 @@ class ProductForm extends Component {
                   <Col sm={9}>
                     <Input type="select" name="supplier">
                       {categories.map(cat => (
-                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                        <option key={cat.id} value={cat.id}>
+                          {cat.name}
+                        </option>
                       ))}
                     </Input>
                   </Col>
-                </FormGroup>                
+                </FormGroup>
               </CardBody>
             </Card>
           </Col>
           <Col md={5}>
             <Card>
-              <CardHeader><FormattedMessage id="sys.inventory" /></CardHeader>
+              <CardHeader>
+                <FormattedMessage id="sys.inventory" />
+              </CardHeader>
               <CardBody>
                 <FormGroup row>
                   <Label for="allow-quantity" sm={5}>
@@ -218,11 +242,11 @@ class ProductForm extends Component {
                         type="checkbox"
                         name="allow-quantity"
                         id="allow-quantity"
-                        style={{width:32, height:32}}
+                        style={{ width: 32, height: 32 }}
                       />
                     </InputGroup>
                   </Col>
-                </FormGroup>                
+                </FormGroup>
                 <FormGroup row>
                   <Label for="qty" sm={5}>
                     <FormattedMessage id="sys.qty" />
@@ -240,9 +264,12 @@ class ProductForm extends Component {
                   </Col>
                 </FormGroup>
               </CardBody>
-            </Card><br />
+            </Card>
+            <br />
             <Card>
-              <CardHeader><FormattedMessage id="sys.price" /></CardHeader>
+              <CardHeader>
+                <FormattedMessage id="sys.price" />
+              </CardHeader>
               <CardBody>
                 <FormGroup row>
                   <Label for="price" sm={4}>
@@ -266,7 +293,7 @@ class ProductForm extends Component {
                       component={renderDecimalField}
                       type="number"
                       name="discount"
-                      id="discount"               
+                      id="discount"
                     />
                   </Col>
                 </FormGroup>
@@ -283,6 +310,8 @@ ProductForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   intl: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  match: PropTypes.object,
 };
 
 ProductForm = reduxForm({
@@ -290,9 +319,34 @@ ProductForm = reduxForm({
   validate,
 })(ProductForm);
 
-export default connect(state => {  
+export default connect(state => {
+  const {
+    name,
+    description,
+    sku,
+    category,
+    cost,
+    manufacturer,
+    supplier,
+    allowQuantity,
+    quantity,
+    unitPrice,
+    discount,
+  } = state.productReducer.productDetails;
   return {
-    initialValues: state.productReducer.productDetails,
+    initialValues: {
+      name,
+      description,
+      sku,
+      category,
+      cost: (cost || 0.0).toFixed(2),
+      manufacturer,
+      supplier,
+      'allow-quantity': allowQuantity,
+      quantity,
+      price: (unitPrice || 0.0).toFixed(2) || 0.0,
+      discount: (discount || 0.0).toFixed(2) || 0.0,
+    },
     enableReinitialize: true,
   };
 })(injectIntl(withRouter(ProductForm)));

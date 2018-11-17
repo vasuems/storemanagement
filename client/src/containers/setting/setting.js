@@ -19,15 +19,13 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { FiSave } from 'react-icons/fi';
 import { fetchStoreSettings } from '../../actions';
-import { 
+import {
   StoreSettingForm,
   AccountSettingForm,
   PasswordForm,
   CredentialForm,
 } from '../forms';
-import {
-  CredentialListItem,
-} from '../../components';
+import { CredentialListItem } from '../../components';
 
 class Setting extends Component {
   constructor(props) {
@@ -42,7 +40,7 @@ class Setting extends Component {
     dispatch(fetchStoreSettings());
   }
 
-  toggle = (tab) => {
+  toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab,
@@ -50,7 +48,7 @@ class Setting extends Component {
     }
   };
 
-  handleSettingSubmit = (values) => {
+  handleSettingSubmit = values => {
     console.log(values);
   };
 
@@ -61,10 +59,7 @@ class Setting extends Component {
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Button
-              color="link"
-              onClick={() => history.push('/dashboard')}
-            >
+            <Button color="link" onClick={() => history.push('/dashboard')}>
               <FormattedMessage id="sys.dashboard" />
             </Button>
           </BreadcrumbItem>
@@ -135,12 +130,26 @@ class Setting extends Component {
                       <FiSave />
                       &nbsp;
                       <FormattedMessage id="sys.save" />
-                    </Button><br /><br />
-                    <StoreSettingForm 
+                    </Button>
+                    <br />
+                    <br />
+                    <StoreSettingForm
                       onSubmit={this.handleSettingSubmit}
-                      currencies={[{id: 3, name: 'SGD'}, {id: 2, name: 'USD'}, {id: 1, name: 'MYR'}]}
-                      countries={[{id: 3, name: 'Singapore'}, {id: 2, name: 'United States'}, {id: 1, name: 'Malaysia'}]}
-                      languages={[{id: 'en', name: 'English'}, {id: 'zh-cn', name: '简体中文'}, {id: 'my', name: 'Malay'}]}
+                      currencies={[
+                        { id: 3, name: 'SGD' },
+                        { id: 2, name: 'USD' },
+                        { id: 1, name: 'MYR' },
+                      ]}
+                      countries={[
+                        { id: 3, name: 'Singapore' },
+                        { id: 2, name: 'United States' },
+                        { id: 1, name: 'Malaysia' },
+                      ]}
+                      languages={[
+                        { id: 'en', name: 'English' },
+                        { id: 'zh-cn', name: '简体中文' },
+                        { id: 'my', name: 'Malay' },
+                      ]}
                     />
                   </Col>
                 </Row>
@@ -152,7 +161,9 @@ class Setting extends Component {
                       <FiSave />
                       &nbsp;
                       <FormattedMessage id="sys.save" />
-                    </Button><br /><br />
+                    </Button>
+                    <br />
+                    <br />
                     <AccountSettingForm
                       onSubmit={this.handleApiSettingSubmit}
                     />
@@ -165,9 +176,15 @@ class Setting extends Component {
                     <Table>
                       <thead className="table-header">
                         <tr>
-                          <th><FormattedMessage id="sys.company" /></th>
-                          <th><FormattedMessage id="sys.apiKey" /></th>
-                          <th><FormattedMessage id="sys.apiSecret" /></th>
+                          <th>
+                            <FormattedMessage id="sys.company" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.apiKey" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.apiSecret" />
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -184,16 +201,14 @@ class Setting extends Component {
                       </tbody>
                     </Table>
                   </Col>
-                </Row>                
+                </Row>
               </TabPane>
               <TabPane tabId="4">
                 <Row>
-                  <Col md={{size: 4, offset: 4}}>
-                    <PasswordForm
-                      onSubmit={this.handleApiSettingSubmit}
-                    />
+                  <Col md={{ size: 4, offset: 4 }}>
+                    <PasswordForm onSubmit={this.handleApiSettingSubmit} />
                   </Col>
-                </Row>                
+                </Row>
               </TabPane>
             </TabContent>
           </div>

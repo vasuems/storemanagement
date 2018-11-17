@@ -14,8 +14,8 @@ export function productMenuClose() {
 
 export function reportMenuOpen() {
   return { type: REPORT_MENU_OPEN };
-} 
+}
 
 export function reportMenuClose() {
   return { type: REPORT_MENU_CLOSE };
-} 
+}

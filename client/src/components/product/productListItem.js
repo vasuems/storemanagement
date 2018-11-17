@@ -4,26 +4,26 @@ import { Button, Badge } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import numeral from 'numeral';
 
-const ProductListItem = (props) => {
+const ProductListItem = props => {
   const { formatMessage } = props.intl;
   return (
     <tr>
-      <td><img src={props.coverImage} className="thumbnail" /></td>
+      <td>
+        <img src={props.coverImage} className="thumbnail" />
+      </td>
       <td>{props.name}</td>
       <td>{props.sku}</td>
       <td>{props.currencySign + numeral(props.price).format('0,0.00')}</td>
       <td>{props.quantity}</td>
       <td>
         <Badge color={props.status ? 'success' : 'danger'}>
-          {props.status ? formatMessage({ id: 'sys.active' }) : formatMessage({ id: 'sys.inactive' })}
+          {props.status
+            ? formatMessage({ id: 'sys.active' })
+            : formatMessage({ id: 'sys.inactive' })}
         </Badge>
       </td>
       <td>
-        <Button
-          size="sm"
-          color="link"
-          onClick={() => props.onClick(props.id)}
-        >
+        <Button size="sm" color="link" onClick={() => props.onClick(props.id)}>
           <FormattedMessage id="sys.view" />
         </Button>
       </td>

@@ -28,7 +28,7 @@ class ProductCategoryList extends Component {
     dispatch(fetchProductCategories('asdfasdfasdfasd'));
   }
 
-  onViewClick = (id) => {
+  onViewClick = id => {
     this.props.history.push(`/categories/${id}`);
   };
 
@@ -39,10 +39,7 @@ class ProductCategoryList extends Component {
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Button
-              color="link"
-              onClick={() => history.push('/dashboard')}
-            >
+            <Button color="link" onClick={() => history.push('/dashboard')}>
               <FormattedMessage id="sys.dashboard" />
             </Button>
           </BreadcrumbItem>
@@ -53,12 +50,14 @@ class ProductCategoryList extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>
                   <InputGroup size="sm">
                     <Input placeholder={formatMessage({ id: 'sys.search' })} />
                     <InputGroupAddon addonType="append">
-                      <Button color="secondary"><FiSearch /></Button>
+                      <Button color="secondary">
+                        <FiSearch />
+                      </Button>
                     </InputGroupAddon>
                   </InputGroup>
                 </div>

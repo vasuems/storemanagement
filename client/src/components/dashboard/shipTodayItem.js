@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 const ShipTodayItem = props => {
   const { orderId, customerName, onClick } = props;
   return (
-    <tr style={{cursor: 'pointer'}} onClick={()=>onClick(orderId)}>
-      <td>{ orderId }</td>
-      <td>{ customerName }</td>
+    <tr style={{ cursor: 'pointer' }} onClick={() => onClick(orderId)}>
+      <td>{orderId}</td>
+      <td>{customerName}</td>
     </tr>
   );
 };

@@ -12,5 +12,5 @@ export default function authReducer(state = initialState, action) {
       return { ...state, auth: false };
     default:
       return state;
-    }
+  }
 }

@@ -17,10 +17,7 @@ import {
 } from 'reactstrap';
 import { withRouter, Redirect } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { 
-  FiPlusCircle,
-  FiSearch,
-} from 'react-icons/fi';
+import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import { fetchProducts } from '../../actions';
 import { ProductListItem } from '../../components';
 
@@ -31,29 +28,30 @@ class ProductList extends Component {
     dispatch(fetchProducts('asdfasdfasdfasd'));
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     const { auth, history } = this.props;
 
-    if(auth === false){
-      return <Redirect to='/' />
+    if (auth === false) {
+      return <Redirect to="/" />;
     }
   }
 
-  onViewClick = (id) => {
+  onViewClick = id => {
     const { history } = this.props;
     history.push(`/products/${id}`);
   };
 
   render() {
-    const { history, products, intl: { formatMessage } } = this.props;
+    const {
+      history,
+      products,
+      intl: { formatMessage },
+    } = this.props;
     return (
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Button
-              color="link"
-              onClick={() => history.push('/dashboard')}
-            >
+            <Button color="link" onClick={() => history.push('/dashboard')}>
               <FormattedMessage id="sys.dashboard" />
             </Button>
           </BreadcrumbItem>
@@ -64,12 +62,14 @@ class ProductList extends Component {
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>
                   <InputGroup size="sm">
                     <Input placeholder={formatMessage({ id: 'sys.search' })} />
                     <InputGroupAddon addonType="append">
-                      <Button color="secondary"><FiSearch /></Button>
+                      <Button color="secondary">
+                        <FiSearch />
+                      </Button>
                     </InputGroupAddon>
                   </InputGroup>
                 </div>
@@ -110,23 +110,21 @@ class ProductList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    products.map(product => (
-                      <ProductListItem
-                        key={product.code}
-                        id={product.code}
-                        coverImage={product.coverImage}
-                        name={product.name}
-                        sku={product.sku}
-                        currency={product.currency}
-                        currencySign={product.currencySign}
-                        price={product.price}
-                        quantity={product.quantity}
-                        status={product.status}
-                        onClick={this.onViewClick}
-                      />
-                    ))
-                  }
+                  {products.map(product => (
+                    <ProductListItem
+                      key={product.code}
+                      id={product.code}
+                      coverImage={product.coverImage}
+                      name={product.name}
+                      sku={product.sku}
+                      currency={product.currency}
+                      currencySign={product.currencySign}
+                      price={product.price}
+                      quantity={product.quantity}
+                      status={product.status}
+                      onClick={this.onViewClick}
+                    />
+                  ))}
                 </tbody>
               </Table>
               <Pagination aria-label="Page navigation example">

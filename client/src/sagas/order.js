@@ -1,12 +1,32 @@
 import { call, put } from 'redux-saga/effects';
-import { fetchOrdersSuccess, fetchOrdersFailed, fetchOrderProductsSuccess, fetchOrderProductsFailed } from '../actions';
+import axios from 'axios';
+import {
+  fetchOrdersSuccess,
+  fetchOrdersFailed,
+  fetchOrderProductsSuccess,
+  fetchOrderProductsFailed,
+  authFailed,
+} from '../actions';
 import { orders, salesReportProducts } from '../apis/mocks/responses';
+import config from '../config';
 
 export function* fetchOrders(action) {
   try {
+    const res = yield axios({
+      method: 'get',
+      url: `${config.apiDomain}/stores/asdfasdfasdfasd`,
+      headers: {
+        authorization: localStorage.getItem(config.accessTokenKey),
+      },
+    });
+
     yield put(fetchOrdersSuccess(orders));
   } catch (error) {
-    yield put(fetchOrdersFailed());
+    if (error.response.status === 401) {
+      yield put(authFailed());
+    } else {
+      yield put(fetchOrdersFailed());
+    }
   }
 }
 
@@ -14,6 +34,10 @@ export function* fetchOrderProducts(action) {
   try {
     yield put(fetchOrderProductsSuccess(salesReportProducts));
   } catch (error) {
-    yield put(fetchOrderProductsFailed());
+    if (error.response.status === 401) {
+      yield put(authFailed());
+    } else {
+      yield put(fetchOrderProductsFailed());
+    }
   }
 }

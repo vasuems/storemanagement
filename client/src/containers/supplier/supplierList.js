@@ -17,34 +17,28 @@ import {
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { 
-  FiPlusCircle,
-  FiSearch,
-} from 'react-icons/fi';
+import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import { fetchSuppliers } from '../../actions';
 import { SupplierListItem } from '../../components';
 
-class SupplierList extends Component{
+class SupplierList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchSuppliers());
   }
 
-  onViewClick = (id) => {
+  onViewClick = id => {
     this.props.history.push(`/suppliers/${id}`);
   };
 
-  render(){
+  render() {
     const { history, suppliers } = this.props;
     const { formatMessage } = this.props.intl;
-    return(
+    return (
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Button
-              color="link"
-              onClick={() => history.push('/dashboard')}
-            >
+            <Button color="link" onClick={() => history.push('/dashboard')}>
               <FormattedMessage id="sys.dashboard" />
             </Button>
           </BreadcrumbItem>
@@ -55,12 +49,14 @@ class SupplierList extends Component{
         <div className="content-body">
           <Row className="table-container">
             <Col md={12} className="table-content">
-              <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>
                   <InputGroup size="sm">
                     <Input placeholder={formatMessage({ id: 'sys.search' })} />
                     <InputGroupAddon addonType="append">
-                      <Button color="secondary"><FiSearch /></Button>
+                      <Button color="secondary">
+                        <FiSearch />
+                      </Button>
                     </InputGroupAddon>
                   </InputGroup>
                 </div>
@@ -95,22 +91,20 @@ class SupplierList extends Component{
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    suppliers.map(product => (
-                      <SupplierListItem
-                        key={product.id}
-                        id={product.id}
-                        logo={product.logo}
-                        name={product.name}
-                        url={product.url}
-                        address={product.address}
-                        email={product.email}
-                        contact={product.contact}
-                        status={product.active}
-                        onClick={this.onViewClick}
-                      />
-                    ))
-                  }
+                  {suppliers.map(product => (
+                    <SupplierListItem
+                      key={product.id}
+                      id={product.id}
+                      logo={product.logo}
+                      name={product.name}
+                      url={product.url}
+                      address={product.address}
+                      email={product.email}
+                      contact={product.contact}
+                      status={product.active}
+                      onClick={this.onViewClick}
+                    />
+                  ))}
                 </tbody>
               </Table>
               <Pagination aria-label="Page navigation example">
@@ -149,4 +143,7 @@ SupplierList.propTypes = {
   intl: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, null)(injectIntl(withRouter(SupplierList)));
+export default connect(
+  mapStateToProps,
+  null
+)(injectIntl(withRouter(SupplierList)));

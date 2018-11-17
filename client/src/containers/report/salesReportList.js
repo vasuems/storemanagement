@@ -27,11 +27,15 @@ import {
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
-import { 
-  FiSearch,
-} from 'react-icons/fi';
-import { fetchSalesReportProducts, fetchSalesReportCategories } from '../../actions';
-import { SalesReportListProductItem, SalesReportListCategoryItem } from '../../components';
+import { FiSearch } from 'react-icons/fi';
+import {
+  fetchSalesReportProducts,
+  fetchSalesReportCategories,
+} from '../../actions';
+import {
+  SalesReportListProductItem,
+  SalesReportListCategoryItem,
+} from '../../components';
 
 class SalesReportList extends Component {
   constructor(props) {
@@ -49,15 +53,15 @@ class SalesReportList extends Component {
     dispatch(fetchSalesReportCategories());
   }
 
-  toggle = (tab) => {
+  toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab,
       });
     }
-  }
+  };
 
-  onViewClick = (id) => {
+  onViewClick = id => {
     const { history } = this.props;
     history.push(`/products/${id}`);
   };
@@ -66,7 +70,7 @@ class SalesReportList extends Component {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
     });
-  }
+  };
   render() {
     const { products, categories } = this.props;
     const { formatMessage } = this.props.intl;
@@ -91,47 +95,80 @@ class SalesReportList extends Component {
               <Nav tabs>
                 <NavItem>
                   <NavLink
-                    className={classnames({ active: this.state.activeTab === '1' })}
-                    onClick={() => { this.toggle('1'); }}
+                    className={classnames({
+                      active: this.state.activeTab === '1',
+                    })}
+                    onClick={() => {
+                      this.toggle('1');
+                    }}
                   >
                     <FormattedMessage id="sys.byProduct" />
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink
-                    className={classnames({ active: this.state.activeTab === '2' })}
-                    onClick={() => { this.toggle('2'); }}
+                    className={classnames({
+                      active: this.state.activeTab === '2',
+                    })}
+                    onClick={() => {
+                      this.toggle('2');
+                    }}
                   >
                     <FormattedMessage id="sys.byCat" />
                   </NavLink>
                 </NavItem>
               </Nav>
-              <TabContent activeTab={this.state.activeTab} style={{backgroundColor: '#fff', padding: 15}}>
+              <TabContent
+                activeTab={this.state.activeTab}
+                style={{ backgroundColor: '#fff', padding: 15 }}
+              >
                 <TabPane tabId="1">
-                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                  <div
+                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
                     <div>
                       <InputGroup size="sm">
-                        <Input placeholder={formatMessage({ id: 'sys.search' })} />
+                        <Input
+                          placeholder={formatMessage({ id: 'sys.search' })}
+                        />
                         <InputGroupAddon addonType="append">
-                          <Button color="secondary"><FiSearch /></Button>
+                          <Button color="secondary">
+                            <FiSearch />
+                          </Button>
                         </InputGroupAddon>
                       </InputGroup>
                     </div>
                     <div>
-                      <ButtonDropdown direction="left" size="sm" isOpen={this.state.dropdownOpen} toggle={this.onFilterSelect}>
+                      <ButtonDropdown
+                        direction="left"
+                        size="sm"
+                        isOpen={this.state.dropdownOpen}
+                        toggle={this.onFilterSelect}
+                      >
                         <DropdownToggle caret>
                           <FormattedMessage id="sys.daily" />
                         </DropdownToggle>
                         <DropdownMenu>
-                          <DropdownItem><FormattedMessage id="sys.daily" /></DropdownItem>
-                          <DropdownItem><FormattedMessage id="sys.weekly" /></DropdownItem>
-                          <DropdownItem><FormattedMessage id="sys.monthly" /></DropdownItem>
-                          <DropdownItem><FormattedMessage id="sys.quaterly" /></DropdownItem>
-                          <DropdownItem><FormattedMessage id="sys.yearly" /></DropdownItem>
+                          <DropdownItem>
+                            <FormattedMessage id="sys.daily" />
+                          </DropdownItem>
+                          <DropdownItem>
+                            <FormattedMessage id="sys.weekly" />
+                          </DropdownItem>
+                          <DropdownItem>
+                            <FormattedMessage id="sys.monthly" />
+                          </DropdownItem>
+                          <DropdownItem>
+                            <FormattedMessage id="sys.quaterly" />
+                          </DropdownItem>
+                          <DropdownItem>
+                            <FormattedMessage id="sys.yearly" />
+                          </DropdownItem>
                         </DropdownMenu>
                       </ButtonDropdown>
                     </div>
-                  </div><br />
+                  </div>
+                  <br />
                   <Table responsive>
                     <thead className="table-header">
                       <tr>
@@ -156,21 +193,19 @@ class SalesReportList extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {
-                        products.map(product => (
-                          <SalesReportListProductItem
-                            key={product.id}
-                            id={product.id}
-                            name={product.name}
-                            sku={product.sku}
-                            price={product.price.toFixed(2)}
-                            currencySign={product.currencySign}
-                            quantity={product.quantity}
-                            amount={product.amount.toFixed(2)}
-                            profit={product.profit.toFixed(2)}
-                          />
-                        ))
-                      }
+                      {products.map(product => (
+                        <SalesReportListProductItem
+                          key={product.id}
+                          id={product.id}
+                          name={product.name}
+                          sku={product.sku}
+                          price={product.price.toFixed(2)}
+                          currencySign={product.currencySign}
+                          quantity={product.quantity}
+                          amount={product.amount.toFixed(2)}
+                          profit={product.profit.toFixed(2)}
+                        />
+                      ))}
                     </tbody>
                   </Table>
                   <Pagination aria-label="Page navigation example">
@@ -192,30 +227,52 @@ class SalesReportList extends Component {
                   </Pagination>
                 </TabPane>
                 <TabPane tabId="2">
-                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                  <div
+                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
                     <div>
                       <InputGroup size="sm">
-                        <Input placeholder={formatMessage({ id: 'sys.search' })} />
+                        <Input
+                          placeholder={formatMessage({ id: 'sys.search' })}
+                        />
                         <InputGroupAddon addonType="append">
-                          <Button color="secondary"><FiSearch /></Button>
+                          <Button color="secondary">
+                            <FiSearch />
+                          </Button>
                         </InputGroupAddon>
                       </InputGroup>
                     </div>
                     <div>
-                      <ButtonDropdown direction="left" size="sm" isOpen={this.state.dropdownOpen} toggle={this.onFilterSelect}>
+                      <ButtonDropdown
+                        direction="left"
+                        size="sm"
+                        isOpen={this.state.dropdownOpen}
+                        toggle={this.onFilterSelect}
+                      >
                         <DropdownToggle caret>
                           <FormattedMessage id="sys.daily" />
                         </DropdownToggle>
                         <DropdownMenu>
-                          <DropdownItem><FormattedMessage id="sys.daily" /></DropdownItem>
-                          <DropdownItem><FormattedMessage id="sys.weekly" /></DropdownItem>
-                          <DropdownItem><FormattedMessage id="sys.monthly" /></DropdownItem>
-                          <DropdownItem><FormattedMessage id="sys.quaterly" /></DropdownItem>
-                          <DropdownItem><FormattedMessage id="sys.yearly" /></DropdownItem>
+                          <DropdownItem>
+                            <FormattedMessage id="sys.daily" />
+                          </DropdownItem>
+                          <DropdownItem>
+                            <FormattedMessage id="sys.weekly" />
+                          </DropdownItem>
+                          <DropdownItem>
+                            <FormattedMessage id="sys.monthly" />
+                          </DropdownItem>
+                          <DropdownItem>
+                            <FormattedMessage id="sys.quaterly" />
+                          </DropdownItem>
+                          <DropdownItem>
+                            <FormattedMessage id="sys.yearly" />
+                          </DropdownItem>
                         </DropdownMenu>
                       </ButtonDropdown>
                     </div>
-                  </div><br />
+                  </div>
+                  <br />
                   <Table responsive>
                     <thead className="table-header">
                       <tr>
@@ -234,19 +291,17 @@ class SalesReportList extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {
-                        categories.map(cat => (
-                          <SalesReportListCategoryItem
-                            key={cat.id}
-                            id={cat.id}
-                            name={cat.name}
-                            quantity={cat.quantity}
-                            currencySign={cat.currencySign}
-                            amount={cat.amount.toFixed(2)}
-                            profit={cat.profit.toFixed(2)}
-                          />
-                        ))
-                      }
+                      {categories.map(cat => (
+                        <SalesReportListCategoryItem
+                          key={cat.id}
+                          id={cat.id}
+                          name={cat.name}
+                          quantity={cat.quantity}
+                          currencySign={cat.currencySign}
+                          amount={cat.amount.toFixed(2)}
+                          profit={cat.profit.toFixed(2)}
+                        />
+                      ))}
                     </tbody>
                   </Table>
                   <Pagination aria-label="Page navigation example">

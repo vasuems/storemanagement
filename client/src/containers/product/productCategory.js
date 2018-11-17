@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  Row, Col, Button, Breadcrumb, BreadcrumbItem,
-} from 'reactstrap';
+import { Row, Col, Button, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { FiSave } from 'react-icons/fi';
@@ -22,18 +20,12 @@ class ProductCategory extends Component {
       <div>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Button
-              color="link"
-              onClick={() => history.push('/dashboard')}
-            >
+            <Button color="link" onClick={() => history.push('/dashboard')}>
               <FormattedMessage id="sys.dashboard" />
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <Button
-              color="link"
-              onClick={() => history.push('/categories')}
-            >
+            <Button color="link" onClick={() => history.push('/categories')}>
               <FormattedMessage id="sys.categories" />
             </Button>
           </BreadcrumbItem>
@@ -48,7 +40,9 @@ class ProductCategory extends Component {
                 <FiSave />
                 &nbsp;
                 <FormattedMessage id="sys.save" />
-              </Button><br /><br />
+              </Button>
+              <br />
+              <br />
               <ProductCategoryForm
                 onSubmit={() => {}}
                 categories={categories}

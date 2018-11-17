@@ -21,9 +21,9 @@
     "uniqid": "^5.0.3"
   },
   "scripts": {
-    "lint:client": "./node_modules/.bin/eslint --fix client/src/ && prettier --single-quote --trailing-comma=es5 --write \"./client/src/**/*.js\"",
+    "lint:client": "./node_modules/.bin/eslint --fix client/src/",
     "lint:server": "./node_modules/.bin/eslint --fix models/",
-    "prettier:server": "prettier --single-quote --trailing-comma=es5 --write \"./models/**/*.js\"",
+    "prettier": "prettier --single-quote --trailing-comma=es5 --write \"./**/*.js\"",
     "build:client": "cd client && yarn build",
     "client": "cd client && yarn start",
     "server": "nodemon app.local.js",
@@ -35,8 +35,9 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "mocha": "^5.2.0",
-    "prettier": "1.15.2"
+    "prettier": "^1.15.2"
   }
 }

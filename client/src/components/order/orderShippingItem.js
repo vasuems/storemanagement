@@ -4,17 +4,21 @@ import { injectIntl } from 'react-intl';
 
 const OrderShippingItem = props => {
   const { formatMessage } = props.intl;
-  return(
+  return (
     <div>
       <p>
-        {formatMessage({ id: 'sys.handledBy' })}&nbsp;<b>{ props.courier }</b>
+        {formatMessage({ id: 'sys.handledBy' })}&nbsp;<b>{props.courier}</b>
         &nbsp;&nbsp;-&nbsp;&nbsp;
-        <span style={{color: props.statusColor || '#000'}}>
-          <b>{ props.status }</b>
+        <span style={{ color: props.statusColor || '#000' }}>
+          <b>{props.status}</b>
         </span>
       </p>
-      <p className="text-muted">{ formatMessage({ id: 'sys.trackingId' }) }:&nbsp;{ props.trackingId }</p>
-      <p className="text-muted">{ props.location },&nbsp;{ props.datetime }</p>
+      <p className="text-muted">
+        {formatMessage({ id: 'sys.trackingId' })}:&nbsp;{props.trackingId}
+      </p>
+      <p className="text-muted">
+        {props.location},&nbsp;{props.datetime}
+      </p>
       <br />
     </div>
   );

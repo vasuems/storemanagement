@@ -6,9 +6,9 @@ const initialState = {
 
 export default function customerReducer(state = initialState, action) {
   switch (action.type) {
-  case FETCH_CUSTOMERS_SUCCESS:
-    return { ...state, customers: action.value };
-  default:
-    return state;
+    case FETCH_CUSTOMERS_SUCCESS:
+      return { ...state, customers: action.value };
+    default:
+      return state;
   }
 }

@@ -5,7 +5,10 @@ import {
   fetchSalesReportCategoriesSuccess,
   fetchSalesReportCategoriesFailed,
 } from '../actions';
-import { salesReportProducts, salesReportCategories } from '../apis/mocks/responses';
+import {
+  salesReportProducts,
+  salesReportCategories,
+} from '../apis/mocks/responses';
 
 export function* fetchSalesReportProducts(action) {
   try {

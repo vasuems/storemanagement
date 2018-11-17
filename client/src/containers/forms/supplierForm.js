@@ -16,7 +16,7 @@ import {
 } from 'reactstrap';
 import Dropzone from 'react-dropzone';
 
-const validate = (values) => {
+const validate = values => {
   const errors = {};
   if (!values.currentPwd) {
     errors.currentPwd = 'Required';
@@ -28,7 +28,10 @@ const validate = (values) => {
 };
 
 const renderField = ({
-  input, placeholder, type, meta: { touched, error },
+  input,
+  placeholder,
+  type,
+  meta: { touched, error },
 }) => (
   <div>
     <Input {...input} placeholder={placeholder} type={type} />
@@ -36,31 +39,57 @@ const renderField = ({
   </div>
 );
 
-class SupplierForm extends Component{
+class SupplierForm extends Component {
   onDrop = (acceptedFiles, rejectedFiles) => {
     // do stuff with files...
-  }
-  
-  render(){
+  };
+
+  render() {
     const { handleSubmit, initialValues } = this.props;
 
     return (
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={4}>
-            {
-              initialValues ? <img src={initialValues.logo} style={{width: '100%', height: '100%'}} /> :
-                <Dropzone style={{width: '100%', height: '100%', border: '1px dashed #999'}}>
-                  <div style={{height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                    <p><b><FormattedMessage id="sys.supplierLogo" /></b></p>
-                    <p><FormattedMessage id="sys.dragImageFile" /></p>
-                  </div>
-                </Dropzone>
-            }
+            {initialValues ? (
+              <img
+                src={initialValues.logo}
+                style={{ width: '100%', height: '100%' }}
+              />
+            ) : (
+              <Dropzone
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  border: '1px dashed #999',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <p>
+                    <b>
+                      <FormattedMessage id="sys.supplierLogo" />
+                    </b>
+                  </p>
+                  <p>
+                    <FormattedMessage id="sys.dragImageFile" />
+                  </p>
+                </div>
+              </Dropzone>
+            )}
           </Col>
           <Col md={8}>
             <Card>
-              <CardHeader><FormattedMessage id="sys.basicInfo" /></CardHeader>
+              <CardHeader>
+                <FormattedMessage id="sys.basicInfo" />
+              </CardHeader>
               <CardBody>
                 <FormGroup row>
                   <Label for="name" sm={3}>
@@ -150,9 +179,14 @@ SupplierForm = reduxForm({
   validate,
 })(SupplierForm);
 
-export default connect((state) => {
+export default connect(state => {
   const {
-    name, email, url, address, logo, contact,
+    name,
+    email,
+    url,
+    address,
+    logo,
+    contact,
   } = state.supplierReducer.supplierDetails;
   return {
     initialValues: {

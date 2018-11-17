@@ -6,7 +6,6 @@ export const FETCH_ORDER_PRODUCTS = 'FETCH_ORDER_PRODUCTS';
 export const FETCH_ORDER_PRODUCTS_SUCCESS = 'FETCH_ORDER_PRODUCTS_SUCCESS';
 export const FETCH_ORDER_PRODUCTS_FAILED = 'FETCH_ORDER_PRODUCTS_FAILED';
 
-
 export function fetchOrders() {
   return { type: FETCH_ORDERS };
 }

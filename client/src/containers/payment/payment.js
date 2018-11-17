@@ -30,26 +30,21 @@ class Payment extends Component {
                     <FaCcPaypal size="3em" />
                   </td>
                   <td>your.paypal@example.com</td>
-                  <td>
-
-                  </td>
+                  <td />
                 </tr>
                 <tr>
                   <td>
                     <FaCcStripe size="3em" />
                   </td>
                   <td>your.paypal@example.com</td>
-                  <td>
-
-                  </td>
+                  <td />
                 </tr>
                 <tr>
                   <td>
                     <FaBtc size="3em" />
                   </td>
                   <td>your.paypal@example.com</td>
-                  <td>
-                  </td>
+                  <td />
                 </tr>
                 <tr>
                   <td>
@@ -59,14 +54,12 @@ class Payment extends Component {
                     />
                   </td>
                   <td>000-123456-1</td>
-                  <td>
-                  </td>
+                  <td />
                 </tr>
                 <tr>
                   <td>Bank Transfer</td>
                   <td>000-123456-1</td>
-                  <td>
-                  </td>
+                  <td />
                 </tr>
               </tbody>
             </Table>

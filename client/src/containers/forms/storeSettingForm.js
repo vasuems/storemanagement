@@ -16,7 +16,7 @@ import {
 } from 'reactstrap';
 import { fetchStoreSettings } from '../../actions';
 
-const validate = (values) => {
+const validate = values => {
   const errors = {};
   if (!values.siteName) {
     errors.siteName = 'Required';
@@ -25,7 +25,10 @@ const validate = (values) => {
 };
 
 const renderField = ({
-  input, placeholder, type, meta: { touched, error },
+  input,
+  placeholder,
+  type,
+  meta: { touched, error },
 }) => (
   <div>
     <Input {...input} placeholder={placeholder} type={type} />
@@ -34,18 +37,20 @@ const renderField = ({
 );
 
 class StoreSettingForm extends Component {
-  componentDidMount(){
+  componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchStoreSettings());
   }
-  render(){
+  render() {
     const { handleSubmit, currencies, countries, languages } = this.props;
     return (
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={6}>
             <Card>
-              <CardHeader><FormattedMessage id="sys.basicInfo" /></CardHeader>
+              <CardHeader>
+                <FormattedMessage id="sys.basicInfo" />
+              </CardHeader>
               <CardBody>
                 <FormGroup row>
                   <Label for="name" sm={3}>
@@ -78,10 +83,17 @@ class StoreSettingForm extends Component {
                     <FormattedMessage id="sys.currency" />
                   </Label>
                   <Col sm={9}>
-                    <Field component="select" name="currencyId" id="currencyId" className="form-control">
+                    <Field
+                      component="select"
+                      name="currencyId"
+                      id="currencyId"
+                      className="form-control"
+                    >
                       <option value="">--</option>
                       {currencies.map(currency => (
-                        <option key={currency.id} value={currency.id}>{currency.name}</option>
+                        <option key={currency.id} value={currency.id}>
+                          {currency.name}
+                        </option>
                       ))}
                     </Field>
                   </Col>
@@ -91,10 +103,17 @@ class StoreSettingForm extends Component {
                     <FormattedMessage id="sys.country" />
                   </Label>
                   <Col sm={9}>
-                    <Field component="select" name="countryId" id="countryId" className="form-control">
+                    <Field
+                      component="select"
+                      name="countryId"
+                      id="countryId"
+                      className="form-control"
+                    >
                       <option value="">--</option>
                       {countries.map(country => (
-                        <option key={country.id} value={country.id}>{country.name}</option>
+                        <option key={country.id} value={country.id}>
+                          {country.name}
+                        </option>
                       ))}
                     </Field>
                   </Col>
@@ -104,10 +123,17 @@ class StoreSettingForm extends Component {
                     <FormattedMessage id="sys.lang" />
                   </Label>
                   <Col sm={9}>
-                    <Field component="select" name="language" id="language" className="form-control">
+                    <Field
+                      component="select"
+                      name="language"
+                      id="language"
+                      className="form-control"
+                    >
                       <option value="">--</option>
                       {languages.map(lang => (
-                        <option key={lang.id} value={lang.id}>{lang.name}</option>
+                        <option key={lang.id} value={lang.id}>
+                          {lang.name}
+                        </option>
                       ))}
                     </Field>
                   </Col>
@@ -117,7 +143,9 @@ class StoreSettingForm extends Component {
           </Col>
           <Col md={6}>
             <Card>
-              <CardHeader><FormattedMessage id="sys.socialMedia" /></CardHeader>
+              <CardHeader>
+                <FormattedMessage id="sys.socialMedia" />
+              </CardHeader>
               <CardBody>
                 <FormGroup row>
                   <Label for="facebook" sm={3}>
@@ -167,7 +195,7 @@ StoreSettingForm = reduxForm({
   validate,
 })(StoreSettingForm);
 
-export default connect((state) => {
+export default connect(state => {
   return {
     initialValues: state.settingReducer.storeSettings,
     enableReinitialize: true,

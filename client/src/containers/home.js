@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Col,
-} from 'reactstrap';
+import { Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { LoginForm } from './forms';
 import Footer from '../components/footer';

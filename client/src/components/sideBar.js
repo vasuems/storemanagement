@@ -14,12 +14,8 @@ import {
   FiHome,
   FiSettings,
 } from 'react-icons/fi';
+import { FaCaretLeft, FaCaretDown, FaWarehouse } from 'react-icons/fa';
 import {
-  FaCaretLeft,
-  FaCaretDown,
-  FaWarehouse,
-} from 'react-icons/fa';
-import { 
   productMenuOpen,
   productMenuClose,
   reportMenuOpen,
@@ -40,7 +36,7 @@ class SideBarContent extends Component {
     } else {
       dispatch(productMenuOpen());
     }
-  }
+  };
 
   onReportMenuClick = () => {
     const { dispatch, reportMenu } = this.props;
@@ -50,7 +46,7 @@ class SideBarContent extends Component {
     } else {
       dispatch(reportMenuOpen());
     }
-  }
+  };
 
   render() {
     const { productMenu, reportMenu } = this.props;
@@ -69,15 +65,19 @@ class SideBarContent extends Component {
             <FormattedMessage id="sys.orders" />
           </Link>
         </Row>
-        <Row className="sidebar-link" onClick={this.onProductMenuClick} style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Row
+          className="sidebar-link"
+          onClick={this.onProductMenuClick}
+          style={{ display: 'flex', justifyContent: 'space-between' }}
+        >
           <div style={{ cursor: 'pointer' }}>
             <FiMenu className="sidebar-icon" />
-            <span style={{ color: '#ddd', fontSize: 14 }}><FormattedMessage id="sys.inventory" /></span>
+            <span style={{ color: '#ddd', fontSize: 14 }}>
+              <FormattedMessage id="sys.inventory" />
+            </span>
           </div>
           <div style={{ color: '#ddd', marginRight: 10, cursor: 'pointer' }}>
-            {
-              productMenu ? <FaCaretDown /> : <FaCaretLeft />
-            }
+            {productMenu ? <FaCaretDown /> : <FaCaretLeft />}
           </div>
         </Row>
         <Collapse isOpen={productMenu}>
@@ -100,15 +100,19 @@ class SideBarContent extends Component {
             </Link>
           </Row>
         </Collapse>
-        <Row className="sidebar-link" onClick={this.onReportMenuClick} style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Row
+          className="sidebar-link"
+          onClick={this.onReportMenuClick}
+          style={{ display: 'flex', justifyContent: 'space-between' }}
+        >
           <div style={{ cursor: 'pointer' }}>
             <FiBarChart2 className="sidebar-icon" />
-            <span style={{ color: '#ddd', fontSize: 14 }}><FormattedMessage id="sys.reports" /></span>
+            <span style={{ color: '#ddd', fontSize: 14 }}>
+              <FormattedMessage id="sys.reports" />
+            </span>
           </div>
           <div style={{ color: '#ddd', marginRight: 10, cursor: 'pointer' }}>
-            {
-              reportMenu ? <FaCaretDown /> : <FaCaretLeft />
-            }
+            {reportMenu ? <FaCaretDown /> : <FaCaretLeft />}
           </div>
         </Row>
         <Collapse isOpen={reportMenu}>
@@ -141,4 +145,7 @@ const mapStateToProps = state => ({
   reportMenu: state.pathReducer.reportMenu,
 });
 
-export default connect(mapStateToProps, null)(SideBarContent);
+export default connect(
+  mapStateToProps,
+  null
+)(SideBarContent);

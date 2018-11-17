@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { Card, CardTitle, Table, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-import {
-  Line, Pie,
-} from 'react-chartjs-2';
+import { Line, Pie } from 'react-chartjs-2';
 import { fetchDashboardData } from '../../actions';
 import { FeedItem, ShipTodayItem } from '../../components';
 
@@ -16,10 +14,10 @@ class Dashboard extends Component {
     dispatch(fetchDashboardData());
   }
 
-  onShipTodayItemClick = (id) =>{
+  onShipTodayItemClick = id => {
     const { history } = this.props;
     history.push(`/orders/${id}`);
-  }
+  };
 
   render() {
     const { weeklySales, categoryProducts } = this.props.data;
@@ -28,7 +26,7 @@ class Dashboard extends Component {
         <h3 style={{ marginTop: 70 }}>
           <FormattedMessage id="sys.dashboard" />
         </h3>
-        <Row style={{marginTop: 15}}>
+        <Row style={{ marginTop: 15 }}>
           <Col md={9}>
             <Row>
               <Col md={6} className="text-center">
@@ -42,21 +40,21 @@ class Dashboard extends Component {
                 </div>
               </Col>
             </Row>
-            <FeedItem 
+            <FeedItem
               backgroundColor="#fff"
               fontColor="#333"
               title="A new product has been created."
               content="Your collegue John Doe has just created a new product: sdlfladsjf"
               datetime="2018-11-11 11:11:00"
             />
-            <FeedItem 
+            <FeedItem
               backgroundColor="#fff"
               fontColor="#333"
               title="A new product has been created."
               content="Your collegue John Doe has just created a new product: asdfasdf sdf asdfasd"
               datetime="2018-11-01 11:11:00"
             />
-            <FeedItem 
+            <FeedItem
               backgroundColor="#fff"
               fontColor="#333"
               title="A new product has been created."
@@ -65,9 +63,18 @@ class Dashboard extends Component {
             />
           </Col>
           <Col md={3}>
-            <Card body style={{borderTop: '2px solid red', padding: 0, borderRadius: 0}}>
-              <CardTitle style={{padding: 10}}><FormattedMessage id="sys.shipToday" /></CardTitle>
-              <Table hover style={{marginBottom: 0}}>
+            <Card
+              body
+              style={{
+                borderTop: '2px solid red',
+                padding: 0,
+                borderRadius: 0,
+              }}
+            >
+              <CardTitle style={{ padding: 10 }}>
+                <FormattedMessage id="sys.shipToday" />
+              </CardTitle>
+              <Table hover style={{ marginBottom: 0 }}>
                 <tbody>
                   <ShipTodayItem
                     orderId="123456"

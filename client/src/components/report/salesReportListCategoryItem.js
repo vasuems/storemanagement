@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import numeral from 'numeral';
 
-const SalesReportListCategoryItem = (props) => {
+const SalesReportListCategoryItem = props => {
   return (
     <tr>
       <td>{props.name}</td>

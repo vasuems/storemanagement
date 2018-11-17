@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import {
-  Form, Input, Button, Alert,
-} from 'reactstrap';
+import { Form, Input, Button, Alert } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { submitLoginData } from '../../actions';
 
-const validate = (values) => {
+const validate = values => {
   const errors = {};
   if (!values.currentPwd) {
     errors.currentPwd = 'Required';
@@ -21,8 +19,11 @@ const validate = (values) => {
 };
 
 const renderField = ({
-  input, placeholder, type, meta: { touched, error },
-}) =>(
+  input,
+  placeholder,
+  type,
+  meta: { touched, error },
+}) => (
   <div>
     <Input {...input} placeholder={placeholder} type={type} />
     {touched && (error && <span className="text-danger">{error}</span>)}
@@ -30,24 +31,27 @@ const renderField = ({
 );
 
 class LoginForm extends Component {
-  componentDidUpdate(){
+  componentDidUpdate() {
     const { auth, history } = this.props;
 
-    if(auth){
+    if (auth) {
       history.push('/dashboard');
     }
   }
 
-  onSubmit = (data) => {
+  onSubmit = data => {
     const { dispatch } = this.props;
     dispatch(submitLoginData(data));
   };
 
-  render(){
+  render() {
     const { handleSubmit, auth } = this.props;
     const { formatMessage } = this.props.intl;
     return (
-      <Form onSubmit={handleSubmit(data => this.onSubmit(data))} id="login-form">
+      <Form
+        onSubmit={handleSubmit(data => this.onSubmit(data))}
+        id="login-form"
+      >
         <Field
           component={renderField}
           type="email"
@@ -65,10 +69,12 @@ class LoginForm extends Component {
         <Button type="submit" block>
           <FormattedMessage id="sys.signin" />
         </Button>
-        {
-          auth === false?<Alert color="danger" style={{marginTop: 20}}><FormattedMessage id="sys.invalidAuth" /></Alert>: null
-        }
-        
+        {auth === false ? (
+          <Alert color="danger" style={{ marginTop: 20 }}>
+            <FormattedMessage id="sys.invalidAuth" />
+          </Alert>
+        ) : null}
+
         <br />
         <Button color="link">
           <FormattedMessage id="sys.forgotPwd" />
@@ -82,7 +88,7 @@ LoginForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
-  auth: PropTypes.object, 
+  auth: PropTypes.object,
   history: PropTypes.object.isRequired,
 };
 

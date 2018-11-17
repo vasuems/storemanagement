@@ -6,9 +6,11 @@ const FeedItem = props => {
   const { backgroundColor, fontColor, title, content, datetime } = props;
   return (
     <Card body style={{ marginTop: 10, background: backgroundColor || '#fff' }}>
-      <CardTitle style={{ color: fontColor || '#000', fontWeight: 200 }}>{title}</CardTitle>
-      <div className="text-muted">{ datetime }</div>
-      <div className="text-muted">{ content }</div>
+      <CardTitle style={{ color: fontColor || '#000', fontWeight: 200 }}>
+        {title}
+      </CardTitle>
+      <div className="text-muted">{datetime}</div>
+      <div className="text-muted">{content}</div>
     </Card>
   );
 };

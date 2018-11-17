@@ -29,4 +29,3 @@ export function fetchSupplierDetailsSuccess(data) {
 export function fetchSupplierDetailsFailed() {
   return { type: FETCH_SUPPLIER_DETAILS_FAILED };
 }
-

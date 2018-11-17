@@ -6,9 +6,9 @@ const initialState = {
 
 export default function dashboardReducer(state = initialState, action) {
   switch (action.type) {
-  case FETCH_DASHBOARD_DATA_SUCCESS:
-    return { ...state, data: action.value };
-  default:
-    return state;
+    case FETCH_DASHBOARD_DATA_SUCCESS:
+      return { ...state, data: action.value };
+    default:
+      return state;
   }
 }

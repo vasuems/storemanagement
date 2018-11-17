@@ -1,6 +1,10 @@
 import { call, all, takeEvery } from 'redux-saga/effects';
 import { fetchOrders, fetchOrderProducts } from './order';
-import { fetchProductCategories, fetchProducts, fetchProductDetails } from './product';
+import {
+  fetchProductCategories,
+  fetchProducts,
+  fetchProductDetails,
+} from './product';
 import { fetchSalesReportProducts, fetchSalesReportCategories } from './report';
 import { fetchDashboardData } from './dashboard';
 import { fetchStoreSettings } from './setting';
