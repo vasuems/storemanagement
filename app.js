@@ -18,6 +18,7 @@ const {
   Store,
   Product,
   Category,
+  Utility,
 } = require('./models');
 const { MySQL } = require('./db');
 const { UnauthorisedError } = require('./exceptions');
@@ -80,6 +81,37 @@ const getUserCodes = (req, res, next) => {
 };
 
 app.use(bodyParser.json());
+
+// public APIs
+app.get(
+  '/countries',
+  async (req, res) => {
+    try {
+      const utility = new Utility();
+      const db = mysql.connect();
+      const data = await utility.getCountries(db);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.get(
+  '/currencies',
+  async (req, res) => {
+    try {
+      const utility = new Utility();
+      const db = mysql.connect();
+      const data = await utility.getCurrencies(db);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
 
 app.post('/auth', async (req, res) => {
   try {

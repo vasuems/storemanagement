@@ -129,6 +129,8 @@
   "sys.company": "Company",
   "sys.suppliers": "Suppliers",
   "sys.supplier": "Supplier",
+  "sys.manufactures": "Manufactures",
+  "sys.manufacture": "Manufacture",
   "sys.manufacturers": "Manufacturers",
   "sys.manufacturer": "Manufacturer",
   "sys.invalidAuth": "Invalid email or password.",

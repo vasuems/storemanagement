@@ -9,7 +9,6 @@ import {
   fetchProductDetailsFailed,
   authFailed,
 } from '../actions';
-import { categories, products, productDetails } from '../apis/mocks/responses';
 import config from '../config';
 
 export function* fetchProductCategories(action) {

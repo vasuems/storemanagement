@@ -3,6 +3,7 @@ const { User, Contact } = require('./user');
 const Store = require('./store');
 const Product = require('./product');
 const Category = require('./category');
+const Utility = require('./utility');
 
 module.exports = {
   OAuth2Request,
@@ -12,4 +13,5 @@ module.exports = {
   Store,
   Product,
   Category,
+  Utility,
 };
