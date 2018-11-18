@@ -103,7 +103,9 @@ class ProductForm extends Component {
     } = this.props;
 
     //TODO: replace the store ID here
-    dispatch(fetchProductDetails({storeCode: 'asdfasdfasdfasd', productCode: id}));
+    dispatch(
+      fetchProductDetails({ storeCode: 'asdfasdfasdfasd', productCode: id })
+    );
   }
 
   onSubmit = data => {

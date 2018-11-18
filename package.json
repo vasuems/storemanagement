@@ -27,7 +27,8 @@
     "build:client": "cd client && yarn build",
     "client": "cd client && yarn start",
     "server": "nodemon app.local.js",
-    "test:server": "./node_modules/mocha/bin/mocha ./models/tests"
+    "test:server": "./node_modules/mocha/bin/mocha ./models/tests",
+    "serverless": "claudia update --handler lambda.handler --deploy-proxy-api"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

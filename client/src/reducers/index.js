@@ -9,6 +9,7 @@ import reportReducer from './report';
 import settingReducer from './setting';
 import authReducer from './auth';
 import supplierReducer from './supplier';
+import publicReducer from './public';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   settingReducer,
   authReducer,
   supplierReducer,
+  publicReducer,
 });
 
 export default rootReducer;

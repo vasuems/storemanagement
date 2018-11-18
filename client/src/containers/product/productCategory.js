@@ -37,9 +37,7 @@ class ProductCategory extends Component {
               </Button>
               <br />
               <br />
-              <ProductCategoryForm
-                categories={categories}
-              />
+              <ProductCategoryForm categories={categories} />
             </Col>
           </Row>
         </div>
@@ -54,9 +52,7 @@ ProductCategory.propTypes = {
   categories: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
-  categories: state.productReducer.categories,
-});
+const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,

@@ -14,7 +14,11 @@ import {
   Label,
   Input,
 } from 'reactstrap';
-import { fetchStoreSettings } from '../../actions';
+import {
+  fetchStoreSettings,
+  fetchCountries,
+  fetchCurrencies,
+} from '../../actions';
 
 const validate = values => {
   const errors = {};
@@ -39,6 +43,9 @@ const renderField = ({
 class StoreSettingForm extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
+
+    dispatch(fetchCountries());
+    dispatch(fetchCurrencies());
     dispatch(fetchStoreSettings());
   }
   render() {
@@ -199,5 +206,7 @@ export default connect(state => {
   return {
     initialValues: state.settingReducer.storeSettings,
     enableReinitialize: true,
+    currencies: state.publicReducer.currencies,
+    countries: state.publicReducer.countries,
   };
 })(StoreSettingForm);

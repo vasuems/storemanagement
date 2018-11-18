@@ -18,7 +18,7 @@ const {
   Store,
   Product,
   Category,
-  Utility,
+  Public,
 } = require('./models');
 const { MySQL } = require('./db');
 const { UnauthorisedError } = require('./exceptions');
@@ -83,9 +83,9 @@ const storeCodeVerifier = (req, res, next) => {
 app.use(bodyParser.json());
 
 // public APIs
-app.get('/countries', async (req, res) => {
+app.get('/countries', authMiddleware, async (req, res) => {
   try {
-    const utility = new Utility();
+    const utility = new Public();
     const db = mysql.connect();
     const data = await utility.getCountries(db);
 
@@ -95,9 +95,9 @@ app.get('/countries', async (req, res) => {
   }
 });
 
-app.get('/currencies', async (req, res) => {
+app.get('/currencies', authMiddleware, async (req, res) => {
   try {
-    const utility = new Utility();
+    const utility = new Public();
     const db = mysql.connect();
     const data = await utility.getCurrencies(db);
 

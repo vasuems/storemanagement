@@ -8,9 +8,9 @@ const {
   NoRecordFoundError,
 } = require('../exceptions');
 
-function Utility() {}
+function Public() {}
 
-Utility.prototype.getCountries = function(db) {
+Public.prototype.getCountries = function(db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
@@ -27,7 +27,7 @@ Utility.prototype.getCountries = function(db) {
   });
 };
 
-Utility.prototype.getCurrencies = function(db) {
+Public.prototype.getCurrencies = function(db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query('select * from currency', (error, results) => {
@@ -41,7 +41,7 @@ Utility.prototype.getCurrencies = function(db) {
   });
 };
 
-Utility.prototype.delete = function(code, db) {
+Public.prototype.delete = function(code, db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
@@ -57,4 +57,4 @@ Utility.prototype.delete = function(code, db) {
   });
 };
 
-module.exports = Utility;
+module.exports = Public;

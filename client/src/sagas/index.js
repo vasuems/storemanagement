@@ -11,6 +11,7 @@ import { fetchDashboardData } from './dashboard';
 import { fetchStoreSettings } from './setting';
 import { submitLoginData } from './auth';
 import { fetchSuppliers, fetchSupplierDetails } from './supplier';
+import { fetchCountries, fetchCurrencies } from './public';
 import {
   FETCH_ORDERS,
   FETCH_ORDER_PRODUCTS,
@@ -25,6 +26,8 @@ import {
   FETCH_SALES_REPORT_CATEGORIES,
   FETCH_STORE_SETTINGS,
   SUBMIT_LOGIN_DATA,
+  FETCH_COUNTRIES,
+  FETCH_CURRENCIES,
 } from '../actions';
 
 export default function* rootSaga() {
@@ -42,5 +45,7 @@ export default function* rootSaga() {
     takeEvery(FETCH_SUPPLIERS, fetchSuppliers),
     takeEvery(FETCH_SUPPLIER_DETAILS, fetchSupplierDetails),
     takeEvery(FETCH_PRODUCT_CATEGORY_DETAILS, fetchProductCategoryDetails),
+    takeEvery(FETCH_COUNTRIES, fetchCountries),
+    takeEvery(FETCH_CURRENCIES, fetchCurrencies),
   ]);
 }

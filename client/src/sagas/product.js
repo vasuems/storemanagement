@@ -56,7 +56,9 @@ export function* fetchProductDetails(action) {
   try {
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${action.value.storeCode}/products/${action.value.productCode}`,
+      url: `${config.apiDomain}/stores/${action.value.storeCode}/products/${
+        action.value.productCode
+      }`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
@@ -76,7 +78,9 @@ export function* fetchProductCategoryDetails(action) {
   try {
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${action.value.storeCode}/categories/${action.value.categoryCode}`,
+      url: `${config.apiDomain}/stores/${action.value.storeCode}/categories/${
+        action.value.categoryCode
+      }`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },

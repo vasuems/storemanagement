@@ -38,7 +38,12 @@ class ProductCategoryForm extends Component {
     } = this.props;
 
     //TODO: replace the store ID here
-    dispatch(fetchProductCategoryDetails({storeCode: 'asdfasdfasdfasd', categoryCode: id}));
+    dispatch(
+      fetchProductCategoryDetails({
+        storeCode: 'asdfasdfasdfasd',
+        categoryCode: id,
+      })
+    );
   }
 
   onSubmit = data => {
@@ -95,13 +100,16 @@ ProductCategoryForm = reduxForm({
   validate,
 })(ProductCategoryForm);
 
-export default withRouter(connect(state => {
-  const { name, parentId } = state.productReducer.categoryDetails;
-  return {
-    initialValues: {
-      name: name,
-      'parent-id': parentId,
-    },
-    enableReinitialize: true,
-  };
-})(ProductCategoryForm));
+export default withRouter(
+  connect(state => {
+    const { name, parentId } = state.productReducer.categoryDetails;
+    return {
+      initialValues: {
+        name: name,
+        'parent-id': parentId,
+      },
+      categories: state.productReducer.categories,
+      enableReinitialize: true,
+    };
+  })(ProductCategoryForm)
+);
