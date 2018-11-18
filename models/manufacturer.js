@@ -43,7 +43,7 @@ Manufacturer.prototype.get = function(code, db) {
       (error, results) => {
         db.end();
         if (error || results.length == 0) {
-          reject(new NoRecordFoundError('No supplier found.'));
+          reject(new NoRecordFoundError('No manufacturer found.'));
         } else {
           const {
             code,

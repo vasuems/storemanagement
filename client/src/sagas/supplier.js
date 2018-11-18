@@ -8,7 +8,7 @@ import {
   authFailed,
 } from '../actions';
 import config from '../config';
-import { suppliers, supplierDetails } from '../apis/mocks/responses';
+import { supplierDetails } from '../apis/mocks/responses';
 
 export function* fetchSuppliers(action) {
   try {

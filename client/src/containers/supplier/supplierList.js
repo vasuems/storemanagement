@@ -24,7 +24,9 @@ import { SupplierListItem } from '../../components';
 class SupplierList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchSuppliers());
+
+    //TODO: to replace the store ID passing to action creator
+    dispatch(fetchSuppliers('asdfasdfasdfasd'));
   }
 
   onViewClick = id => {
@@ -93,15 +95,15 @@ class SupplierList extends Component {
                 <tbody>
                   {suppliers.map(product => (
                     <SupplierListItem
-                      key={product.id}
-                      id={product.id}
+                      key={product.code}
+                      id={product.code}
                       logo={product.logo}
                       name={product.name}
                       url={product.url}
                       address={product.address}
                       email={product.email}
                       contact={product.contact}
-                      status={product.active}
+                      status={product.status}
                       onClick={this.onViewClick}
                     />
                   ))}

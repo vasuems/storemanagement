@@ -8,9 +8,26 @@ const {
   NoRecordFoundError,
 } = require('../exceptions');
 
-function Supplier(code, name, storeId, countryId, createdBy, status = true) {
+function Supplier(
+  code,
+  name,
+  url,
+  email,
+  contact,
+  address,
+  logo,
+  storeId,
+  countryId,
+  createdBy,
+  status = true
+) {
   this.code = code || '';
   this.name = name || '';
+  this.url = url || '';
+  this.email = email || '';
+  this.contact = contact || '';
+  this.address = address || '';
+  this.logo = logo || '';
   this.storeId = storeId || '';
   this.countryId = countryId || '';
   this.createdBy = createdBy || '';
@@ -21,7 +38,7 @@ Supplier.prototype.get = function(code, db) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select code, name, store_id as storeId, country_id as countryId, created_by as createdBy, status
+      `select code, name, url, email, contact, address, logo, store_id as storeId, country_id as countryId, created_by as createdBy, status
        from supplier where code='${code}'`,
       (error, results) => {
         db.end();
@@ -31,13 +48,30 @@ Supplier.prototype.get = function(code, db) {
           const {
             code,
             name,
+            url,
+            email,
+            contact,
+            address,
+            logo,
             storeId,
             countryId,
             createdBy,
             status,
           } = results[0];
           resolve(
-            new Supplier(code, name, storeId, countryId, createdBy, status)
+            new Supplier(
+              code,
+              name,
+              url,
+              email,
+              contact,
+              address,
+              logo,
+              storeId,
+              countryId,
+              createdBy,
+              status
+            )
           );
         }
       }
@@ -49,7 +83,7 @@ Supplier.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
   return new Promise((resolve, reject) => {
     db.connect();
     db.query(
-      `select code, name, store_id as storeId, country_id as countryId, created_by as createdBy, status
+      `select code, name, url, email, contact, address, logo, store_id as storeId, country_id as countryId, created_by as createdBy, status
        from supplier where store_id='${id}' limit ${(page - 1) *
         pageSize}, ${pageSize}`,
       (error, results) => {
@@ -61,6 +95,11 @@ Supplier.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
             const {
               code,
               name,
+              url,
+              email,
+              contact,
+              address,
+              logo,
               storeId,
               countryId,
               createdBy,
@@ -69,6 +108,11 @@ Supplier.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
             return new Supplier(
               code,
               name,
+              url,
+              email,
+              contact,
+              address,
+              logo,
               storeId,
               countryId,
               createdBy,
@@ -96,23 +140,47 @@ Supplier.prototype.add = function(supplier, db) {
         }
       });
 
-      const { code, name, storeId, countryId, createdBy } = supplier;
+      const {
+        code,
+        name,
+        url,
+        email,
+        contact,
+        address,
+        logo,
+        storeId,
+        countryId,
+        createdBy,
+      } = supplier;
 
       db.connect();
       db.query(
-        `insert into supplier(code, name, store_id, country_id, created_by) 
-         values('${code}', '${name}', '${storeId}', '${countryId}', '${createdBy}')`,
+        `insert into supplier(code, name, url, email, contact, address, logo, store_id, country_id, created_by) 
+         values('${code}', '${name}', '${url}', '${email}', '${contact}', '${address}', '${logo}', '${storeId}', '${countryId}', '${createdBy}')`,
         (error, results) => {
           db.end();
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide supplier data.'));
           } else {
-            resolve(new Supplier(code, name, storeId, countryId, createdBy));
+            resolve(
+              new Supplier(
+                code,
+                name,
+                url,
+                email,
+                contact,
+                address,
+                logo,
+                storeId,
+                countryId,
+                createdBy
+              )
+            );
           }
         }
       );
     } else {
-      reject(new BadRequestError('Invalide product data.'));
+      reject(new BadRequestError('Invalide supplier data.'));
     }
   });
 };

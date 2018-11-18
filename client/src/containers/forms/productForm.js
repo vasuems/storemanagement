@@ -180,17 +180,23 @@ class ProductForm extends Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label for="category" sm={3}>
+                  <Label for="categoryId" sm={3}>
                     <FormattedMessage id="sys.category" />
                   </Label>
                   <Col sm={9}>
-                    <Input type="select" name="category">
+                    <Field
+                      component="select"
+                      id="categoryId"
+                      name="categoryId"
+                      className="form-control"
+                    >
+                      <option value="">--</option>
                       {categories.map(cat => (
-                        <option key={cat.id} value={cat.id}>
+                        <option key={cat.code} value={cat.code}>
                           {cat.name}
                         </option>
                       ))}
-                    </Input>
+                    </Field>
                   </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -207,31 +213,43 @@ class ProductForm extends Component {
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label for="manufacturer" sm={3}>
+                  <Label for="manufacturerId" sm={3}>
                     <FormattedMessage id="sys.manufacturer" />
                   </Label>
                   <Col sm={9}>
-                    <Input type="select" name="manufacturer">
+                    <Field
+                      component="select"
+                      id="manufacturerId"
+                      name="manufacturerId"
+                      className="form-control"
+                    >
+                      <option value="">--</option>
                       {manufacturers.map(man => (
-                        <option key={man.id} value={man.id}>
+                        <option key={man.code} value={man.code}>
                           {man.name}
                         </option>
                       ))}
-                    </Input>
+                    </Field>
                   </Col>
                 </FormGroup>
                 <FormGroup row>
-                  <Label for="supplier" sm={3}>
+                  <Label for="supplierId" sm={3}>
                     <FormattedMessage id="sys.supplier" />
                   </Label>
                   <Col sm={9}>
-                    <Input type="select" name="supplier">
+                    <Field
+                      component="select"
+                      id="supplierId"
+                      name="supplierId"
+                      className="form-control"
+                    >
+                      <option value="">--</option>
                       {suppliers.map(supplier => (
-                        <option key={supplier.id} value={supplier.id}>
+                        <option key={supplier.code} value={supplier.code}>
                           {supplier.name}
                         </option>
                       ))}
-                    </Input>
+                    </Field>
                   </Col>
                 </FormGroup>
               </CardBody>
@@ -322,7 +340,7 @@ ProductForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   suppliers: PropTypes.array.isRequired,
-  manufactures: PropTypes.array.isRequired,
+  manufacturers: PropTypes.array.isRequired,
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
@@ -333,37 +351,40 @@ ProductForm = reduxForm({
   validate,
 })(ProductForm);
 
-export default connect(state => {
-  const {
-    name,
-    description,
-    sku,
-    category,
-    cost,
-    manufacturer,
-    supplier,
-    allowQuantity,
-    quantity,
-    unitPrice,
-    discount,
-  } = state.productReducer.productDetails;
-  return {
-    initialValues: {
+export default withRouter(
+  connect(state => {
+    const {
       name,
       description,
       sku,
-      category,
-      cost: (cost || 0.0).toFixed(2),
-      manufacturer,
-      supplier,
-      'allow-quantity': allowQuantity,
+      categoryId,
+      cost,
+      manufacturerId,
+      supplierId,
+      allowQuantity,
       quantity,
-      price: (unitPrice || 0.0).toFixed(2) || 0.0,
-      discount: (discount || 0.0).toFixed(2) || 0.0,
-    },
-    categories: state.productReducer.categories,
-    suppliers: state.supplierReducer.suppliers,
-    manufacturers: state.manufacturerReducer.manufacturers,
-    enableReinitialize: true,
-  };
-})(injectIntl(withRouter(ProductForm)));
+      unitPrice,
+      discount,
+    } = state.productReducer.productDetails;
+
+    return {
+      initialValues: {
+        name,
+        description,
+        sku,
+        categoryId,
+        cost: (cost || 0.0).toFixed(2),
+        manufacturerId,
+        supplierId,
+        'allow-quantity': allowQuantity,
+        quantity,
+        price: (unitPrice || 0.0).toFixed(2) || 0.0,
+        discount: (discount || 0.0).toFixed(2) || 0.0,
+      },
+      categories: state.productReducer.categories,
+      suppliers: state.supplierReducer.suppliers,
+      manufacturers: state.manufacturerReducer.manufacturers,
+      enableReinitialize: true,
+    };
+  })(injectIntl(ProductForm))
+);
