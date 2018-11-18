@@ -105,9 +105,9 @@ class SideBarContent extends Component {
             </Link>
           </Row>
           <Row className="sidebar-link sub-menu">
-            <Link to="/manufactures">
+            <Link to="/manufacturers">
               <FaIndustry className="sidebar-icon" />
-              <FormattedMessage id="sys.manufactures" />
+              <FormattedMessage id="sys.manufacturers" />
             </Link>
           </Row>
         </Collapse>

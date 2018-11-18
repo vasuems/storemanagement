@@ -18,7 +18,12 @@ import {
 import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { fetchProductDetails } from '../../actions';
+import {
+  fetchProductDetails,
+  fetchProductCategories,
+  fetchSuppliers,
+  fetchManufacturers,
+} from '../../actions';
 
 const validate = values => {
   const errors = {};
@@ -103,6 +108,9 @@ class ProductForm extends Component {
     } = this.props;
 
     //TODO: replace the store ID here
+    dispatch(fetchProductCategories('asdfasdfasdfasd'));
+    dispatch(fetchSuppliers('asdfasdfasdfasd'));
+    dispatch(fetchManufacturers('asdfasdfasdfasd'));
     dispatch(
       fetchProductDetails({ storeCode: 'asdfasdfasdfasd', productCode: id })
     );
@@ -116,6 +124,8 @@ class ProductForm extends Component {
     const {
       handleSubmit,
       categories,
+      suppliers,
+      manufacturers,
       intl: { formatMessage },
     } = this.props;
     return (
@@ -202,9 +212,9 @@ class ProductForm extends Component {
                   </Label>
                   <Col sm={9}>
                     <Input type="select" name="manufacturer">
-                      {categories.map(cat => (
-                        <option key={cat.id} value={cat.id}>
-                          {cat.name}
+                      {manufacturers.map(man => (
+                        <option key={man.id} value={man.id}>
+                          {man.name}
                         </option>
                       ))}
                     </Input>
@@ -216,9 +226,9 @@ class ProductForm extends Component {
                   </Label>
                   <Col sm={9}>
                     <Input type="select" name="supplier">
-                      {categories.map(cat => (
-                        <option key={cat.id} value={cat.id}>
-                          {cat.name}
+                      {suppliers.map(supplier => (
+                        <option key={supplier.id} value={supplier.id}>
+                          {supplier.name}
                         </option>
                       ))}
                     </Input>
@@ -311,6 +321,8 @@ class ProductForm extends Component {
 ProductForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
+  suppliers: PropTypes.array.isRequired,
+  manufactures: PropTypes.array.isRequired,
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
@@ -349,6 +361,9 @@ export default connect(state => {
       price: (unitPrice || 0.0).toFixed(2) || 0.0,
       discount: (discount || 0.0).toFixed(2) || 0.0,
     },
+    categories: state.productReducer.categories,
+    suppliers: state.supplierReducer.suppliers,
+    manufacturers: state.manufacturerReducer.manufacturers,
     enableReinitialize: true,
   };
 })(injectIntl(withRouter(ProductForm)));

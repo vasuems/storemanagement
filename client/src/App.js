@@ -16,6 +16,7 @@ import {
   SalesReportList,
   SupplierList,
   Supplier,
+  ManufacturerList,
 } from './containers';
 import NavBar from './containers/navigation';
 import SideBarContent from './components/sideBar';
@@ -93,6 +94,12 @@ const routes = [
     exact: true,
     sidebar: () => <SideBarContent />,
     main: () => <Supplier />,
+  },
+  {
+    path: '/manufacturers',
+    exact: true,
+    sidebar: () => <SideBarContent />,
+    main: () => <ManufacturerList />,
   },
   {
     path: '/payments',

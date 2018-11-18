@@ -4,7 +4,7 @@ import { Button, Badge } from 'reactstrap';
 import { FaGlobe, FaAt, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
-const ManufactureListItem = props => {
+const ManufacturerListItem = props => {
   const { formatMessage } = props.intl;
   return (
     <tr>
@@ -46,7 +46,7 @@ const ManufactureListItem = props => {
   );
 };
 
-ManufactureListItem.propTypes = {
+ManufacturerListItem.propTypes = {
   id: PropTypes.string.isRequired,
   logo: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -54,9 +54,9 @@ ManufactureListItem.propTypes = {
   address: PropTypes.string,
   email: PropTypes.string.isRequired,
   contact: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
+  status: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
 };
 
-export default injectIntl(ManufactureListItem);
+export default injectIntl(ManufacturerListItem);

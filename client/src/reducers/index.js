@@ -9,6 +9,7 @@ import reportReducer from './report';
 import settingReducer from './setting';
 import authReducer from './auth';
 import supplierReducer from './supplier';
+import manufacturerReducer from './manufacturer';
 import publicReducer from './public';
 
 const rootReducer = combineReducers({
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   settingReducer,
   authReducer,
   supplierReducer,
+  manufacturerReducer,
   publicReducer,
 });
 

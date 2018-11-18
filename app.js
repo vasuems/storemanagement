@@ -14,11 +14,12 @@ require('dotenv').load();
 const {
   OAuth2Request,
   User,
-  Contact,
   Store,
   Product,
   Category,
   Public,
+  Supplier,
+  Manufacturer,
 } = require('./models');
 const { MySQL } = require('./db');
 const { UnauthorisedError } = require('./exceptions');
@@ -319,6 +320,38 @@ app.get(
       const category = new Category();
       const db = mysql.connect();
       const data = await category.get(req.params.categoryCode, db);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.get(
+  '/stores/:storeCode/manufacturers',
+  [authMiddleware, storeCodeVerifier],
+  async (req, res) => {
+    try {
+      const manufacturer = new Manufacturer();
+      const db = mysql.connect();
+      const data = await manufacturer.getAllByStoreId(req.params.storeCode, db);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.get(
+  '/stores/:storeCode/suppliers',
+  [authMiddleware, storeCodeVerifier],
+  async (req, res) => {
+    try {
+      const supplier = new Supplier();
+      const db = mysql.connect();
+      const data = await supplier.getAllByStoreId(req.params.storeCode, db);
 
       res.send(data);
     } catch (err) {

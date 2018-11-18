@@ -3,6 +3,8 @@ const { User, Contact } = require('./user');
 const Store = require('./store');
 const Product = require('./product');
 const Category = require('./category');
+const Supplier = require('./supplier');
+const Manufacturer = require('./manufacturer');
 const Public = require('./public');
 
 module.exports = {
@@ -14,4 +16,6 @@ module.exports = {
   Product,
   Category,
   Public,
+  Supplier,
+  Manufacturer,
 };

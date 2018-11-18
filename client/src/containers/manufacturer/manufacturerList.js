@@ -18,13 +18,15 @@ import {
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
-import { fetchSuppliers } from '../../actions';
-import { ManufactureListItem } from '../../components';
+import { fetchManufacturers } from '../../actions';
+import { ManufacturerListItem } from '../../components';
 
-class ManufactureList extends Component {
+class ManufacturerList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchSuppliers());
+
+    //TODO: to replace the store ID passing to action creator
+    dispatch(fetchManufacturers('asdfasdfasdfasd'));
   }
 
   onViewClick = id => {
@@ -34,9 +36,10 @@ class ManufactureList extends Component {
   render() {
     const {
       history,
-      manufactures,
+      manufacturers,
       intl: { formatMessage },
     } = this.props;
+
     return (
       <div>
         <Breadcrumb>
@@ -46,7 +49,7 @@ class ManufactureList extends Component {
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem active>
-            <FormattedMessage id="sys.suppliers" />
+            <FormattedMessage id="sys.manufacturers" />
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="content-body">
@@ -94,17 +97,17 @@ class ManufactureList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {manufactures.map(manufacture => (
-                    <ManufactureListItem
-                      key={manufacture.id}
-                      id={manufacture.id}
-                      logo={manufacture.logo}
-                      name={manufacture.name}
-                      url={manufacture.url}
-                      address={manufacture.address}
-                      email={manufacture.email}
-                      contact={manufacture.contact}
-                      status={manufacture.active}
+                  {manufacturers.map(manufacturer => (
+                    <ManufacturerListItem
+                      key={manufacturer.code}
+                      id={manufacturer.code}
+                      logo={manufacturer.logo}
+                      name={manufacturer.name}
+                      url={manufacturer.url}
+                      address={manufacturer.address}
+                      email={manufacturer.email}
+                      contact={manufacturer.contact}
+                      status={manufacturer.status}
                       onClick={this.onViewClick}
                     />
                   ))}
@@ -136,12 +139,12 @@ class ManufactureList extends Component {
 }
 
 const mapStateToProps = state => ({
-  manufactures: state.manufactureReducer.manufactures,
+  manufacturers: state.manufacturerReducer.manufacturers,
 });
 
-ManufactureList.propTypes = {
+ManufacturerList.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  manufactures: PropTypes.array.isRequired,
+  manufacturers: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
 };
@@ -150,5 +153,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     null
-  )(injectIntl(ManufactureList))
+  )(injectIntl(ManufacturerList))
 );

@@ -6,8 +6,8 @@ export const FETCH_SUPPLIER_DETAILS = 'FETCH_SUPPLIER_DETAILS';
 export const FETCH_SUPPLIER_DETAILS_SUCCESS = 'FETCH_SUPPLIER_DETAILS_SUCCESS';
 export const FETCH_SUPPLIER_DETAILS_FAILED = 'FETCH_SUPPLIER_DETAILS_FAILED';
 
-export function fetchSuppliers() {
-  return { type: FETCH_SUPPLIERS };
+export function fetchSuppliers(data) {
+  return { type: FETCH_SUPPLIERS, value: data };
 }
 
 export function fetchSuppliersSuccess(data) {

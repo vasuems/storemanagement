@@ -1,11 +1,12 @@
 import { call, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { 
+import {
   fetchCountriesSuccess,
   fetchCountriesFailed,
   fetchCurrenciesSuccess,
   fetchCurrenciesFailed,
-  authFailed } from '../actions';
+  authFailed,
+} from '../actions';
 import config from '../config';
 
 export function* fetchCountries(action) {
