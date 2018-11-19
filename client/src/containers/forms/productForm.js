@@ -16,6 +16,7 @@ import {
   InputGroup,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import { List } from 'react-content-loader';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import {

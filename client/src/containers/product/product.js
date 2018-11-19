@@ -49,7 +49,6 @@ class Product extends Component {
 Product.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  auth: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({

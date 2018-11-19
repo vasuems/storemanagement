@@ -6,9 +6,6 @@ import {
   Row,
   Col,
   Button,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
   Breadcrumb,
   BreadcrumbItem,
   InputGroup,
@@ -208,23 +205,7 @@ class SalesReportList extends Component {
                         />
                       ))}
                     </tbody>
-                  </Table>
-                  <ReactPaginate 
-                    pageCount={20}
-                    pageRangeDisplayed={3}
-                    marginPagesDisplayed={2}
-                    containerClassName="pagination"
-                    subContainerClassName="pages pagination"
-                    pageClassName="page-item"
-                    breakClassName="page-item"
-                    breakLabel="..."
-                    pageLinkClassName="page-link"
-                    previousLabel={formatMessage({ id: 'sys.prev' })}
-                    nextLabel={formatMessage({ id: 'sys.next' })}
-                    previousLinkClassName="page-link"
-                    nextLinkClassName="page-link"
-                    activeClassName="active"
-                  />
+                  </Table>                  
                 </TabPane>
                 <TabPane tabId="2">
                   <div
@@ -303,27 +284,27 @@ class SalesReportList extends Component {
                         />
                       ))}
                     </tbody>
-                  </Table>
-                  <ReactPaginate 
-                    pageCount={20}
-                    pageRangeDisplayed={3}
-                    marginPagesDisplayed={2}
-                    containerClassName="pagination"
-                    subContainerClassName="pages pagination"
-                    pageClassName="page-item"
-                    breakClassName="page-item"
-                    breakLabel="..."
-                    pageLinkClassName="page-link"
-                    previousLabel={formatMessage({ id: 'sys.prev' })}
-                    nextLabel={formatMessage({ id: 'sys.next' })}
-                    previousLinkClassName="page-link"
-                    nextLinkClassName="page-link"
-                    activeClassName="active"
-                  />
+                  </Table>                
                 </TabPane>
               </TabContent>
             </Col>
-          </Row>
+          </Row><br />
+          <ReactPaginate 
+            pageCount={20}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            containerClassName="pagination"
+            subContainerClassName="pages pagination"
+            pageClassName="page-item"
+            breakClassName="page-item"
+            breakLabel="..."
+            pageLinkClassName="page-link"
+            previousLabel={formatMessage({ id: 'sys.prev' })}
+            nextLabel={formatMessage({ id: 'sys.next' })}
+            previousLinkClassName="page-link"
+            nextLinkClassName="page-link"
+            activeClassName="active"
+          />      
         </div>
       </div>
     );
