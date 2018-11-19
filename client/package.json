@@ -16,7 +16,6 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-chartjs-2": "^2.7.4",
-    "react-content-loader": "^3.2.0",
     "react-datepicker": "^1.8.0",
     "react-dom": "^16.4.2",
     "react-dropzone": "^7.0.1",

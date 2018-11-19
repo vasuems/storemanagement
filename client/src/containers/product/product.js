@@ -9,13 +9,6 @@ import { ProductForm } from '../forms';
 
 class Product extends Component {
   render() {
-    const {
-      auth,
-    } = this.props;
-
-    if (auth === false) {
-      window.location.href = '/';
-    }
     const { history } = this.props;
     return (
       <div>
@@ -60,7 +53,6 @@ Product.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.authReducer.auth,
 });
 
 export default connect(

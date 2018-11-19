@@ -18,7 +18,6 @@ import {
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
-import { List } from 'react-content-loader';
 import { fetchProducts } from '../../actions';
 import { ProductListItem } from '../../components';
 
