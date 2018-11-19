@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { Form, CardTitle, Input, Button } from 'reactstrap';
-import { FiSave } from 'react-icons/fi';
 
 const validate = values => {
   const errors = {};

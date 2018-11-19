@@ -9,6 +9,13 @@ import { ProductForm } from '../forms';
 
 class Product extends Component {
   render() {
+    const {
+      auth,
+    } = this.props;
+
+    if (auth === false) {
+      window.location.href = '/';
+    }
     const { history } = this.props;
     return (
       <div>
@@ -49,9 +56,12 @@ class Product extends Component {
 Product.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  auth: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  auth: state.authReducer.auth,
+});
 
 export default connect(
   mapStateToProps,

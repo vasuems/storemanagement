@@ -20,6 +20,7 @@ import {
 } from './containers';
 import NavBar from './containers/navigation';
 import SideBarContent from './components/sideBar';
+import PrivateRoute from './privateRoute';
 
 const routes = [
   {
@@ -140,7 +141,7 @@ const App = () => (
           </Col>
           <Col md={{ size: 10, offset: 2 }} style={{ padding: 0 }}>
             {routes.map((route, index) => (
-              <Route
+              <PrivateRoute
                 key={index}
                 path={route.path}
                 exact={route.exact}

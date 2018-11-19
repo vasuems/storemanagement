@@ -18,6 +18,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
+import { List } from 'react-content-loader';
 import { fetchProducts } from '../../actions';
 import { ProductListItem } from '../../components';
 
@@ -38,13 +39,8 @@ class ProductList extends Component {
     const {
       history,
       products,
-      auth,
       intl: { formatMessage },
     } = this.props;
-
-    if (auth === false) {
-      window.location.href = '/';
-    }
 
     return (
       <div>
@@ -162,7 +158,6 @@ ProductList.propTypes = {
 const mapStateToProps = state => {
   return {
     products: state.productReducer.products,
-    auth: state.authReducer.auth,
   };
 };
 

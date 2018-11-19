@@ -6,6 +6,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { Form, Input, Button, Alert } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { submitLoginData } from '../../actions';
+import config from '../../config';
 
 const validate = values => {
   const errors = {};
