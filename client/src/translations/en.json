@@ -137,5 +137,7 @@
   "sys.website": "Website",
   "sys.dragImageFile": "Drag an image file here.",
   "sys.percentage": "Percentage",
-  "sys.value": "Value"
+  "sys.value": "Value",
+  "sys.prev": "Prev",
+  "sys.next": "Next"
 }

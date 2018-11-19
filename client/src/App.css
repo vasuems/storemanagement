@@ -285,3 +285,14 @@ table .btn-link{
   width: 64px;
   height: 64px;
 }
+.page-item a:not(.page-link){
+  position: relative;
+  display: block;
+  padding: .5rem .75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+}
