@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Table,
-  Row,
   Col,
   Button,
   Breadcrumb,
@@ -60,7 +59,7 @@ class ProductList extends Component {
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="content-body">
-          <Row className="table-container">
+          <div className="table-container">
             <Col md={12} className="table-content">
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>
@@ -126,26 +125,26 @@ class ProductList extends Component {
                     />
                   ))}
                 </tbody>
-              </Table>
-              <ReactPaginate 
-                pageCount={20}
-                pageRangeDisplayed={3}
-                marginPagesDisplayed={2}
-                containerClassName="pagination"
-                subContainerClassName="pages pagination"
-                pageClassName="page-item"
-                breakClassName="page-item"
-                breakLabel="..."
-                pageLinkClassName="page-link"
-                previousLabel={formatMessage({ id: 'sys.prev' })}
-                nextLabel={formatMessage({ id: 'sys.next' })}
-                previousLinkClassName="page-link"
-                nextLinkClassName="page-link"
-                activeClassName="active"
-              />              
+              </Table>                       
             </Col>
-          </Row>
-        </div>
+          </div>
+          <ReactPaginate 
+            pageCount={20}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            containerClassName="pagination"
+            subContainerClassName="pages pagination"
+            pageClassName="page-item"
+            breakClassName="page-item"
+            breakLabel="..."
+            pageLinkClassName="page-link"
+            previousLabel={formatMessage({ id: 'sys.prev' })}
+            nextLabel={formatMessage({ id: 'sys.next' })}
+            previousLinkClassName="page-link"
+            nextLinkClassName="page-link"
+            activeClassName="active"
+          />
+        </div>          
       </div>
     );
   }

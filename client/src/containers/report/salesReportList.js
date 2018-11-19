@@ -28,6 +28,7 @@ import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { FiSearch } from 'react-icons/fi';
+import ReactPaginate from 'react-paginate';
 import {
   fetchSalesReportProducts,
   fetchSalesReportCategories,
@@ -208,23 +209,22 @@ class SalesReportList extends Component {
                       ))}
                     </tbody>
                   </Table>
-                  <Pagination aria-label="Page navigation example">
-                    <PaginationItem disabled>
-                      <PaginationLink previous href="#" />
-                    </PaginationItem>
-                    <PaginationItem active>
-                      <PaginationLink href="#">1</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink href="#">2</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink href="#">3</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink next href="#" />
-                    </PaginationItem>
-                  </Pagination>
+                  <ReactPaginate 
+                    pageCount={20}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    containerClassName="pagination"
+                    subContainerClassName="pages pagination"
+                    pageClassName="page-item"
+                    breakClassName="page-item"
+                    breakLabel="..."
+                    pageLinkClassName="page-link"
+                    previousLabel={formatMessage({ id: 'sys.prev' })}
+                    nextLabel={formatMessage({ id: 'sys.next' })}
+                    previousLinkClassName="page-link"
+                    nextLinkClassName="page-link"
+                    activeClassName="active"
+                  />
                 </TabPane>
                 <TabPane tabId="2">
                   <div
@@ -304,23 +304,22 @@ class SalesReportList extends Component {
                       ))}
                     </tbody>
                   </Table>
-                  <Pagination aria-label="Page navigation example">
-                    <PaginationItem disabled>
-                      <PaginationLink previous href="#" />
-                    </PaginationItem>
-                    <PaginationItem active>
-                      <PaginationLink href="#">1</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink href="#">2</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink href="#">3</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink next href="#" />
-                    </PaginationItem>
-                  </Pagination>
+                  <ReactPaginate 
+                    pageCount={20}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    containerClassName="pagination"
+                    subContainerClassName="pages pagination"
+                    pageClassName="page-item"
+                    breakClassName="page-item"
+                    breakLabel="..."
+                    pageLinkClassName="page-link"
+                    previousLabel={formatMessage({ id: 'sys.prev' })}
+                    nextLabel={formatMessage({ id: 'sys.next' })}
+                    previousLinkClassName="page-link"
+                    nextLinkClassName="page-link"
+                    activeClassName="active"
+                  />
                 </TabPane>
               </TabContent>
             </Col>

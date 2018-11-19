@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Table,
-  Row,
   Col,
   Button,
   Breadcrumb,
@@ -11,13 +10,11 @@ import {
   InputGroup,
   Input,
   InputGroupAddon,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
+import ReactPaginate from 'react-paginate';
 import { CategoryListItem } from '../../components';
 import { fetchProductCategories } from '../../actions';
 
@@ -48,7 +45,7 @@ class ProductCategoryList extends Component {
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="content-body">
-          <Row className="table-container">
+          <div className="table-container">
             <Col md={12} className="table-content">
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>
@@ -101,25 +98,24 @@ class ProductCategoryList extends Component {
                   ))}
                 </tbody>
               </Table>
-              <Pagination aria-label="Page navigation example">
-                <PaginationItem disabled>
-                  <PaginationLink previous href="#" />
-                </PaginationItem>
-                <PaginationItem active>
-                  <PaginationLink href="#">1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">2</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">3</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink next href="#" />
-                </PaginationItem>
-              </Pagination>
             </Col>
-          </Row>
+          </div>
+          <ReactPaginate 
+            pageCount={20}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            containerClassName="pagination"
+            subContainerClassName="pages pagination"
+            pageClassName="page-item"
+            breakClassName="page-item"
+            breakLabel="..."
+            pageLinkClassName="page-link"
+            previousLabel={formatMessage({ id: 'sys.prev' })}
+            nextLabel={formatMessage({ id: 'sys.next' })}
+            previousLinkClassName="page-link"
+            nextLinkClassName="page-link"
+            activeClassName="active"
+          />
         </div>
       </div>
     );
