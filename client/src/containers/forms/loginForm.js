@@ -32,6 +32,11 @@ const renderField = ({
 );
 
 class LoginForm extends Component {
+  constructor(props){
+    super(props);
+
+    localStorage.removeItem(config.accessTokenKey);
+  }
   componentDidUpdate() {
     const { auth, history } = this.props;
 
