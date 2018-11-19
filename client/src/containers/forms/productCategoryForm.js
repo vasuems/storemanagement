@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Col, Form, FormGroup, Label, Button, Input } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import { FiSave } from 'react-icons/fi';
 import { fetchProductCategoryDetails } from '../../actions';
 
 const validate = values => {
@@ -55,6 +56,13 @@ class ProductCategoryForm extends Component {
 
     return (
       <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
+        <Button size="sm" color="primary" className="pull-right form-btn">
+          <FiSave />
+          &nbsp;
+          <FormattedMessage id="sys.save" />
+        </Button>
+        <br />
+        <br />
         <FormGroup row>
           <Label for="name" sm={2}>
             <FormattedMessage id="sys.categoryName" />

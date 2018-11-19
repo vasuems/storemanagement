@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Breadcrumb, BreadcrumbItem, Button, Row, Col } from 'reactstrap';
-import { FiSave } from 'react-icons/fi';
+import { Breadcrumb, BreadcrumbItem, Button, Col } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { ProductForm } from '../forms';
@@ -28,18 +27,11 @@ class Product extends Component {
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="content-body">
-          <Row className="table-container">
-            <Col md={12} className="table-content">
-              <Button size="sm" color="primary" className="pull-right form-btn">
-                <FiSave />
-                &nbsp;
-                <FormattedMessage id="sys.save" />
-              </Button>
-              <br />
-              <br />
+          <div className="table-container">
+            <Col md={12} className="table-content">              
               <ProductForm />
             </Col>
-          </Row>
+          </div>
         </div>
       </div>
     );

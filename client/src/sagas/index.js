@@ -1,4 +1,4 @@
-import { call, all, takeLatest } from 'redux-saga/effects';
+import { call, all, takeEvery } from 'redux-saga/effects';
 import { fetchOrders, fetchOrderProducts } from './order';
 import {
   fetchProductCategories,
@@ -35,22 +35,22 @@ import {
 
 export default function* rootSaga() {
   yield all([
-    takeLatest(FETCH_ORDERS, fetchOrders),
-    takeLatest(FETCH_PRODUCT_CATEGORIES, fetchProductCategories),
-    takeLatest(FETCH_PRODUCTS, fetchProducts),
-    takeLatest(FETCH_PRODUCT_DETAILS, fetchProductDetails),
-    takeLatest(FETCH_DASHBOARD_DATA, fetchDashboardData),
-    takeLatest(FETCH_SALES_REPORT_PRODUCTS, fetchSalesReportProducts),
-    takeLatest(FETCH_SALES_REPORT_CATEGORIES, fetchSalesReportCategories),
-    takeLatest(FETCH_STORE_SETTINGS, fetchStoreSettings),
-    takeLatest(FETCH_ORDER_PRODUCTS, fetchOrderProducts),
-    takeLatest(SUBMIT_LOGIN_DATA, submitLoginData),
-    takeLatest(FETCH_SUPPLIERS, fetchSuppliers),
-    takeLatest(FETCH_SUPPLIER_DETAILS, fetchSupplierDetails),
-    takeLatest(FETCH_MANUFACTURERS, fetchManufacturers),
-    takeLatest(FETCH_MANUFACTURER_DETAILS, fetchManufacturerDetails),
-    takeLatest(FETCH_PRODUCT_CATEGORY_DETAILS, fetchProductCategoryDetails),
-    takeLatest(FETCH_COUNTRIES, fetchCountries),
-    takeLatest(FETCH_CURRENCIES, fetchCurrencies),
+    takeEvery(FETCH_ORDERS, fetchOrders),
+    takeEvery(FETCH_PRODUCT_CATEGORIES, fetchProductCategories),
+    takeEvery(FETCH_PRODUCTS, fetchProducts),
+    takeEvery(FETCH_PRODUCT_DETAILS, fetchProductDetails),
+    takeEvery(FETCH_DASHBOARD_DATA, fetchDashboardData),
+    takeEvery(FETCH_SALES_REPORT_PRODUCTS, fetchSalesReportProducts),
+    takeEvery(FETCH_SALES_REPORT_CATEGORIES, fetchSalesReportCategories),
+    takeEvery(FETCH_STORE_SETTINGS, fetchStoreSettings),
+    takeEvery(FETCH_ORDER_PRODUCTS, fetchOrderProducts),
+    takeEvery(SUBMIT_LOGIN_DATA, submitLoginData),
+    takeEvery(FETCH_SUPPLIERS, fetchSuppliers),
+    takeEvery(FETCH_SUPPLIER_DETAILS, fetchSupplierDetails),
+    takeEvery(FETCH_MANUFACTURERS, fetchManufacturers),
+    takeEvery(FETCH_MANUFACTURER_DETAILS, fetchManufacturerDetails),
+    takeEvery(FETCH_PRODUCT_CATEGORY_DETAILS, fetchProductCategoryDetails),
+    takeEvery(FETCH_COUNTRIES, fetchCountries),
+    takeEvery(FETCH_CURRENCIES, fetchCurrencies),
   ]);
 }

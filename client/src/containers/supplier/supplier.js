@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Breadcrumb, BreadcrumbItem, Button, Row, Col } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Col } from 'reactstrap';
 import { FiSave } from 'react-icons/fi';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -26,16 +26,16 @@ class Supplier extends Component {
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <Button color="link" onClick={() => history.push('/products')}>
-              <FormattedMessage id="sys.products" />
+            <Button color="link" onClick={() => history.push('/suppliers')}>
+              <FormattedMessage id="sys.suppliers" />
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem active>
-            <FormattedMessage id="sys.productDetails" />
+            <FormattedMessage id="sys.supplier" />
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="content-body">
-          <Row className="table-container">
+          <div className="table-container">
             <Col md={12} className="table-content">
               <Button size="sm" color="primary" className="pull-right form-btn">
                 <FiSave />
@@ -49,7 +49,7 @@ class Supplier extends Component {
                 currencies={[{ id: 1, currency: 'SGD' }]}
               />
             </Col>
-          </Row>
+          </div>
         </div>
       </div>
     );

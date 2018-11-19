@@ -19,25 +19,21 @@ import { fetchProducts } from '../../actions';
 import { ProductListItem } from '../../components';
 
 class ProductList extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      pageNo: 1,
-      pageSize: 20,
-    };
-  }
-
   componentDidMount() {
     const { dispatch } = this.props;
     //TODO: to replace the store ID passing to action creator
-    const { pageNo, pageSize } = this.state;
-    dispatch(fetchProducts({storeCode: 'asdfasdfasdfasd', pageSize, pageNo }));
+    dispatch(fetchProducts({storeCode: 'asdfasdfasdfasd', pageSize: 20, pageNo: 1 }));
   }
 
   onViewClick = id => {
     const { history } = this.props;
     history.push(`/products/${id}`);
   };
+
+  onPageChange = page => {
+    const { dispatch } = this.props;
+    dispatch(fetchProducts({storeCode: 'asdfasdfasdfasd', pageSize: 20, pageNo: page.selected + 1 }));
+  }
 
   render() {
     const {
@@ -143,6 +139,7 @@ class ProductList extends Component {
             previousLinkClassName="page-link"
             nextLinkClassName="page-link"
             activeClassName="active"
+            onPageChange={this.onPageChange}
           />
         </div>          
       </div>
