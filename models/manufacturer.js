@@ -93,7 +93,7 @@ Manufacturer.prototype.getAllByStoreId = function(
         pageSize}, ${pageSize}`,
       (error, results) => {
         db.end();
-        if (error || results.length == 0) {
+        if (error) {
           reject(new NoRecordFoundError('No manufacturers found.'));
         } else {
           const manufacturers = results.map(supplier => {

@@ -88,7 +88,7 @@ Supplier.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
         pageSize}, ${pageSize}`,
       (error, results) => {
         db.end();
-        if (error || results.length == 0) {
+        if (error) {
           reject(new NoRecordFoundError('No suppliers found.'));
         } else {
           const suppliers = results.map(supplier => {

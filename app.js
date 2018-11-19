@@ -245,7 +245,7 @@ app.get(
     try {
       const product = new Product();
       const db = mysql.connect();
-      const data = await product.getAllByStoreId(req.params.storeCode, db);
+      const data = await product.getAllByStoreId(req.params.storeCode, db, req.query.page || 1, req.query.size || 20);
 
       res.send(data);
     } catch (err) {

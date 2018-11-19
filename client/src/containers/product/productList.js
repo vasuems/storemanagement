@@ -22,11 +22,19 @@ import { fetchProducts } from '../../actions';
 import { ProductListItem } from '../../components';
 
 class ProductList extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      pageNo: 1,
+      pageSize: 20,
+    };
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
     //TODO: to replace the store ID passing to action creator
-
-    dispatch(fetchProducts('asdfasdfasdfasd'));
+    const { pageNo, pageSize } = this.state;
+    dispatch(fetchProducts({storeCode: 'asdfasdfasdfasd', pageSize, pageNo }));
   }
 
   onViewClick = id => {

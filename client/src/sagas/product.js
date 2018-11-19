@@ -34,9 +34,10 @@ export function* fetchProductCategories(action) {
 
 export function* fetchProducts(action) {
   try {
+    const { storeCode, pageNo, pageSize } = action.value;
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${action.value}/products`,
+      url: `${config.apiDomain}/stores/${storeCode}/products?page=${pageNo}&size=${pageSize}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
