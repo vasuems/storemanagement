@@ -26,6 +26,7 @@ import {
   fetchProductCategories,
   fetchSuppliers,
   fetchManufacturers,
+  submitProduct,
 } from '../../actions';
 
 const validate = values => {
@@ -90,18 +91,15 @@ const renderNumberField = ({ input, type, meta: { touched, error } }) => (
   </div>
 );
 
-const renderTextArea = ({ input, type, meta: { touched, error } }) => (
-  <div>
-    <ReactQuill
-      modules={modules}
-      formats={formats}
-      style={{ height: 180 }}
-      value={input.value}
-    />
-  </div>
-);
-
 class ProductForm extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      description: '',
+    }
+  }
+
   componentDidMount() {
     const {
       dispatch,
@@ -116,7 +114,7 @@ class ProductForm extends Component {
     dispatch(fetchProductCategories('asdfasdfasdfasd'));
     dispatch(fetchSuppliers('asdfasdfasdfasd'));
     dispatch(fetchManufacturers('asdfasdfasdfasd'));
-    console.log(mode);
+
     if(mode==='update'){
       dispatch(
         fetchProductDetails({ storeCode: 'asdfasdfasdfasd', productCode: id })
@@ -128,8 +126,19 @@ class ProductForm extends Component {
     }
   }
 
+  onDescriptionChange = data => {
+    console.log(data);
+    this.setState({
+      description: data,
+    });
+  }
+
   onSubmit = data => {
     const { dispatch } = this.props;
+    const payload = data;
+    payload.description = this.state.description;
+
+    dispatch(submitProduct(payload));
   };
 
   render() {
@@ -138,6 +147,8 @@ class ProductForm extends Component {
       categories,
       suppliers,
       manufacturers,
+      initialValues,
+      mode,
       intl: { formatMessage },
     } = this.props;
 
@@ -175,11 +186,12 @@ class ProductForm extends Component {
                     <FormattedMessage id="sys.desc" />
                   </Label>
                   <Col sm={9}>
-                    <Field
-                      component={renderTextArea}
-                      name="description"
-                      className="form-control"
-                      id="description"
+                    <ReactQuill
+                      modules={modules}
+                      formats={formats}
+                      style={{ height: 180 }}
+                      value={mode==='update'?initialValues || '':this.state.description}
+                      onChange={this.onDescriptionChange}
                     />
                   </Col>
                 </FormGroup>
@@ -365,6 +377,7 @@ ProductForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
   mode: PropTypes.string,
+  initialValues: PropTypes.object,
 };
 
 ProductForm = reduxForm({
