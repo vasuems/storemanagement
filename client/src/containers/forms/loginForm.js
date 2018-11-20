@@ -10,11 +10,11 @@ import config from '../../config';
 
 const validate = values => {
   const errors = {};
-  if (!values.currentPwd) {
-    errors.currentPwd = 'Required';
+  if (!values.username) {
+    errors.username = 'This field is required.';
   }
-  if (!values.newPwd) {
-    errors.newPwd = 'Required';
+  if (!values.password) {
+    errors.password = 'This field is required.';
   }
   return errors;
 };
@@ -34,25 +34,31 @@ const renderField = ({
 class LoginForm extends Component {
   constructor(props){
     super(props);
+    this.state = {
+      showLoading: false,
+    };
 
     localStorage.removeItem(config.accessTokenKey);
   }
   componentDidUpdate() {
     const { auth, history } = this.props;
-
+    
     if (auth) {
       history.push('/dashboard');
     }
   }
 
   onSubmit = data => {
-    const { dispatch } = this.props;
-    dispatch(submitLoginData(data));
+    this.setState({showLoading: true}, () => {
+      const { dispatch } = this.props;
+      dispatch(submitLoginData(data));
+    });
   };
 
   render() {
     const { handleSubmit, auth } = this.props;
     const { formatMessage } = this.props.intl;
+
     return (
       <Form
         onSubmit={handleSubmit(data => this.onSubmit(data))}
@@ -72,9 +78,13 @@ class LoginForm extends Component {
           id="password"
           placeholder={formatMessage({ id: 'sys.pwd' })}
         />
-        <Button type="submit" block>
-          <FormattedMessage id="sys.signin" />
-        </Button>
+        {          
+          this.state.showLoading ? 
+            <img src={require('../../assets/coffee_loader.svg')} width="64" height="64" /> : 
+            <Button type="submit" block>
+              <FormattedMessage id="sys.signin" /> 
+            </Button>            
+        }
         {auth === false ? (
           <Alert color="danger" style={{ marginTop: 20 }}>
             <FormattedMessage id="sys.invalidAuth" />
@@ -103,9 +113,12 @@ LoginForm = reduxForm({
   validate,
 })(injectIntl(LoginForm));
 
-const mapStateToProps = state => ({
-  auth: state.authReducer.auth,
-});
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    auth: state.authReducer.auth,
+  };
+};
 
 export default connect(
   mapStateToProps,

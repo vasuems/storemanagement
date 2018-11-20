@@ -15,7 +15,7 @@ const FeedItem = props => {
   );
 };
 
-FeedItem.PropTypes = {
+FeedItem.propTypes = {
   backgroundColor: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   fontColor: PropTypes.string.isRequired,

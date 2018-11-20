@@ -11,7 +11,7 @@ const ShipTodayItem = props => {
   );
 };
 
-ShipTodayItem.PropTypes = {
+ShipTodayItem.propTypes = {
   orderId: PropTypes.string.isRequired,
   customerName: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
