@@ -8,7 +8,6 @@ import {
   authFailed,
 } from '../actions';
 import config from '../config';
-import { manufacturers, manufacturerDetails } from '../apis/mocks/responses';
 
 export function* fetchManufacturers(action) {
   try {

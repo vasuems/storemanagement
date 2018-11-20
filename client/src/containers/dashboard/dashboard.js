@@ -5,12 +5,13 @@ import { Card, CardTitle, Table, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { Line, Pie } from 'react-chartjs-2';
-import { fetchDashboardData } from '../../actions';
+import { fetchAccount, fetchDashboardData } from '../../actions';
 import { FeedItem, ShipTodayItem } from '../../components';
 
 class Dashboard extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
+    dispatch(fetchAccount('40s1cqdw6jmyyiixe'));
     dispatch(fetchDashboardData());
   }
 

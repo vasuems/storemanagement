@@ -114,7 +114,6 @@ LoginForm = reduxForm({
 })(injectIntl(LoginForm));
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     auth: state.authReducer.auth,
   };
