@@ -1,12 +1,16 @@
 'use strict';
 
 const moment = require('moment');
-
+const { MySQL } = require('../db');
 const {
   BadRequestError,
   InvalidModelArgumentsError,
   NoRecordFoundError,
 } = require('../exceptions');
+require('dotenv').load();
+
+const { host, user, password, database } = process.env;
+var db = new MySQL(host, user, password, database);
 
 function User(code, name, email, password, salt, joinedOn, role) {
   this.code = code || '';
@@ -26,10 +30,11 @@ function Contact(userId, number, type, areaCode, countryId) {
   this.countryId = countryId;
 }
 
-User.prototype.get = function(code, db) {
+User.prototype.get = function(code) {
   return new Promise((resolve, reject) => {
     db.query(`select * from user where code='${code}'`, (error, results) => {
       if (error || results.length == 0) {
+        
         reject(new NoRecordFoundError('No user found.'));
       } else {
         const { code, name, email, joinedOn } = results[0];
@@ -38,6 +43,7 @@ User.prototype.get = function(code, db) {
         db.query(
           `select user_id as userId, number, type, area_code as areaCode, country_id as countryId from user_contact where user_id='${code}' and status=1`,
           (error, results) => {
+            
             if (error) {
               reject(new NoRecordFoundError('No user found.'));
             } else {
@@ -54,7 +60,7 @@ User.prototype.get = function(code, db) {
   });
 };
 
-User.prototype.add = function(user, db) {
+User.prototype.add = function(user) {
   return new Promise((resolve, reject) => {
     if (user instanceof User) {
       Object.keys(user).forEach(function(key, index) {
@@ -72,6 +78,7 @@ User.prototype.add = function(user, db) {
         `insert into user(code, name, email, password, salt, joined_on, role)
          values('${code}', '${name}', '${email}', '${password}', '${salt}', '${joinedOn}', '${role}')`,
         error => {
+          
           if (error) {
             reject(new BadRequestError('Invalide user data.'));
           } else {
@@ -85,9 +92,10 @@ User.prototype.add = function(user, db) {
   });
 };
 
-User.prototype.delete = function(code, db) {
+User.prototype.delete = function(code) {
   return new Promise((resolve, reject) => {
     db.query(`update user set status=0 where code=${code}`, error => {
+      
       if (error) {
         reject(new BadRequestError('Deleting user failed.'));
       } else {
@@ -97,7 +105,7 @@ User.prototype.delete = function(code, db) {
   });
 };
 
-Contact.prototype.add = function(contact, db) {
+Contact.prototype.add = function(contact) {
   return new Promise((resolve, reject) => {
     if (contact instanceof Contact) {
       const { userId, number, type, areaCode, countryId } = contact;
@@ -105,6 +113,7 @@ Contact.prototype.add = function(contact, db) {
       db.query(
         `insert into user_contact(user_id, number, type, area_code, country_id) values(${userId}, '${number}', '${type}', '${areaCode}', ${countryId})`,
         error => {
+          
           if (error) {
             reject(new BadRequestError('Invalide user contact data.'));
           } else {
@@ -118,7 +127,7 @@ Contact.prototype.add = function(contact, db) {
   });
 };
 
-Contact.prototype.update = function(id, contact, db) {
+Contact.prototype.update = function(id, contact) {
   return new Promise((resolve, reject) => {
     if (contact instanceof Contact) {
       const { userId, number, type, areaCode, countryId } = contact;
@@ -126,6 +135,7 @@ Contact.prototype.update = function(id, contact, db) {
       db.query(
         `update user_contact set number='${number}', type='${type}', area_code='${areaCode}', country_id=${countryId} where id=${id}`,
         error => {
+          
           if (error) {
             reject(new BadRequestError('Invalide user contact data.'));
           } else {
@@ -142,6 +152,7 @@ Contact.prototype.update = function(id, contact, db) {
 Contact.prototype.delete = function(id, db) {
   return new Promise((resolve, reject) => {
     db.query(`update user_contact set status=0 where id=${id}`, error => {
+      
       if (error) {
         reject(new BadRequestError('Contact deleting failed.'));
       } else {

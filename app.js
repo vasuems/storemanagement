@@ -21,15 +21,12 @@ const {
   Supplier,
   Manufacturer,
 } = require('./models');
-const { MySQL } = require('./db');
 const { UnauthorisedError } = require('./exceptions');
 
 const app = express();
 app.use(cors());
 
-const { host, user, password, database, tokenSecret } = process.env;
-const db = new MySQL(host, user, password, database);
-db.connect();
+const { tokenSecret } = process.env;
 
 const authMiddleware = async (req, res, next) => {
   // This should be replaced by key-value pair storage like memcache
@@ -38,12 +35,10 @@ const authMiddleware = async (req, res, next) => {
     if (!req.headers.authorization) {
       throw new UnauthorisedError('Unauthorised request.');
     }
-    const auth = new OAuth2Request();
+    const auth = new OAuth2Request();  
     const res = await auth.validateToken(
-      req.headers.authorization,
-      db
+      req.headers.authorization
     );
-
     next();
   } catch (err) {
     res.status(err.statusCode).send(err);
@@ -90,26 +85,22 @@ app.use(bodyParser.json());
 app.get('/countries', authMiddleware, async (req, res) => {
   try {
     const utility = new Public();
-    const data = await utility.getCountries(db);
+    const data = await utility.getCountries();
 
     res.send(data);
   } catch (err) {
     res.status(err.statusCode).send(err);
-  } finally {
-    db.end();
   }
 });
 
 app.get('/currencies', authMiddleware, async (req, res) => {
   try {
     const utility = new Public();
-    const data = await utility.getCurrencies(db);
+    const data = await utility.getCurrencies();
 
     res.send(data);
   } catch (err) {
     res.status(err.statusCode).send(err);
-  } finally {
-    db.end();
   }
 });
 
@@ -122,8 +113,7 @@ app.post('/auth', async (req, res) => {
         req.body.grantType,
         req.body.scope
       );
-
-      const data = await auth.auth(db);
+      const data = await auth.auth();
       //TODO: call another function to get store code
 
       res.send(data);
@@ -134,8 +124,6 @@ app.post('/auth', async (req, res) => {
     }
   } catch (err) {
     res.status(err.statusCode).send(err);
-  } finally {
-    db.end();
   }
 });
 
@@ -149,13 +137,11 @@ app.post('/accounts', async (req, res) => {
       md5(`${req.body.password + salt}`),
       salt
     );
-    const data = await user.add(user, db);
+    const data = await user.add(user);
 
     res.send(data);
   } catch (err) {
     res.status(err.statusCode).send(err);
-  } finally {
-    db.end();
   }
 });
 
@@ -165,13 +151,11 @@ app.get(
   async (req, res) => {
     try {
       const user = new User();
-      const data = await user.get(req.params.accountCode, db);
+      const data = await user.get(req.params.accountCode);
 
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
-    } finally {
-      db.end();
     }
   }
 );
@@ -182,13 +166,11 @@ app.get(
   async (req, res) => {
     try {
       const store = new Store();
-      const data = await store.get(req.params.storeCode, db);
+      const data = await store.get(req.params.storeCode);
 
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
-    } finally {
-      db.end();
     }
   }
 );
@@ -217,13 +199,11 @@ app.put(
         currencyId,
         res.locals.auth.accountCode
       );
-      const data = await store.update(store, db);
+      const data = await store.update(store);
 
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
-    } finally {
-      db.end();
     }
   }
 );
@@ -234,7 +214,7 @@ app.get(
   async (req, res) => {
     try {
       const product = new Product();
-      const data = await product.get(req.params.productCode, db);
+      const data = await product.get(req.params.productCode);
 
       if (data.storeId !== req.params.storeCode) {
         throw new UnauthorisedError('Invalid product ID.');
@@ -243,8 +223,6 @@ app.get(
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
-    } finally {
-      db.end();
     }
   }
 );
@@ -255,14 +233,12 @@ app.get(
   async (req, res) => {
     try {
       const product = new Product();
-      const data = await product.getAllByStoreId(req.params.storeCode, db, req.query.page || 1, req.query.size || 20);
-      const count = await product.getTotalCountByStoreId(req.params.storeCode, db);
+      const data = await product.getAllByStoreId(req.params.storeCode, req.query.page || 1, req.query.size || 20);
+      const count = await product.getTotalCountByStoreId(req.params.storeCode);
 
-      res.send({ data, count });
+      res.send({ data, count});
     } catch (err) {
       res.status(err.statusCode).send(err);
-    } finally {
-      db.end();
     }
   }
 );
@@ -299,13 +275,11 @@ app.post(
         cost,
         coverImage
       );
-      const data = await product.add(product, db);
+      const data = await product.add(product);
 
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
-    } finally {
-      db.end();
     }
   }
 );
@@ -316,13 +290,11 @@ app.get(
   async (req, res) => {
     try {
       const category = new Category();
-      const data = await category.getAllByStoreId(req.params.storeCode, db);
+      const data = await category.getAllByStoreId(req.params.storeCode);
 
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
-    } finally {
-      db.end();
     }
   }
 );
@@ -333,13 +305,11 @@ app.get(
   async (req, res) => {
     try {
       const category = new Category();
-      const data = await category.get(req.params.categoryCode, db);
+      const data = await category.get(req.params.categoryCode);
 
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
-    } finally {
-      db.end();
     }
   }
 );
@@ -350,13 +320,11 @@ app.get(
   async (req, res) => {
     try {
       const manufacturer = new Manufacturer();
-      const data = await manufacturer.getAllByStoreId(req.params.storeCode, db);
+      const data = await manufacturer.getAllByStoreId(req.params.storeCode);
 
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
-    } finally {
-      db.end();
     }
   }
 );
@@ -367,13 +335,11 @@ app.get(
   async (req, res) => {
     try {
       const supplier = new Supplier();
-      const data = await supplier.getAllByStoreId(req.params.storeCode, db);
+      const data = await supplier.getAllByStoreId(req.params.storeCode);
 
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
-    } finally {
-      db.end();
     }
   }
 );

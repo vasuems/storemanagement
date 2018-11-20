@@ -1,12 +1,15 @@
 'use strict';
 
-const moment = require('moment');
-
+const { MySQL } = require('../db');
 const {
   BadRequestError,
   InvalidModelArgumentsError,
   NoRecordFoundError,
 } = require('../exceptions');
+require('dotenv').load();
+
+const { host, user, password, database } = process.env;
+var db = new MySQL(host, user, password, database);
 
 function Supplier(
   code,
@@ -34,12 +37,13 @@ function Supplier(
   this.status = status ? true : false;
 }
 
-Supplier.prototype.get = function(code, db) {
+Supplier.prototype.get = function(code) {
   return new Promise((resolve, reject) => {
     db.query(
       `select code, name, url, email, contact, address, logo, store_id as storeId, country_id as countryId, created_by as createdBy, status
        from supplier where code='${code}'`,
       (error, results) => {
+        
         if (error || results.length == 0) {
           reject(new NoRecordFoundError('No supplier found.'));
         } else {
@@ -77,13 +81,14 @@ Supplier.prototype.get = function(code, db) {
   });
 };
 
-Supplier.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
+Supplier.prototype.getAllByStoreId = function(id, page = 1, pageSize = 20) {
   return new Promise((resolve, reject) => {
     db.query(
       `select code, name, url, email, contact, address, logo, store_id as storeId, country_id as countryId, created_by as createdBy, status
        from supplier where store_id='${id}' limit ${(page - 1) *
         pageSize}, ${pageSize}`,
       (error, results) => {
+        
         if (error) {
           reject(new NoRecordFoundError('No suppliers found.'));
         } else {
@@ -123,7 +128,7 @@ Supplier.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
   });
 };
 
-Supplier.prototype.add = function(supplier, db) {
+Supplier.prototype.add = function(supplier) {
   return new Promise((resolve, reject) => {
     if (supplier instanceof Supplier) {
       Object.keys(supplier).forEach(function(key, index) {
@@ -153,6 +158,7 @@ Supplier.prototype.add = function(supplier, db) {
         `insert into supplier(code, name, url, email, contact, address, logo, store_id, country_id, created_by) 
          values('${code}', '${name}', '${url}', '${email}', '${contact}', '${address}', '${logo}', '${storeId}', '${countryId}', '${createdBy}')`,
         (error, results) => {
+          
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide supplier data.'));
           } else {
@@ -179,11 +185,12 @@ Supplier.prototype.add = function(supplier, db) {
   });
 };
 
-Supplier.prototype.delete = function(code, db) {
+Supplier.prototype.delete = function(code) {
   return new Promise((resolve, reject) => {
     db.query(
       `update supplier set status=0 where code=${code}`,
       (error, results) => {
+        
         if (error || results.affectedRows == 0) {
           reject(new BadRequestError('Deleting supplier failed.'));
         } else {
