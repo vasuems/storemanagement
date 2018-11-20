@@ -10,7 +10,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  products: [],
+  products: {products: [], total: 0},
   categories: [],
   productDetails: {},
   categoryDetails: {},

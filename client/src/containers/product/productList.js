@@ -39,6 +39,7 @@ class ProductList extends Component {
     const {
       history,
       products,
+      total,
       intl: { formatMessage },
     } = this.props;
 
@@ -105,7 +106,7 @@ class ProductList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map(product => (
+                  {products?products.map(product => (
                     <ProductListItem
                       key={product.code}
                       id={product.code}
@@ -119,13 +120,13 @@ class ProductList extends Component {
                       status={product.status}
                       onClick={this.onViewClick}
                     />
-                  ))}
+                  )): null}
                 </tbody>
               </Table>                       
             </Col>
           </div>
           <ReactPaginate 
-            pageCount={20}
+            pageCount={total}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             containerClassName="pagination"
@@ -152,12 +153,15 @@ ProductList.propTypes = {
   auth: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,
+  total: PropTypes.number.isRequired,
   intl: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => {
+  const diff = state.productReducer.products.count / 20;
   return {
-    products: state.productReducer.products,
+    products: state.productReducer.products.data,
+    total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   };
 };
 
