@@ -80,7 +80,7 @@ class LoginForm extends Component {
         />
         {          
           this.state.showLoading && auth === null ? 
-            <img src={require('../../assets/coffee_loader.svg')} width="64" height="64" /> : 
+            <img src={require('../../assets/coffee_loader.svg')} /> : 
             <Button type="submit" block>
               <FormattedMessage id="sys.signin" /> 
             </Button>            

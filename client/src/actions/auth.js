@@ -11,6 +11,5 @@ export function authSuccess(data) {
 }
 
 export function authFailed() {
-  console.log('here')
   return { type: AUTH_FAILED };
 }

@@ -8,7 +8,7 @@ const Footer = () => (
       <span>Copyright &copy; 2018</span>
       &nbsp;&nbsp;
       <span>
-        Created by:
+        Created by:&nbsp;
         <a href="https://github.com/ccwukong">Nick Chen</a>
       </span>
     </div>

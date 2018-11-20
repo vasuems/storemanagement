@@ -15,7 +15,6 @@ export function* submitLoginData(action) {
     localStorage.setItem(config.accessTokenKey, res.data.accessToken);
     yield put(authSuccess(res.data));
   } catch (error) {
-    console.log(error);
     yield put(authFailed());
   }
 }
