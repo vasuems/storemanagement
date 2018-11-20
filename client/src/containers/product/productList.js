@@ -150,9 +150,8 @@ class ProductList extends Component {
 
 ProductList.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  auth: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
-  products: PropTypes.array.isRequired,
+  products: PropTypes.array,
   total: PropTypes.number.isRequired,
   intl: PropTypes.object.isRequired,
 };

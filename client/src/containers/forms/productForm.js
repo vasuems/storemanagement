@@ -22,6 +22,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import {
   fetchProductDetails,
+  clearProductDetails,
   fetchProductCategories,
   fetchSuppliers,
   fetchManufacturers,
@@ -104,6 +105,7 @@ class ProductForm extends Component {
   componentDidMount() {
     const {
       dispatch,
+      mode,
       match: {
         params: { id },
       },
@@ -114,9 +116,16 @@ class ProductForm extends Component {
     dispatch(fetchProductCategories('asdfasdfasdfasd'));
     dispatch(fetchSuppliers('asdfasdfasdfasd'));
     dispatch(fetchManufacturers('asdfasdfasdfasd'));
-    dispatch(
-      fetchProductDetails({ storeCode: 'asdfasdfasdfasd', productCode: id })
-    );
+    console.log(mode);
+    if(mode==='update'){
+      dispatch(
+        fetchProductDetails({ storeCode: 'asdfasdfasdfasd', productCode: id })
+      );
+    }else{
+      dispatch(
+        clearProductDetails()
+      );
+    }
   }
 
   onSubmit = data => {
@@ -355,6 +364,7 @@ ProductForm.propTypes = {
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
+  mode: PropTypes.string,
 };
 
 ProductForm = reduxForm({

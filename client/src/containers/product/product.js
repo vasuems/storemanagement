@@ -8,7 +8,8 @@ import { ProductForm } from '../forms';
 
 class Product extends Component {
   render() {
-    const { history } = this.props;
+    const { history, match: { path } } = this.props;
+    
     return (
       <div>
         <Breadcrumb>
@@ -29,7 +30,8 @@ class Product extends Component {
         <div className="content-body">
           <div className="table-container">
             <Col md={12} className="table-content">              
-              <ProductForm />
+              <ProductForm 
+                mode={path === '/new-product'?'new':'update'} />
             </Col>
           </div>
         </div>
@@ -41,6 +43,7 @@ class Product extends Component {
 Product.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({

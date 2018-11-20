@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Navbar,
@@ -55,7 +56,7 @@ class Navigation extends Component {
                 </DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem>
-                    <NavLink href="/dashboard">
+                    <NavLink href="/settings">
                       <FormattedMessage id="sys.myAccount" />
                     </NavLink>
                   </DropdownItem>
@@ -73,6 +74,10 @@ class Navigation extends Component {
     );
   }
 }
+
+Navigation.propTypes = {
+  account: PropTypes.object,
+};
 
 const mapStateToProps = state => ({
   account: state.accountReducer.account,

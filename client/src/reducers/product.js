@@ -3,6 +3,7 @@ import {
   FETCH_PRODUCTS_FAILED,
   FETCH_PRODUCT_CATEGORIES_SUCCESS,
   FETCH_PRODUCT_CATEGORIES_FAILED,
+  CLEAR_PRODUCT_DETAILS,
   FETCH_PRODUCT_DETAILS_SUCCESS,
   FETCH_PRODUCT_DETAILS_FAILED,
   FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS,
@@ -22,6 +23,8 @@ export default function productReducer(state = initialState, action) {
       return { ...state, products: action.value };
     case FETCH_PRODUCT_DETAILS_SUCCESS:
       return { ...state, productDetails: action.value };
+    case CLEAR_PRODUCT_DETAILS:
+      return {...state, productDetails: {} };
     case FETCH_PRODUCT_CATEGORIES_SUCCESS:
       return { ...state, categories: action.value };
     case FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS:
