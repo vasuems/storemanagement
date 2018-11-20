@@ -79,7 +79,7 @@ class LoginForm extends Component {
           placeholder={formatMessage({ id: 'sys.pwd' })}
         />
         {          
-          this.state.showLoading ? 
+          this.state.showLoading && auth === null ? 
             <img src={require('../../assets/coffee_loader.svg')} width="64" height="64" /> : 
             <Button type="submit" block>
               <FormattedMessage id="sys.signin" /> 
