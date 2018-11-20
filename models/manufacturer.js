@@ -36,12 +36,10 @@ function Manufacturer(
 
 Manufacturer.prototype.get = function(code, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       `select code, name, url, email, contact, address, logo, store_id as storeId, country_id as countryId, created_by as createdBy, status
        from manufacturer where code='${code}'`,
       (error, results) => {
-        db.end();
         if (error || results.length == 0) {
           reject(new NoRecordFoundError('No manufacturer found.'));
         } else {
@@ -86,13 +84,11 @@ Manufacturer.prototype.getAllByStoreId = function(
   pageSize = 20
 ) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       `select code, name, url, email, contact, address, logo, store_id as storeId, country_id as countryId, created_by as createdBy, status
        from manufacturer where store_id='${id}' limit ${(page - 1) *
         pageSize}, ${pageSize}`,
       (error, results) => {
-        db.end();
         if (error) {
           reject(new NoRecordFoundError('No manufacturers found.'));
         } else {
@@ -158,12 +154,10 @@ Manufacturer.prototype.add = function(manufacturer, db) {
         createdBy,
       } = manufacturer;
 
-      db.connect();
       db.query(
         `insert into manufacturer(code, name, url, email, contact, address, logo, store_id, country_id, created_by) 
          values('${code}', '${name}', '${url}', '${email}', '${contact}', '${address}', '${logo}', '${storeId}', '${countryId}', '${createdBy}')`,
         (error, results) => {
-          db.end();
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide manufacturer data.'));
           } else {
@@ -192,7 +186,6 @@ Manufacturer.prototype.add = function(manufacturer, db) {
 
 Manufacturer.prototype.delete = function(code, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       `update manufacturer set status=0 where code=${code}`,
       (error, results) => {

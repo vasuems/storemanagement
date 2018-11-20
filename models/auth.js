@@ -22,7 +22,6 @@ function OAuth2Response(code, accessToken, refreshToken) {
 
 OAuth2Request.prototype.auth = function(db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       `select code, password, salt, token, urt.status as tokenStatus, su.store_id as storeCode
        from user
@@ -63,7 +62,6 @@ OAuth2Request.prototype.auth = function(db) {
                 .format('YYYY-MM-DD HH:mm:ss')}')`,
               error => {
                 if (error) {
-                  db.end();
                   reject(new UnauthorisedError('Not authorised.'));
                 } else if (!token) {
                   const refreshToken = md5(
@@ -83,7 +81,6 @@ OAuth2Request.prototype.auth = function(db) {
                       }
                     }
                   );
-                  db.end();
                 } else {
                   resolve(new OAuth2Response(code, accessToken, token));
                 }
@@ -100,7 +97,6 @@ OAuth2Request.prototype.auth = function(db) {
 
 OAuth2Request.prototype.validateToken = function(token, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       `select * from user_access_token where token='${token}' and expired_on > '${moment
         .utc()
@@ -113,18 +109,15 @@ OAuth2Request.prototype.validateToken = function(token, db) {
         }
       }
     );
-    db.end();
   });
 };
 
 OAuth2Request.prototype.refreshToken = function(token, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       `select user_id as userId from user_refresh_token where token='${token}' and status=1 order by id desc limit 1`,
       (error, results) => {
         if (error) {
-          db.end();
           reject(new UnauthorisedError('Unauthorised request.'));
         } else if (results.length > 0) {
           const userId = results[0].userId;
@@ -132,7 +125,6 @@ OAuth2Request.prototype.refreshToken = function(token, db) {
             `select id, code, salt from user where id='${userId}' and status=1`,
             (error, results) => {
               if (error || results.length == 0) {
-                db.end();
                 reject(new UnauthorisedError('Unauthorised request.'));
               } else {
                 const { code } = results[0];
@@ -152,7 +144,6 @@ OAuth2Request.prototype.refreshToken = function(token, db) {
                     .add(1, 'hour')
                     .format('YYYY-MM-DD HH:mm:ss')}')`,
                   error => {
-                    db.end();
                     if (error) {
                       reject(new UnauthorisedError('Unauthorised request.'));
                     } else {

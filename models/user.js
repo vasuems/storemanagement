@@ -28,7 +28,6 @@ function Contact(userId, number, type, areaCode, countryId) {
 
 User.prototype.get = function(code, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(`select * from user where code='${code}'`, (error, results) => {
       if (error || results.length == 0) {
         reject(new NoRecordFoundError('No user found.'));
@@ -39,7 +38,6 @@ User.prototype.get = function(code, db) {
         db.query(
           `select user_id as userId, number, type, area_code as areaCode, country_id as countryId from user_contact where user_id='${code}' and status=1`,
           (error, results) => {
-            db.end();
             if (error) {
               reject(new NoRecordFoundError('No user found.'));
             } else {
@@ -69,13 +67,11 @@ User.prototype.add = function(user, db) {
         }
       });
 
-      db.connect();
       const { code, name, email, password, salt, joinedOn, role } = user;
       db.query(
         `insert into user(code, name, email, password, salt, joined_on, role)
          values('${code}', '${name}', '${email}', '${password}', '${salt}', '${joinedOn}', '${role}')`,
         error => {
-          db.end();
           if (error) {
             reject(new BadRequestError('Invalide user data.'));
           } else {
@@ -91,7 +87,6 @@ User.prototype.add = function(user, db) {
 
 User.prototype.delete = function(code, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(`update user set status=0 where code=${code}`, error => {
       if (error) {
         reject(new BadRequestError('Deleting user failed.'));
@@ -106,11 +101,10 @@ Contact.prototype.add = function(contact, db) {
   return new Promise((resolve, reject) => {
     if (contact instanceof Contact) {
       const { userId, number, type, areaCode, countryId } = contact;
-      db.connect();
+
       db.query(
         `insert into user_contact(user_id, number, type, area_code, country_id) values(${userId}, '${number}', '${type}', '${areaCode}', ${countryId})`,
         error => {
-          db.end();
           if (error) {
             reject(new BadRequestError('Invalide user contact data.'));
           } else {
@@ -128,11 +122,10 @@ Contact.prototype.update = function(id, contact, db) {
   return new Promise((resolve, reject) => {
     if (contact instanceof Contact) {
       const { userId, number, type, areaCode, countryId } = contact;
-      db.connect();
+
       db.query(
         `update user_contact set number='${number}', type='${type}', area_code='${areaCode}', country_id=${countryId} where id=${id}`,
         error => {
-          db.end();
           if (error) {
             reject(new BadRequestError('Invalide user contact data.'));
           } else {
@@ -148,7 +141,6 @@ Contact.prototype.update = function(id, contact, db) {
 
 Contact.prototype.delete = function(id, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(`update user_contact set status=0 where id=${id}`, error => {
       if (error) {
         reject(new BadRequestError('Contact deleting failed.'));

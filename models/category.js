@@ -19,11 +19,9 @@ function Category(code, name, storeId, addedBy, parentId, status = true) {
 
 Category.prototype.get = function(code, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       `select code, name, store_id as storeId, parent_id as parentId, status from category where code='${code}'`,
       (error, results) => {
-        db.end();
         if (error) {
           reject(new NoRecordFoundError('No category found.'));
         } else {
@@ -37,13 +35,11 @@ Category.prototype.get = function(code, db) {
 
 Category.prototype.getAllByStoreId = function(id, db, page = 1, pageSize = 20) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       `select code, name, store_id as storeId, parent_id as parentId, status from category where store_id='${id}' limit ${(page -
         1) *
         pageSize}, ${pageSize}`,
       (error, results) => {
-        db.end();
         if (error) {
           reject(new NoRecordFoundError('No categories found.'));
         } else {
@@ -72,12 +68,11 @@ Category.prototype.add = function(category, db) {
       });
 
       const { code, name, storeId, addedBy, parentId } = category;
-      db.connect();
+
       db.query(
         `insert into category(code, name, store_id, added_by, parent_id) 
          values('${code}', '${name}', '${storeId}', '${addedBy}', '${parentId}')`,
         (error, results) => {
-          db.end();
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide category data.'));
           } else {
@@ -93,7 +88,6 @@ Category.prototype.add = function(category, db) {
 
 Category.prototype.delete = function(code, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(`update category set status=0 where code='${code}'`, error => {
       if (error) {
         reject(new BadRequestError('Deleting category failed.'));

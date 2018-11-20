@@ -34,12 +34,10 @@ function Store(
 
 Store.prototype.get = function(code, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       `select name, code, description, logo, country_id as countryId, language, currency_id as currencyId, facebook, twitter 
        from store where code='${code}' and status=1`,
       (error, results) => {
-        db.end();
         if (error || results.length == 0) {
           reject(new NoRecordFoundError('No store found.'));
         } else {
@@ -99,7 +97,6 @@ Store.prototype.add = function(store, db) {
         facebook,
         twitter,
       } = store;
-      db.connect();
       db.query(
         `insert into store(name, code, description, created_on, created_by, logo, country_id, language, currency_id, facebook, twitter) 
          values('${name}', '${code}', '${description}', '${moment
@@ -108,7 +105,6 @@ Store.prototype.add = function(store, db) {
             'YYYY-MM-DD HH:mm:ss'
           )}', '${createdBy}', '${logo}', ${countryId}, '${language}', ${currencyId}, '${facebook}', '${twitter}')`,
         (error, results) => {
-          db.end();
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide store data.'));
           } else {
@@ -150,12 +146,11 @@ Store.prototype.update = function(store, db) {
         facebook,
         twitter,
       } = store;
-      db.connect();
+
       db.query(
         `update store set name='${name}', logo='${logo}', description='${description}', currency_id='${currencyId}', language='${language}', country_id=${countryId}, facebook='${facebook}', twitter='${twitter}'
          where code='${code}' and created_by='${createdBy}'`,
         (error, results) => {
-          db.end();
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide store data.'));
           } else {
@@ -184,7 +179,6 @@ Store.prototype.update = function(store, db) {
 
 Store.prototype.delete = function(code, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       `update store set status=0 where code=${code}`,
       (error, results) => {

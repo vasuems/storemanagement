@@ -12,11 +12,9 @@ function Public() {}
 
 Public.prototype.getCountries = function(db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       'select id, name, flag, tel_code as telCode from country',
       (error, results) => {
-        db.end();
         if (error || results.length == 0) {
           reject(new NoRecordFoundError('No countries found.'));
         } else {
@@ -29,9 +27,7 @@ Public.prototype.getCountries = function(db) {
 
 Public.prototype.getCurrencies = function(db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query('select * from currency', (error, results) => {
-      db.end();
       if (error || results.length == 0) {
         reject(new NoRecordFoundError('No currencies found.'));
       } else {
@@ -43,7 +39,6 @@ Public.prototype.getCurrencies = function(db) {
 
 Public.prototype.delete = function(code, db) {
   return new Promise((resolve, reject) => {
-    db.connect();
     db.query(
       `update product set status=0 where code=${code}`,
       (error, results) => {
