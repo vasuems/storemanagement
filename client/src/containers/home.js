@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Col } from 'reactstrap';
+import { Col, Card, CardHeader, CardBody } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
+import { FiUser, FiLock } from 'react-icons/fi';
 import { LoginForm } from './forms';
 import Footer from '../components/footer';
 
@@ -14,8 +15,16 @@ class Home extends Component {
               <FormattedMessage id="site.name" />
             </p>
             <LoginForm />
+            <br />
+            <Card>
+              <CardHeader>Demo account</CardHeader>
+              <CardBody>
+                <FiUser />:&nbsp;&nbsp;test@test.com<br />
+                <FiLock />:&nbsp;&nbsp;123
+              </CardBody>
+            </Card>
           </Col>
-        </div>
+        </div><br />
         <Footer style={{ flex: 0.1 }} />
       </div>
     );
