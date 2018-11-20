@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { LoginForm } from './forms';
 import Footer from '../components/footer';
 
-class Home extends Component {
+class Login extends Component {
   render() {
     return (
       <div className="login-page">
@@ -22,4 +22,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Login;

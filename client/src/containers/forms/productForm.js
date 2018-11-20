@@ -97,7 +97,7 @@ class ProductForm extends Component {
 
     this.state = {
       description: '',
-    }
+    };
   }
 
   componentDidMount() {
@@ -127,7 +127,6 @@ class ProductForm extends Component {
   }
 
   onDescriptionChange = data => {
-    console.log(data);
     this.setState({
       description: data,
     });
