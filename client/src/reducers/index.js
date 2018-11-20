@@ -11,6 +11,7 @@ import authReducer from './auth';
 import supplierReducer from './supplier';
 import manufacturerReducer from './manufacturer';
 import publicReducer from './public';
+import accountReducer from './account';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   supplierReducer,
   manufacturerReducer,
   publicReducer,
+  accountReducer,
 });
 
 export default rootReducer;

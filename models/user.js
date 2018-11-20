@@ -29,8 +29,8 @@ function Contact(userId, number, type, areaCode, countryId) {
 User.prototype.get = function(code, db) {
   return new Promise((resolve, reject) => {
     db.connect();
-    db.query(`select * from user where code=${code}`, (error, results) => {
-      if (error) {
+    db.query(`select * from user where code='${code}'`, (error, results) => {
+      if (error || results.length == 0) {
         reject(new NoRecordFoundError('No user found.'));
       } else {
         const { code, name, email, joinedOn } = results[0];
@@ -72,7 +72,8 @@ User.prototype.add = function(user, db) {
       db.connect();
       const { code, name, email, password, salt, joinedOn, role } = user;
       db.query(
-        `insert into user(code, name, email, password, salt, joined_on, role) values('${code}', '${name}', '${email}', '${password}', '${salt}', '${joinedOn}', '${role}')`,
+        `insert into user(code, name, email, password, salt, joined_on, role)
+         values('${code}', '${name}', '${email}', '${password}', '${salt}', '${joinedOn}', '${role}')`,
         error => {
           db.end();
           if (error) {
