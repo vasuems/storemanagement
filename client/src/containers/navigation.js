@@ -13,10 +13,17 @@ import {
   Container,
   Badge,
 } from 'reactstrap';
+import { fetchAccount } from '../actions';
 import { FormattedMessage } from 'react-intl';
 import { FaRegBell } from 'react-icons/fa';
 
 class Navigation extends Component {
+  componentDidMount(){
+    const { dispatch } = this.props;
+
+    //TODO: replace user ID
+    dispatch(fetchAccount('40s1cqdw6jmyyiixe'));
+  }
   render() {
     const { account } = this.props;
     return (
@@ -76,6 +83,7 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   account: PropTypes.object,
 };
 

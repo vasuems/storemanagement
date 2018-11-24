@@ -15,7 +15,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { FiSearch } from 'react-icons/fi';
+import { FiSearch, FiPlusCircle } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
 import { fetchOrders } from '../../actions';
 import { OrderListItem } from '../../components';
@@ -38,8 +38,8 @@ class OrderList extends Component {
   };
 
   render() {
-    const { orders } = this.props;
-    const { formatMessage } = this.props.intl;
+    const { orders, history, intl: { formatMessage } } = this.props;
+
     return (
       <div>
         <Breadcrumb>
@@ -70,18 +70,32 @@ class OrderList extends Component {
                   </InputGroup>
                 </div>
                 <div>
-                  <FormattedMessage id="sys.orderDate" />
-                  :&nbsp;
-                  <DatePicker
-                    dateFormat="YYYY-MM-DD"
-                    selected={moment()}
-                    popperModifiers={{
-                      offset: {
-                        enabled: true,
-                        offset: '10px, 10px',
-                      },
-                    }}
-                  />
+                  <div>       
+                    <FormattedMessage id="sys.orderDate" />
+                    :&nbsp;
+                    <DatePicker
+                      dateFormat="YYYY-MM-DD"
+                      selected={moment()}
+                      popperModifiers={{
+                        offset: {
+                          enabled: true,
+                          offset: '10px, 10px',
+                        },
+                      }}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Button
+                    size="sm"
+                    color="primary"
+                    className="pull-right form-btn"
+                    onClick={() => history.push('/new-order')}
+                  >
+                    <FiPlusCircle />
+                    &nbsp;
+                    <FormattedMessage id="sys.addNew" />
+                  </Button>
                 </div>
               </div>
               <br />
