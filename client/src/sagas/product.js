@@ -15,13 +15,15 @@ import config from '../config';
 
 export function* fetchProductCategories(action) {
   try {
+    const { storeCode, pageNo, pageSize } = action.value;
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${action.value}/categories`,
+      url: `${config.apiDomain}/stores/${storeCode}/categories?page=${pageNo}&size=${pageSize}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
     });
+
     yield put(fetchProductCategoriesSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {

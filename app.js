@@ -236,7 +236,7 @@ app.get(
       const data = await product.getAllByStoreId(req.params.storeCode, req.query.page || 1, req.query.size || 20);
       const count = await product.getTotalCountByStoreId(req.params.storeCode);
 
-      res.send({ data, count});
+      res.send({ data, count });
     } catch (err) {
       res.status(err.statusCode).send(err);
     }
@@ -290,9 +290,10 @@ app.get(
   async (req, res) => {
     try {
       const category = new Category();
-      const data = await category.getAllByStoreId(req.params.storeCode);
+      const data = await category.getAllByStoreId(req.params.storeCode, req.query.page || 1, req.query.size || 20);
+      const count = await category.getTotalCountByStoreId(req.params.storeCode);
 
-      res.send(data);
+      res.send({ data, count });
     } catch (err) {
       res.status(err.statusCode).send(err);
     }

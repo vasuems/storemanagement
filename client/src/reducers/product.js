@@ -11,8 +11,8 @@ import {
 } from '../actions';
 
 const initialState = {
-  products: {products: [], total: 0},
-  categories: [],
+  products: {data: [], total: 0},
+  categories: {data: [], total: 0},
   productDetails: {},
   categoryDetails: {},
 };

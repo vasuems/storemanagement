@@ -37,6 +37,22 @@ Category.prototype.get = function(code) {
   });
 };
 
+Category.prototype.getTotalCountByStoreId = function(id) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `select count(*) as total 
+       from category where store_id='${id}'`,
+      (error, results) => {
+        if (error) {
+          reject(new NoRecordFoundError('No categorys found.'));
+        } else {
+          resolve(results[0].total);
+        }
+      }
+    );
+  });
+};
+
 Category.prototype.getAllByStoreId = function(id, page = 1, pageSize = 20) {
   return new Promise((resolve, reject) => {
     db.query(

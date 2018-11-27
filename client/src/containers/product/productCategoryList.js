@@ -22,16 +22,20 @@ class ProductCategoryList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     //TODO: to replace the store ID passing to action creator
-    dispatch(fetchProductCategories('asdfasdfasdfasd'));
+    dispatch(fetchProductCategories({storeCode: 'asdfasdfasdfasd', pageSize: 20, pageNo: 1}));
   }
 
   onViewClick = id => {
     this.props.history.push(`/categories/${id}`);
   };
 
+  onPageChange = page => {
+    const { dispatch } = this.props;
+    dispatch(fetchProductCategories({storeCode: 'asdfasdfasdfasd', pageSize: 20, pageNo: page.selected + 1 }));
+  }
+
   render() {
-    const { history, categories } = this.props;
-    const { formatMessage } = this.props.intl;
+    const { history, categories, total, intl: { formatMessage } } = this.props;
     return (
       <div>
         <Breadcrumb>
@@ -101,7 +105,7 @@ class ProductCategoryList extends Component {
             </Col>
           </div>
           <ReactPaginate 
-            pageCount={20}
+            pageCount={total}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             containerClassName="pagination"
@@ -115,6 +119,7 @@ class ProductCategoryList extends Component {
             previousLinkClassName="page-link"
             nextLinkClassName="page-link"
             activeClassName="active"
+            onPageChange={this.onPageChange}
           />
         </div>
       </div>
@@ -127,11 +132,16 @@ ProductCategoryList.propTypes = {
   history: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired,
   intl: PropTypes.object.isRequired,
+  total: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = state => ({
-  categories: state.productReducer.categories,
-});
+const mapStateToProps = state => {
+  const diff = state.productReducer.categories.count / 20;
+  return {
+    categories: state.productReducer.categories.data,
+    total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
+  };
+};
 
 export default connect(
   mapStateToProps,

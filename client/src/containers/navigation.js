@@ -13,9 +13,9 @@ import {
   Container,
   Badge,
 } from 'reactstrap';
-import { fetchAccount } from '../actions';
 import { FormattedMessage } from 'react-intl';
 import { FaRegBell } from 'react-icons/fa';
+import { fetchAccount } from '../actions';
 
 class Navigation extends Component {
   componentDidMount(){
