@@ -1,5 +1,5 @@
-# Elf Commerce
-
+# ElfCommerce
+<img src="https://raw.githubusercontent.com/ccwukong/ElfCommerce/master/client/src/logo.svg" />
 <p>
   <img src="https://img.shields.io/badge/React-16.4.2-lightblue.svg">
   <img src="https://img.shields.io/badge/Redux-4.0.0-purple.svg">
