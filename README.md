@@ -144,6 +144,10 @@ to make sure all formatting or other issues have been properly fixed.
 
 ...
 
+## About the logo
+
+Icons made by [Freepik](https://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0)
+
 
 ## License
 Elf Commerce is [Apache-2.0 licensed.](https://github.com/ccwukong/elfcommerce/blob/master/LICENSE)
