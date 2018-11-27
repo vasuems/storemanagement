@@ -111,7 +111,7 @@ class ProductForm extends Component {
 
     //TODO: replace the store ID here
 
-    dispatch(fetchProductCategories('asdfasdfasdfasd'));
+    dispatch(fetchProductCategories({storeCode: 'asdfasdfasdfasd', pageSize: 200, pageNo: 1}));
     dispatch(fetchSuppliers('asdfasdfasdfasd'));
     dispatch(fetchManufacturers('asdfasdfasdfasd'));
 
@@ -414,7 +414,7 @@ export default withRouter(
         price: (unitPrice || 0.0).toFixed(2) || 0.0,
         discount: (discount || 0.0).toFixed(2) || 0.0,
       },
-      categories: state.productReducer.categories,
+      categories: state.productReducer.categories.data,
       suppliers: state.supplierReducer.suppliers,
       manufacturers: state.manufacturerReducer.manufacturers,
       enableReinitialize: true,

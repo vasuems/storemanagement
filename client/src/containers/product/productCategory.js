@@ -8,7 +8,8 @@ import ProductCategoryForm from '../forms/productCategoryForm';
 
 class ProductCategory extends Component {
   render() {
-    const { history, categories } = this.props;
+    const { history } = this.props;
+
     return (
       <div>
         <Breadcrumb>
@@ -29,7 +30,7 @@ class ProductCategory extends Component {
         <div className="content-body">
           <div className="table-container">
             <Col md={12} className="table-content">              
-              <ProductCategoryForm categories={categories} />
+              <ProductCategoryForm />
             </Col>
           </div>
         </div>
@@ -41,7 +42,6 @@ class ProductCategory extends Component {
 ProductCategory.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  categories: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = state => ({});

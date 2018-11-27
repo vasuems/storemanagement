@@ -6,7 +6,10 @@ import { FormattedMessage } from 'react-intl';
 import { Col, Form, FormGroup, Label, Button, Input } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FiSave } from 'react-icons/fi';
-import { fetchProductCategoryDetails } from '../../actions';
+import { 
+  fetchProductCategories,
+  fetchProductCategoryDetails,
+} from '../../actions';
 
 const validate = values => {
   const errors = {};
@@ -39,6 +42,7 @@ class ProductCategoryForm extends Component {
     } = this.props;
 
     //TODO: replace the store ID here
+    dispatch(fetchProductCategories({storeCode: 'asdfasdfasdfasd', pageSize: 200, pageNo: 1}));
     dispatch(
       fetchProductCategoryDetails({
         storeCode: 'asdfasdfasdfasd',
@@ -116,7 +120,7 @@ export default withRouter(
         name: name,
         'parent-id': parentId,
       },
-      categories: state.productReducer.categories,
+      categories: state.productReducer.categories.data,
       enableReinitialize: true,
     };
   })(ProductCategoryForm)
