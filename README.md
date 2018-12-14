@@ -74,6 +74,14 @@ const config = {
 export default config;
 ```
 
+Step 6, set up database
+
+Before run the following command, make sure you already created a database and have it configured in your **.env** file.
+
+```javascript
+yarn db:migrate
+```
+
 ## How to run this?
 
 **Yarn**

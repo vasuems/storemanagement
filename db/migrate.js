@@ -1,27 +1,25 @@
 const fs = require('fs');
+const mysql = require('mysql');
+require('dotenv').load();
 
-const sql = fs.readFileSync(`${__dirname}/davinci.sql`);
-
-const knex = require('knex')({
-  dialect: 'mysql',
-  connection: {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'davinci',
-    multipleStatements: true,
-  },
+const { host, user, password, database } = process.env;
+var db = mysql.createConnection({
+  host,
+  user,
+  password,
+  database,
+  multipleStatements: true,
 });
 
-knex
-  .raw('CREATE DATABASE IF NOT EXISTS davinci;')
-  .then(() => {
-    knex.raw(sql);
-    console.log('Finished database setup.');
-  })
-  .catch(err => {
-    console.log('Unable to setup database.');
-  })
-  .finally(() => {
-    process.exit();
-  });
+const sql = fs.readFileSync(`${__dirname}/db.sql`, 'utf8');
+
+db.query(sql, (err, results) => {
+  if(err){
+    console.log(err);
+  }else{
+    console.log(results);
+  }
+  process.exit();
+});
+
+
