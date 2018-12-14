@@ -26,7 +26,7 @@ Password: 123
 
 Step 1, clone this repo
 
-Step 2, add the ***env.json*** file in root directory with environment settings:
+Step 2, add the ***.env*** file in root directory with environment settings:
 
 ```
 {
