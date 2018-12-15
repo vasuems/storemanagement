@@ -69,6 +69,7 @@ Step 5, create your own config.js in **client** directory with following setting
 const config = {
   apiDomain: 'YOUR_API_DOMAIN',
   accessTokenKey: 'THE_KEY_FOR_LOCAL_STORAGE_TO_STORE_ACCESS_TOKEN',
+  googleApiKey: 'GOOGLE_API_KeY',
 };
 
 export default config;
