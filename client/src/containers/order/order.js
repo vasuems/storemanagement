@@ -25,6 +25,7 @@ import {
   OrderShippingItem,
   OrderProductListItem,
 } from '../../components';
+import config from '../../config';
 
 class Order extends Component {
   constructor(props) {
@@ -221,28 +222,41 @@ class Order extends Component {
                   </Row>
                 </TabPane>
                 <TabPane tabId="2">
-                  <OrderShippingItem
-                    courier="Fedex Express"
-                    trackingId="asa3djfa123lksdfj23432sdf"
-                    datetime="2018-11-11 11:11:00"
-                    location="Singapore logistics center"
-                    status="Processing"
-                    statusColor="green"
-                  />
-                  <OrderShippingItem
-                    courier="Fedex Express"
-                    trackingId="234adsf9asdf31asdf"
-                    datetime="2018-11-10 07:10:00"
-                    location="Malaysia logistic center"
-                    status="Shipped out"
-                  />
-                  <OrderShippingItem
-                    courier="Fedex Express"
-                    trackingId="Not available"
-                    datetime="2018-11-08 16:30:00"
-                    location="Seller"
-                    status="Dispatched"
-                  />
+                  <Row>
+                    <Col md={5}>
+                      <OrderShippingItem
+                        courier="Fedex Express"
+                        trackingId="asa3djfa123lksdfj23432sdf"
+                        datetime="2018-11-11 11:11:00"
+                        location="Singapore logistics center"
+                        status="Processing"
+                        statusColor="green"
+                      />
+                      <OrderShippingItem
+                        courier="Fedex Express"
+                        trackingId="234adsf9asdf31asdf"
+                        datetime="2018-11-10 07:10:00"
+                        location="Malaysia logistic center"
+                        status="Shipped out"
+                      />
+                      <OrderShippingItem
+                        courier="Fedex Express"
+                        trackingId="Not available"
+                        datetime="2018-11-08 16:30:00"
+                        location="Seller"
+                        status="Dispatched"
+                      />
+                    </Col>
+                    <Col md={7}>
+                      <iframe
+                        width="100%"
+                        height="450"
+                        frameborder="0"
+                        src={`https://www.google.com/maps/embed/v1/place?key=${config.googleApiKey}&q=Space+Needle,Seattle+WA`}
+                        allowfullscreen>
+                      </iframe>              
+                    </Col>
+                  </Row>
                 </TabPane>
               </TabContent>
             </Col>
