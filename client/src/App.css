@@ -224,10 +224,10 @@ a, a:hover, a:link, a:active, a:visited{
   justify-content: center;
   align-items: center;
 }
-#login-form .form-control, #login-form .btn, #reset-pwd-form .form-control, #reset-pwd-form .btn{
+#login-form .form-control, #login-form .btn{
   border-radius: 0;
 }
-#login-form, #reset-pwd-form{
+#login-form{
   text-align: center;
 }
 #reset-pwd-form{

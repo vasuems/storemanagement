@@ -205,7 +205,7 @@ class Setting extends Component {
               </TabPane>
               <TabPane tabId="4">
                 <Row>
-                  <Col md={{ size: 4, offset: 4 }}>
+                  <Col md={{ size: 6 }}>
                     <PasswordForm onSubmit={this.handleApiSettingSubmit} />
                   </Col>
                 </Row>
