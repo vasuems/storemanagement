@@ -89,7 +89,7 @@ export function* addProduct(action){
       },
       data: action.value,
     });
-    console.log(res);
+
     yield put(submitProductSuccess(res.data));
   }catch(error){
     if (error.response.status === 401) {

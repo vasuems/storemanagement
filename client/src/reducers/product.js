@@ -4,6 +4,8 @@ import {
   FETCH_PRODUCT_CATEGORIES_SUCCESS,
   FETCH_PRODUCT_CATEGORIES_FAILED,
   CLEAR_PRODUCT_DETAILS,
+  SUBMIT_PRODUCT_SUCCESS,
+  SUBMIT_PRODUCT_FAILED,
   FETCH_PRODUCT_DETAILS_SUCCESS,
   FETCH_PRODUCT_DETAILS_FAILED,
   FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS,
@@ -15,6 +17,7 @@ const initialState = {
   categories: {data: [], total: 0},
   productDetails: {},
   categoryDetails: {},
+  newSuccess: undefined,
 };
 
 export default function productReducer(state = initialState, action) {
@@ -25,6 +28,10 @@ export default function productReducer(state = initialState, action) {
       return { ...state, productDetails: action.value };
     case CLEAR_PRODUCT_DETAILS:
       return {...state, productDetails: {} };
+    case SUBMIT_PRODUCT_SUCCESS:
+      return { ...state, newSuccess: true };
+    case SUBMIT_PRODUCT_FAILED:
+      return { ...state, newSuccess: false };
     case FETCH_PRODUCT_CATEGORIES_SUCCESS:
       return { ...state, categories: action.value };
     case FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS:

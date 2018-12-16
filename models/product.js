@@ -30,21 +30,22 @@ function Product(
   supplierId,
   status = true
 ) {
-  this.code = code || '';
-  this.name = name || '';
-  this.categoryId = categoryId || '';
-  this.storeId = storeId || '';
-  this.sku = sku || '';
-  this.description = description || 'nil';
+  // If a field is optional then provide default empty value
+  this.code = code;
+  this.name = name;
+  this.categoryId = categoryId;
+  this.storeId = storeId;
+  this.sku = sku;
+  this.description = description || '';
   this.quantity = quantity || 0;
-  this.allowQuantity = allowQuantity || true;
+  this.allowQuantity = allowQuantity;
   this.addedOn = addedOn || moment.utc().format('YYYY-MM-DD HH:mm:ss');
-  this.addedBy = addedBy || '';
-  this.unitPrice = unitPrice || 0.0;
-  this.cost = cost || 0.0;
+  this.addedBy = addedBy;
+  this.unitPrice = unitPrice;
+  this.cost = cost;
   this.coverImage = coverImage || '';
-  this.manufacturerId = manufacturerId || 'nil';
-  this.supplierId = supplierId || 'nil';
+  this.manufacturerId = manufacturerId || '';
+  this.supplierId = supplierId || '';
   this.status = status ? true : false;
 }
 
@@ -126,7 +127,7 @@ Product.prototype.getAllByStoreId = function(id, page = 1, pageSize = 20) {
       `select code, name, category_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity,
        added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage,
        manufacturer_id as manufacturerId, supplier_id as supplierId, status
-       from product where store_id='${id}' limit ${(page - 1) *
+       from product where store_id='${id}' order by added_on desc limit ${(page - 1) *
         pageSize}, ${pageSize}`,
       (error, results) => {
         
@@ -183,7 +184,8 @@ Product.prototype.add = function(product) {
   return new Promise((resolve, reject) => {
     if (product instanceof Product) {
       Object.keys(product).forEach(function(key, index) {
-        if (!product[key]) {
+        if (product[key] === undefined) {
+          console.log(key);
           reject(
             new InvalidModelArgumentsError(
               'Not all required fields have a value.'

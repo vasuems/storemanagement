@@ -139,5 +139,7 @@
   "sys.percentage": "Percentage",
   "sys.value": "Value",
   "sys.prev": "Prev",
-  "sys.next": "Next"
+  "sys.next": "Next",
+  "sys.newFailed": "Failed creating new item.",
+  "sys.newSuccess": "Creating new item successful."
 }

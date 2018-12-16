@@ -16,6 +16,7 @@ import {
   Input,
   InputGroup,
   Button,
+  Alert,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
@@ -139,11 +140,14 @@ class ProductForm extends Component {
 
   onSubmit = data => {
     const { dispatch } = this.props;
-    const payload = data;
-    payload.description = this.state.description;
-    payload.storeId = 'asdfasdfasdfasd';
 
-    dispatch(submitProduct(payload));
+    data.description = this.state.description;
+    data.storeId = 'asdfasdfasdfasd';
+    if(data.allowQuantity === undefined){
+      data.allowQuantity = false;
+    }
+    
+    dispatch(submitProduct(data));
   };
 
   render() {
@@ -151,6 +155,7 @@ class ProductForm extends Component {
       handleSubmit,
       categories,
       suppliers,
+      newSuccess,
       manufacturers,
       initialValues,
       mode,
@@ -166,6 +171,17 @@ class ProductForm extends Component {
         </Button>
         <br />
         <br />
+        {
+          newSuccess === false ?
+            <Alert color="danger">
+              <FormattedMessage id="sys.newFailed" />
+            </Alert> : 
+            newSuccess === true ? 
+              <Alert color="success">
+                <FormattedMessage id="sys.newSuccess" />
+              </Alert> : null
+        }
+        
         <Row>
           <Col md={7}>
             <Card>
@@ -368,6 +384,7 @@ ProductForm.propTypes = {
   categories: PropTypes.array.isRequired,
   suppliers: PropTypes.array.isRequired,
   manufacturers: PropTypes.array.isRequired,
+  newSuccess: PropTypes.bool,
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
@@ -386,6 +403,7 @@ export default withRouter(
       categories: state.productReducer.categories.data,
       suppliers: state.supplierReducer.suppliers,
       manufacturers: state.manufacturerReducer.manufacturers,
+      newSuccess: state.productReducer.newSuccess,
       enableReinitialize: true,
     };
   })(injectIntl(ProductForm))
