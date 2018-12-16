@@ -29,16 +29,7 @@ import {
   submitProduct,
 } from '../../actions';
 
-const validate = values => {
-  const errors = {};
-  if (!values.categoryName) {
-    errors.categoryName = 'Required';
-  }
-  if (!values.newPwd) {
-    errors.newPwd = 'Required';
-  }
-  return errors;
-};
+const required = value => (value ? undefined : 'Required');
 
 const modules = {
   toolbar: [
@@ -70,9 +61,9 @@ const formats = [
   'video',
 ];
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({ input, type, meta: { touched, error } }) => (
   <div>
-    <Input {...input} placeholder={label} type={type} />
+    <Input {...input} type={type} />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
@@ -88,6 +79,20 @@ const renderNumberField = ({ input, type, meta: { touched, error } }) => (
   <div>
     <Input {...input} placeholder="0" type={type} />
     {touched && (error && <span className="text-danger">{error}</span>)}
+  </div>
+);
+
+const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
+  <div>
+    <select {...input} className="form-control">
+      <option />
+      {data.map(cat => (
+        <option key={cat.code} value={cat.code}>
+          {cat.name}
+        </option>
+      ))}
+    </select>
+    {touched && (error && <div><span className="text-danger">{error}</span></div>)}
   </div>
 );
 
@@ -136,6 +141,7 @@ class ProductForm extends Component {
     const { dispatch } = this.props;
     const payload = data;
     payload.description = this.state.description;
+    payload.storeId = 'asdfasdfasdfasd';
 
     dispatch(submitProduct(payload));
   };
@@ -170,6 +176,7 @@ class ProductForm extends Component {
                 <FormGroup row>
                   <Label for="name" sm={3}>
                     <FormattedMessage id="sys.productName" />
+                    <span className="text-danger mandatory-field">*</span>
                   </Label>
                   <Col sm={9}>
                     <Field
@@ -177,6 +184,7 @@ class ProductForm extends Component {
                       name="name"
                       className="form-control"
                       id="name"
+                      validate={[required]}
                     />
                   </Col>
                 </FormGroup>
@@ -189,7 +197,7 @@ class ProductForm extends Component {
                       modules={modules}
                       formats={formats}
                       style={{ height: 180 }}
-                      value={mode==='update'?initialValues || '':this.state.description}
+                      value={mode==='update' ? initialValues || '':this.state.description}
                       onChange={this.onDescriptionChange}
                     />
                   </Col>
@@ -200,6 +208,7 @@ class ProductForm extends Component {
                 <FormGroup row>
                   <Label for="sku" sm={3}>
                     <FormattedMessage id="sys.sku" />
+                    <span className="text-danger mandatory-field">*</span>
                   </Label>
                   <Col sm={9}>
                     <Field
@@ -207,32 +216,30 @@ class ProductForm extends Component {
                       name="sku"
                       className="form-control"
                       id="sku"
+                      validate={[required]}
                     />
                   </Col>
                 </FormGroup>
                 <FormGroup row>
                   <Label for="categoryId" sm={3}>
                     <FormattedMessage id="sys.category" />
+                    <span className="text-danger mandatory-field">*</span>
                   </Label>
                   <Col sm={9}>
                     <Field
-                      component="select"
+                      component={renderSelect}
                       id="category-id"
-                      name="categoryId"
-                      className="form-control"
+                      name="categoryId"                      
+                      data={categories}
+                      validate={[required]}
                     >
-                      <option value="">--</option>
-                      {categories.map(cat => (
-                        <option key={cat.code} value={cat.code}>
-                          {cat.name}
-                        </option>
-                      ))}
                     </Field>
                   </Col>
                 </FormGroup>
                 <FormGroup row>
                   <Label for="cost" sm={3}>
                     <FormattedMessage id="sys.costPrice" />
+                    <span className="text-danger mandatory-field">*</span>
                   </Label>
                   <Col sm={9}>
                     <Field
@@ -240,6 +247,7 @@ class ProductForm extends Component {
                       type="number"
                       name="cost"
                       id="cost"
+                      validate={[required]}
                     />
                   </Col>
                 </FormGroup>
@@ -249,18 +257,11 @@ class ProductForm extends Component {
                   </Label>
                   <Col sm={9}>
                     <Field
-                      component="select"
+                      component={renderSelect}
                       id="manufacturer-id"
                       name="manufacturerId"
-                      className="form-control"
-                    >
-                      <option value="">--</option>
-                      {manufacturers.map(man => (
-                        <option key={man.code} value={man.code}>
-                          {man.name}
-                        </option>
-                      ))}
-                    </Field>
+                      data={manufacturers}
+                    />
                   </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -269,18 +270,11 @@ class ProductForm extends Component {
                   </Label>
                   <Col sm={9}>
                     <Field
-                      component="select"
+                      component={renderSelect}
                       id="supplier-id"
                       name="supplierId"
-                      className="form-control"
-                    >
-                      <option value="">--</option>
-                      {suppliers.map(supplier => (
-                        <option key={supplier.code} value={supplier.code}>
-                          {supplier.name}
-                        </option>
-                      ))}
-                    </Field>
+                      data={suppliers}
+                    />
                   </Col>
                 </FormGroup>
               </CardBody>
@@ -335,13 +329,15 @@ class ProductForm extends Component {
                 <FormGroup row>
                   <Label for="price" sm={4}>
                     <FormattedMessage id="sys.price" />
+                    <span className="text-danger mandatory-field">*</span>
                   </Label>
                   <Col sm={8}>
                     <Field
                       component={renderDecimalField}
                       type="number"
-                      name="price"
+                      name="unitPrice"
                       id="price"
+                      validate={[required]}
                     />
                   </Col>
                 </FormGroup>
@@ -381,40 +377,12 @@ ProductForm.propTypes = {
 
 ProductForm = reduxForm({
   form: 'productForm',
-  validate,
 })(ProductForm);
 
 export default withRouter(
   connect(state => {
-    const {
-      name,
-      description,
-      sku,
-      categoryId,
-      cost,
-      manufacturerId,
-      supplierId,
-      allowQuantity,
-      quantity,
-      unitPrice,
-      discount,
-    } = state.productReducer.productDetails;
-
     return {
-      initialValues: {
-        storeId: 'asdfasdfasdfasd',
-        name,
-        description,
-        sku,
-        categoryId,
-        cost: (cost || 0.0).toFixed(2),
-        manufacturerId,
-        supplierId,
-        allowQuantity,
-        quantity,
-        price: (unitPrice || 0.0).toFixed(2) || 0.0,
-        discount: (discount || 0.0).toFixed(2) || 0.0,
-      },
+      initialValues: state.productReducer.productDetails,
       categories: state.productReducer.categories.data,
       suppliers: state.supplierReducer.suppliers,
       manufacturers: state.manufacturerReducer.manufacturers,

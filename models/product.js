@@ -35,7 +35,7 @@ function Product(
   this.categoryId = categoryId || '';
   this.storeId = storeId || '';
   this.sku = sku || '';
-  this.description = description || '';
+  this.description = description || 'nil';
   this.quantity = quantity || 0;
   this.allowQuantity = allowQuantity || true;
   this.addedOn = addedOn || moment.utc().format('YYYY-MM-DD HH:mm:ss');

@@ -296,3 +296,6 @@ table .btn-link{
   border: 1px solid #dee2e6;
   cursor: pointer;
 }
+.mandatory-field{
+  font-size: 15px;
+}
