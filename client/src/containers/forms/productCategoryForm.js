@@ -85,7 +85,7 @@ class ProductCategoryForm extends Component {
             <FormattedMessage id="sys.parentCategory" />
           </Label>
           <Col sm={10}>
-            <Input type="select" id="parent-id" name="parent-id">
+            <Input type="select" id="parent-id" name="parentId">
               {categories.map(cat => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
@@ -118,7 +118,7 @@ export default withRouter(
     return {
       initialValues: {
         name: name,
-        'parent-id': parentId,
+        parentId,
       },
       categories: state.productReducer.categories.data,
       enableReinitialize: true,

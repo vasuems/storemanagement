@@ -217,7 +217,7 @@ class ProductForm extends Component {
                   <Col sm={9}>
                     <Field
                       component="select"
-                      id="categoryId"
+                      id="category-id"
                       name="categoryId"
                       className="form-control"
                     >
@@ -250,7 +250,7 @@ class ProductForm extends Component {
                   <Col sm={9}>
                     <Field
                       component="select"
-                      id="manufacturerId"
+                      id="manufacturer-id"
                       name="manufacturerId"
                       className="form-control"
                     >
@@ -270,7 +270,7 @@ class ProductForm extends Component {
                   <Col sm={9}>
                     <Field
                       component="select"
-                      id="supplierId"
+                      id="supplier-id"
                       name="supplierId"
                       className="form-control"
                     >
@@ -301,7 +301,7 @@ class ProductForm extends Component {
                       <Field
                         component="input"
                         type="checkbox"
-                        name="allow-quantity"
+                        name="allowQuantity"
                         id="allow-quantity"
                         style={{ width: 32, height: 32 }}
                       />
@@ -409,7 +409,7 @@ export default withRouter(
         cost: (cost || 0.0).toFixed(2),
         manufacturerId,
         supplierId,
-        'allow-quantity': allowQuantity,
+        allowQuantity,
         quantity,
         price: (unitPrice || 0.0).toFixed(2) || 0.0,
         discount: (discount || 0.0).toFixed(2) || 0.0,

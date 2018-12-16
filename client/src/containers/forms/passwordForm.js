@@ -44,7 +44,7 @@ const PasswordForm = props => {
               <Field
                 component={renderField}
                 type="password"
-                name="current-pwd"
+                name="currentPwd"
                 className="form-control"
                 id="current-pwd"
               />
@@ -58,7 +58,7 @@ const PasswordForm = props => {
               <Field
                 component={renderField}
                 type="password"
-                name="new-pwd"
+                name="newPwd"
                 className="form-control"
                 id="new-pwd"
               />

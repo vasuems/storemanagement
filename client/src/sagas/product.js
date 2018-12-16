@@ -5,6 +5,8 @@ import {
   fetchProductCategoriesFailed,
   fetchProductsSuccess,
   fetchProductsFailed,
+  submitProductSuccess,
+  submitProductFailed,
   fetchProductDetailsSuccess,
   fetchProductDetailsFailed,
   fetchProductCategoryDetailsSuccess,
@@ -73,6 +75,39 @@ export function* fetchProductDetails(action) {
       yield put(authFailed());
     } else {
       yield put(fetchProductDetailsFailed());
+    }
+  }
+}
+
+export function* addProduct(action){
+  try{
+    console.log(action)
+    // const res = yield axios({
+    //   method: 'post',
+    //   url: `${config.apiDomain}/stores/${action.value.storeCode}/products`,
+    //   headers: {
+    //     authorization: localStorage.getItem(config.accessTokenKey),
+    //   },
+    //   data: {
+    //     name: "Product 2",
+    //     categoryId: "cat123",
+    //     storeId: "asdfasdfasdfasd",
+    //     sku: "afdsafsd2342asdfasd",
+    //     description: "Test product 2",
+    //     quantity: 100,
+    //     allowQuantity: true,
+    //     unitPrice: 100.00,
+    //     cost: 87.00,
+    //     coverImage: "https://www.sandisk.com/content/dam/sandisk-main/en_us/assets/about/media/product/retail/usb/cruzer_blade_usb_flash_drive/SDCZ50_angle_Large.jpg"
+    //   },
+    // });
+
+    // yield put(submitProductSuccess(res.data));
+  }catch(error){
+    if (error.response.status === 401) {
+      yield put(authFailed());
+    } else {
+      yield put(submitProductFailed());
     }
   }
 }

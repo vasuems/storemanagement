@@ -82,7 +82,7 @@ const AccountSettingForm = props => {
                 <Col sm={9}>
                   <Field
                     component={renderField}
-                    name="contact-no"
+                    name="contactNo"
                     className="form-control"
                     id="contact-no"
                     readonly

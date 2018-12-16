@@ -93,7 +93,7 @@ class StoreSettingForm extends Component {
                     <Field
                       component="select"
                       name="currencyId"
-                      id="currencyId"
+                      id="currency-id"
                       className="form-control"
                     >
                       <option value="">--</option>
@@ -113,7 +113,7 @@ class StoreSettingForm extends Component {
                     <Field
                       component="select"
                       name="countryId"
-                      id="countryId"
+                      id="country-id"
                       className="form-control"
                     >
                       <option value="">--</option>

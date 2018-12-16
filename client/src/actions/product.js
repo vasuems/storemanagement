@@ -71,7 +71,6 @@ export function fetchProductDetailsFailed() {
 }
 
 export function submitProduct(data){
-  console.log(data);
   return { type: SUBMIT_PRODUCT, value: data };
 }
 
