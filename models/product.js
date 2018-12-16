@@ -185,7 +185,6 @@ Product.prototype.add = function(product) {
     if (product instanceof Product) {
       Object.keys(product).forEach(function(key, index) {
         if (product[key] === undefined) {
-          console.log(key);
           reject(
             new InvalidModelArgumentsError(
               'Not all required fields have a value.'

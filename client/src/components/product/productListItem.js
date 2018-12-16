@@ -9,7 +9,7 @@ const ProductListItem = props => {
   return (
     <tr>
       <td>
-        <img src={props.coverImage} className="thumbnail" />
+        <img src={props.coverImage|| require('../../assets/no_image.svg')} className="thumbnail" />
       </td>
       <td>{props.name}</td>
       <td>{props.sku}</td>
