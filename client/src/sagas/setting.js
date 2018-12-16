@@ -3,7 +3,7 @@ import axios from 'axios';
 import {
   fetchStoreSettingsSuccess,
   fetchStoreSettingsFailed,
-  authFailed,
+  clearToken,
 } from '../actions';
 import config from '../config';
 
@@ -20,7 +20,7 @@ export function* fetchStoreSettings(action) {
     yield put(fetchStoreSettingsSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchStoreSettingsFailed());
     }

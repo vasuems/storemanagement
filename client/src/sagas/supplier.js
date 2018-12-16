@@ -5,7 +5,7 @@ import {
   fetchSuppliersFailed,
   fetchSupplierDetailsSuccess,
   fetchSupplierDetailsFailed,
-  authFailed,
+  clearToken,
 } from '../actions';
 import config from '../config';
 import { supplierDetails } from '../apis/mocks/responses';
@@ -23,7 +23,7 @@ export function* fetchSuppliers(action) {
     yield put(fetchSuppliersSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchSuppliersFailed());
     }
@@ -35,7 +35,7 @@ export function* fetchSupplierDetails(action) {
     yield put(fetchSupplierDetailsSuccess(supplierDetails));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchSupplierDetailsFailed());
     }

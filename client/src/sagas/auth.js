@@ -18,3 +18,8 @@ export function* submitLoginData(action) {
     yield put(authFailed());
   }
 }
+
+export function* clearToken(){
+  localStorage.removeItem(config.accessTokenKey);
+  yield put(authFailed());
+}

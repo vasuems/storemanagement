@@ -11,7 +11,7 @@ import {
   fetchProductDetailsFailed,
   fetchProductCategoryDetailsSuccess,
   fetchProductCategoryDetailsFailed,
-  authFailed,
+  clearToken,
 } from '../actions';
 import config from '../config';
 
@@ -29,7 +29,7 @@ export function* fetchProductCategories(action) {
     yield put(fetchProductCategoriesSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchProductCategoriesFailed());
     }
@@ -50,7 +50,7 @@ export function* fetchProducts(action) {
     yield put(fetchProductsSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchProductsFailed());
     }
@@ -72,7 +72,7 @@ export function* fetchProductDetails(action) {
     yield put(fetchProductDetailsSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchProductDetailsFailed());
     }
@@ -93,7 +93,7 @@ export function* addProduct(action){
     yield put(submitProductSuccess(res.data));
   }catch(error){
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(submitProductFailed());
     }
@@ -115,7 +115,7 @@ export function* fetchProductCategoryDetails(action) {
     yield put(fetchProductCategoryDetailsSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchProductCategoryDetailsFailed());
     }

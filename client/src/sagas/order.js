@@ -5,7 +5,7 @@ import {
   fetchOrdersFailed,
   fetchOrderProductsSuccess,
   fetchOrderProductsFailed,
-  authFailed,
+  clearToken,
 } from '../actions';
 import { orders, salesReportProducts } from '../apis/mocks/responses';
 import config from '../config';
@@ -23,7 +23,7 @@ export function* fetchOrders(action) {
     yield put(fetchOrdersSuccess(orders));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchOrdersFailed());
     }
@@ -35,7 +35,7 @@ export function* fetchOrderProducts(action) {
     yield put(fetchOrderProductsSuccess(salesReportProducts));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchOrderProductsFailed());
     }

@@ -5,7 +5,7 @@ import {
   fetchManufacturersFailed,
   fetchManufacturerDetailsSuccess,
   fetchManufacturerDetailsFailed,
-  authFailed,
+  clearToken,
 } from '../actions';
 import config from '../config';
 
@@ -22,7 +22,7 @@ export function* fetchManufacturers(action) {
     yield put(fetchManufacturersSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchManufacturersFailed());
     }
@@ -41,6 +41,10 @@ export function* fetchManufacturerDetails(action) {
 
     yield put(fetchManufacturerDetailsSuccess(res.data));
   } catch (error) {
-    yield put(fetchManufacturerDetailsFailed());
+    if (error.response.status === 401) {
+      yield put(clearToken());
+    } else {
+      yield put(fetchManufacturerDetailsFailed());
+    }
   }
 }

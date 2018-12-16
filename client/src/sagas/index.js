@@ -10,12 +10,13 @@ import {
 import { fetchSalesReportProducts, fetchSalesReportCategories } from './report';
 import { fetchDashboardData } from './dashboard';
 import { fetchStoreSettings } from './setting';
-import { submitLoginData } from './auth';
+import { submitLoginData, clearToken } from './auth';
 import { fetchSuppliers, fetchSupplierDetails } from './supplier';
 import { fetchManufacturers, fetchManufacturerDetails } from './manufacturer';
 import { fetchCountries, fetchCurrencies } from './public';
 import { fetchAccount } from './account';
 import {
+  CLEAR_TOKEN,
   FETCH_ORDERS,
   FETCH_ORDER_PRODUCTS,
   FETCH_PRODUCT_CATEGORIES,
@@ -39,6 +40,7 @@ import {
 
 export default function* rootSaga() {
   yield all([
+    takeEvery(CLEAR_TOKEN, clearToken),
     takeEvery(FETCH_ORDERS, fetchOrders),
     takeEvery(FETCH_PRODUCT_CATEGORIES, fetchProductCategories),
     takeEvery(FETCH_PRODUCTS, fetchProducts),

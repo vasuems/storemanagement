@@ -5,7 +5,7 @@ import {
   fetchCountriesFailed,
   fetchCurrenciesSuccess,
   fetchCurrenciesFailed,
-  authFailed,
+  clearToken,
 } from '../actions';
 import config from '../config';
 
@@ -20,7 +20,7 @@ export function* fetchCountries(action) {
     yield put(fetchCountriesSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchCountriesFailed());
     }
@@ -38,7 +38,7 @@ export function* fetchCurrencies(action) {
     yield put(fetchCurrenciesSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
-      yield put(authFailed());
+      yield put(clearToken());
     } else {
       yield put(fetchCurrenciesFailed());
     }
