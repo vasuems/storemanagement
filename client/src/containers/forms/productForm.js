@@ -111,13 +111,13 @@ class ProductForm extends Component {
 
     //TODO: replace the store ID here
 
-    dispatch(fetchProductCategories({storeCode: 'asdfasdfasdfasd', pageSize: 200, pageNo: 1}));
+    dispatch(fetchProductCategories({storeId: 'asdfasdfasdfasd', pageSize: 200, pageNo: 1}));
     dispatch(fetchSuppliers('asdfasdfasdfasd'));
     dispatch(fetchManufacturers('asdfasdfasdfasd'));
 
     if(mode==='update'){
       dispatch(
-        fetchProductDetails({ storeCode: 'asdfasdfasdfasd', productCode: id })
+        fetchProductDetails({ storeId: 'asdfasdfasdfasd', productId: id })
       );
     }else{
       dispatch(
@@ -402,6 +402,7 @@ export default withRouter(
 
     return {
       initialValues: {
+        storeId: 'asdfasdfasdfasd',
         name,
         description,
         sku,

@@ -17,8 +17,8 @@ function OAuth2Request(username, password, grantType, scope) {
   this.scope = scope || '';
 }
 
-function OAuth2Response(code, accessToken, refreshToken) {
-  this.userCode = code;
+function OAuth2Response(id, accessToken, refreshToken) {
+  this.userId = id;
   this.accessToken = accessToken;
   this.refreshToken = refreshToken;
 }
@@ -26,7 +26,7 @@ function OAuth2Response(code, accessToken, refreshToken) {
 OAuth2Request.prototype.auth = function() {
   return new Promise((resolve, reject) => {
     db.query(
-      `select code, password, salt, token, urt.status as tokenStatus, su.store_id as storeCode
+      `select code, password, salt, token, urt.status as tokenStatus, su.store_id as storeId
        from user
        left join user_refresh_token as urt on user.code = urt.user_id
        left join store_user as su on user.code = su.user_id
@@ -42,7 +42,7 @@ OAuth2Request.prototype.auth = function() {
             salt,
             token,
             tokenStatus,
-            storeCode,
+            storeId,
           } = results[0];
 
           if (password === md5(`${this.password + salt}`)) {
@@ -50,8 +50,8 @@ OAuth2Request.prototype.auth = function() {
             const accessToken = jwt.sign(
               {
                 data: {
-                  code,
-                  storeCode,
+                  accountId: code,
+                  storeId,
                   expiry: moment.utc().format('YYYY-MM-DD HH:mm:ss'),
                 },
               },

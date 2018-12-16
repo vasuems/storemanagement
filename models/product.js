@@ -39,22 +39,22 @@ function Product(
   this.quantity = quantity || 0;
   this.allowQuantity = allowQuantity || true;
   this.addedOn = addedOn || moment.utc().format('YYYY-MM-DD HH:mm:ss');
-  this.addedBy = addedBy || 0;
+  this.addedBy = addedBy || '';
   this.unitPrice = unitPrice || 0.0;
   this.cost = cost || 0.0;
   this.coverImage = coverImage || '';
-  this.manufacturerId = manufacturerId || '';
-  this.supplierId = supplierId || '';
+  this.manufacturerId = manufacturerId || 'nil';
+  this.supplierId = supplierId || 'nil';
   this.status = status ? true : false;
 }
 
-Product.prototype.get = function(code) {
+Product.prototype.get = function(id) {
   return new Promise((resolve, reject) => {
     db.query(
       `select code, name, category_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity,
        added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage,
        manufacturer_id as manufacturerId, supplier_id as supplierId, status
-       from product where code='${code}'`,
+       from product where code='${id}'`,
       (error, results) => {
         
         if (error || results.length == 0) {
@@ -211,10 +211,9 @@ Product.prototype.add = function(product) {
       } = product;
 
       db.query(
-        `insert into product(code, name, category_id, store_id, sku, description, quantity, allow_quantity, added_on, added_by, unit_price, cost, cover_image, manufacture_id, supplier_id) 
-         values('${code}', '${name}', '${categoryId}', '${storeId}', '${sku}', '${description}', ${quantity}, ${allowQuantity}, '${addedOn}', '${addedBy}', ${unitPrice}, ${cost}, '${coverImage}', ${manufacturerId}, '${supplierId}')`,
+        `insert into product(code, name, category_id, store_id, sku, description, quantity, allow_quantity, added_on, added_by, unit_price, cost, cover_image, manufacturer_id, supplier_id) 
+         values('${code}', '${name}', '${categoryId}', '${storeId}', '${sku}', '${description}', ${quantity}, ${allowQuantity}, '${addedOn}', '${addedBy}', ${unitPrice}, ${cost}, '${coverImage}', '${manufacturerId}', '${supplierId}')`,
         (error, results) => {
-          
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide product data.'));
           } else {

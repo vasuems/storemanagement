@@ -22,7 +22,7 @@ class ProductList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     //TODO: to replace the store ID passing to action creator
-    dispatch(fetchProducts({storeCode: 'asdfasdfasdfasd', pageSize: 20, pageNo: 1 }));
+    dispatch(fetchProducts({storeId: 'asdfasdfasdfasd', pageSize: 20, pageNo: 1 }));
   }
 
   onViewClick = id => {
@@ -32,7 +32,7 @@ class ProductList extends Component {
 
   onPageChange = page => {
     const { dispatch } = this.props;
-    dispatch(fetchProducts({storeCode: 'asdfasdfasdfasd', pageSize: 20, pageNo: page.selected + 1 }));
+    dispatch(fetchProducts({storeId: 'asdfasdfasdfasd', pageSize: 20, pageNo: page.selected + 1 }));
   }
 
   render() {

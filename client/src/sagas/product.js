@@ -17,10 +17,10 @@ import config from '../config';
 
 export function* fetchProductCategories(action) {
   try {
-    const { storeCode, pageNo, pageSize } = action.value;
+    const { storeId, pageNo, pageSize } = action.value;
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${storeCode}/categories?page=${pageNo}&size=${pageSize}`,
+      url: `${config.apiDomain}/stores/${storeId}/categories?page=${pageNo}&size=${pageSize}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
@@ -38,15 +38,15 @@ export function* fetchProductCategories(action) {
 
 export function* fetchProducts(action) {
   try {
-    const { storeCode, pageNo, pageSize } = action.value;
+    const { storeId, pageNo, pageSize } = action.value;
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${storeCode}/products?page=${pageNo}&size=${pageSize}`,
+      url: `${config.apiDomain}/stores/${storeId}/products?page=${pageNo}&size=${pageSize}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
     });
-
+    
     yield put(fetchProductsSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
@@ -61,8 +61,8 @@ export function* fetchProductDetails(action) {
   try {
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${action.value.storeCode}/products/${
-        action.value.productCode
+      url: `${config.apiDomain}/stores/${action.value.storeId}/products/${
+        action.value.productId
       }`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
@@ -81,28 +81,16 @@ export function* fetchProductDetails(action) {
 
 export function* addProduct(action){
   try{
-    console.log(action)
-    // const res = yield axios({
-    //   method: 'post',
-    //   url: `${config.apiDomain}/stores/${action.value.storeCode}/products`,
-    //   headers: {
-    //     authorization: localStorage.getItem(config.accessTokenKey),
-    //   },
-    //   data: {
-    //     name: "Product 2",
-    //     categoryId: "cat123",
-    //     storeId: "asdfasdfasdfasd",
-    //     sku: "afdsafsd2342asdfasd",
-    //     description: "Test product 2",
-    //     quantity: 100,
-    //     allowQuantity: true,
-    //     unitPrice: 100.00,
-    //     cost: 87.00,
-    //     coverImage: "https://www.sandisk.com/content/dam/sandisk-main/en_us/assets/about/media/product/retail/usb/cruzer_blade_usb_flash_drive/SDCZ50_angle_Large.jpg"
-    //   },
-    // });
-
-    // yield put(submitProductSuccess(res.data));
+    const res = yield axios({
+      method: 'post',
+      url: `${config.apiDomain}/stores/${action.value.storeId}/products`,
+      headers: {
+        authorization: localStorage.getItem(config.accessTokenKey),
+      },
+      data: action.value,
+    });
+    console.log(res);
+    yield put(submitProductSuccess(res.data));
   }catch(error){
     if (error.response.status === 401) {
       yield put(authFailed());
@@ -116,8 +104,8 @@ export function* fetchProductCategoryDetails(action) {
   try {
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${action.value.storeCode}/categories/${
-        action.value.categoryCode
+      url: `${config.apiDomain}/stores/${action.value.storeId}/categories/${
+        action.value.categoryId
       }`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),

@@ -51,10 +51,10 @@ const userCodeVerifier = (req, res, next) => {
       req.headers.authorization,
       tokenSecret
     );
-    if (!decoded || decoded.data.code !== req.params.accountCode) {
+
+    if (!decoded || decoded.data.accountId !== req.params.accountId) {
       throw new UnauthorisedError('Invalid user ID.');
     }
-
     res.locals.auth = decoded.data;
     next();
   } catch (err) {
@@ -62,13 +62,14 @@ const userCodeVerifier = (req, res, next) => {
   }
 };
 
-const storeCodeVerifier = (req, res, next) => {
+const storeIdVerifier = (req, res, next) => {
   try {
     const decoded = jwt.verify(
       req.headers.authorization,
       tokenSecret
     );
-    if (!decoded || decoded.data.storeCode !== req.params.storeCode) {
+
+    if (!decoded || decoded.data.storeId !== req.params.storeId) {
       throw new UnauthorisedError('Invalid store ID');
     }
 
@@ -119,7 +120,7 @@ app.post('/auth', async (req, res) => {
       res.send(data);
     } else {
       const auth = new OAuth2Request();
-      const data = await auth.refreshToken(req.body.refreshToken, db);
+      const data = await auth.refreshToken(req.body.refreshToken);
       res.send(data);
     }
   } catch (err) {
@@ -146,12 +147,12 @@ app.post('/accounts', async (req, res) => {
 });
 
 app.get(
-  '/accounts/:accountCode',
+  '/accounts/:accountId',
   [authMiddleware, userCodeVerifier],
   async (req, res) => {
     try {
       const user = new User();
-      const data = await user.get(req.params.accountCode);
+      const data = await user.get(req.params.accountId);
 
       res.send(data);
     } catch (err) {
@@ -161,12 +162,12 @@ app.get(
 );
 
 app.get(
-  '/stores/:storeCode',
-  [authMiddleware, storeCodeVerifier],
+  '/stores/:storeId',
+  [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
       const store = new Store();
-      const data = await store.get(req.params.storeCode);
+      const data = await store.get(req.params.storeId);
 
       res.send(data);
     } catch (err) {
@@ -176,8 +177,8 @@ app.get(
 );
 
 app.put(
-  '/stores/:storeCode',
-  [authMiddleware, storeCodeVerifier],
+  '/stores/:storeId',
+  [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
       const {
@@ -190,14 +191,14 @@ app.put(
         currencyId,
       } = req.body;
       const store = new Store(
-        req.params.storeCode,
+        req.params.storeId,
         name,
         description,
         logo,
         countryId,
         language,
         currencyId,
-        res.locals.auth.accountCode
+        res.locals.auth.accountId
       );
       const data = await store.update(store);
 
@@ -209,14 +210,14 @@ app.put(
 );
 
 app.get(
-  '/stores/:storeCode/products/:productCode',
-  [authMiddleware, storeCodeVerifier],
+  '/stores/:storeId/products/:productId',
+  [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
       const product = new Product();
-      const data = await product.get(req.params.productCode);
+      const data = await product.get(req.params.productId);
 
-      if (data.storeId !== req.params.storeCode) {
+      if (data.storeId !== req.params.storeId) {
         throw new UnauthorisedError('Invalid product ID.');
       }
 
@@ -228,13 +229,13 @@ app.get(
 );
 
 app.get(
-  '/stores/:storeCode/products',
-  [authMiddleware, storeCodeVerifier],
+  '/stores/:storeId/products',
+  [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
       const product = new Product();
-      const data = await product.getAllByStoreId(req.params.storeCode, req.query.page || 1, req.query.size || 20);
-      const count = await product.getTotalCountByStoreId(req.params.storeCode);
+      const data = await product.getAllByStoreId(req.params.storeId, req.query.page || 1, req.query.size || 20);
+      const count = await product.getTotalCountByStoreId(req.params.storeId);
 
       res.send({ data, count });
     } catch (err) {
@@ -244,8 +245,8 @@ app.get(
 );
 
 app.post(
-  '/stores/:storeCode/products',
-  [authMiddleware, storeCodeVerifier],
+  '/stores/:storeId/products',
+  [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
       const {
@@ -270,7 +271,7 @@ app.post(
         quantity,
         allowQuantity,
         moment.utc().format('YYYY-MM-DD HH:mm:ss'),
-        res.locals.auth.accountCode,
+        res.locals.auth.accountId,
         unitPrice,
         cost,
         coverImage
@@ -285,13 +286,13 @@ app.post(
 );
 
 app.get(
-  '/stores/:storeCode/categories',
-  [authMiddleware, storeCodeVerifier],
+  '/stores/:storeId/categories',
+  [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
       const category = new Category();
-      const data = await category.getAllByStoreId(req.params.storeCode, req.query.page || 1, req.query.size || 20);
-      const count = await category.getTotalCountByStoreId(req.params.storeCode);
+      const data = await category.getAllByStoreId(req.params.storeId, req.query.page || 1, req.query.size || 20);
+      const count = await category.getTotalCountByStoreId(req.params.storeId);
 
       res.send({ data, count });
     } catch (err) {
@@ -301,12 +302,12 @@ app.get(
 );
 
 app.get(
-  '/stores/:storeCode/categories/:categoryCode',
-  [authMiddleware, storeCodeVerifier],
+  '/stores/:storeId/categories/:categoryId',
+  [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
       const category = new Category();
-      const data = await category.get(req.params.categoryCode);
+      const data = await category.get(req.params.categoryId);
 
       res.send(data);
     } catch (err) {
@@ -316,12 +317,12 @@ app.get(
 );
 
 app.get(
-  '/stores/:storeCode/manufacturers',
-  [authMiddleware, storeCodeVerifier],
+  '/stores/:storeId/manufacturers',
+  [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
       const manufacturer = new Manufacturer();
-      const data = await manufacturer.getAllByStoreId(req.params.storeCode);
+      const data = await manufacturer.getAllByStoreId(req.params.storeId);
 
       res.send(data);
     } catch (err) {
@@ -331,12 +332,12 @@ app.get(
 );
 
 app.get(
-  '/stores/:storeCode/suppliers',
-  [authMiddleware, storeCodeVerifier],
+  '/stores/:storeId/suppliers',
+  [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
       const supplier = new Supplier();
-      const data = await supplier.getAllByStoreId(req.params.storeCode);
+      const data = await supplier.getAllByStoreId(req.params.storeId);
 
       res.send(data);
     } catch (err) {
