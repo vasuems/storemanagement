@@ -29,13 +29,13 @@ Step 1, clone this repo
 Step 2, add the ***.env*** file in root directory with environment settings:
 
 ```
-{
-  "tokenSecret": "REPLACE_THIS_WITH_ANY_LONG_RANDOM_STRING",
-  "host": "YOUR_MYSQL_SERVER_CONNECTION_STRING",
-  "user": "YOUR_MYSQL_USER",
-  "password": "YOUR_MYSQL_USER_PASSWORD",
-  "database": "YOUR_MYSQL_DATABASE_NAME"
-}
+
+tokenSecret=REPLACE_THIS_WITH_ANY_LONG_RANDOM_STRING
+host=YOUR_MYSQL_SERVER_CONNECTION_STRING
+user=YOUR_MYSQL_USER
+password=YOUR_MYSQL_USER_PASSWORD
+database=YOUR_MYSQL_DATABASE_NAME
+
 ```
 Step 3, install all dependancies for ExpressJS
 
@@ -63,7 +63,7 @@ cd client && yarn install
 cd client && npm install
 ```
 
-Step 5, create your own config.js in **client** directory with following settings:
+Step 5, create your own config.js in **client/src** directory with following settings:
 
 ```javascript
 const config = {
@@ -128,10 +128,13 @@ Your contribution is appreicated. For the purpose of having good project managem
 │   │   └── App.css              # Your customized styles should be added here
 │   │   └── App.js               # ** Where React webapp routes configured.
 │   │   └── index.js             # React webapp start point
+│   │   └── config.js            # All global configurations(not included in this repo)
 └── .travis.yml                  # Travis CI config file
 └── .eslintrc.json               # **Don't change settings here.
 └── package.json                 # All project dependancies
+└── .env                         # Global environment variables(not included in this repo)
 └── app.js                       # Restful APIs written in ExpressJS
+└── app.local.js                 # Wrapper file for claudia.js
 └── README.md                    # **Don't change contents here.
 ```
 
