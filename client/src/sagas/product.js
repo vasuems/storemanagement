@@ -7,6 +7,8 @@ import {
   fetchProductsFailed,
   submitProductSuccess,
   submitProductFailed,
+  submitProductCategorySuccess,
+  submitProductCategoryFailed,
   fetchProductDetailsSuccess,
   fetchProductDetailsFailed,
   fetchProductCategoryDetailsSuccess,
@@ -118,6 +120,27 @@ export function* fetchProductCategoryDetails(action) {
       yield put(clearToken());
     } else {
       yield put(fetchProductCategoryDetailsFailed());
+    }
+  }
+}
+
+export function* addProductCategory(action){
+  try{
+    const res = yield axios({
+      method: 'post',
+      url: `${config.apiDomain}/stores/${action.value.storeId}/categories`,
+      headers: {
+        authorization: localStorage.getItem(config.accessTokenKey),
+      },
+      data: action.value,
+    });
+
+    yield put(submitProductCategorySuccess(res.data));
+  }catch(error){
+    if (error.response.status === 401) {
+      yield put(clearToken());
+    } else {
+      yield put(submitProductCategoryFailed());
     }
   }
 }

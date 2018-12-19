@@ -13,13 +13,13 @@ const initialState = {
 
 export default function publicReducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_COUNTRIES_SUCCESS:
-      return { ...state, currencies: action.value };
-    case FETCH_CURRENCIES_SUCCESS:
-      return { ...state, countries: action.value };
-    case FETCH_COUNTRIES_FAILED:
-    case FETCH_CURRENCIES_FAILED:
-    default:
-      return state;
+  case FETCH_COUNTRIES_SUCCESS:
+    return { ...state, currencies: action.value };
+  case FETCH_CURRENCIES_SUCCESS:
+    return { ...state, countries: action.value };
+  case FETCH_COUNTRIES_FAILED:
+  case FETCH_CURRENCIES_FAILED:
+  default:
+    return state;
   }
 }

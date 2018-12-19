@@ -213,7 +213,7 @@ class ProductForm extends Component {
                       modules={modules}
                       formats={formats}
                       style={{ height: 180 }}
-                      value={mode==='update' ? initialValues || '':this.state.description}
+                      value={mode==='update' ? initialValues.description || '' : this.state.description}
                       onChange={this.onDescriptionChange}
                     />
                   </Col>

@@ -11,6 +11,10 @@ export const SUBMIT_PRODUCT = 'SUBMIT_PRODUCT';
 export const SUBMIT_PRODUCT_SUCCESS = 'SUBMIT_PRODUCT_SUCCESS';
 export const SUBMIT_PRODUCT_FAILED = 'SUBMIT_PRODUCT_FAILED';
 
+export const SUBMIT_PRODUCT_CATEGORY = 'SUBMIT_PRODUCT_CATEGORY';
+export const SUBMIT_PRODUCT_CATEGORY_SUCCESS = 'SUBMIT_PRODUCT_CATEGORY_SUCCESS';
+export const SUBMIT_PRODUCT_CATEGORY_FAILED = 'SUBMIT_PRODUCT_CATEGORY_FAILED';
+
 export const FETCH_PRODUCT_CATEGORIES = 'FETCH_PRODUCT_CATEGORIES';
 export const FETCH_PRODUCT_CATEGORIES_SUCCESS =
   'FETCH_PRODUCT_CATEGORIES_SUCCESS';
@@ -84,6 +88,18 @@ export function submitProductFailed(){
 
 export function fetchProductCategoryDetails(data) {
   return { type: FETCH_PRODUCT_CATEGORY_DETAILS, value: data };
+}
+
+export function submitProductCategory(data){
+  return { type: SUBMIT_PRODUCT_CATEGORY, value: data };
+}
+
+export function submitProductCategorySuccess(data){
+  return { type: SUBMIT_PRODUCT_CATEGORY_SUCCESS, value: data };
+}
+
+export function submitProductCategoryFailed(){
+  return { type: SUBMIT_PRODUCT_CATEGORY_FAILED };
 }
 
 export function fetchProductCategoryDetailsSuccess(data) {

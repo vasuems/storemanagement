@@ -12,10 +12,10 @@ const { host, user, password, database } = process.env;
 var db = new MySQL(host, user, password, database);
 
 function Category(code, name, storeId, addedBy, parentId, status = true) {
-  this.code = code || '';
-  this.name = name || '';
-  this.storeId = storeId || '';
-  this.addedBy = addedBy || '';
+  this.code = code;
+  this.name = name;
+  this.storeId = storeId;
+  this.addedBy = addedBy;
   this.parentId = parentId || '';
   this.status = status ? true : false;
 }
@@ -79,7 +79,7 @@ Category.prototype.add = function(category) {
   return new Promise((resolve, reject) => {
     if (category instanceof Category) {
       Object.keys(category).forEach(function(key, index) {
-        if (!category[key]) {
+        if (category[key] === undefined) {
           reject(
             new InvalidModelArgumentsError(
               'Not all required fields have a value.'

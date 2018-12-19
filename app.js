@@ -301,6 +301,31 @@ app.get(
   }
 );
 
+app.post(
+  '/stores/:storeId/categories',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const {
+        name,
+        parentId,
+      } = req.body;
+      const category = new Category(
+        shortid.generate(),
+        name,
+        req.params.storeId,
+        res.locals.auth.accountId,
+        parentId,
+      );
+      const data = await category.add(category);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 app.get(
   '/stores/:storeId/categories/:categoryId',
   [authMiddleware, storeIdVerifier],

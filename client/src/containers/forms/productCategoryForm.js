@@ -9,16 +9,10 @@ import { FiSave } from 'react-icons/fi';
 import { 
   fetchProductCategories,
   fetchProductCategoryDetails,
+  submitProductCategory,
 } from '../../actions';
 
-const validate = values => {
-  const errors = {};
-  if (!values.name) {
-    errors.name = 'Required';
-  }
-
-  return errors;
-};
+const required = value => (value ? undefined : 'Required');
 
 const renderField = ({
   input,
@@ -36,23 +30,29 @@ class ProductCategoryForm extends Component {
   componentDidMount() {
     const {
       dispatch,
+      mode,
       match: {
         params: { id },
       },
     } = this.props;
 
     //TODO: replace the store ID here
-    dispatch(fetchProductCategories({storeCode: 'asdfasdfasdfasd', pageSize: 200, pageNo: 1}));
-    dispatch(
-      fetchProductCategoryDetails({
-        storeCode: 'asdfasdfasdfasd',
-        categoryCode: id,
-      })
-    );
+    dispatch(fetchProductCategories({storeId: 'asdfasdfasdfasd', pageSize: 200, pageNo: 1}));
+
+    if(mode === 'update'){
+      dispatch(
+        fetchProductCategoryDetails({
+          storeId: 'asdfasdfasdfasd',
+          categoryId: id,
+        })
+      );
+    }
   }
 
   onSubmit = data => {
     const { dispatch } = this.props;
+
+    dispatch(submitProductCategory(data));
   };
 
   render() {
@@ -70,6 +70,7 @@ class ProductCategoryForm extends Component {
         <FormGroup row>
           <Label for="name" sm={2}>
             <FormattedMessage id="sys.categoryName" />
+            <span className="text-danger mandatory-field">*</span>
           </Label>
           <Col sm={10}>
             <Field
@@ -77,6 +78,7 @@ class ProductCategoryForm extends Component {
               name="name"
               className="form-control"
               id="name"
+              validate={[required]}
             />
           </Col>
         </FormGroup>
@@ -86,6 +88,7 @@ class ProductCategoryForm extends Component {
           </Label>
           <Col sm={10}>
             <Input type="select" id="parent-id" name="parentId">
+              <option value="0"></option>
               {categories.map(cat => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
@@ -105,11 +108,11 @@ ProductCategoryForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   match: PropTypes.object,
+  mode: PropTypes.string,
 };
 
 ProductCategoryForm = reduxForm({
   form: 'productCategoryForm',
-  validate,
 })(ProductCategoryForm);
 
 export default withRouter(

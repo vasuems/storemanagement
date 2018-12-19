@@ -8,16 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { submitLoginData } from '../../actions';
 import config from '../../config';
 
-const validate = values => {
-  const errors = {};
-  if (!values.username) {
-    errors.username = 'This field is required.';
-  }
-  if (!values.password) {
-    errors.password = 'This field is required.';
-  }
-  return errors;
-};
+const required = value => (value ? undefined : 'Required');
 
 const renderField = ({
   input,
@@ -70,6 +61,7 @@ class LoginForm extends Component {
           name="username"
           id="username"
           placeholder={formatMessage({ id: 'sys.email' })}
+          validate={[required]}
         />
         <Field
           component={renderField}
@@ -77,6 +69,7 @@ class LoginForm extends Component {
           name="password"
           id="password"
           placeholder={formatMessage({ id: 'sys.pwd' })}
+          validate={[required]}
         />
         {          
           this.state.showLoading && auth === null ? 
@@ -110,7 +103,6 @@ LoginForm.propTypes = {
 
 LoginForm = reduxForm({
   form: 'loginForm',
-  validate,
 })(injectIntl(LoginForm));
 
 const mapStateToProps = state => {

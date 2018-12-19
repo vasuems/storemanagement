@@ -8,7 +8,7 @@ import ProductCategoryForm from '../forms/productCategoryForm';
 
 class ProductCategory extends Component {
   render() {
-    const { history } = this.props;
+    const { history, match: { path } } = this.props;
 
     return (
       <div>
@@ -30,7 +30,8 @@ class ProductCategory extends Component {
         <div className="content-body">
           <div className="table-container">
             <Col md={12} className="table-content">              
-              <ProductCategoryForm />
+              <ProductCategoryForm 
+                mode={path === '/new-category'?'new':'update'} />
             </Col>
           </div>
         </div>
@@ -42,6 +43,7 @@ class ProductCategory extends Component {
 ProductCategory.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({});

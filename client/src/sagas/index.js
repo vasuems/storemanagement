@@ -6,6 +6,7 @@ import {
   fetchProductDetails,
   fetchProductCategoryDetails,
   addProduct,
+  addProductCategory,
 } from './product';
 import { fetchSalesReportProducts, fetchSalesReportCategories } from './report';
 import { fetchDashboardData } from './dashboard';
@@ -24,6 +25,7 @@ import {
   FETCH_PRODUCTS,
   FETCH_PRODUCT_DETAILS,
   SUBMIT_PRODUCT,
+  SUBMIT_PRODUCT_CATEGORY,
   FETCH_SUPPLIERS,
   FETCH_SUPPLIER_DETAILS,
   FETCH_MANUFACTURERS,
@@ -46,6 +48,7 @@ export default function* rootSaga() {
     takeEvery(FETCH_PRODUCTS, fetchProducts),
     takeEvery(FETCH_PRODUCT_DETAILS, fetchProductDetails),
     takeEvery(SUBMIT_PRODUCT, addProduct),
+    takeEvery(SUBMIT_PRODUCT_CATEGORY, addProductCategory),
     takeEvery(FETCH_DASHBOARD_DATA, fetchDashboardData),
     takeEvery(FETCH_SALES_REPORT_PRODUCTS, fetchSalesReportProducts),
     takeEvery(FETCH_SALES_REPORT_CATEGORIES, fetchSalesReportCategories),
