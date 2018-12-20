@@ -41,6 +41,11 @@ const routes = [
     main: () => <Order />,
   },
   {
+    path: '/new-order',
+    sidebar: () => <SideBarContent />,
+    main: () => <Order />,
+  },
+  {
     path: '/categories',
     exact: true,
     sidebar: () => <SideBarContent />,
