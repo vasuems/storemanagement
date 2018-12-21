@@ -2,7 +2,7 @@ const assert = require('assert');
 const Product = require('../product');
 
 describe('Create a new product object', () => {
-  it('should return a new user object', () => {
+  it('should return a new product object', () => {
     const product = new Product(
       'alsdfjal23rj2ladlsf23',
       'Sample Product',
