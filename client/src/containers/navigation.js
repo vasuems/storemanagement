@@ -16,13 +16,16 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { FaRegBell } from 'react-icons/fa';
 import { fetchAccount } from '../actions';
+import config from '../config';
 
 class Navigation extends Component {
-  componentDidMount(){
+  componentDidMount() {
     const { dispatch } = this.props;
 
     //TODO: replace user ID
-    dispatch(fetchAccount('40s1cqdw6jmyyiixe'));
+    if (!window.location.pathname === '/') {
+      dispatch(fetchAccount('40s1cqdw6jmyyiixe'));
+    }
   }
   render() {
     const { account } = this.props;
@@ -59,7 +62,7 @@ class Navigation extends Component {
               </UncontrolledDropdown>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  {account ? account.user.name: ''}
+                  {account ? account.user.name : ''}
                 </DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem>

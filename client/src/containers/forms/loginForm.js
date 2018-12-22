@@ -16,14 +16,14 @@ const renderField = ({
   type,
   meta: { touched, error },
 }) => (
-  <div>
-    <Input {...input} placeholder={placeholder} type={type} />
-    {touched && (error && <span className="text-danger">{error}</span>)}
-  </div>
-);
+    <div>
+      <Input {...input} placeholder={placeholder} type={type} />
+      {touched && (error && <span className="text-danger">{error}</span>)}
+    </div>
+  );
 
 class LoginForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       showLoading: false,
@@ -31,16 +31,17 @@ class LoginForm extends Component {
 
     localStorage.removeItem(config.accessTokenKey);
   }
+
   componentDidUpdate() {
     const { auth, history } = this.props;
-    
+
     if (auth) {
       history.push('/dashboard');
     }
   }
 
   onSubmit = data => {
-    this.setState({showLoading: true}, () => {
+    this.setState({ showLoading: true }, () => {
       const { dispatch } = this.props;
       dispatch(submitLoginData(data));
     });
@@ -71,12 +72,12 @@ class LoginForm extends Component {
           placeholder={formatMessage({ id: 'sys.pwd' })}
           validate={[required]}
         />
-        {          
-          this.state.showLoading && auth === null ? 
-            <img src={require('../../assets/coffee_loader.svg')} /> : 
+        {
+          this.state.showLoading && auth === null ?
+            <img src={require('../../assets/coffee_loader.svg')} /> :
             <Button type="submit" block>
-              <FormattedMessage id="sys.signin" /> 
-            </Button>            
+              <FormattedMessage id="sys.signin" />
+            </Button>
         }
         {auth === false ? (
           <Alert color="danger" style={{ marginTop: 20 }}>

@@ -1,5 +1,5 @@
 import { call, all, takeEvery } from 'redux-saga/effects';
-import { fetchOrders, fetchOrderProducts } from './order';
+import { fetchOrders, fetchOrderDetails } from './order';
 import {
   fetchProductCategories,
   fetchProducts,
@@ -19,7 +19,7 @@ import { fetchAccount } from './account';
 import {
   CLEAR_TOKEN,
   FETCH_ORDERS,
-  FETCH_ORDER_PRODUCTS,
+  FETCH_ORDER_DETAILS,
   FETCH_PRODUCT_CATEGORIES,
   FETCH_PRODUCT_CATEGORY_DETAILS,
   FETCH_PRODUCTS,
@@ -44,6 +44,7 @@ export default function* rootSaga() {
   yield all([
     takeEvery(CLEAR_TOKEN, clearToken),
     takeEvery(FETCH_ORDERS, fetchOrders),
+    takeEvery(FETCH_ORDER_DETAILS, fetchOrderDetails),
     takeEvery(FETCH_PRODUCT_CATEGORIES, fetchProductCategories),
     takeEvery(FETCH_PRODUCTS, fetchProducts),
     takeEvery(FETCH_PRODUCT_DETAILS, fetchProductDetails),
@@ -53,7 +54,6 @@ export default function* rootSaga() {
     takeEvery(FETCH_SALES_REPORT_PRODUCTS, fetchSalesReportProducts),
     takeEvery(FETCH_SALES_REPORT_CATEGORIES, fetchSalesReportCategories),
     takeEvery(FETCH_STORE_SETTINGS, fetchStoreSettings),
-    takeEvery(FETCH_ORDER_PRODUCTS, fetchOrderProducts),
     takeEvery(SUBMIT_LOGIN_DATA, submitLoginData),
     takeEvery(FETCH_SUPPLIERS, fetchSuppliers),
     takeEvery(FETCH_SUPPLIER_DETAILS, fetchSupplierDetails),

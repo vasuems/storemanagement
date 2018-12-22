@@ -3,8 +3,8 @@ import axios from 'axios';
 import {
   fetchOrdersSuccess,
   fetchOrdersFailed,
-  fetchOrderProductsSuccess,
-  fetchOrderProductsFailed,
+  fetchOrderDetailsSuccess,
+  fetchOrderDetailsFailed,
   clearToken,
 } from '../actions';
 import { orders, salesReportProducts } from '../apis/mocks/responses';
@@ -30,14 +30,14 @@ export function* fetchOrders(action) {
   }
 }
 
-export function* fetchOrderProducts(action) {
+export function* fetchOrderDetails(action) {
   try {
-    yield put(fetchOrderProductsSuccess(salesReportProducts));
+    yield put(fetchOrderDetailsSuccess(salesReportProducts));
   } catch (error) {
     if (error.response.status === 401) {
       yield put(clearToken());
     } else {
-      yield put(fetchOrderProductsFailed());
+      yield put(fetchOrderDetailsFailed());
     }
   }
 }
