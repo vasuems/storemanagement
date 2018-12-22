@@ -91,7 +91,7 @@ Order.prototype.getTotalCountByStoreId = function (id) {
   return new Promise((resolve, reject) => {
     db.query(
       `select count(*) as total 
-       from order where store_id='${id}'`,
+       from \`order\` where store_id='${id}'`,
       (error, results) => {
         if (error) {
           reject(new NoRecordFoundError('No orders found.'));
@@ -106,14 +106,13 @@ Order.prototype.getTotalCountByStoreId = function (id) {
 Order.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
   return new Promise((resolve, reject) => {
     db.query(
-      `selectcode, store_id as storeId, added_by as addedBy, added_on as addedOn, paid_on as paidOn, 
+      `select code, store_id as storeId, added_by as addedBy, added_on as addedOn, paid_on as paidOn, 
        customer_name as customerName, shipping_address as shippingAddress, billing_address as billingAddress, 
        contact, status
-       from order
+       from \`order\`
        where store_id='${id}' order by added_on desc limit ${(page - 1) *
       pageSize}, ${pageSize}`,
       (error, results) => {
-
         if (error) {
           reject(new NoRecordFoundError('No orders found.'));
         } else {

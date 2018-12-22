@@ -290,9 +290,9 @@ app.get(
   [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
-      const product = new Product();
-      const data = await product.getAllByStoreId(req.params.storeId, req.query.page || 1, req.query.size || 20);
-      const count = await product.getTotalCountByStoreId(req.params.storeId);
+      const order = new Order();
+      const data = await order.getAllByStoreId(req.params.storeId, req.query.page || 1, req.query.size || 20);
+      const count = await order.getTotalCountByStoreId(req.params.storeId);
 
       res.send({ data, count });
     } catch (err) {
