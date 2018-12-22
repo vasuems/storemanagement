@@ -301,6 +301,21 @@ app.get(
   }
 );
 
+app.get(
+  '/stores/:storeId/orders/:orderId',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const order = new Order();
+      const data = await order.get(req.params.orderId);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 app.post(
   '/stores/:storeId/orders',
   [authMiddleware, storeIdVerifier],

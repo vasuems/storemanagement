@@ -43,10 +43,10 @@ function Order(
 Order.prototype.get = function (id) {
   return new Promise((resolve, reject) => {
     db.query(
-      `selectcode, store_id as storeId, added_by as addedBy, added_on as addedOn, paid_on as paidOn, 
+      `select code, store_id as storeId, added_by as addedBy, added_on as addedOn, paid_on as paidOn, 
        customer_name as customerName, shipping_address as shippingAddress, billing_address as billingAddress, 
        contact, status
-       from order
+       from \`order\`
        where code='${id}'`,
       (error, results) => {
 
