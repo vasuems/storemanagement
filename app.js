@@ -16,6 +16,7 @@ const {
   User,
   Store,
   Product,
+  Order,
   Category,
   Public,
   Supplier,
@@ -35,7 +36,7 @@ const authMiddleware = async (req, res, next) => {
     if (!req.headers.authorization) {
       throw new UnauthorisedError('Unauthorised request.');
     }
-    const auth = new OAuth2Request();  
+    const auth = new OAuth2Request();
     const res = await auth.validateToken(
       req.headers.authorization
     );
@@ -252,7 +253,6 @@ app.post(
       const {
         name,
         categoryId,
-        storeId,
         sku,
         description,
         quantity,
@@ -265,7 +265,7 @@ app.post(
         shortid.generate(),
         name,
         categoryId,
-        storeId,
+        req.params.storeId,
         sku,
         description,
         quantity,
@@ -277,6 +277,58 @@ app.post(
         coverImage
       );
       const data = await product.add(product);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.get(
+  '/stores/:storeId/orders',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const product = new Product();
+      const data = await product.getAllByStoreId(req.params.storeId, req.query.page || 1, req.query.size || 20);
+      const count = await product.getTotalCountByStoreId(req.params.storeId);
+
+      res.send({ data, count });
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.post(
+  '/stores/:storeId/orders',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const {
+        isPaid,
+        customerName,
+        shippingAddress,
+        billingAddress,
+        contact,
+        products,
+      } = req.body;
+
+      const order = new Order(
+        shortid.generate(),
+        req.params.storeId,
+        moment.utc().format('YYYY-MM-DD HH:mm:ss'),
+        res.locals.auth.accountId,
+        isPaid ? moment.utc().format('YYYY-MM-DD HH:mm:ss') : null,
+        customerName,
+        shippingAddress,
+        billingAddress,
+        contact,
+        products
+      );
+
+      const data = await order.add(order);
 
       res.send(data);
     } catch (err) {

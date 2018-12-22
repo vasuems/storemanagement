@@ -49,7 +49,7 @@ function Product(
   this.status = status ? true : false;
 }
 
-Product.prototype.get = function(id) {
+Product.prototype.get = function (id) {
   return new Promise((resolve, reject) => {
     db.query(
       `select code, name, category_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity,
@@ -57,7 +57,7 @@ Product.prototype.get = function(id) {
        manufacturer_id as manufacturerId, supplier_id as supplierId, status
        from product where code='${id}'`,
       (error, results) => {
-        
+
         if (error || results.length == 0) {
           reject(new NoRecordFoundError('No product found.'));
         } else {
@@ -105,7 +105,7 @@ Product.prototype.get = function(id) {
   });
 };
 
-Product.prototype.getTotalCountByStoreId = function(id) {
+Product.prototype.getTotalCountByStoreId = function (id) {
   return new Promise((resolve, reject) => {
     db.query(
       `select count(*) as total 
@@ -121,16 +121,16 @@ Product.prototype.getTotalCountByStoreId = function(id) {
   });
 };
 
-Product.prototype.getAllByStoreId = function(id, page = 1, pageSize = 20) {
+Product.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
   return new Promise((resolve, reject) => {
     db.query(
       `select code, name, category_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity,
        added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage,
        manufacturer_id as manufacturerId, supplier_id as supplierId, status
        from product where store_id='${id}' order by added_on desc limit ${(page - 1) *
-        pageSize}, ${pageSize}`,
+      pageSize}, ${pageSize}`,
       (error, results) => {
-        
+
         if (error) {
           reject(new NoRecordFoundError('No products found.'));
         } else {
@@ -180,10 +180,10 @@ Product.prototype.getAllByStoreId = function(id, page = 1, pageSize = 20) {
   });
 };
 
-Product.prototype.add = function(product) {
+Product.prototype.add = function (product) {
   return new Promise((resolve, reject) => {
     if (product instanceof Product) {
-      Object.keys(product).forEach(function(key, index) {
+      Object.keys(product).forEach(function (key, index) {
         if (product[key] === undefined) {
           reject(
             new InvalidModelArgumentsError(
@@ -216,7 +216,7 @@ Product.prototype.add = function(product) {
          values('${code}', '${name}', '${categoryId}', '${storeId}', '${sku}', '${description}', ${quantity}, ${allowQuantity}, '${addedOn}', '${addedBy}', ${unitPrice}, ${cost}, '${coverImage}', '${manufacturerId}', '${supplierId}')`,
         (error, results) => {
           if (error || results.affectedRows == 0) {
-            reject(new BadRequestError('Invalide product data.'));
+            reject(new BadRequestError('Invalid product data.'));
           } else {
             resolve(
               new Product(
@@ -242,17 +242,17 @@ Product.prototype.add = function(product) {
         }
       );
     } else {
-      reject(new BadRequestError('Invalide product data.'));
+      reject(new BadRequestError('Invalid product data.'));
     }
   });
 };
 
-Product.prototype.delete = function(code) {
+Product.prototype.delete = function (code) {
   return new Promise((resolve, reject) => {
     db.query(
       `update product set status=0 where code=${code}`,
       (error, results) => {
-        
+
         if (error || results.affectedRows == 0) {
           reject(new BadRequestError('Deleting product failed.'));
         } else {

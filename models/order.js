@@ -19,6 +19,7 @@ function Order(
   addedOn,
   addedBy,
   paidOn,
+  customerName,
   shippingAddress,
   billingAddress,
   contact,
@@ -28,9 +29,10 @@ function Order(
   // If a field is optional then provide default empty value
   this.code = code;
   this.storeId = storeId;
-  this.createdOn = addedOn || moment.utc().format('YYYY-MM-DD HH:mm:ss');
-  this.createdBy = addedBy;
+  this.addedOn = addedOn || moment.utc().format('YYYY-MM-DD HH:mm:ss');
+  this.addedBy = addedBy;
   this.paidOn = paidOn || null;
+  this.customerName = customerName;
   this.shippingAddress = shippingAddress;
   this.billingAddress = billingAddress;
   this.contact = contact || '';
@@ -42,7 +44,8 @@ Order.prototype.get = function (id) {
   return new Promise((resolve, reject) => {
     db.query(
       `selectcode, store_id as storeId, added_by as addedBy, added_on as addedOn, paid_on as paidOn, 
-       shipping_address as shippingAddress, billing_address as billingAddress, contact, status
+       customer_name as customerName, shipping_address as shippingAddress, billing_address as billingAddress, 
+       contact, status
        from order
        where code='${id}'`,
       (error, results) => {
@@ -56,6 +59,7 @@ Order.prototype.get = function (id) {
             addedOn,
             addedBy,
             paidOn,
+            customerName,
             shippingAddress,
             billingAddress,
             contact,
@@ -69,6 +73,7 @@ Order.prototype.get = function (id) {
               addedOn,
               addedBy,
               paidOn,
+              customerName,
               shippingAddress,
               billingAddress,
               contact,
@@ -102,7 +107,8 @@ Order.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
   return new Promise((resolve, reject) => {
     db.query(
       `selectcode, store_id as storeId, added_by as addedBy, added_on as addedOn, paid_on as paidOn, 
-       shipping_address as shippingAddress, billing_address as billingAddress, contact, status
+       customer_name as customerName, shipping_address as shippingAddress, billing_address as billingAddress, 
+       contact, status
        from order
        where store_id='${id}' order by added_on desc limit ${(page - 1) *
       pageSize}, ${pageSize}`,
@@ -118,6 +124,7 @@ Order.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
               addedOn,
               addedBy,
               paidOn,
+              customerName,
               shippingAddress,
               billingAddress,
               contact,
@@ -130,6 +137,7 @@ Order.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
               addedOn,
               addedBy,
               paidOn,
+              customerName,
               shippingAddress,
               billingAddress,
               contact,
@@ -164,6 +172,7 @@ Order.prototype.add = function (order) {
         addedOn,
         addedBy,
         paidOn,
+        customerName,
         shippingAddress,
         billingAddress,
         contact,
@@ -171,11 +180,11 @@ Order.prototype.add = function (order) {
       } = order;
 
       db.query(
-        `insert into order(code, store_id, added_on, added_by, paid_on, shipping_address, billing_address, contact) 
-         values('${code}', '${storeId}', '${addedOn}', '${addedBy}', ${paidOn}, ${shippingAddress}, '${billingAddress}', '${contact}')`,
+        `insert into \`order\`(code, store_id, added_on, added_by, paid_on, customer_name, shipping_address, billing_address, contact) 
+         values('${code}', '${storeId}', '${addedOn}', '${addedBy}', ` + (paidOn ? `'${paidOn}'` : null) + `, '${customerName}', '${shippingAddress}', '${billingAddress}', '${contact}')`,
         (error, results) => {
           if (error || results.affectedRows == 0) {
-            reject(new BadRequestError('Invalide order data.'));
+            reject(new BadRequestError('Invalid order data.'));
           } else {
             resolve(
               new Order(
@@ -184,6 +193,7 @@ Order.prototype.add = function (order) {
                 addedOn,
                 addedBy,
                 paidOn,
+                customerName,
                 shippingAddress,
                 billingAddress,
                 contact,
@@ -195,7 +205,7 @@ Order.prototype.add = function (order) {
         }
       );
     } else {
-      reject(new BadRequestError('Invalide order data.'));
+      reject(new BadRequestError('Invalid order data.'));
     }
   });
 };
