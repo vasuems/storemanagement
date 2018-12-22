@@ -212,7 +212,7 @@ Order.prototype.add = function (order) {
 Order.prototype.delete = function (code) {
   return new Promise((resolve, reject) => {
     db.query(
-      `update order set status=0 where code=${code}`,
+      `update \`order\` set status=0 where code='${code}'`,
       (error, results) => {
 
         if (error || results.affectedRows == 0) {

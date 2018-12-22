@@ -250,7 +250,7 @@ Product.prototype.add = function (product) {
 Product.prototype.delete = function (code) {
   return new Promise((resolve, reject) => {
     db.query(
-      `update product set status=0 where code=${code}`,
+      `update product set status=0 where code='${code}'`,
       (error, results) => {
 
         if (error || results.affectedRows == 0) {

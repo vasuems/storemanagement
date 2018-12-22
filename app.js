@@ -353,6 +353,21 @@ app.get(
   }
 );
 
+app.delete(
+  '/stores/:storeId/orders/:orderId',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const order = new Order();
+      await order.delete(req.params.orderId);
+
+      res.send({ data: true });
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 app.post(
   '/stores/:storeId/categories',
   [authMiddleware, storeIdVerifier],
