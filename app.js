@@ -229,6 +229,47 @@ app.get(
   }
 );
 
+app.put(
+  '/stores/:storeId/products/:productId',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const {
+        name,
+        categoryId,
+        sku,
+        description,
+        quantity,
+        allowQuantity,
+        unitPrice,
+        cost,
+        coverImage,
+      } = req.body;
+      const product = new Product(
+        req.params.productId,
+        name,
+        categoryId,
+        req.params.storeId,
+        sku,
+        description,
+        quantity,
+        allowQuantity,
+        null,
+        res.locals.auth.accountId,
+        unitPrice,
+        cost,
+        coverImage
+      );
+
+      const data = await product.update(product);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 app.get(
   '/stores/:storeId/products',
   [authMiddleware, storeIdVerifier],

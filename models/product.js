@@ -247,6 +247,63 @@ Product.prototype.add = function (product) {
   });
 };
 
+Product.prototype.update = function (product) {
+  return new Promise((resolve, reject) => {
+    if (product instanceof Product) {
+      const {
+        code,
+        name,
+        categoryId,
+        storeId,
+        sku,
+        description,
+        quantity,
+        allowQuantity,
+        addedBy,
+        unitPrice,
+        cost,
+        coverImage,
+        manufacturerId,
+        supplierId,
+      } = product;
+
+      db.query(
+        `update product set name='${name}', category_id='${categoryId}', sku='${sku}', description='${description}', quantity=${quantity}, 
+         allow_quantity=${allowQuantity}, unit_price=${unitPrice}, cost=${cost}, cover_image='${coverImage}', 
+         manufacturer_id='${manufacturerId}', supplier_id='${supplierId}'
+         where code='${code}' and added_by='${addedBy}'`,
+        (error, results) => {
+          if (error || results.affectedRows == 0) {
+            reject(new BadRequestError('Invalid product data.'));
+          } else {
+            resolve(
+              new Product(
+                code,
+                name,
+                categoryId,
+                storeId,
+                sku,
+                description,
+                quantity,
+                allowQuantity,
+                null,
+                addedBy,
+                unitPrice,
+                cost,
+                coverImage,
+                manufacturerId,
+                supplierId
+              )
+            );
+          }
+        }
+      );
+    } else {
+      reject(new BadRequestError('Invalid product data.'));
+    }
+  });
+};
+
 Product.prototype.delete = function (code) {
   return new Promise((resolve, reject) => {
     db.query(
