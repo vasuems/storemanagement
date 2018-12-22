@@ -316,13 +316,48 @@ app.get(
   }
 );
 
+app.put(
+  '/stores/:storeId/orders/:orderId',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const {
+        paidOn,
+        customerName,
+        shippingAddress,
+        billingAddress,
+        contact,
+        products,
+      } = req.body;
+
+      const order = new Order(
+        req.params.orderId,
+        req.params.storeId,
+        null,
+        res.locals.auth.accountId,
+        paidOn,
+        customerName,
+        shippingAddress,
+        billingAddress,
+        contact,
+        products
+      );
+      const data = await order.update(order);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 app.post(
   '/stores/:storeId/orders',
   [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
       const {
-        isPaid,
+        paidOn,
         customerName,
         shippingAddress,
         billingAddress,
@@ -335,7 +370,7 @@ app.post(
         req.params.storeId,
         moment.utc().format('YYYY-MM-DD HH:mm:ss'),
         res.locals.auth.accountId,
-        isPaid ? moment.utc().format('YYYY-MM-DD HH:mm:ss') : null,
+        paidOn,
         customerName,
         shippingAddress,
         billingAddress,
@@ -352,6 +387,21 @@ app.post(
   }
 );
 
+app.delete(
+  '/stores/:storeId/orders/:orderId',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const order = new Order();
+      await order.delete(req.params.orderId);
+
+      res.send({ data: true });
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 app.get(
   '/stores/:storeId/categories',
   [authMiddleware, storeIdVerifier],
@@ -362,21 +412,6 @@ app.get(
       const count = await category.getTotalCountByStoreId(req.params.storeId);
 
       res.send({ data, count });
-    } catch (err) {
-      res.status(err.statusCode).send(err);
-    }
-  }
-);
-
-app.delete(
-  '/stores/:storeId/orders/:orderId',
-  [authMiddleware, storeIdVerifier],
-  async (req, res) => {
-    try {
-      const order = new Order();
-      await order.delete(req.params.orderId);
-
-      res.send({ data: true });
     } catch (err) {
       res.status(err.statusCode).send(err);
     }

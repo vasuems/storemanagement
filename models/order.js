@@ -209,6 +209,51 @@ Order.prototype.add = function (order) {
   });
 };
 
+Order.prototype.update = function (order) {
+  return new Promise((resolve, reject) => {
+    if (order instanceof Order) {
+      const {
+        code,
+        storeId,
+        addedBy,
+        paidOn,
+        customerName,
+        shippingAddress,
+        billingAddress,
+        contact,
+        products,
+      } = order;
+
+      db.query(
+        `update \`order\` set paid_on=` + (paidOn ? `'${paidOn}'` : null) + `, customer_name='${customerName}', shipping_address='${shippingAddress}', billing_address='${billingAddress}', contact='${contact}'
+         where code='${code}' and added_by='${addedBy}'`,
+        (error, results) => {
+          if (error || results.affectedRows == 0) {
+            reject(new BadRequestError('Invalid order data.'));
+          } else {
+            resolve(
+              new Order(
+                code,
+                storeId,
+                '',
+                addedBy,
+                paidOn,
+                customerName,
+                shippingAddress,
+                billingAddress,
+                contact,
+                products
+              )
+            );
+          }
+        }
+      );
+    } else {
+      reject(new BadRequestError('Invalid order data.'));
+    }
+  });
+};
+
 Order.prototype.delete = function (code) {
   return new Promise((resolve, reject) => {
     db.query(
