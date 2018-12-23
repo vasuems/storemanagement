@@ -503,6 +503,31 @@ app.post(
   }
 );
 
+app.put(
+  '/stores/:storeId/categories/:categoryId',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const {
+        name,
+        parentId,
+      } = req.body;
+      const category = new Category(
+        req.params.categoryId,
+        name,
+        req.params.storeId,
+        res.locals.auth.accountId,
+        parentId,
+      );
+      const data = await category.update(category);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 app.get(
   '/stores/:storeId/categories/:categoryId',
   [authMiddleware, storeIdVerifier],
