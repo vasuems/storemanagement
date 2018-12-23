@@ -232,7 +232,8 @@ Order.prototype.update = function (order) {
       } = order;
 
       db.query(
-        `update \`order\` set paid_on=` + (paidOn ? `'${paidOn}'` : null) + `, customer_name='${customerName}', shipping_address='${shippingAddress}', billing_address='${billingAddress}', contact='${contact}'
+        `update \`order\` set paid_on=` + (paidOn ? `'${paidOn}'` : null) + `, customer_name='${customerName}', 
+         shipping_address='${shippingAddress}', billing_address='${billingAddress}', contact='${contact}'
          where code='${code}' and added_by='${addedBy}'`,
         (error, results) => {
           if (error || results.affectedRows == 0) {

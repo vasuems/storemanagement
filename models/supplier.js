@@ -194,7 +194,7 @@ Supplier.prototype.add = function (supplier) {
 Supplier.prototype.delete = function (code) {
   return new Promise((resolve, reject) => {
     db.query(
-      `update supplier set status=0 where code=${code}`,
+      `update supplier set status=0 where code='${code}'`,
       (error, results) => {
 
         if (error || results.affectedRows == 0) {

@@ -276,7 +276,6 @@ app.delete(
   async (req, res) => {
     try {
       const product = new Product();
-
       await product.delete(req.params.productId);
 
       res.send({ data: true });
@@ -365,6 +364,10 @@ app.get(
     try {
       const order = new Order();
       const data = await order.get(req.params.orderId);
+
+      if (data.storeId !== req.params.storeId) {
+        throw new UnauthorisedError('Invalid order ID.');
+      }
 
       res.send(data);
     } catch (err) {
@@ -508,6 +511,10 @@ app.get(
       const category = new Category();
       const data = await category.get(req.params.categoryId);
 
+      if (data.storeId !== req.params.storeId) {
+        throw new UnauthorisedError('Invalid category ID.');
+      }
+
       res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
@@ -572,6 +579,25 @@ app.post(
         res.locals.auth.accountId
       );
       const data = await supplier.add(supplier);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.get(
+  '/stores/:storeId/suppliers/:supplierId',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const supplier = new Supplier();
+      const data = await supplier.get(req.params.supplierId);
+
+      if (data.storeId !== req.params.storeId) {
+        throw new UnauthorisedError('Invalid supplier ID.');
+      }
 
       res.send(data);
     } catch (err) {
