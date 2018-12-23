@@ -278,7 +278,7 @@ app.delete(
       const product = new Product();
       await product.delete(req.params.productId);
 
-      res.send({ data: true });
+      res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
     }
@@ -453,9 +453,9 @@ app.delete(
   async (req, res) => {
     try {
       const order = new Order();
-      await order.delete(req.params.orderId);
+      const data = await order.delete(req.params.orderId);
 
-      res.send({ data: true });
+      res.send(data);
     } catch (err) {
       res.status(err.statusCode).send(err);
     }
@@ -539,6 +539,21 @@ app.get(
       if (data.storeId !== req.params.storeId) {
         throw new UnauthorisedError('Invalid category ID.');
       }
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.delete(
+  '/stores/:storeId/categories/:categoryId',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const category = new Category();
+      const data = await category.delete(req.params.categoryId);
 
       res.send(data);
     } catch (err) {
