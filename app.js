@@ -537,6 +537,41 @@ app.get(
   }
 );
 
+app.post(
+  '/stores/:storeId/manufacturers',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const {
+        name,
+        url,
+        email,
+        contact,
+        address,
+        logo,
+        countryId,
+      } = req.body;
+      const manufacturer = new Manufacturer(
+        shortid.generate(),
+        name,
+        url,
+        email,
+        contact,
+        address,
+        logo,
+        req.params.storeId,
+        countryId,
+        res.locals.auth.accountId
+      );
+      const data = await manufacturer.add(manufacturer);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 app.get(
   '/stores/:storeId/suppliers',
   [authMiddleware, storeIdVerifier],
