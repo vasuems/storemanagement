@@ -270,6 +270,22 @@ app.put(
   }
 );
 
+app.delete(
+  '/stores/:storeId/products/:productId',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const product = new Product();
+
+      await product.delete(req.params.productId);
+
+      res.send({ data: true });
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 app.get(
   '/stores/:storeId/products',
   [authMiddleware, storeIdVerifier],
