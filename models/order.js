@@ -154,6 +154,8 @@ Order.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
 
 Order.prototype.add = function (order) {
   return new Promise((resolve, reject) => {
+    let proceed = true;
+
     if (order instanceof Order) {
       Object.keys(order).forEach(function (key, index) {
         if (order[key] === undefined) {
@@ -162,8 +164,13 @@ Order.prototype.add = function (order) {
               'Not all required fields have a value.'
             )
           );
+          proceed = false;
         }
       });
+
+      if (!proceed) {
+        return;
+      }
 
       const {
         code,

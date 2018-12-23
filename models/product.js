@@ -181,6 +181,8 @@ Product.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
 };
 
 Product.prototype.add = function (product) {
+  let proceed = true;
+
   return new Promise((resolve, reject) => {
     if (product instanceof Product) {
       Object.keys(product).forEach(function (key, index) {
@@ -190,8 +192,13 @@ Product.prototype.add = function (product) {
               'Not all required fields have a value.'
             )
           );
+          proceed = false;
         }
       });
+
+      if (!proceed) {
+        return;
+      }
 
       const {
         code,

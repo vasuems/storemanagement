@@ -21,29 +21,29 @@ function Supplier(
   logo,
   storeId,
   countryId,
-  createdBy,
+  addedBy,
   status = true
 ) {
-  this.code = code || '';
-  this.name = name || '';
+  this.code = code;
+  this.name = name;
   this.url = url || '';
   this.email = email || '';
-  this.contact = contact || '';
-  this.address = address || '';
+  this.contact = contact;
+  this.address = address;
   this.logo = logo || '';
-  this.storeId = storeId || '';
-  this.countryId = countryId || '';
-  this.createdBy = createdBy || '';
+  this.storeId = storeId;
+  this.countryId = countryId;
+  this.addedBy = addedBy;
   this.status = status ? true : false;
 }
 
-Supplier.prototype.get = function(code) {
+Supplier.prototype.get = function (code) {
   return new Promise((resolve, reject) => {
     db.query(
-      `select code, name, url, email, contact, address, logo, store_id as storeId, country_id as countryId, created_by as createdBy, status
+      `select code, name, url, email, contact, address, logo, store_id as storeId, country_id as countryId, added_by as addedBy, status
        from supplier where code='${code}'`,
       (error, results) => {
-        
+
         if (error || results.length == 0) {
           reject(new NoRecordFoundError('No supplier found.'));
         } else {
@@ -57,7 +57,7 @@ Supplier.prototype.get = function(code) {
             logo,
             storeId,
             countryId,
-            createdBy,
+            addedBy,
             status,
           } = results[0];
           resolve(
@@ -71,7 +71,7 @@ Supplier.prototype.get = function(code) {
               logo,
               storeId,
               countryId,
-              createdBy,
+              addedBy,
               status
             )
           );
@@ -81,14 +81,13 @@ Supplier.prototype.get = function(code) {
   });
 };
 
-Supplier.prototype.getAllByStoreId = function(id, page = 1, pageSize = 20) {
+Supplier.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
   return new Promise((resolve, reject) => {
     db.query(
-      `select code, name, url, email, contact, address, logo, store_id as storeId, country_id as countryId, created_by as createdBy, status
-       from supplier where store_id='${id}' limit ${(page - 1) *
-        pageSize}, ${pageSize}`,
+      `select code, name, url, email, contact, address, logo, store_id as storeId, country_id as countryId, added_by as addedBy, status
+       from supplier where store_id='${id}'  order by name limit ${(page - 1) *
+      pageSize}, ${pageSize}`,
       (error, results) => {
-        
         if (error) {
           reject(new NoRecordFoundError('No suppliers found.'));
         } else {
@@ -103,7 +102,7 @@ Supplier.prototype.getAllByStoreId = function(id, page = 1, pageSize = 20) {
               logo,
               storeId,
               countryId,
-              createdBy,
+              addedBy,
               status,
             } = supplier;
             return new Supplier(
@@ -116,7 +115,7 @@ Supplier.prototype.getAllByStoreId = function(id, page = 1, pageSize = 20) {
               logo,
               storeId,
               countryId,
-              createdBy,
+              addedBy,
               status
             );
           });
@@ -128,18 +127,25 @@ Supplier.prototype.getAllByStoreId = function(id, page = 1, pageSize = 20) {
   });
 };
 
-Supplier.prototype.add = function(supplier) {
+Supplier.prototype.add = function (supplier) {
   return new Promise((resolve, reject) => {
+    let proceed = true;
+
     if (supplier instanceof Supplier) {
-      Object.keys(supplier).forEach(function(key, index) {
-        if (!supplier[key]) {
+      Object.keys(supplier).forEach(function (key, index) {
+        if (supplier[key] === undefined) {
           reject(
             new InvalidModelArgumentsError(
               'Not all required fields have a value.'
             )
           );
+          proceed = false;
         }
       });
+
+      if (!proceed) {
+        return;
+      }
 
       const {
         code,
@@ -151,14 +157,14 @@ Supplier.prototype.add = function(supplier) {
         logo,
         storeId,
         countryId,
-        createdBy,
+        addedBy,
       } = supplier;
 
       db.query(
-        `insert into supplier(code, name, url, email, contact, address, logo, store_id, country_id, created_by) 
-         values('${code}', '${name}', '${url}', '${email}', '${contact}', '${address}', '${logo}', '${storeId}', '${countryId}', '${createdBy}')`,
+        `insert into supplier(code, name, url, email, contact, address, logo, store_id, country_id, added_by) 
+         values('${code}', '${name}', '${url}', '${email}', '${contact}', '${address}', '${logo}', '${storeId}', '${countryId}', '${addedBy}')`,
         (error, results) => {
-          
+
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide supplier data.'));
           } else {
@@ -173,7 +179,7 @@ Supplier.prototype.add = function(supplier) {
                 logo,
                 storeId,
                 countryId,
-                createdBy
+                addedBy
               )
             );
           }
@@ -185,12 +191,12 @@ Supplier.prototype.add = function(supplier) {
   });
 };
 
-Supplier.prototype.delete = function(code) {
+Supplier.prototype.delete = function (code) {
   return new Promise((resolve, reject) => {
     db.query(
       `update supplier set status=0 where code=${code}`,
       (error, results) => {
-        
+
         if (error || results.affectedRows == 0) {
           reject(new BadRequestError('Deleting supplier failed.'));
         } else {
