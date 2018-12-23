@@ -191,6 +191,53 @@ Supplier.prototype.add = function (supplier) {
   });
 };
 
+Supplier.prototype.update = function (supplier) {
+  return new Promise((resolve, reject) => {
+    if (supplier instanceof Supplier) {
+      const {
+        code,
+        name,
+        url,
+        email,
+        contact,
+        address,
+        logo,
+        storeId,
+        countryId,
+        addedBy,
+      } = supplier;
+
+      db.query(
+        `update supplier set name='${name}', url='${url}', email='${email}', contact='${contact}', 
+         address='${address}', logo='${logo}', country_id=${countryId} 
+         where code='${code}' and added_by='${addedBy}'`,
+        (error, results) => {
+          if (error || results.affectedRows == 0) {
+            reject(new BadRequestError('Invalide supplier data.'));
+          } else {
+            resolve(
+              new Supplier(
+                code,
+                name,
+                url,
+                email,
+                contact,
+                address,
+                logo,
+                storeId,
+                countryId,
+                addedBy
+              )
+            );
+          }
+        }
+      );
+    } else {
+      reject(new BadRequestError('Invalide supplier data.'));
+    }
+  });
+};
+
 Supplier.prototype.delete = function (code) {
   return new Promise((resolve, reject) => {
     db.query(

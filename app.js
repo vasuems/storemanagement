@@ -606,4 +606,39 @@ app.get(
   }
 );
 
+app.put(
+  '/stores/:storeId/suppliers/:supplierId',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const {
+        name,
+        url,
+        email,
+        contact,
+        address,
+        logo,
+        countryId,
+      } = req.body;
+      const supplier = new Supplier(
+        req.params.supplierId,
+        name,
+        url,
+        email,
+        contact,
+        address,
+        logo,
+        req.params.storeId,
+        countryId,
+        res.locals.auth.accountId
+      );
+      const data = await supplier.update(supplier);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
 module.exports = app;
