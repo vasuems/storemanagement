@@ -276,7 +276,7 @@ app.delete(
   async (req, res) => {
     try {
       const product = new Product();
-      await product.delete(req.params.productId);
+      const data = await product.delete(req.params.productId);
 
       res.send(data);
     } catch (err) {
@@ -708,6 +708,21 @@ app.put(
         res.locals.auth.accountId
       );
       const data = await supplier.update(supplier);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.delete(
+  '/stores/:storeId/suppliers/:supplierId',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const supplier = new Supplier();
+      const data = await supplier.delete(req.params.supplierId);
 
       res.send(data);
     } catch (err) {

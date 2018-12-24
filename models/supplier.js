@@ -243,7 +243,6 @@ Supplier.prototype.delete = function (code) {
     db.query(
       `update supplier set status=0 where code='${code}'`,
       (error, results) => {
-
         if (error || results.affectedRows == 0) {
           reject(new BadRequestError('Deleting supplier failed.'));
         } else {

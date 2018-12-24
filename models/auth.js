@@ -23,14 +23,13 @@ function OAuth2Response(id, accessToken, refreshToken) {
   this.refreshToken = refreshToken;
 }
 
-OAuth2Request.prototype.auth = function() {
+OAuth2Request.prototype.auth = function () {
   return new Promise((resolve, reject) => {
     db.query(
-      `select code, password, salt, token, urt.status as tokenStatus, su.store_id as storeId
+      `select code, password, salt, token, urt.status as tokenStatus, store_id as storeId
        from user
        left join user_refresh_token as urt on user.code = urt.user_id
-       left join store_user as su on user.code = su.user_id
-       where email='${this.username}' and user.status=1 and su.status=1`,
+       where email='${this.username}' and user.status=1`,
       (error, results) => {
         // Check if account is valid and active
         if (error || results.length == 0) {
@@ -65,18 +64,18 @@ OAuth2Request.prototype.auth = function() {
                 .format('YYYY-MM-DD HH:mm:ss')}')`,
               error => {
                 if (error) {
-                  
+
                   reject(new UnauthorisedError('Not authorised.'));
                 } else if (!token) {
                   const refreshToken = md5(
                     `${code +
-                      salt +
-                      moment.utc().format('YYYY-MM-DD HH:mm:ss')}`
+                    salt +
+                    moment.utc().format('YYYY-MM-DD HH:mm:ss')}`
                   );
                   db.query(
                     `insert into user_refresh_token(token, user_id) values('${refreshToken}', '${code}')`,
                     error => {
-                      
+
                       if (error) {
                         reject(new UnauthorisedError('Not authorised.'));
                       } else {
@@ -87,13 +86,13 @@ OAuth2Request.prototype.auth = function() {
                     }
                   );
                 } else {
-                  
+
                   resolve(new OAuth2Response(code, accessToken, token));
                 }
               }
             );
           } else {
-            
+
             reject(new UnauthorisedError('No account found.'));
           }
         }
@@ -102,14 +101,14 @@ OAuth2Request.prototype.auth = function() {
   });
 };
 
-OAuth2Request.prototype.validateToken = function(token) {
+OAuth2Request.prototype.validateToken = function (token) {
   return new Promise((resolve, reject) => {
     db.query(
       `select * from user_access_token where token='${token}' and expired_on > '${moment
         .utc()
         .format('YYYY-MM-DD HH:mm:ss')}' order by id desc limit 1`,
       (error, results) => {
-        
+
         if (error || results.length == 0) {
           reject(new UnauthorisedError('Unauthorised request.'));
         } else {
@@ -120,13 +119,13 @@ OAuth2Request.prototype.validateToken = function(token) {
   });
 };
 
-OAuth2Request.prototype.refreshToken = function(token) {
+OAuth2Request.prototype.refreshToken = function (token) {
   return new Promise((resolve, reject) => {
     db.query(
       `select user_id as userId from user_refresh_token where token='${token}' and status=1 order by id desc limit 1`,
       (error, results) => {
         if (error) {
-          
+
           reject(new UnauthorisedError('Unauthorised request.'));
         } else if (results.length > 0) {
           const userId = results[0].userId;
@@ -134,7 +133,7 @@ OAuth2Request.prototype.refreshToken = function(token) {
             `select id, code, salt from user where id='${userId}' and status=1`,
             (error, results) => {
               if (error || results.length == 0) {
-                
+
                 reject(new UnauthorisedError('Unauthorised request.'));
               } else {
                 const { code } = results[0];
@@ -154,7 +153,7 @@ OAuth2Request.prototype.refreshToken = function(token) {
                     .add(1, 'hour')
                     .format('YYYY-MM-DD HH:mm:ss')}')`,
                   error => {
-                    
+
                     if (error) {
                       reject(new UnauthorisedError('Unauthorised request.'));
                     } else {
@@ -166,7 +165,7 @@ OAuth2Request.prototype.refreshToken = function(token) {
             }
           );
         } else {
-          
+
           reject(new UnauthorisedError('Refresh token expired.'));
         }
       }
