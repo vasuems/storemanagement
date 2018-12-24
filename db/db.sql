@@ -1,4 +1,3 @@
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -7,7 +6,8 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-# Dump of table country
+
+# Dump of table category
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `category`;
@@ -17,21 +17,12 @@ CREATE TABLE `category` (
   `name` varchar(60) NOT NULL DEFAULT '',
   `store_id` varchar(60) NOT NULL DEFAULT '',
   `added_by` varchar(60) NOT NULL,
-  `parent_id` varchar(60) NOT NULL DEFAULT '',
+  `parent_id` varchar(60) DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`code`),
   KEY `store_id` (`store_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-
-INSERT INTO `category` (`code`, `name`, `store_id`, `added_by`, `parent_id`, `status`)
-VALUES
-	('cat123','Fashion','asdfasdfasdfasd','40s1cqdw6jmyyiixe','',1);
-
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table country
@@ -109,21 +100,12 @@ CREATE TABLE `manufacturer` (
   `logo` varchar(200) NOT NULL,
   `store_id` varchar(60) NOT NULL,
   `country_id` tinyint(3) NOT NULL,
-  `created_by` varchar(60) NOT NULL DEFAULT '',
+  `added_by` varchar(60) NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`code`),
   KEY `store_id` (`store_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `manufacturer` WRITE;
-/*!40000 ALTER TABLE `manufacturer` DISABLE KEYS */;
-
-INSERT INTO `manufacturer` (`code`, `name`, `url`, `email`, `contact`, `address`, `logo`, `store_id`, `country_id`, `created_by`, `status`)
-VALUES
-	('man123','Manufacture 123','https://man123.example.com','man123@example.com','+65-1234567890','Jurong East Singapore','https://www.freelogodesign.org/Content/img/logo-ex-7.png','asdfasdfasdfasd',3,'40s1cqdw6jmyyiixe',1);
-
-/*!40000 ALTER TABLE `manufacturer` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table order
@@ -132,13 +114,18 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `code` varchar(60) NOT NULL DEFAULT '',
+  `store_id` varchar(60) NOT NULL,
+  `added_by` varchar(60) NOT NULL DEFAULT '',
+  `added_on` datetime NOT NULL,
   `paid_on` datetime DEFAULT NULL,
-  `shipping_address_id` int(11) DEFAULT NULL,
-  `contact_id` int(11) DEFAULT NULL,
+  `customer_name` varchar(100) NOT NULL,
+  `shipping_address` varchar(300) NOT NULL DEFAULT '',
+  `billing_address` varchar(300) NOT NULL DEFAULT '',
+  `contact` varchar(60) NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`code`),
+  KEY `store_id` (`store_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -205,16 +192,6 @@ CREATE TABLE `product` (
   KEY `store_id` (`store_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `product` WRITE;
-/*!40000 ALTER TABLE `product` DISABLE KEYS */;
-
-INSERT INTO `product` (`code`, `name`, `store_id`, `category_id`, `sku`, `description`, `quantity`, `allow_quantity`, `added_on`, `added_by`, `unit_price`, `cost`, `cover_image`, `supplier_id`, `manufacturer_id`, `status`)
-VALUES
-	('asdfasdfa','Product 1','asdfasdfasdfasd','cat123','asdfasdfasdfasdfasd','This is a test product',100,1,'2018-11-10 00:00:00','40s1cqdw6jmyyiixe',99.99,32.00,'https://image.spreadshirtmedia.com/image-server/v1/products/1003716746/views/1,width=800,height=800,appearanceId=1,backgroundColor=fff,version=1485256808/i-eat-ass-t-shirt-men-s-t-shirt.jpg','supplier123','man123',1),
-	('H0ZbL4lKU','Product 2','asdfasdfasdfasd','cat123','afdsafsd2342asdfasd','Test product 2',100,1,'2018-11-16 03:22:35','40s1cqdw6jmyyiixe',100.00,87.00,'https://www.sandisk.com/content/dam/sandisk-main/en_us/assets/about/media/product/retail/usb/cruzer_blade_usb_flash_drive/SDCZ50_angle_Large.jpg','supplier456','man123',1);
-
-/*!40000 ALTER TABLE `product` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table product_attribute
@@ -299,30 +276,6 @@ VALUES
 UNLOCK TABLES;
 
 
-# Dump of table store_user
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `store_user`;
-
-CREATE TABLE `store_user` (
-  `user_id` varchar(60) NOT NULL DEFAULT '',
-  `store_id` varchar(60) NOT NULL DEFAULT '',
-  `role` varchar(10) NOT NULL DEFAULT '',
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`user_id`,`store_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `store_user` WRITE;
-/*!40000 ALTER TABLE `store_user` DISABLE KEYS */;
-
-INSERT INTO `store_user` (`user_id`, `store_id`, `role`, `status`)
-VALUES
-	('40s1cqdw6jmyyiixe','asdfasdfasdfasd','admin',1);
-
-/*!40000 ALTER TABLE `store_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
 # Dump of table supplier
 # ------------------------------------------------------------
 
@@ -338,22 +291,13 @@ CREATE TABLE `supplier` (
   `logo` varchar(200) NOT NULL,
   `store_id` varchar(60) NOT NULL,
   `country_id` tinyint(3) NOT NULL,
-  `created_by` varchar(60) NOT NULL,
+  `added_by` varchar(60) NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`code`),
-  KEY `store_id` (`store_id`)
+  KEY `store_id` (`store_id`),
+  KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `supplier` WRITE;
-/*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-
-INSERT INTO `supplier` (`code`, `name`, `url`, `email`, `contact`, `address`, `logo`, `store_id`, `country_id`, `created_by`, `status`)
-VALUES
-	('supplier123','Supplier ABC','http://www.example.com/supplier','supplier123@example.com','+65-9123819236','Tuas Singapore','https://www.designevo.com/res/templates/thumb_small/golden-hexagon-and-thunder.png','asdfasdfasdfasd',3,'40s1cqdw6jmyyiixe',1),
-	('supplier456','Supplier EFG','http://www.example.com/efg','supplier456@example.com','+65-9234234236','Bugis Singapore','https://www.designevo.com/res/templates/thumb_small/golden-hexagon-and-thunder.png','asdfasdfasdfasd',3,'40s1cqdw6jmyyiixe',1);
-
-/*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table user
@@ -363,6 +307,7 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
   `code` varchar(20) NOT NULL DEFAULT '',
+  `store_id` varchar(60) NOT NULL DEFAULT '',
   `name` varchar(30) NOT NULL DEFAULT '',
   `email` varchar(60) NOT NULL DEFAULT '',
   `password` varchar(32) NOT NULL DEFAULT '',
@@ -371,15 +316,16 @@ CREATE TABLE `user` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`code`),
   KEY `name` (`name`),
-  KEY `email` (`email`)
+  KEY `email` (`email`),
+  KEY `store_id` (`store_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 
-INSERT INTO `user` (`code`, `name`, `email`, `password`, `salt`, `joined_on`, `status`)
+INSERT INTO `user` (`code`, `store_id`, `name`, `email`, `password`, `salt`, `joined_on`, `status`)
 VALUES
-	('40s1cqdw6jmyyiixe','Nick Chen','test@test.com','b9d8f73d5c643d6c0558dd610c94f09f','EO4fwIBPKw5tVKl2a0eT8gW3ynjwG13Q','2018-10-07 14:22:30',1);
+	('40s1cqdw6jmyyiixe','asdfasdfasdfasd','Nick Chen','test@test.com','b9d8f73d5c643d6c0558dd610c94f09f','EO4fwIBPKw5tVKl2a0eT8gW3ynjwG13Q','2018-10-07 14:22:30',1);
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -398,6 +344,7 @@ CREATE TABLE `user_access_token` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 # Dump of table user_address
@@ -452,6 +399,8 @@ CREATE TABLE `user_refresh_token` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
 # Dump of table warehouse
 # ------------------------------------------------------------
 
@@ -461,6 +410,8 @@ CREATE TABLE `warehouse` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
