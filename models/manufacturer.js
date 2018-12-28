@@ -81,6 +81,22 @@ Manufacturer.prototype.get = function (code) {
   });
 };
 
+Manufacturer.prototype.getTotalCountByStoreId = function (id) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `select count(*) as total 
+       from manufacturer where store_id='${id}'`,
+      (error, results) => {
+        if (error) {
+          reject(new NoRecordFoundError('No manufacturers found.'));
+        } else {
+          resolve(results[0].total);
+        }
+      }
+    );
+  });
+};
+
 Manufacturer.prototype.getAllByStoreId = function (
   id,
   page = 1,

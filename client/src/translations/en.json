@@ -141,5 +141,6 @@
   "sys.prev": "Prev",
   "sys.next": "Next",
   "sys.newFailed": "Failed creating new item.",
-  "sys.newSuccess": "Creating new item successful."
+  "sys.newSuccess": "Creating new item successful.",
+  "sys.noRecords": "No records."
 }

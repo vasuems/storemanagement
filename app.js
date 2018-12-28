@@ -569,8 +569,9 @@ app.get(
     try {
       const manufacturer = new Manufacturer();
       const data = await manufacturer.getAllByStoreId(req.params.storeId);
+      const count = await manufacturer.getTotalCountByStoreId(req.params.storeId);
 
-      res.send(data);
+      res.send({ data, count });
     } catch (err) {
       res.status(err.statusCode).send(err);
     }

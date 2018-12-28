@@ -98,7 +98,7 @@ class SupplierList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {suppliers.map(product => (
+                  {suppliers ? suppliers.map(product => (
                     <SupplierListItem
                       key={product.code}
                       id={product.code}
@@ -111,7 +111,7 @@ class SupplierList extends Component {
                       status={product.status}
                       onClick={this.onViewClick}
                     />
-                  ))}
+                  )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
                 </tbody>
               </Table>
             </Col>

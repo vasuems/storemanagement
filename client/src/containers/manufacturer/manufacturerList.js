@@ -23,19 +23,27 @@ import config from '../../config';
 class ManufacturerList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    const { data : { storeId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
-    dispatch(fetchManufacturers(storeId));
+    dispatch(fetchManufacturers({ storeId, pageSize: 20, pageNo: 1 }));
   }
 
   onViewClick = id => {
-    this.props.history.push(`/suppliers/${id}`);
+    this.props.history.push(`/manufacturers/${id}`);
   };
+
+  onPageChange = page => {
+    const { dispatch } = this.props;
+
+    dispatch(fetchManufacturers({ storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
+  }
+
 
   render() {
     const {
       history,
       manufacturers,
+      total,
       intl: { formatMessage },
     } = this.props;
 
@@ -96,7 +104,7 @@ class ManufacturerList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {manufacturers.map(manufacturer => (
+                  {manufacturers.length > 0 ? manufacturers.map(manufacturer => (
                     <ManufacturerListItem
                       key={manufacturer.code}
                       id={manufacturer.code}
@@ -109,13 +117,13 @@ class ManufacturerList extends Component {
                       status={manufacturer.status}
                       onClick={this.onViewClick}
                     />
-                  ))}
+                  )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
                 </tbody>
               </Table>
             </Col>
           </div>
-          <ReactPaginate 
-            pageCount={20}
+          <ReactPaginate
+            pageCount={total}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             containerClassName="pagination"
@@ -129,6 +137,7 @@ class ManufacturerList extends Component {
             previousLinkClassName="page-link"
             nextLinkClassName="page-link"
             activeClassName="active"
+            onPageChange={this.onPageChange}
           />
         </div>
       </div>
@@ -136,14 +145,19 @@ class ManufacturerList extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  manufacturers: state.manufacturerReducer.manufacturers,
-});
+const mapStateToProps = state => {
+  const diff = state.manufacturerReducer.manufacturers.count / 20;
+  return ({
+    manufacturers: state.manufacturerReducer.manufacturers.data,
+    total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
+  });
+};
 
 ManufacturerList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   manufacturers: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
+  total: PropTypes.number.isRequired,
   intl: PropTypes.object.isRequired,
 };
 

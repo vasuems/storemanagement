@@ -11,9 +11,10 @@ import config from '../config';
 
 export function* fetchManufacturers(action) {
   try {
+    const { storeId, pageNo, pageSize } = action.value;
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${action.value}/manufacturers`,
+      url: `${config.apiDomain}/stores/${storeId}/manufacturers?page=${pageNo}&size=${pageSize}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
