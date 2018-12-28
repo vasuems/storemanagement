@@ -21,11 +21,17 @@ import { SupplierListItem } from '../../components';
 import config from '../../config';
 
 class SupplierList extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
+  constructor(props) {
+    super(props);
     const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
-    dispatch(fetchSuppliers({ storeId, pageSize: 20, pageNo: 1 }));
+    this.state = { activePage: 1, storeId };
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(fetchSuppliers({ storeId: this.state.storeId, pageSize: 20, pageNo: 1 }));
   }
 
   onViewClick = id => {
@@ -117,7 +123,7 @@ class SupplierList extends Component {
             </Col>
           </div>
           <ReactPaginate
-            pageCount={total}
+            pageCount={total || 1}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             containerClassName="pagination"

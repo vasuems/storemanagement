@@ -17,19 +17,25 @@ import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiSearch, FiPlusCircle } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
+import jwt from 'jsonwebtoken';
 import { fetchOrders } from '../../actions';
 import { OrderListItem } from '../../components';
 import 'react-datepicker/dist/react-datepicker.css';
+import config from '../../config';
 
 class OrderList extends Component {
   constructor(props) {
     super(props);
-    this.state = { activePage: 1 };
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
+
+    this.state = { activePage: 1, storeId };
   }
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchOrders());
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
+
+    dispatch(fetchOrders({ storeId: this.state.storeId, pageSize: 20, pageNo: 1 }));
   }
 
   onViewClick = id => {
@@ -37,8 +43,13 @@ class OrderList extends Component {
     history.push(`/orders/${id}`);
   };
 
+  onPageChange = page => {
+    const { dispatch } = this.props;
+    dispatch(fetchOrders({ storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
+  }
+
   render() {
-    const { orders, history, intl: { formatMessage } } = this.props;
+    const { orders, history, total, intl: { formatMessage } } = this.props;
 
     return (
       <div>
@@ -70,7 +81,7 @@ class OrderList extends Component {
                   </InputGroup>
                 </div>
                 <div>
-                  <div>       
+                  <div>
                     <FormattedMessage id="sys.orderDate" />
                     :&nbsp;
                     <DatePicker
@@ -121,7 +132,7 @@ class OrderList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.map(order => (
+                  {orders ? orders.map(order => (
                     <OrderListItem
                       key={order.id}
                       number={order.number}
@@ -131,13 +142,13 @@ class OrderList extends Component {
                       status={order.status}
                       onClick={this.onViewClick}
                     />
-                  ))}
+                  )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
                 </tbody>
               </Table>
             </Col>
           </div>
-          <ReactPaginate 
-            pageCount={20}
+          <ReactPaginate
+            pageCount={total || 1}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             containerClassName="pagination"
@@ -151,6 +162,7 @@ class OrderList extends Component {
             previousLinkClassName="page-link"
             nextLinkClassName="page-link"
             activeClassName="active"
+            onPageChange={this.onPageChange}
           />
         </div>
       </div>
@@ -162,12 +174,17 @@ OrderList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   orders: PropTypes.array.isRequired,
+  total: PropTypes.number.isRequired,
   intl: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  orders: state.orderReducer.orders,
-});
+const mapStateToProps = state => {
+  const diff = state.productReducer.categories.count / 20;
+  return ({
+    orders: state.orderReducer.orders.data,
+    total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
+  });
+};
 
 export default withRouter(
   connect(

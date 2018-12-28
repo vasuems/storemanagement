@@ -132,13 +132,13 @@ class ProductList extends Component {
                       status={product.status}
                       onClick={this.onViewClick}
                     />
-                  )) : null}
+                  )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
                 </tbody>
               </Table>
             </Col>
           </div>
           <ReactPaginate
-            pageCount={total}
+            pageCount={total || 1}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             containerClassName="pagination"

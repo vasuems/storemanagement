@@ -6,7 +6,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  orders: [],
+  orders: { data: [], total: 0 },
   products: [],
 };
 

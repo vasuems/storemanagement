@@ -21,18 +21,19 @@ import { fetchProductCategories } from '../../actions';
 import config from '../../config';
 
 class ProductCategoryList extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    const { data : { storeId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
+
     this.state = {
-      storeId, 
+      storeId,
     };
   }
 
   componentDidMount() {
     const { dispatch } = this.props;
 
-    dispatch(fetchProductCategories({storeId: this.state.storeId, pageSize: 20, pageNo: 1}));
+    dispatch(fetchProductCategories({ storeId: this.state.storeId, pageSize: 20, pageNo: 1 }));
   }
 
   onViewClick = id => {
@@ -41,7 +42,7 @@ class ProductCategoryList extends Component {
 
   onPageChange = page => {
     const { dispatch } = this.props;
-    dispatch(fetchProductCategories({storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
+    dispatch(fetchProductCategories({ storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
   }
 
   render() {
@@ -100,7 +101,7 @@ class ProductCategoryList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {categories.map(cat => (
+                  {categories ? categories.map(cat => (
                     <CategoryListItem
                       key={cat.code}
                       id={cat.code}
@@ -109,13 +110,13 @@ class ProductCategoryList extends Component {
                       status={cat.status}
                       onClick={this.onViewClick}
                     />
-                  ))}
+                  )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
                 </tbody>
               </Table>
             </Col>
           </div>
-          <ReactPaginate 
-            pageCount={total}
+          <ReactPaginate
+            pageCount={total || 1}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             containerClassName="pagination"
