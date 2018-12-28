@@ -179,7 +179,7 @@ OrderList.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const diff = state.productReducer.categories.count / 20;
+  const diff = state.orderReducer.orders.count / 20;
   return ({
     orders: state.orderReducer.orders.data,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
