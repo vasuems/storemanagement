@@ -7,6 +7,7 @@ import {
   fetchOrderDetailsFailed,
   clearToken,
 } from '../actions';
+import { salesReportProducts } from '../apis/mocks/responses';
 import config from '../config';
 
 export function* fetchOrders(action) {

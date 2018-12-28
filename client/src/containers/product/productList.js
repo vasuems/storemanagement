@@ -126,7 +126,7 @@ class ProductList extends Component {
                       name={product.name}
                       sku={product.sku}
                       currency={product.currency}
-                      currencySign={product.currencySign}
+                      currencySign="$"
                       price={product.price}
                       quantity={product.quantity}
                       status={product.status}
