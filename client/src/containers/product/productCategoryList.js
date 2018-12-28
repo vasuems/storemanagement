@@ -15,14 +15,24 @@ import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
+import jwt from 'jsonwebtoken';
 import { CategoryListItem } from '../../components';
 import { fetchProductCategories } from '../../actions';
+import config from '../../config';
 
 class ProductCategoryList extends Component {
+  constructor(props){
+    super(props);
+    const { data : { storeId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
+    this.state = {
+      storeId, 
+    };
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
-    //TODO: to replace the store ID passing to action creator
-    dispatch(fetchProductCategories({storeId: 'asdfasdfasdfasd', pageSize: 20, pageNo: 1}));
+
+    dispatch(fetchProductCategories({storeId: this.state.storeId, pageSize: 20, pageNo: 1}));
   }
 
   onViewClick = id => {
@@ -31,7 +41,7 @@ class ProductCategoryList extends Component {
 
   onPageChange = page => {
     const { dispatch } = this.props;
-    dispatch(fetchProductCategories({storeId: 'asdfasdfasdfasd', pageSize: 20, pageNo: page.selected + 1 }));
+    dispatch(fetchProductCategories({storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
   }
 
   render() {

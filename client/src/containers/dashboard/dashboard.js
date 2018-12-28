@@ -11,7 +11,7 @@ import { FeedItem, ShipTodayItem } from '../../components';
 class Dashboard extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchAccount('40s1cqdw6jmyyiixe'));
+
     dispatch(fetchDashboardData());
   }
 

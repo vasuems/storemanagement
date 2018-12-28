@@ -15,15 +15,17 @@ import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
+import jwt from 'jsonwebtoken';
 import { fetchSuppliers } from '../../actions';
 import { SupplierListItem } from '../../components';
+import config from '../../config';
 
 class SupplierList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
+    const { data : { storeId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
-    //TODO: to replace the store ID passing to action creator
-    dispatch(fetchSuppliers('asdfasdfasdfasd'));
+    dispatch(fetchSuppliers(storeId));
   }
 
   onViewClick = id => {

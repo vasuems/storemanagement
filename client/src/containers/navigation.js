@@ -15,6 +15,7 @@ import {
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { FaRegBell } from 'react-icons/fa';
+import jwt from 'jsonwebtoken';
 import { fetchAccount } from '../actions';
 import config from '../config';
 
@@ -24,7 +25,9 @@ class Navigation extends Component {
 
     //TODO: replace user ID
     if (!window.location.pathname === '/') {
-      dispatch(fetchAccount('40s1cqdw6jmyyiixe'));
+      const { data : { accountId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
+
+      dispatch(fetchAccount(accountId));
     }
   }
   render() {

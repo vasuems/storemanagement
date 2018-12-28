@@ -21,10 +21,19 @@ import { ProductListItem } from '../../components';
 import config from '../../config';
 
 class ProductList extends Component {
+  constructor(props){
+    super(props);
+    const { data : { storeId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
+    this.state = {
+      storeId, 
+    };
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
     const { data : { storeId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
-    dispatch(fetchProducts({storeId, pageSize: 20, pageNo: 1 }));
+
+    dispatch(fetchProducts({storeId: this.state.storeId, pageSize: 20, pageNo: 1 }));
   }
 
   onViewClick = id => {
@@ -34,7 +43,8 @@ class ProductList extends Component {
 
   onPageChange = page => {
     const { dispatch } = this.props;
-    dispatch(fetchProducts({storeId: 'asdfasdfasdfasd', pageSize: 20, pageNo: page.selected + 1 }));
+
+    dispatch(fetchProducts({storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
   }
 
   render() {
