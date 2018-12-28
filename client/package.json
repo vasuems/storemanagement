@@ -11,6 +11,7 @@
     "enzyme": "^3.4.4",
     "enzyme-adapter-react-16": "^1.2.0",
     "enzyme-to-json": "^3.3.4",
+    "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
     "numeral": "^2.0.6",
     "prop-types": "^15.6.2",

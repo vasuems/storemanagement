@@ -15,14 +15,16 @@ import { withRouter } from 'react-router-dom';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
+import jwt from 'jsonwebtoken';
 import { fetchProducts } from '../../actions';
 import { ProductListItem } from '../../components';
+import config from '../../config';
 
 class ProductList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    //TODO: to replace the store ID passing to action creator
-    dispatch(fetchProducts({storeId: 'asdfasdfasdfasd', pageSize: 20, pageNo: 1 }));
+    const { data : { storeId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
+    dispatch(fetchProducts({storeId, pageSize: 20, pageNo: 1 }));
   }
 
   onViewClick = id => {
