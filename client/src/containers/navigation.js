@@ -24,9 +24,8 @@ class Navigation extends Component {
     const { dispatch } = this.props;
 
     //TODO: replace user ID
-    if (!window.location.pathname === '/') {
-      const { data : { accountId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
-
+    if (window.location.pathname !== '/') {
+      const { data: { accountId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
       dispatch(fetchAccount(accountId));
     }
   }
