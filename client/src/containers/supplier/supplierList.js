@@ -23,17 +23,23 @@ import config from '../../config';
 class SupplierList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    const { data : { storeId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
-    dispatch(fetchSuppliers(storeId));
+    dispatch(fetchSuppliers({ storeId, pageSize: 20, pageNo: 1 }));
   }
 
   onViewClick = id => {
     this.props.history.push(`/suppliers/${id}`);
   };
 
+  onPageChange = page => {
+    const { dispatch } = this.props;
+
+    dispatch(fetchSuppliers({ storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
+  }
+
   render() {
-    const { history, suppliers } = this.props;
+    const { history, suppliers, total } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <div>
@@ -107,11 +113,11 @@ class SupplierList extends Component {
                     />
                   ))}
                 </tbody>
-              </Table>              
+              </Table>
             </Col>
           </div>
-          <ReactPaginate 
-            pageCount={20}
+          <ReactPaginate
+            pageCount={total}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             containerClassName="pagination"
@@ -125,6 +131,7 @@ class SupplierList extends Component {
             previousLinkClassName="page-link"
             nextLinkClassName="page-link"
             activeClassName="active"
+            onPageChange={this.onPageChange}
           />
         </div>
       </div>
@@ -132,13 +139,18 @@ class SupplierList extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  suppliers: state.supplierReducer.suppliers,
-});
+const mapStateToProps = state => {
+  const diff = state.supplierReducer.suppliers.count / 20;
+  return ({
+    suppliers: state.supplierReducer.suppliers.data,
+    total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
+  });
+};
 
 SupplierList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   suppliers: PropTypes.array.isRequired,
+  total: PropTypes.number.isRequired,
   history: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
 };

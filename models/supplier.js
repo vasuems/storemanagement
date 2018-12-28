@@ -81,6 +81,22 @@ Supplier.prototype.get = function (code) {
   });
 };
 
+Supplier.prototype.getTotalCountByStoreId = function (id) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `select count(*) as total 
+       from supplier where store_id='${id}'`,
+      (error, results) => {
+        if (error) {
+          reject(new NoRecordFoundError('No suppliers found.'));
+        } else {
+          resolve(results[0].total);
+        }
+      }
+    );
+  });
+};
+
 Supplier.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
   return new Promise((resolve, reject) => {
     db.query(

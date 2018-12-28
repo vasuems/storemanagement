@@ -12,9 +12,10 @@ import { supplierDetails } from '../apis/mocks/responses';
 
 export function* fetchSuppliers(action) {
   try {
+    const { storeId, pageNo, pageSize } = action.value;
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${action.value}/suppliers`,
+      url: `${config.apiDomain}/stores/${storeId}/suppliers?page=${pageNo}&size=${pageSize}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },

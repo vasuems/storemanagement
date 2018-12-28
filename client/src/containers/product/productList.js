@@ -21,19 +21,19 @@ import { ProductListItem } from '../../components';
 import config from '../../config';
 
 class ProductList extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    const { data : { storeId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
     this.state = {
-      storeId, 
+      storeId,
     };
   }
 
   componentDidMount() {
     const { dispatch } = this.props;
-    const { data : { storeId }} = jwt.decode(localStorage.getItem(config.accessTokenKey));
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
-    dispatch(fetchProducts({storeId: this.state.storeId, pageSize: 20, pageNo: 1 }));
+    dispatch(fetchProducts({ storeId: this.state.storeId, pageSize: 20, pageNo: 1 }));
   }
 
   onViewClick = id => {
@@ -44,7 +44,7 @@ class ProductList extends Component {
   onPageChange = page => {
     const { dispatch } = this.props;
 
-    dispatch(fetchProducts({storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
+    dispatch(fetchProducts({ storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
   }
 
   render() {
@@ -118,7 +118,7 @@ class ProductList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {products?products.map(product => (
+                  {products ? products.map(product => (
                     <ProductListItem
                       key={product.code}
                       id={product.code}
@@ -132,12 +132,12 @@ class ProductList extends Component {
                       status={product.status}
                       onClick={this.onViewClick}
                     />
-                  )): null}
+                  )) : null}
                 </tbody>
-              </Table>                       
+              </Table>
             </Col>
           </div>
-          <ReactPaginate 
+          <ReactPaginate
             pageCount={total}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
@@ -154,7 +154,7 @@ class ProductList extends Component {
             activeClassName="active"
             onPageChange={this.onPageChange}
           />
-        </div>          
+        </div>
       </div>
     );
   }

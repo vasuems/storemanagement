@@ -618,9 +618,10 @@ app.get(
   async (req, res) => {
     try {
       const supplier = new Supplier();
-      const data = await supplier.getAllByStoreId(req.params.storeId);
+      const data = await supplier.getAllByStoreId(req.params.storeId, req.query.page || 1, req.query.size || 20);
+      const count = await supplier.getTotalCountByStoreId(req.params.storeId);
 
-      res.send(data);
+      res.send({ data, count });
     } catch (err) {
       res.status(err.statusCode).send(err);
     }
