@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
   Col,
@@ -15,17 +16,9 @@ import {
   Input,
 } from 'reactstrap';
 import Dropzone from 'react-dropzone';
+import { fetchCountries } from '../../actions';
 
-const validate = values => {
-  const errors = {};
-  if (!values.currentPwd) {
-    errors.currentPwd = 'Required';
-  }
-  if (!values.newPwd) {
-    errors.newPwd = 'Required';
-  }
-  return errors;
-};
+const required = value => (value ? undefined : 'Required');
 
 const renderField = ({
   input,
@@ -39,13 +32,39 @@ const renderField = ({
     </div>
   );
 
+const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
+  <div>
+    <select {...input} className="form-control">
+      <option />
+      {data.map(item => (
+        <option key={item.id} value={item.id}>
+          {item.name}
+        </option>
+      ))}
+    </select>
+    {touched && (error && <div><span className="text-danger">{error}</span></div>)}
+  </div>
+);
+
 class SupplierForm extends Component {
   onDrop = (acceptedFiles, rejectedFiles) => {
     // do stuff with files...
   };
 
+  componentDidMount() {
+    const {
+      dispatch,
+      mode,
+      match: {
+        params: { id },
+      },
+    } = this.props;
+
+    dispatch(fetchCountries());
+  }
+
   render() {
-    const { handleSubmit, initialValues } = this.props;
+    const { handleSubmit, initialValues, countries } = this.props;
 
     return (
       <Form onSubmit={handleSubmit}>
@@ -94,6 +113,7 @@ class SupplierForm extends Component {
                 <FormGroup row>
                   <Label for="name" sm={3}>
                     <FormattedMessage id="sys.name" />
+                    <span className="text-danger mandatory-field">*</span>
                   </Label>
                   <Col sm={9}>
                     <Field
@@ -101,6 +121,7 @@ class SupplierForm extends Component {
                       name="name"
                       className="form-control"
                       id="name"
+                      validate={[required]}
                     />
                   </Col>
                 </FormGroup>
@@ -114,7 +135,6 @@ class SupplierForm extends Component {
                       name="url"
                       className="form-control"
                       id="url"
-                      readonly
                     />
                   </Col>
                 </FormGroup>
@@ -128,13 +148,13 @@ class SupplierForm extends Component {
                       name="email"
                       className="form-control"
                       id="email"
-                      readonly
                     />
                   </Col>
                 </FormGroup>
                 <FormGroup row>
                   <Label for="contact" sm={3}>
                     <FormattedMessage id="sys.contactNo" />
+                    <span className="text-danger mandatory-field">*</span>
                   </Label>
                   <Col sm={9}>
                     <Field
@@ -142,13 +162,29 @@ class SupplierForm extends Component {
                       name="contact"
                       className="form-control"
                       id="contact"
-                      readonly
+                      validate={[required]}
+                    />
+                  </Col>
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="contact" sm={3}>
+                    <FormattedMessage id="sys.country" />
+                    <span className="text-danger mandatory-field">*</span>
+                  </Label>
+                  <Col sm={9}>
+                    <Field
+                      component={renderSelect}
+                      name="country"
+                      id="country"
+                      data={countries}
+                      validate={[required]}
                     />
                   </Col>
                 </FormGroup>
                 <FormGroup row>
                   <Label for="address" sm={3}>
                     <FormattedMessage id="sys.address" />
+                    <span className="text-danger mandatory-field">*</span>
                   </Label>
                   <Col sm={9}>
                     <Field
@@ -156,7 +192,7 @@ class SupplierForm extends Component {
                       name="address"
                       className="form-control"
                       id="address"
-                      readonly
+                      validate={[required]}
                     />
                   </Col>
                 </FormGroup>
@@ -172,31 +208,22 @@ class SupplierForm extends Component {
 SupplierForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  match: PropTypes.object,
+  mode: PropTypes.string,
+  countries: PropTypes.array.isRequired,
 };
 
 SupplierForm = reduxForm({
   form: 'supplierForm',
-  validate,
 })(SupplierForm);
 
-export default connect(state => {
-  const {
-    name,
-    email,
-    url,
-    address,
-    logo,
-    contact,
-  } = state.supplierReducer.supplierDetails;
-  return {
-    initialValues: {
-      name,
-      email,
-      url,
-      address,
-      logo,
-      contact,
-    },
-    enableReinitialize: true,
-  };
-})(SupplierForm);
+export default withRouter(
+  connect(state => {
+    return {
+      initialValues: state.supplierReducer.supplierDetails,
+      countries: state.publicReducer.countries,
+      enableReinitialize: true,
+    };
+  })(SupplierForm)
+);

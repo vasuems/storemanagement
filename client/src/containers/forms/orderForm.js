@@ -55,7 +55,7 @@ const renderNumberField = ({ input, type, meta: { touched, error } }) => (
 
 
 class OrderForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -67,22 +67,21 @@ class OrderForm extends Component {
     const {
       dispatch,
       mode,
+      storeId,
       match: {
         params: { id },
       },
     } = this.props;
 
-    //TODO: replace the store ID here
+    dispatch(fetchProductCategories({ storeId, pageSize: 200, pageNo: 1 }));
+    dispatch(fetchSuppliers(storeId));
+    dispatch(fetchManufacturers(storeId));
 
-    dispatch(fetchProductCategories({storeId: 'asdfasdfasdfasd', pageSize: 200, pageNo: 1}));
-    dispatch(fetchSuppliers('asdfasdfasdfasd'));
-    dispatch(fetchManufacturers('asdfasdfasdfasd'));
-
-    if(mode==='update'){
+    if (mode === 'update') {
       dispatch(
-        fetchProductDetails({ storeId: 'asdfasdfasdfasd', productId: id })
+        fetchProductDetails({ storeId, productId: id })
       );
-    }else{
+    } else {
       dispatch(
         clearProductDetails()
       );
@@ -96,14 +95,14 @@ class OrderForm extends Component {
   }
 
   onSubmit = data => {
-    const { dispatch } = this.props;
+    const { dispatch, storeId } = this.props;
 
     data.description = this.state.description;
-    data.storeId = 'asdfasdfasdfasd';
-    if(data.allowQuantity === undefined){
+    data.storeId = storeId;
+    if (data.allowQuantity === undefined) {
       data.allowQuantity = false;
     }
-    
+
     dispatch(submitProduct(data));
   };
 
@@ -132,13 +131,13 @@ class OrderForm extends Component {
           newSuccess === false ?
             <Alert color="danger">
               <FormattedMessage id="sys.newFailed" />
-            </Alert> : 
-            newSuccess === true ? 
+            </Alert> :
+            newSuccess === true ?
               <Alert color="success">
                 <FormattedMessage id="sys.newSuccess" />
               </Alert> : null
         }
-        
+
         <Row>
           <Col md={7}>
             <Card>
@@ -170,7 +169,7 @@ class OrderForm extends Component {
                       modules={modules}
                       formats={formats}
                       style={{ height: 180 }}
-                      value={mode==='update' ? initialValues.description || '' : this.state.description}
+                      value={mode === 'update' ? initialValues.description || '' : this.state.description}
                       onChange={this.onDescriptionChange}
                     />
                   </Col>
@@ -202,7 +201,7 @@ class OrderForm extends Component {
                     <Field
                       component={renderSelect}
                       id="category-id"
-                      name="categoryId"                      
+                      name="categoryId"
                       data={categories}
                       validate={[required]}
                     >
@@ -340,6 +339,7 @@ OrderForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   suppliers: PropTypes.array.isRequired,
+  storeId: PropTypes.string.isRequired,
   manufacturers: PropTypes.array.isRequired,
   newSuccess: PropTypes.bool,
   intl: PropTypes.object.isRequired,

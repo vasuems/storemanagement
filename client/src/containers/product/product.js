@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Breadcrumb, BreadcrumbItem, Button, Col } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 import { FormattedMessage } from 'react-intl';
 import { ProductForm } from '../forms';
+import config from '../../config';
 
 class Product extends Component {
   render() {
     const { history, match: { path } } = this.props;
-    
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
+
     return (
       <div>
         <Breadcrumb>
@@ -29,9 +32,10 @@ class Product extends Component {
         </Breadcrumb>
         <div className="content-body">
           <div className="table-container">
-            <Col md={12} className="table-content">              
-              <ProductForm 
-                mode={path === '/new-product'?'new':'update'} />
+            <Col md={12} className="table-content">
+              <ProductForm
+                mode={path === '/new-product' ? 'new' : 'update'}
+                storeId={storeId} />
             </Col>
           </div>
         </div>
@@ -49,7 +53,9 @@ Product.propTypes = {
 const mapStateToProps = state => ({
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(Product));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(Product)
+);

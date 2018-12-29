@@ -65,7 +65,9 @@ const mapStateToProps = state => ({
   categories: state.productReducer.categories,
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(Manufacturer));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(Manufacturer)
+);

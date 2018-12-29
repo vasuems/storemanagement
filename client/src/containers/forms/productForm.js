@@ -89,9 +89,9 @@ const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
   <div>
     <select {...input} className="form-control">
       <option />
-      {data.map(cat => (
-        <option key={cat.code} value={cat.code}>
-          {cat.name}
+      {data.map(item => (
+        <option key={item.code} value={item.code}>
+          {item.name}
         </option>
       ))}
     </select>
@@ -112,12 +112,12 @@ class ProductForm extends Component {
     const {
       dispatch,
       mode,
+      storeId,
       match: {
         params: { id },
       },
     } = this.props;
 
-    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
     const params = { storeId, pageSize: 200, pageNo: 1 };
 
     dispatch(fetchProductCategories(params));
@@ -392,6 +392,7 @@ ProductForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
   mode: PropTypes.string,
+  storeId: PropTypes.string.isRequired,
   initialValues: PropTypes.object,
 };
 

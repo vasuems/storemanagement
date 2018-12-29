@@ -52,7 +52,9 @@ ProductCategory.propTypes = {
 
 const mapStateToProps = state => ({});
 
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(ProductCategory));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(ProductCategory)
+);

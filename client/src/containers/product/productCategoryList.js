@@ -154,7 +154,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(injectIntl(withRouter(ProductCategoryList)));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(injectIntl(ProductCategoryList))
+);

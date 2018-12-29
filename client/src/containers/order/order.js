@@ -254,7 +254,7 @@ class Order extends Component {
                         frameBorder="0"
                         src={`https://www.google.com/maps/embed/v1/place?key=${config.googleApiKey}&q=Space+Needle,Seattle+WA`}
                         allowFullScreen>
-                      </iframe>              
+                      </iframe>
                     </Col>
                   </Row>
                 </TabPane>
@@ -277,7 +277,9 @@ const mapStateToProps = state => ({
   products: state.orderReducer.products,
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(injectIntl(withRouter(Order)));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(injectIntl(Order))
+);
