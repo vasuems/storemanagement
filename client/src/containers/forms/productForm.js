@@ -19,6 +19,7 @@ import {
   Alert,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import {
@@ -29,6 +30,7 @@ import {
   fetchManufacturers,
   submitProduct,
 } from '../../actions';
+import config from '../../config';
 
 const required = value => (value ? undefined : 'Required');
 
@@ -98,7 +100,7 @@ const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
 );
 
 class ProductForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -115,17 +117,18 @@ class ProductForm extends Component {
       },
     } = this.props;
 
-    //TODO: replace the store ID here
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
+    const params = { storeId, pageSize: 200, pageNo: 1 };
 
-    dispatch(fetchProductCategories({storeId: 'asdfasdfasdfasd', pageSize: 200, pageNo: 1}));
-    dispatch(fetchSuppliers('asdfasdfasdfasd'));
-    dispatch(fetchManufacturers('asdfasdfasdfasd'));
+    dispatch(fetchProductCategories(params));
+    dispatch(fetchSuppliers(params));
+    dispatch(fetchManufacturers(params));
 
-    if(mode==='update'){
+    if (mode === 'update') {
       dispatch(
-        fetchProductDetails({ storeId: 'asdfasdfasdfasd', productId: id })
+        fetchProductDetails({ storeId, productId: id })
       );
-    }else{
+    } else {
       dispatch(
         clearProductDetails()
       );
@@ -143,10 +146,10 @@ class ProductForm extends Component {
 
     data.description = this.state.description;
     data.storeId = 'asdfasdfasdfasd';
-    if(data.allowQuantity === undefined){
+    if (data.allowQuantity === undefined) {
       data.allowQuantity = false;
     }
-    
+
     dispatch(submitProduct(data));
   };
 
@@ -175,13 +178,13 @@ class ProductForm extends Component {
           newSuccess === false ?
             <Alert color="danger">
               <FormattedMessage id="sys.newFailed" />
-            </Alert> : 
-            newSuccess === true ? 
+            </Alert> :
+            newSuccess === true ?
               <Alert color="success">
                 <FormattedMessage id="sys.newSuccess" />
               </Alert> : null
         }
-        
+
         <Row>
           <Col md={7}>
             <Card>
@@ -213,7 +216,7 @@ class ProductForm extends Component {
                       modules={modules}
                       formats={formats}
                       style={{ height: 180 }}
-                      value={mode==='update' ? initialValues.description || '' : this.state.description}
+                      value={mode === 'update' ? initialValues.description || '' : this.state.description}
                       onChange={this.onDescriptionChange}
                     />
                   </Col>
@@ -245,7 +248,7 @@ class ProductForm extends Component {
                     <Field
                       component={renderSelect}
                       id="category-id"
-                      name="categoryId"                      
+                      name="categoryId"
                       data={categories}
                       validate={[required]}
                     >
@@ -401,8 +404,8 @@ export default withRouter(
     return {
       initialValues: state.productReducer.productDetails,
       categories: state.productReducer.categories.data,
-      suppliers: state.supplierReducer.suppliers,
-      manufacturers: state.manufacturerReducer.manufacturers,
+      suppliers: state.supplierReducer.suppliers.data,
+      manufacturers: state.manufacturerReducer.manufacturers.data,
       newSuccess: state.productReducer.newSuccess,
       enableReinitialize: true,
     };

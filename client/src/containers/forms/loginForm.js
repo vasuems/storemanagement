@@ -36,7 +36,7 @@ class LoginForm extends Component {
     const { auth, history } = this.props;
 
     if (auth) {
-      history.push('/dashboard');
+      window.location.href = '/dashboard';
     }
   }
 

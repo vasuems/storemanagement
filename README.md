@@ -3,10 +3,10 @@
 <img src="https://image.flaticon.com/icons/svg/235/235111.svg" width="64" />
 
 <p>
-  <img src="https://img.shields.io/badge/React-16.4.2-lightblue.svg">
-  <img src="https://img.shields.io/badge/Redux-4.0.0-purple.svg">
-  <img src="https://img.shields.io/badge/Nodejs-8.10.0-green.svg">
-  <img src="https://img.shields.io/badge/Express-4.16.3-black.svg">
+  <img src="https://img.shields.io/badge/React-16.4.+-lightblue.svg">
+  <img src="https://img.shields.io/badge/Redux-4.0.+-purple.svg">
+  <img src="https://img.shields.io/badge/Nodejs-8.10.+-green.svg">
+  <img src="https://img.shields.io/badge/Express-4.16.+-black.svg">
   <img src="https://img.shields.io/badge/Boostrap-4.+-purple.svg">
   <img src="https://img.shields.io/badge/MySQL-5.7.+-blue.svg">
 </p>

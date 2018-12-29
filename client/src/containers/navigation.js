@@ -23,14 +23,15 @@ class Navigation extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
-    //TODO: replace user ID
     if (window.location.pathname !== '/') {
       const { data: { accountId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
+
       dispatch(fetchAccount(accountId));
     }
   }
   render() {
     const { account } = this.props;
+
     return (
       <div className="admin-navbar">
         <Container fluid>
