@@ -147,6 +147,7 @@ ProductCategoryForm = reduxForm({
 export default withRouter(
   connect(state => {
     const { name, parentId } = state.productReducer.categoryDetails;
+
     return {
       initialValues: {
         name,

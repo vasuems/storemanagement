@@ -31,7 +31,7 @@ const CategoryListItem = props => {
         </td>
       </tr>
       {childCats.map(cat => (
-        <tr>
+        <tr key={cat.code}>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{cat.name}</td>
           <td>
             <Badge color={cat.status ? 'success' : 'danger'}>
@@ -41,7 +41,7 @@ const CategoryListItem = props => {
             </Badge>
           </td>
           <td>
-            <Button size="sm" color="link" onClick={() => onClick(cat.id)}>
+            <Button size="sm" color="link" onClick={() => onClick(cat.code)}>
               <FormattedMessage id="sys.view" />
             </Button>
           </td>
