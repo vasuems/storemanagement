@@ -32,8 +32,10 @@ class ProductCategoryList extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-
-    dispatch(fetchProductCategories({ storeId: this.state.storeId, pageSize: 20, pageNo: 1 }));
+    /*TODO: The page size is temporarily set to 200 until 
+      I figure out a good way to handle pagination for list with sub-items
+    */
+    dispatch(fetchProductCategories({ storeId: this.state.storeId, pageSize: 200, pageNo: 1 }));
   }
 
   onViewClick = id => {
@@ -42,11 +44,13 @@ class ProductCategoryList extends Component {
 
   onPageChange = page => {
     const { dispatch } = this.props;
-    dispatch(fetchProductCategories({ storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
+    dispatch(fetchProductCategories({ storeId: this.state.storeId, pageSize: 200, pageNo: page.selected + 1 }));
   }
 
   render() {
     const { history, categories, total, intl: { formatMessage } } = this.props;
+    const parentCats = categories.filter(cat => !cat.parentId);
+
     return (
       <div>
         <Breadcrumb>
@@ -91,27 +95,23 @@ class ProductCategoryList extends Component {
                     <th width="40%">
                       <FormattedMessage id="sys.name" />
                     </th>
-                    <th width="40%">
-                      <FormattedMessage id="sys.parent" />
-                    </th>
                     <th width="10%">
                       <FormattedMessage id="sys.status" />
                     </th>
                     <th width="10%" />
                   </tr>
                 </thead>
-                <tbody>
-                  {categories ? categories.map(cat => (
-                    <CategoryListItem
-                      key={cat.code}
-                      id={cat.code}
-                      name={cat.name}
-                      parent={cat.parent}
-                      status={cat.status}
-                      onClick={this.onViewClick}
-                    />
-                  )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
-                </tbody>
+
+                {parentCats ? parentCats.map(cat => (
+                  <CategoryListItem
+                    key={cat.code}
+                    id={cat.code}
+                    name={cat.name}
+                    status={cat.status}
+                    childCats={categories.filter(ccat => ccat.parentId === cat.code)}
+                    onClick={this.onViewClick}
+                  />
+                )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
               </Table>
             </Col>
           </div>

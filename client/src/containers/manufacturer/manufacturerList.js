@@ -85,7 +85,7 @@ class ManufacturerList extends Component {
                   size="sm"
                   color="primary"
                   className="pull-right form-btn"
-                  onClick={() => history.push('/new-supplier')}
+                  onClick={() => history.push('/new-manufacturer')}
                 >
                   <FiPlusCircle />
                   &nbsp;

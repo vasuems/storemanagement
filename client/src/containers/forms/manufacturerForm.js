@@ -33,13 +33,13 @@ const renderField = ({
   type,
   meta: { touched, error },
 }) => (
-  <div>
-    <Input {...input} placeholder={placeholder} type={type} />
-    {touched && (error && <span className="text-danger">{error}</span>)}
-  </div>
-);
+    <div>
+      <Input {...input} placeholder={placeholder} type={type} />
+      {touched && (error && <span className="text-danger">{error}</span>)}
+    </div>
+  );
 
-class SupplierForm extends Component {
+class ManufacturerForm extends Component {
   onDrop = (acceptedFiles, rejectedFiles) => {
     // do stuff with files...
   };
@@ -57,33 +57,33 @@ class SupplierForm extends Component {
                 style={{ width: '100%', height: '100%' }}
               />
             ) : (
-              <Dropzone
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  border: '1px dashed #999',
-                }}
-              >
-                <div
+                <Dropzone
                   style={{
+                    width: '100%',
                     height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                    border: '1px dashed #999',
                   }}
                 >
-                  <p>
-                    <b>
-                      <FormattedMessage id="sys.supplierLogo" />
-                    </b>
-                  </p>
-                  <p>
-                    <FormattedMessage id="sys.dragImageFile" />
-                  </p>
-                </div>
-              </Dropzone>
-            )}
+                  <div
+                    style={{
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <p>
+                      <b>
+                        <FormattedMessage id="sys.supplierLogo" />
+                      </b>
+                    </p>
+                    <p>
+                      <FormattedMessage id="sys.dragImageFile" />
+                    </p>
+                  </div>
+                </Dropzone>
+              )}
           </Col>
           <Col md={8}>
             <Card>
@@ -169,15 +169,15 @@ class SupplierForm extends Component {
   }
 }
 
-SupplierForm.propTypes = {
+ManufacturerForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
 };
 
-SupplierForm = reduxForm({
-  form: 'supplierForm',
+ManufacturerForm = reduxForm({
+  form: 'manufacturerForm',
   validate,
-})(SupplierForm);
+})(ManufacturerForm);
 
 export default connect(state => {
   const {
@@ -187,7 +187,7 @@ export default connect(state => {
     address,
     logo,
     contact,
-  } = state.supplierReducer.supplierDetails;
+  } = state.manufacturerReducer.manufacturerDetails;
   return {
     initialValues: {
       name,
@@ -199,4 +199,4 @@ export default connect(state => {
     },
     enableReinitialize: true,
   };
-})(SupplierForm);
+})(ManufacturerForm);

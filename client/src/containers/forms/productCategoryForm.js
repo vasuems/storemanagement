@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { Col, Form, FormGroup, Label, Button, Input, Alert } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FiSave } from 'react-icons/fi';
-import { 
+import {
   fetchProductCategories,
   fetchProductCategoryDetails,
   submitProductCategory,
@@ -20,11 +20,11 @@ const renderField = ({
   type,
   meta: { touched, error },
 }) => (
-  <div>
-    <Input {...input} placeholder={placeholder} type={type} />
-    {touched && (error && <span className="text-danger">{error}</span>)}
-  </div>
-);
+    <div>
+      <Input {...input} placeholder={placeholder} type={type} />
+      {touched && (error && <span className="text-danger">{error}</span>)}
+    </div>
+  );
 
 const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
   <div>
@@ -51,9 +51,9 @@ class ProductCategoryForm extends Component {
     } = this.props;
 
     //TODO: replace the store ID here
-    dispatch(fetchProductCategories({storeId: 'asdfasdfasdfasd', pageSize: 200, pageNo: 1}));
+    dispatch(fetchProductCategories({ storeId: 'asdfasdfasdfasd', pageSize: 200, pageNo: 1 }));
 
-    if(mode === 'update'){
+    if (mode === 'update') {
       dispatch(
         fetchProductCategoryDetails({
           storeId: 'asdfasdfasdfasd',
@@ -71,7 +71,7 @@ class ProductCategoryForm extends Component {
   };
 
   render() {
-    const { 
+    const {
       handleSubmit,
       categories,
       newSuccess,
@@ -90,8 +90,8 @@ class ProductCategoryForm extends Component {
           newSuccess === false ?
             <Alert color="danger">
               <FormattedMessage id="sys.newFailed" />
-            </Alert> : 
-            newSuccess === true ? 
+            </Alert> :
+            newSuccess === true ?
               <Alert color="success">
                 <FormattedMessage id="sys.newSuccess" />
               </Alert> : null
@@ -119,8 +119,8 @@ class ProductCategoryForm extends Component {
             <Field
               component={renderSelect}
               id="parent-id"
-              name="parentId"                      
-              data={categories}
+              name="parentId"
+              data={categories.filter(cat => !cat.parentId)}
             >
             </Field>
           </Col>

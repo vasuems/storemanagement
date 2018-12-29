@@ -7,6 +7,7 @@ import Supplier from './supplier/supplier';
 import ProductCategoryList from './product/productCategoryList';
 import ProductCategory from './product/productCategory';
 import ManufacturerList from './manufacturer/manufacturerList';
+import Manufacturer from './manufacturer/manufacturer';
 import Payment from './payment/payment';
 import Setting from './setting/setting';
 import SalesReportList from './report/salesReportList';
@@ -24,4 +25,5 @@ export {
   SupplierList,
   Supplier,
   ManufacturerList,
+  Manufacturer,
 };
