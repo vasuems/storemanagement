@@ -3,11 +3,14 @@ import {
   FETCH_SUPPLIERS_FAILED,
   FETCH_SUPPLIER_DETAILS_SUCCESS,
   FETCH_SUPPLIER_DETAILS_FAILED,
+  SUBMIT_SUPPLIER_SUCCESS,
+  SUBMIT_SUPPLIER_FAILED,
 } from '../actions';
 
 const initialState = {
   suppliers: { data: [], total: 0 },
   supplierDetails: {},
+  newSuccess: undefined,
 };
 
 export default function supplierReducer(state = initialState, action) {
@@ -16,6 +19,10 @@ export default function supplierReducer(state = initialState, action) {
       return { ...state, suppliers: action.value };
     case FETCH_SUPPLIER_DETAILS_SUCCESS:
       return { ...state, supplierDetails: action.value };
+    case SUBMIT_SUPPLIER_SUCCESS:
+      return { ...state, newSuccess: true };
+    case SUBMIT_SUPPLIER_FAILED:
+      return { ...state, newSuccess: false };
     case FETCH_SUPPLIERS_FAILED:
     case FETCH_SUPPLIER_DETAILS_FAILED:
     default:

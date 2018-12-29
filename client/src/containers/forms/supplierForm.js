@@ -14,9 +14,12 @@ import {
   CardHeader,
   CardBody,
   Input,
+  Button,
+  Alert,
 } from 'reactstrap';
 import Dropzone from 'react-dropzone';
-import { fetchCountries } from '../../actions';
+import { FiSave } from 'react-icons/fi';
+import { fetchCountries, submitSupplier } from '../../actions';
 
 const required = value => (value ? undefined : 'Required');
 
@@ -48,7 +51,7 @@ const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
 
 class SupplierForm extends Component {
   onDrop = (acceptedFiles, rejectedFiles) => {
-    // do stuff with files...
+    console.log(acceptedFiles);
   };
 
   componentDidMount() {
@@ -63,11 +66,41 @@ class SupplierForm extends Component {
     dispatch(fetchCountries());
   }
 
+  onSubmit = data => {
+    const { dispatch, storeId } = this.props;
+
+    data.storeId = storeId;
+
+    dispatch(submitSupplier(data));
+  };
+
   render() {
-    const { handleSubmit, initialValues, countries } = this.props;
+    const {
+      handleSubmit,
+      initialValues,
+      countries,
+      newSuccess,
+    } = this.props;
 
     return (
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
+        <Button size="sm" color="primary" className="pull-right form-btn">
+          <FiSave />
+          &nbsp;
+          <FormattedMessage id="sys.save" />
+        </Button>
+        <br />
+        <br />
+        {
+          newSuccess === false ?
+            <Alert color="danger">
+              <FormattedMessage id="sys.newFailed" />
+            </Alert> :
+            newSuccess === true ?
+              <Alert color="success">
+                <FormattedMessage id="sys.newSuccess" />
+              </Alert> : null
+        }
         <Row>
           <Col md={4}>
             {initialValues ? (
@@ -174,8 +207,8 @@ class SupplierForm extends Component {
                   <Col sm={9}>
                     <Field
                       component={renderSelect}
-                      name="country"
-                      id="country"
+                      name="countryId"
+                      id="country-id"
                       data={countries}
                       validate={[required]}
                     />
@@ -211,6 +244,8 @@ SupplierForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
   mode: PropTypes.string,
+  newSuccess: PropTypes.bool,
+  storeId: PropTypes.string.isRequired,
   countries: PropTypes.array.isRequired,
 };
 
@@ -223,6 +258,7 @@ export default withRouter(
     return {
       initialValues: state.supplierReducer.supplierDetails,
       countries: state.publicReducer.countries,
+      newSuccess: state.supplierReducer.newSuccess,
       enableReinitialize: true,
     };
   })(SupplierForm)

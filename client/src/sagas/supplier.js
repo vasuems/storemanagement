@@ -6,6 +6,8 @@ import {
   fetchSupplierDetailsSuccess,
   fetchSupplierDetailsFailed,
   clearToken,
+  submitSupplierSuccess,
+  submitSupplierFailed,
 } from '../actions';
 import config from '../config';
 import { supplierDetails } from '../apis/mocks/responses';
@@ -39,6 +41,28 @@ export function* fetchSupplierDetails(action) {
       yield put(clearToken());
     } else {
       yield put(fetchSupplierDetailsFailed());
+    }
+  }
+}
+
+export function* addSupplier(action) {
+  try {
+    const { storeId } = action.value;
+    const res = yield axios({
+      method: 'post',
+      url: `${config.apiDomain}/stores/${storeId}/suppliers`,
+      headers: {
+        authorization: localStorage.getItem(config.accessTokenKey),
+      },
+      data: action.value,
+    });
+
+    yield put(submitSupplierSuccess(res.data));
+  } catch (error) {
+    if (error.response.status === 401) {
+      yield put(clearToken());
+    } else {
+      yield put(submitSupplierFailed());
     }
   }
 }

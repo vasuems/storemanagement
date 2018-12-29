@@ -2,6 +2,10 @@ export const FETCH_SUPPLIERS = 'FETCH_SUPPLIERS';
 export const FETCH_SUPPLIERS_SUCCESS = 'FETCH_SUPPLIERS_SUCCESS';
 export const FETCH_SUPPLIERS_FAILED = 'FETCH_SUPPLIERS_FAILED';
 
+export const SUBMIT_SUPPLIER = 'SUBMIT_SUPPLIER';
+export const SUBMIT_SUPPLIER_SUCCESS = 'SUBMIT_SUPPLIER_SUCCESS';
+export const SUBMIT_SUPPLIER_FAILED = 'SUBMIT_SUPPLIER_FAILED';
+
 export const FETCH_SUPPLIER_DETAILS = 'FETCH_SUPPLIER_DETAILS';
 export const FETCH_SUPPLIER_DETAILS_SUCCESS = 'FETCH_SUPPLIER_DETAILS_SUCCESS';
 export const FETCH_SUPPLIER_DETAILS_FAILED = 'FETCH_SUPPLIER_DETAILS_FAILED';
@@ -17,6 +21,19 @@ export function fetchSuppliersSuccess(data) {
 export function fetchSuppliersFailed() {
   return { type: FETCH_SUPPLIERS_FAILED };
 }
+
+export function submitSupplier(data) {
+  return { type: SUBMIT_SUPPLIER, value: data };
+}
+
+export function submitSupplierSuccess(data) {
+  return { type: SUBMIT_SUPPLIER_SUCCESS, value: data };
+}
+
+export function submitSupplierFailed() {
+  return { type: SUBMIT_SUPPLIER_FAILED };
+}
+
 
 export function fetchSupplierDetails() {
   return { type: FETCH_SUPPLIER_DETAILS };
