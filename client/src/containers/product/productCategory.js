@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Col, Button, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 import { FormattedMessage } from 'react-intl';
 import ProductCategoryForm from '../forms/productCategoryForm';
+import config from '../../config';
 
 class ProductCategory extends Component {
   render() {
     const { history, match: { path } } = this.props;
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
     return (
       <div>
@@ -29,9 +32,10 @@ class ProductCategory extends Component {
         </Breadcrumb>
         <div className="content-body">
           <div className="table-container">
-            <Col md={12} className="table-content">              
-              <ProductCategoryForm 
-                mode={path === '/new-category'?'new':'update'} />
+            <Col md={12} className="table-content">
+              <ProductCategoryForm
+                mode={path === '/new-category' ? 'new' : 'update'}
+                storeId={storeId} />
             </Col>
           </div>
         </div>

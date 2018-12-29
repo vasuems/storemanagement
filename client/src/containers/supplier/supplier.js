@@ -9,14 +9,8 @@ import { fetchSupplierDetails } from '../../actions';
 import { SupplierForm } from '../forms';
 
 class Supplier extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-
-    dispatch(fetchSupplierDetails());
-  }
-
   render() {
-    const { history } = this.props;
+    const { history, match: { path } } = this.props;
     return (
       <div>
         <Breadcrumb>
@@ -45,8 +39,7 @@ class Supplier extends Component {
               <br />
               <br />
               <SupplierForm
-                categories={[]}
-                currencies={[{ id: 1, currency: 'SGD' }]}
+                mode={path === '/new-category' ? 'new' : 'update'}
               />
             </Col>
           </div>
@@ -59,13 +52,14 @@ class Supplier extends Component {
 Supplier.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  categories: state.productReducer.categories,
-});
+const mapStateToProps = state => ({});
 
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(Supplier));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(Supplier)
+);

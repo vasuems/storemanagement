@@ -45,18 +45,19 @@ class ProductCategoryForm extends Component {
     const {
       dispatch,
       mode,
+      storeId,
       match: {
         params: { id },
       },
     } = this.props;
 
     //TODO: replace the store ID here
-    dispatch(fetchProductCategories({ storeId: 'asdfasdfasdfasd', pageSize: 200, pageNo: 1 }));
+    dispatch(fetchProductCategories({ storeId, pageSize: 200, pageNo: 1 }));
 
     if (mode === 'update') {
       dispatch(
         fetchProductCategoryDetails({
-          storeId: 'asdfasdfasdfasd',
+          storeId,
           categoryId: id,
         })
       );
@@ -64,9 +65,9 @@ class ProductCategoryForm extends Component {
   }
 
   onSubmit = data => {
-    const { dispatch } = this.props;
+    const { dispatch, storeId } = this.props;
 
-    data.storeId = 'asdfasdfasdfasd';
+    data.storeId = storeId;
     dispatch(submitProductCategory(data));
   };
 
@@ -133,6 +134,7 @@ class ProductCategoryForm extends Component {
 ProductCategoryForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
+  storeId: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   newSuccess: PropTypes.bool,

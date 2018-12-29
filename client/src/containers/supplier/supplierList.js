@@ -161,7 +161,9 @@ SupplierList.propTypes = {
   intl: PropTypes.object.isRequired,
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(injectIntl(withRouter(SupplierList)));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(injectIntl(SupplierList))
+);
