@@ -6,6 +6,8 @@ import {
   fetchManufacturerDetailsSuccess,
   fetchManufacturerDetailsFailed,
   clearToken,
+  submitManufacturerSuccess,
+  submitManufacturerFailed,
 } from '../actions';
 import config from '../config';
 
@@ -46,6 +48,28 @@ export function* fetchManufacturerDetails(action) {
       yield put(clearToken());
     } else {
       yield put(fetchManufacturerDetailsFailed());
+    }
+  }
+}
+
+export function* addManufacturer(action) {
+  try {
+    const { storeId } = action.value;
+    const res = yield axios({
+      method: 'post',
+      url: `${config.apiDomain}/stores/${storeId}/manufacturers`,
+      headers: {
+        authorization: localStorage.getItem(config.accessTokenKey),
+      },
+      data: action.value,
+    });
+
+    yield put(submitManufacturerSuccess(res.data));
+  } catch (error) {
+    if (error.response.status === 401) {
+      yield put(clearToken());
+    } else {
+      yield put(submitManufacturerFailed());
     }
   }
 }

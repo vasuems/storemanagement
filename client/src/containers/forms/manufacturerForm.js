@@ -258,7 +258,7 @@ export default withRouter(
     return {
       initialValues: state.manufacturerReducer.manufacturerDetails,
       countries: state.publicReducer.countries,
-      newSuccess: state.supplierReducer.newSuccess,
+      newSuccess: state.manufacturerReducer.newSuccess,
       enableReinitialize: true,
     };
   })(ManufacturerForm)

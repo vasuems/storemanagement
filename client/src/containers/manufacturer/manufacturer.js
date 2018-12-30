@@ -22,7 +22,7 @@ class Manufacturer extends Component {
             </Button>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <Button color="link" onClick={() => history.push('/suppliers')}>
+            <Button color="link" onClick={() => history.push('/manufacturers')}>
               <FormattedMessage id="sys.manufacturers" />
             </Button>
           </BreadcrumbItem>
