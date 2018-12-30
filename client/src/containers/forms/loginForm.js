@@ -63,7 +63,7 @@ class LoginForm extends Component {
           id="username"
           placeholder={formatMessage({ id: 'sys.email' })}
           validate={[required]}
-        />
+        /><br />
         <Field
           component={renderField}
           type="password"
@@ -71,11 +71,11 @@ class LoginForm extends Component {
           id="password"
           placeholder={formatMessage({ id: 'sys.pwd' })}
           validate={[required]}
-        />
+        /><br />
         {
           this.state.showLoading && auth === null ?
             <img src={require('../../assets/coffee_loader.svg')} /> :
-            <Button type="submit" block>
+            <Button color="dark" type="submit" block>
               <FormattedMessage id="sys.signin" />
             </Button>
         }
@@ -86,7 +86,7 @@ class LoginForm extends Component {
         ) : null}
 
         <br />
-        <Button color="link">
+        <Button color="link" id="forgot-pwd">
           <FormattedMessage id="sys.forgotPwd" />
         </Button>
       </Form>

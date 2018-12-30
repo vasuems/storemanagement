@@ -9,12 +9,12 @@ class Login extends Component {
     return (
       <div className="login-page">
         <div className="login-box">
-          <Col sm={6} md={3}>
+          <div id="login-box">
             <p id="login-site-name">
               <FormattedMessage id="site.name" />
             </p>
             <LoginForm />
-          </Col>
+          </div>
         </div>
         <Footer style={{ flex: 0.1 }} />
       </div>
