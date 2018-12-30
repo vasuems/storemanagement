@@ -115,6 +115,12 @@ const routes = [
     main: () => <Manufacturer />,
   },
   {
+    path: '/manufacturers/:id',
+    exact: true,
+    sidebar: () => <SideBarContent />,
+    main: () => <Manufacturer />,
+  },
+  {
     path: '/payments',
     exact: true,
     sidebar: () => <SideBarContent />,

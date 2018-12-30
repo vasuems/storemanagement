@@ -6,10 +6,11 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 
 const ManufacturerListItem = props => {
   const { formatMessage } = props.intl;
+
   return (
     <tr>
       <td>
-        <img src={props.logo} className="thumbnail" />
+        <img src={props.logo || require('../../assets/no_image.svg')} className="thumbnail" />
       </td>
       <td>{props.name}</td>
       <td>

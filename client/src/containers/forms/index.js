@@ -7,6 +7,7 @@ import LoginForm from './loginForm';
 import CredentialForm from './credentialForm';
 import SupplierForm from './supplierForm';
 import ManufacturerForm from './manufacturerForm';
+import OrderForm from './orderForm';
 
 export {
   StoreSettingForm,
@@ -18,4 +19,5 @@ export {
   CredentialForm,
   SupplierForm,
   ManufacturerForm,
+  OrderForm,
 };

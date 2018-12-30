@@ -8,15 +8,13 @@ class Login extends Component {
   render() {
     return (
       <div className="login-page">
-        <div className="login-box">
-          <div id="login-box">
-            <p id="login-site-name">
-              <FormattedMessage id="site.name" />
-            </p>
-            <LoginForm />
-          </div>
+        <div id="login-box">
+          <p id="login-site-name">
+            <FormattedMessage id="site.name" />
+          </p>
+          <LoginForm />
         </div>
-        <Footer style={{ flex: 0.1 }} />
+        <Footer />
       </div>
     );
   }

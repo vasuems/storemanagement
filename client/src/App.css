@@ -216,19 +216,14 @@ a, a:hover, a:link, a:active, a:visited{
   display: flex;
   flex: 1;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 #login-box{
   width: 320px;
   background-color: #fff;
   padding: 20px;
   border: 1px solid #dadada;
-}
-.login-box{
-  display: flex;
-  flex: .95;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 #forgot-pwd{
   font-size: 13px;
