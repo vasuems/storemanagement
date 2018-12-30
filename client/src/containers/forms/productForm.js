@@ -19,7 +19,6 @@ import {
   Alert,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import {
@@ -30,7 +29,6 @@ import {
   fetchManufacturers,
   submitProduct,
 } from '../../actions';
-import config from '../../config';
 
 const required = value => (value ? undefined : 'Required');
 
@@ -142,10 +140,10 @@ class ProductForm extends Component {
   }
 
   onSubmit = data => {
-    const { dispatch } = this.props;
+    const { dispatch, storeId } = this.props;
 
     data.description = this.state.description;
-    data.storeId = 'asdfasdfasdfasd';
+    data.storeId = storeId;
     if (data.allowQuantity === undefined) {
       data.allowQuantity = false;
     }

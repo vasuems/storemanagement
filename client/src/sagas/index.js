@@ -13,7 +13,11 @@ import { fetchDashboardData } from './dashboard';
 import { fetchStoreSettings } from './setting';
 import { submitLoginData, clearToken } from './auth';
 import { fetchSuppliers, fetchSupplierDetails, addSupplier } from './supplier';
-import { fetchManufacturers, fetchManufacturerDetails, addManufacturer } from './manufacturer';
+import {
+  fetchManufacturers,
+  fetchManufacturerDetails,
+  addManufacturer,
+} from './manufacturer';
 import { fetchCountries, fetchCurrencies } from './public';
 import { fetchAccount } from './account';
 import {

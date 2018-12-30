@@ -1,6 +1,7 @@
 export const FETCH_MANUFACTURERS = 'FETCH_MANUFACTURERS';
 export const FETCH_MANUFACTURERS_SUCCESS = 'FETCH_MANUFACTURERS_SUCCESS';
 export const FETCH_MANUFACTURERS_FAILED = 'FETCH_MANUFACTURERS_FAILED';
+export const CLEAR_MANUFACTURER_DETAILS = 'CLEAR_MANUFACTURER_DETAILS';
 
 export const SUBMIT_MANUFACTURER = 'SUBMIT_MANUFACTURER';
 export const SUBMIT_MANUFACTURER_SUCCESS = 'SUBMIT_MANUFACTURER_SUCCESS';
@@ -22,6 +23,10 @@ export function fetchManufacturersSuccess(data) {
 
 export function fetchManufacturersFailed() {
   return { type: FETCH_MANUFACTURERS_FAILED };
+}
+
+export function clearManufacturerDetails() {
+  return { type: CLEAR_MANUFACTURER_DETAILS };
 }
 
 export function submitManufacturer(data) {

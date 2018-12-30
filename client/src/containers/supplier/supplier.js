@@ -34,7 +34,7 @@ class Supplier extends Component {
           <div className="table-container">
             <Col md={12} className="table-content">
               <SupplierForm
-                mode={path === '/new-category' ? 'new' : 'update'}
+                mode={path === '/new-supplier' ? 'new' : 'update'}
                 storeId={storeId}
               />
             </Col>

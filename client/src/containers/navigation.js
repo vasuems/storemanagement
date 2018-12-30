@@ -24,9 +24,13 @@ class Navigation extends Component {
     const { dispatch } = this.props;
 
     if (window.location.pathname !== '/') {
-      const { data: { accountId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
+      if (localStorage.getItem(config.accessTokenKey)) {
+        const { data: { accountId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
-      dispatch(fetchAccount(accountId));
+        dispatch(fetchAccount(accountId));
+      } else {
+        window.location.href = '/';
+      }
     }
   }
   render() {

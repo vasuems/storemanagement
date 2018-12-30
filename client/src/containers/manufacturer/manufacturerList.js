@@ -97,7 +97,7 @@ class ManufacturerList extends Component {
                 <thead className="table-header">
                   <tr>
                     <th>
-                      <FormattedMessage id="sys.comLogo" />
+                      <FormattedMessage id="sys.manufacturerLogo" />
                     </th>
                     <th>
                       <FormattedMessage id="sys.name" />

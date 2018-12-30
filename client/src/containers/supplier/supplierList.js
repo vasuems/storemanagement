@@ -89,7 +89,7 @@ class SupplierList extends Component {
                 <thead className="table-header">
                   <tr>
                     <th>
-                      <FormattedMessage id="sys.comLogo" />
+                      <FormattedMessage id="sys.supplierLogo" />
                     </th>
                     <th>
                       <FormattedMessage id="sys.name" />

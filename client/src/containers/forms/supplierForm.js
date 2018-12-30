@@ -17,9 +17,13 @@ import {
   Button,
   Alert,
 } from 'reactstrap';
-import Dropzone from 'react-dropzone';
 import { FiSave } from 'react-icons/fi';
-import { fetchCountries, submitSupplier } from '../../actions';
+import {
+  fetchCountries,
+  submitSupplier,
+  fetchSupplierDetails,
+  clearSupplierDetails,
+} from '../../actions';
 
 const required = value => (value ? undefined : 'Required');
 
@@ -49,30 +53,63 @@ const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
   </div>
 );
 
-class SupplierForm extends Component {
-  onDrop = (acceptedFiles, rejectedFiles) => {
-    console.log(acceptedFiles);
-  };
+const adaptFileEventToValue = delegate =>
+  e => delegate(e.target.files[0]);
 
+const renderFileInput = ({
+  input: {
+    value: omitValue,
+    onChange,
+    onBlur,
+    ...inputProps,
+  },
+  meta: omitMeta,
+  ...props,
+}) =>
+  <input
+    onChange={adaptFileEventToValue(onChange)}
+    onBlur={adaptFileEventToValue(onBlur)}
+    type="file"
+    {...inputProps}
+    {...props}
+  />
+
+class SupplierForm extends Component {
   componentDidMount() {
     const {
       dispatch,
       mode,
+      storeId,
       match: {
         params: { id },
       },
     } = this.props;
 
     dispatch(fetchCountries());
+
+    if (mode === 'update') {
+      dispatch(
+        fetchSupplierDetails({ storeId, supplierId: id })
+      );
+    } else {
+      dispatch(
+        clearSupplierDetails()
+      );
+    }
   }
 
   onSubmit = data => {
+    console.log(data)
     const { dispatch, storeId } = this.props;
 
     data.storeId = storeId;
 
     dispatch(submitSupplier(data));
   };
+
+  onUpload = data => {
+    console.log(data.target.files[0]);
+  }
 
   render() {
     const {
@@ -102,42 +139,19 @@ class SupplierForm extends Component {
               </Alert> : null
         }
         <Row>
-          <Col md={4}>
-            {initialValues ? (
-              <img
-                src={initialValues.logo}
-                style={{ width: '100%', height: '100%' }}
-              />
-            ) : (
-                <Dropzone
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    border: '1px dashed #999',
-                  }}
-                >
-                  <div
-                    style={{
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <p>
-                      <b>
-                        <FormattedMessage id="sys.supplierLogo" />
-                      </b>
-                    </p>
-                    <p>
-                      <FormattedMessage id="sys.dragImageFile" />
-                    </p>
-                  </div>
-                </Dropzone>
-              )}
+          <Col md={3}>
+            <p className="lead"><FormattedMessage id="sys.supplierLogo" /></p>
+            <img
+              src={initialValues.logo || require('../../assets/no_image.svg')}
+              style={{ width: 128, height: 128 }}
+            /><br /><br />
+            <Field
+              name="logo"
+              id="logo"
+              component={renderFileInput}
+            />
           </Col>
-          <Col md={8}>
+          <Col md={9}>
             <Card>
               <CardHeader>
                 <FormattedMessage id="sys.basicInfo" />

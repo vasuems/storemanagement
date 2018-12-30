@@ -18,7 +18,6 @@ import {
   Alert,
 } from 'reactstrap';
 import { FiSave } from 'react-icons/fi';
-import Dropzone from 'react-dropzone';
 import { fetchCountries, submitManufacturer } from '../../actions';
 
 const required = value => (value ? undefined : 'Required');
@@ -50,10 +49,6 @@ const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
 );
 
 class ManufacturerForm extends Component {
-  onDrop = (acceptedFiles, rejectedFiles) => {
-    console.log(acceptedFiles);
-  };
-
   componentDidMount() {
     const {
       dispatch,
@@ -103,39 +98,10 @@ class ManufacturerForm extends Component {
         }
         <Row>
           <Col md={4}>
-            {initialValues ? (
-              <img
-                src={initialValues.logo}
-                style={{ width: '100%', height: '100%' }}
-              />
-            ) : (
-                <Dropzone
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    border: '1px dashed #999',
-                  }}
-                >
-                  <div
-                    style={{
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <p>
-                      <b>
-                        <FormattedMessage id="sys.supplierLogo" />
-                      </b>
-                    </p>
-                    <p>
-                      <FormattedMessage id="sys.dragImageFile" />
-                    </p>
-                  </div>
-                </Dropzone>
-              )}
+            <img
+              src={initialValues.logo}
+              style={{ width: 64, height: 64 }}
+            />
           </Col>
           <Col md={8}>
             <Card>
