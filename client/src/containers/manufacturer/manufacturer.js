@@ -2,21 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Breadcrumb, BreadcrumbItem, Button, Col } from 'reactstrap';
-import { FiSave } from 'react-icons/fi';
 import { withRouter } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 import { FormattedMessage } from 'react-intl';
-import { fetchManufacturerDetails } from '../../actions';
 import { ManufacturerForm } from '../forms';
+import config from '../../config';
 
 class Manufacturer extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-
-    dispatch(fetchManufacturerDetails());
-  }
-
   render() {
-    const { history } = this.props;
+    const { history, match: { path } } = this.props;
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
+
     return (
       <div>
         <Breadcrumb>
@@ -37,16 +33,9 @@ class Manufacturer extends Component {
         <div className="content-body">
           <div className="table-container">
             <Col md={12} className="table-content">
-              <Button size="sm" color="primary" className="pull-right form-btn">
-                <FiSave />
-                &nbsp;
-                <FormattedMessage id="sys.save" />
-              </Button>
-              <br />
-              <br />
               <ManufacturerForm
-                categories={[]}
-                currencies={[{ id: 1, currency: 'SGD' }]}
+                mode={path === '/new-category' ? 'new' : 'update'}
+                storeId={storeId}
               />
             </Col>
           </div>
@@ -59,11 +48,10 @@ class Manufacturer extends Component {
 Manufacturer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  categories: state.productReducer.categories,
-});
+const mapStateToProps = state => ({});
 
 export default withRouter(
   connect(
