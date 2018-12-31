@@ -135,7 +135,7 @@ class SupplierForm extends Component {
         }
         <Row>
           <Col md={3}>
-            <p className="lead"><FormattedMessage id="sys.supplierLogo" /></p>
+            <p className="lead"><FormattedMessage id="sys.logo" /></p>
             <img
               src={initialValues.logo || require('../../assets/no_image.svg')}
               style={{ width: 128, height: 128 }}

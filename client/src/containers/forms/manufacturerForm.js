@@ -48,6 +48,27 @@ const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
   </div>
 );
 
+const adaptFileEventToValue = delegate =>
+  e => delegate(e.target.files[0]);
+
+const renderFileInput = ({
+  input: {
+    value: omitValue,
+    onChange,
+    onBlur,
+    ...inputProps,
+  },
+  meta: omitMeta,
+  ...props,
+}) =>
+  <input
+    onChange={adaptFileEventToValue(onChange)}
+    onBlur={adaptFileEventToValue(onBlur)}
+    type="file"
+    {...inputProps}
+    {...props}
+  />
+
 class ManufacturerForm extends Component {
   componentDidMount() {
     const {
@@ -97,13 +118,19 @@ class ManufacturerForm extends Component {
               </Alert> : null
         }
         <Row>
-          <Col md={4}>
+          <Col md={3}>
+            <p className="lead"><FormattedMessage id="sys.logo" /></p>
             <img
-              src={initialValues.logo}
-              style={{ width: 64, height: 64 }}
+              src={initialValues.logo || require('../../assets/no_image.svg')}
+              style={{ width: 128, height: 128 }}
+            /><br /><br />
+            <Field
+              name="logo"
+              id="logo"
+              component={renderFileInput}
             />
           </Col>
-          <Col md={8}>
+          <Col md={9}>
             <Card>
               <CardHeader>
                 <FormattedMessage id="sys.basicInfo" />

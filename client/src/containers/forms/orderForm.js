@@ -19,6 +19,8 @@ import {
   Alert,
   CardTitle,
   Table,
+  FormGroup,
+  Label,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FiDownload, FiPrinter } from 'react-icons/fi';
@@ -303,22 +305,66 @@ class OrderForm extends Component {
                   <FormattedMessage id="sys.customerInfo" />
                 </CardTitle>
                 <Card body>
-                  <OrderInfoItem
-                    title={formatMessage({ id: 'sys.customerName' })}
-                    content="Nick Chen"
-                  />
-                  <OrderInfoItem
-                    title={formatMessage({ id: 'sys.customerContact' })}
-                    content="+65-99999999"
-                  />
-                  <OrderInfoItem
-                    title={formatMessage({ id: 'sys.deliveryAddr' })}
-                    content="BLK 666, Bugis, Singapore, 100666"
-                  />
-                  <OrderInfoItem
-                    title={formatMessage({ id: 'sys.billingAddr' })}
-                    content="Not provided"
-                  />
+                  <FormGroup row>
+                    <Label for="email" sm={4}>
+                      <FormattedMessage id="sys.name" />
+                      <span className="text-danger mandatory-field">*</span>
+                    </Label>
+                    <Col sm={8}>
+                      <Field
+                        component={renderField}
+                        name="customerName"
+                        className="form-control"
+                        id="customer-name"
+                        validate={[required]}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="email" sm={4}>
+                      <FormattedMessage id="sys.contactNo" />
+                      <span className="text-danger mandatory-field">*</span>
+                    </Label>
+                    <Col sm={8}>
+                      <Field
+                        component={renderField}
+                        name="customerContact"
+                        className="form-control"
+                        id="customer-contact"
+                        validate={[required]}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="email" sm={4}>
+                      <FormattedMessage id="sys.deliveryAddr" />
+                      <span className="text-danger mandatory-field">*</span>
+                    </Label>
+                    <Col sm={8}>
+                      <Field
+                        component={renderField}
+                        name="deliveryAddress"
+                        className="form-control"
+                        id="address"
+                        validate={[required]}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="email" sm={4}>
+                      <FormattedMessage id="sys.billingAddr" />
+                      <span className="text-danger mandatory-field">*</span>
+                    </Label>
+                    <Col sm={8}>
+                      <Field
+                        component={renderField}
+                        name="billingAddress"
+                        className="form-control"
+                        id="billing-address"
+                        validate={[required]}
+                      />
+                    </Col>
+                  </FormGroup>
                 </Card>
               </Col>
             </Row>
