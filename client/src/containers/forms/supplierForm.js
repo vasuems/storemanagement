@@ -99,17 +99,12 @@ class SupplierForm extends Component {
   }
 
   onSubmit = data => {
-    console.log(data)
     const { dispatch, storeId } = this.props;
 
     data.storeId = storeId;
 
     dispatch(submitSupplier(data));
   };
-
-  onUpload = data => {
-    console.log(data.target.files[0]);
-  }
 
   render() {
     const {

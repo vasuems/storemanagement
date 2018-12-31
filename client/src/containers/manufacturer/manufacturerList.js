@@ -93,11 +93,11 @@ class ManufacturerList extends Component {
                 </Button>
               </div>
               <br />
-              <Table responsive>
+              <Table responsive size="sm">
                 <thead className="table-header">
                   <tr>
                     <th>
-                      <FormattedMessage id="sys.manufacturerLogo" />
+                      <FormattedMessage id="sys.logo" />
                     </th>
                     <th>
                       <FormattedMessage id="sys.name" />
@@ -128,25 +128,27 @@ class ManufacturerList extends Component {
                   )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
                 </tbody>
               </Table>
+              <div className="pagination-container">
+                <ReactPaginate
+                  pageCount={total || 1}
+                  pageRangeDisplayed={3}
+                  marginPagesDisplayed={2}
+                  containerClassName="pagination"
+                  subContainerClassName="pages pagination"
+                  pageClassName="page-item"
+                  breakClassName="page-item"
+                  breakLabel="..."
+                  pageLinkClassName="page-link"
+                  previousLabel="‹"
+                  nextLabel="›"
+                  previousLinkClassName="page-link"
+                  nextLinkClassName="page-link"
+                  activeClassName="active"
+                  onPageChange={this.onPageChange}
+                />
+              </div>
             </Col>
           </div>
-          <ReactPaginate
-            pageCount={total || 1}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={2}
-            containerClassName="pagination"
-            subContainerClassName="pages pagination"
-            pageClassName="page-item"
-            breakClassName="page-item"
-            breakLabel="..."
-            pageLinkClassName="page-link"
-            previousLabel={formatMessage({ id: 'sys.prev' })}
-            nextLabel={formatMessage({ id: 'sys.next' })}
-            previousLinkClassName="page-link"
-            nextLinkClassName="page-link"
-            activeClassName="active"
-            onPageChange={this.onPageChange}
-          />
         </div>
       </div>
     );

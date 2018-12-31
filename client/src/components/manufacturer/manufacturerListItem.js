@@ -13,23 +13,23 @@ const ManufacturerListItem = props => {
         <img src={props.logo || require('../../assets/no_image.svg')} className="thumbnail" />
       </td>
       <td>{props.name}</td>
-      <td>
-        <p>
-          <FaGlobe />
-          &nbsp;{props.url}
-        </p>
-        <p>
-          <FaAt />
-          &nbsp;{props.email}
-        </p>
-        <p>
-          <FaMapMarkerAlt />
-          &nbsp;{props.address}
-        </p>
-        <p>
-          <FaPhone />
-          &nbsp;{props.contact}
-        </p>
+      <td style={{ fontSize: 14 }}>
+        <div>
+          <FaGlobe color="#555" />
+          &nbsp;&nbsp;{props.url}
+        </div>
+        <div style={{ marginTop: 5 }}>
+          <FaAt color="#e22b46" />
+          &nbsp;&nbsp;{props.email}
+        </div>
+        <div style={{ marginTop: 5 }}>
+          <FaMapMarkerAlt color="#2e66c1" />
+          &nbsp;&nbsp;{props.address}
+        </div>
+        <div style={{ marginTop: 5 }}>
+          <FaPhone color="#26ad72" />
+          &nbsp;&nbsp;{props.contact}
+        </div>
       </td>
       <td>
         <Badge color={props.status ? 'success' : 'danger'}>

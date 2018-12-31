@@ -258,8 +258,18 @@ a, a:hover, a:link, a:active, a:visited{
   padding: 0;
   color: #007bff;
 }
+.table{
+  margin-bottom: 10px;
+}
 .pagination{
-  margin: 0;
+  margin-bottom: 0;
+}
+.pagination .page-link{
+  padding: 5px 10px !important;
+}
+.pagination-container{
+  display: flex; 
+  justify-content: flex-end;
 }
 .table-container{
   padding: 0 0 20px;
@@ -287,19 +297,22 @@ table .btn-link{
   text-decoration: underline;
 }
 .thumbnail{
-  width: 64px;
-  height: 64px;
+  width: 42px;
+  height: 42px;
 }
-.page-item a:not(.page-link){
+.page-item .page-link{
   position: relative;
   display: block;
   padding: .5rem .75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #007bff;
+  color: #666;
   background-color: #fff;
   border: 1px solid #dee2e6;
   cursor: pointer;
+}
+.previous .page-link, .next .page-link{
+  color: #666;
 }
 .mandatory-field{
   font-size: 15px;
