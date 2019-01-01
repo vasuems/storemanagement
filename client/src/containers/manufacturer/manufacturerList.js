@@ -26,6 +26,7 @@ class ManufacturerList extends Component {
     const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
     this.state = {
+      pageSize: 20,
       storeId,
     };
   }
@@ -33,7 +34,15 @@ class ManufacturerList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
-    dispatch(fetchManufacturers({ storeId: this.state.storeId, pageSize: 20, pageNo: 1 }));
+    dispatch(
+      fetchManufacturers(
+        {
+          storeId: this.state.storeId,
+          pageSize: this.state.pageSize,
+          pageNo: 1,
+        }
+      )
+    );
   }
 
   onViewClick = id => {
@@ -43,15 +52,23 @@ class ManufacturerList extends Component {
   onPageChange = page => {
     const { dispatch } = this.props;
 
-    dispatch(fetchManufacturers({ storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
+    dispatch(
+      fetchManufacturers(
+        {
+          storeId: this.state.storeId,
+          pageSize: this.state.pageSize,
+          pageNo: page.selected + 1,
+        }
+      )
+    );
   }
-
 
   render() {
     const {
       history,
       manufacturers,
       total,
+      count,
       intl: { formatMessage },
     } = this.props;
 
@@ -129,6 +146,7 @@ class ManufacturerList extends Component {
                 </tbody>
               </Table>
               <div className="pagination-container">
+                <span className="text-muted">Total {count} entries</span>
                 <ReactPaginate
                   pageCount={total || 1}
                   pageRangeDisplayed={3}
@@ -155,20 +173,22 @@ class ManufacturerList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const diff = state.manufacturerReducer.manufacturers.count / 20;
-  return ({
-    manufacturers: state.manufacturerReducer.manufacturers.data,
-    total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
-  });
-};
-
 ManufacturerList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   manufacturers: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   total: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
   intl: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => {
+  const diff = state.manufacturerReducer.manufacturers.count / 20;
+  return ({
+    manufacturers: state.manufacturerReducer.manufacturers.data,
+    count: state.manufacturerReducer.manufacturers.count,
+    total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
+  });
 };
 
 export default withRouter(

@@ -29,7 +29,6 @@ class OrderList extends Component {
     const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
     this.state = {
-      activePage: 1,
       pageSize: 20,
       storeId,
     };
