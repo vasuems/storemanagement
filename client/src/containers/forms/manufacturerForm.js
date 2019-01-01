@@ -18,7 +18,12 @@ import {
   Alert,
 } from 'reactstrap';
 import { FiSave } from 'react-icons/fi';
-import { fetchCountries, submitManufacturer } from '../../actions';
+import {
+  fetchCountries,
+  submitManufacturer,
+  fetchManufacturerDetails,
+  clearManufacturerDetails,
+} from '../../actions';
 
 const required = value => (value ? undefined : 'Required');
 
@@ -74,12 +79,23 @@ class ManufacturerForm extends Component {
     const {
       dispatch,
       mode,
+      storeId,
       match: {
         params: { id },
       },
     } = this.props;
 
     dispatch(fetchCountries());
+
+    if (mode === 'update') {
+      dispatch(
+        fetchManufacturerDetails({ storeId, manufacturerId: id })
+      );
+    } else {
+      dispatch(
+        clearManufacturerDetails()
+      );
+    }
   }
 
   onSubmit = data => {
@@ -97,7 +113,7 @@ class ManufacturerForm extends Component {
       countries,
       newSuccess,
     } = this.props;
-
+    console.log(initialValues)
     return (
       <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
         <Button size="sm" color="primary" className="pull-right form-btn">

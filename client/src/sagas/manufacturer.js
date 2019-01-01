@@ -34,9 +34,10 @@ export function* fetchManufacturers(action) {
 
 export function* fetchManufacturerDetails(action) {
   try {
+    const { storeId, manufacturerId } = action.value;
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${action.value}/manufactures`,
+      url: `${config.apiDomain}/stores/${storeId}/manufacturers/${manufacturerId}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
