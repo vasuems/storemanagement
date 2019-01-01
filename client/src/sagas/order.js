@@ -15,7 +15,7 @@ export function* fetchOrders(action) {
     const { storeId, pageNo, pageSize } = action.value;
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${storeId}?page=${pageNo}&size=${pageSize}`,
+      url: `${config.apiDomain}/stores/${storeId}/orders?page=${pageNo}&size=${pageSize}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },

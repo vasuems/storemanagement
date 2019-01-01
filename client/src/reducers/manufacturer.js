@@ -8,7 +8,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  manufacturers: { data: [], total: 0 },
+  manufacturers: { data: [], count: 0 },
   manufacturerDetails: {},
   newSuccess: undefined,
 };

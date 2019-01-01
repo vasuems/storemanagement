@@ -15,8 +15,8 @@ import {
 } from '../actions';
 
 const initialState = {
-  products: { data: [], total: 0 },
-  categories: { data: [], total: 0 },
+  products: { data: [], count: 0 },
+  categories: { data: [], count: 0 },
   productDetails: {},
   categoryDetails: {},
   newSuccess: undefined,

@@ -23,7 +23,7 @@ import {
   Label,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import { FiDownload, FiPrinter } from 'react-icons/fi';
+import { FiDownload, FiPrinter, FiPlusCircle } from 'react-icons/fi';
 import classnames from 'classnames';
 import {
   OrderInfoItem,
@@ -143,14 +143,12 @@ class OrderForm extends Component {
     const {
       history,
       handleSubmit,
-      categories,
-      suppliers,
       newSuccess,
-      manufacturers,
       initialValues,
       mode,
       intl: { formatMessage },
     } = this.props;
+    const products = [];
 
     return (
       <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
@@ -233,7 +231,7 @@ class OrderForm extends Component {
                 <CardTitle>
                   <FormattedMessage id="sys.products" />
                 </CardTitle>
-                <Table responsive>
+                <Table responsive size="sm">
                   <thead className="table-header">
                     <tr>
                       <th>
@@ -251,7 +249,7 @@ class OrderForm extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {[].map(product => {
+                    {products.length > 0 ? products.map(product => {
                       return (
                         <OrderProductListItem
                           key={product.id}
@@ -262,9 +260,18 @@ class OrderForm extends Component {
                           currencySign={product.currencySign}
                         />
                       );
-                    })}
+                    }) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
                   </tbody>
                 </Table>
+                <Button
+                  color="link"
+                  className="pull-right form-btn"
+                  onClick={() => history.push('/new-order')}
+                >
+                  <FiPlusCircle />
+                  &nbsp;
+                  <FormattedMessage id="sys.addNew" />
+                </Button><br /><br /><br />
                 <Col md={6} className="pull-right">
                   <Table size="sm" responsive>
                     <tbody>
@@ -414,10 +421,7 @@ class OrderForm extends Component {
 
 OrderForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  categories: PropTypes.array.isRequired,
-  suppliers: PropTypes.array.isRequired,
   storeId: PropTypes.string.isRequired,
-  manufacturers: PropTypes.array.isRequired,
   newSuccess: PropTypes.bool,
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
@@ -435,9 +439,6 @@ export default withRouter(
   connect(state => {
     return {
       initialValues: state.productReducer.productDetails,
-      categories: state.productReducer.categories.data,
-      suppliers: state.supplierReducer.suppliers,
-      manufacturers: state.manufacturerReducer.manufacturers,
       newSuccess: state.productReducer.newSuccess,
       enableReinitialize: true,
     };

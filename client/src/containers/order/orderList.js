@@ -28,14 +28,26 @@ class OrderList extends Component {
     super(props);
     const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
-    this.state = { activePage: 1, storeId };
+    this.state = {
+      activePage: 1,
+      pageSize: 20,
+      storeId,
+    };
   }
 
   componentDidMount() {
     const { dispatch } = this.props;
     const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
-    dispatch(fetchOrders({ storeId: this.state.storeId, pageSize: 20, pageNo: 1 }));
+    dispatch(
+      fetchOrders(
+        {
+          storeId: this.state.storeId,
+          pageSize: this.state.pageSize,
+          pageNo: 1,
+        }
+      )
+    );
   }
 
   onViewClick = id => {
@@ -45,11 +57,25 @@ class OrderList extends Component {
 
   onPageChange = page => {
     const { dispatch } = this.props;
-    dispatch(fetchOrders({ storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
+    dispatch(
+      fetchOrders(
+        {
+          storeId: this.state.storeId,
+          pageSize: this.state.pageSize,
+          pageNo: page.selected + 1,
+        }
+      )
+    );
   }
 
   render() {
-    const { orders, history, total, intl: { formatMessage } } = this.props;
+    const {
+      orders,
+      history,
+      total,
+      count,
+      intl: { formatMessage },
+    } = this.props;
 
     return (
       <div>
@@ -132,7 +158,7 @@ class OrderList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders ? orders.map(order => (
+                  {orders.length > 0 ? orders.map(order => (
                     <OrderListItem
                       key={order.id}
                       number={order.number}
@@ -146,6 +172,7 @@ class OrderList extends Component {
                 </tbody>
               </Table>
               <div className="pagination-container">
+                <span className="text-muted">Total {count} entries</span>
                 <ReactPaginate
                   pageCount={total || 1}
                   pageRangeDisplayed={3}
@@ -177,13 +204,16 @@ OrderList.propTypes = {
   history: PropTypes.object.isRequired,
   orders: PropTypes.array.isRequired,
   total: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
   intl: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => {
   const diff = state.orderReducer.orders.count / 20;
+
   return ({
     orders: state.orderReducer.orders.data,
+    count: state.orderReducer.orders.count,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   });
 };

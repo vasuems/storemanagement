@@ -25,13 +25,25 @@ class SupplierList extends Component {
     super(props);
     const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
-    this.state = { activePage: 1, storeId };
+    this.state = {
+      activePage: 1,
+      pageSize: 20,
+      storeId,
+    };
   }
 
   componentDidMount() {
     const { dispatch } = this.props;
 
-    dispatch(fetchSuppliers({ storeId: this.state.storeId, pageSize: 20, pageNo: 1 }));
+    dispatch(
+      fetchSuppliers(
+        {
+          storeId: this.state.storeId,
+          pageSize: this.state.pageSize,
+          pageNo: 1,
+        }
+      )
+    );
   }
 
   onViewClick = id => {
@@ -41,11 +53,19 @@ class SupplierList extends Component {
   onPageChange = page => {
     const { dispatch } = this.props;
 
-    dispatch(fetchSuppliers({ storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
+    dispatch(
+      fetchSuppliers(
+        {
+          storeId: this.state.storeId,
+          pageSize: this.state.pageSize,
+          pageNo: page.selected + 1,
+        }
+      )
+    );
   }
 
   render() {
-    const { history, suppliers, total } = this.props;
+    const { history, suppliers, total, count } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <div>
@@ -104,7 +124,7 @@ class SupplierList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {suppliers ? suppliers.map(product => (
+                  {suppliers.length > 0 ? suppliers.map(product => (
                     <SupplierListItem
                       key={product.code}
                       id={product.code}
@@ -121,6 +141,7 @@ class SupplierList extends Component {
                 </tbody>
               </Table>
               <div className="pagination-container">
+                <span className="text-muted">Total {count} entries</span>
                 <ReactPaginate
                   pageCount={total || 1}
                   pageRangeDisplayed={3}
@@ -151,6 +172,7 @@ const mapStateToProps = state => {
   const diff = state.supplierReducer.suppliers.count / 20;
   return ({
     suppliers: state.supplierReducer.suppliers.data,
+    count: state.supplierReducer.suppliers.count,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   });
 };
@@ -158,6 +180,7 @@ const mapStateToProps = state => {
 SupplierList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   suppliers: PropTypes.array.isRequired,
+  count: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   history: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,

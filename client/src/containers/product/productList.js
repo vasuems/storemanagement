@@ -26,6 +26,7 @@ class ProductList extends Component {
     const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
     this.state = {
       storeId,
+      pageSize: 20,
     };
   }
 
@@ -33,7 +34,15 @@ class ProductList extends Component {
     const { dispatch } = this.props;
     const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
-    dispatch(fetchProducts({ storeId: this.state.storeId, pageSize: 20, pageNo: 1 }));
+    dispatch(
+      fetchProducts(
+        {
+          storeId: this.state.storeId,
+          pageSize: this.state.pageSize,
+          pageNo: 1,
+        }
+      )
+    );
   }
 
   onViewClick = id => {
@@ -44,7 +53,15 @@ class ProductList extends Component {
   onPageChange = page => {
     const { dispatch } = this.props;
 
-    dispatch(fetchProducts({ storeId: this.state.storeId, pageSize: 20, pageNo: page.selected + 1 }));
+    dispatch(
+      fetchProducts(
+        {
+          storeId: this.state.storeId,
+          pageSize: this.state.pageSize,
+          pageNo: page.selected + 1,
+        }
+      )
+    );
   }
 
   render() {
@@ -52,6 +69,7 @@ class ProductList extends Component {
       history,
       products,
       total,
+      count,
       intl: { formatMessage },
     } = this.props;
 
@@ -118,7 +136,7 @@ class ProductList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {products ? products.map(product => (
+                  {products.length > 0 ? products.map(product => (
                     <ProductListItem
                       key={product.code}
                       id={product.code}
@@ -136,6 +154,7 @@ class ProductList extends Component {
                 </tbody>
               </Table>
               <div className="pagination-container">
+                <span className="text-muted">Total {count} entries</span>
                 <ReactPaginate
                   pageCount={total || 1}
                   pageRangeDisplayed={3}
@@ -167,6 +186,7 @@ ProductList.propTypes = {
   history: PropTypes.object.isRequired,
   products: PropTypes.array,
   total: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
   intl: PropTypes.object.isRequired,
 };
 
@@ -174,6 +194,7 @@ const mapStateToProps = state => {
   const diff = state.productReducer.products.count / 20;
   return {
     products: state.productReducer.products.data,
+    count: state.productReducer.products.count,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   };
 };

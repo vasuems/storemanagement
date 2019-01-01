@@ -27,6 +27,7 @@ class ProductCategoryList extends Component {
 
     this.state = {
       storeId,
+      pageSize: 200,
     };
   }
 
@@ -35,7 +36,15 @@ class ProductCategoryList extends Component {
     /*TODO: The page size is temporarily set to 200 until 
       I figure out a good way to handle pagination for list with sub-items
     */
-    dispatch(fetchProductCategories({ storeId: this.state.storeId, pageSize: 200, pageNo: 1 }));
+    dispatch(
+      fetchProductCategories(
+        {
+          storeId: this.state.storeId,
+          pageSize: this.state.pageSize,
+          pageNo: 1,
+        }
+      )
+    );
   }
 
   onViewClick = id => {
@@ -44,11 +53,25 @@ class ProductCategoryList extends Component {
 
   onPageChange = page => {
     const { dispatch } = this.props;
-    dispatch(fetchProductCategories({ storeId: this.state.storeId, pageSize: 200, pageNo: page.selected + 1 }));
+    dispatch(
+      fetchProductCategories(
+        {
+          storeId: this.state.storeId,
+          pageSize: this.state.pageSize,
+          pageNo: page.selected + 1,
+        }
+      )
+    );
   }
 
   render() {
-    const { history, categories, total, intl: { formatMessage } } = this.props;
+    const {
+      history,
+      categories,
+      total,
+      count,
+      intl: { formatMessage },
+    } = this.props;
     const parentCats = categories.filter(cat => !cat.parentId);
 
     return (
@@ -102,7 +125,7 @@ class ProductCategoryList extends Component {
                   </tr>
                 </thead>
 
-                {parentCats ? parentCats.map(cat => (
+                {parentCats.length > 0 ? parentCats.map(cat => (
                   <CategoryListItem
                     key={cat.code}
                     id={cat.code}
@@ -114,6 +137,7 @@ class ProductCategoryList extends Component {
                 )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
               </Table>
               <div className="pagination-container">
+                <span className="text-muted">Total {count} entries</span>
                 <ReactPaginate
                   pageCount={total || 1}
                   pageRangeDisplayed={3}
@@ -146,12 +170,14 @@ ProductCategoryList.propTypes = {
   categories: PropTypes.array.isRequired,
   intl: PropTypes.object.isRequired,
   total: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => {
   const diff = state.productReducer.categories.count / 20;
   return {
     categories: state.productReducer.categories.data,
+    count: state.productReducer.categories.count,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   };
 };
