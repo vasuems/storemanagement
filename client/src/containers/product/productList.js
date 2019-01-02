@@ -145,7 +145,7 @@ class ProductList extends Component {
                       sku={product.sku}
                       currency={product.currency}
                       currencySign="$"
-                      price={product.price}
+                      price={product.unitPrice}
                       quantity={product.quantity}
                       status={product.status}
                       onClick={this.onViewClick}

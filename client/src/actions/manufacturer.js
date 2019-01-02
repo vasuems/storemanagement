@@ -41,8 +41,8 @@ export function submitManufacturerFailed() {
   return { type: SUBMIT_MANUFACTURER_FAILED };
 }
 
-export function fetchManufacturerDetails() {
-  return { type: FETCH_MANUFACTURER_DETAILS };
+export function fetchManufacturerDetails(data) {
+  return { type: FETCH_MANUFACTURER_DETAILS, value: data };
 }
 
 export function fetchManufacturerDetailsSuccess(data) {

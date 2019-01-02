@@ -43,8 +43,6 @@ export function* fetchSupplierDetails(action) {
       },
     });
 
-    console.log(res.data)
-
     yield put(fetchSupplierDetailsSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {

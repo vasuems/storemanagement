@@ -5,25 +5,37 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import numeral from 'numeral';
 
 const ProductListItem = props => {
-  const { formatMessage } = props.intl;
+  const {
+    coverImage,
+    name,
+    sku,
+    currencySign,
+    price,
+    quantity,
+    status,
+    id,
+    onClick,
+    intl: { formatMessage },
+  } = props;
+
   return (
     <tr>
       <td>
-        <img src={props.coverImage|| require('../../assets/no_image.svg')} className="thumbnail" />
+        <img src={coverImage || require('../../assets/no_image.svg')} className="thumbnail" />
       </td>
-      <td>{props.name}</td>
-      <td>{props.sku}</td>
-      <td>{props.currencySign + numeral(props.price).format('0,0.00')}</td>
-      <td>{props.quantity}</td>
+      <td>{name}</td>
+      <td>{sku}</td>
+      <td>{currencySign + numeral(price).format('0,0.00')}</td>
+      <td>{quantity}</td>
       <td>
-        <Badge color={props.status ? 'success' : 'danger'}>
-          {props.status
+        <Badge color={status ? 'success' : 'danger'}>
+          {status
             ? formatMessage({ id: 'sys.active' })
             : formatMessage({ id: 'sys.inactive' })}
         </Badge>
       </td>
       <td>
-        <Button size="sm" color="link" onClick={() => props.onClick(props.id)}>
+        <Button size="sm" color="link" onClick={() => onClick(id)}>
           <FormattedMessage id="sys.view" />
         </Button>
       </td>
