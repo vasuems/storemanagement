@@ -99,9 +99,20 @@ class SupplierForm extends Component {
   }
 
   onSubmit = data => {
-    const { dispatch, storeId } = this.props;
+    const { 
+      dispatch, 
+      storeId,
+      mode,
+      match: {
+        params: { id },
+      },
+    } = this.props;
 
     data.storeId = storeId;
+
+    if(mode === 'update'){
+      data.supplierId = id;
+    }
 
     dispatch(submitSupplier(data));
   };

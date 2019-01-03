@@ -62,9 +62,9 @@ const formats = [
   'video',
 ];
 
-const renderField = ({ input, type, meta: { touched, error } }) => (
+const renderField = ({ input, type, style, meta: { touched, error } }) => (
   <div>
-    <Input {...input} type={type} />
+    <Input {...input} type={type} style={style} />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
@@ -149,7 +149,6 @@ class ProductForm extends Component {
       },
     } = this.props;
 
-    data.description = this.state.description;
     data.storeId = storeId;
     if (data.allowQuantity === undefined) {
       data.allowQuantity = false;
@@ -221,18 +220,15 @@ class ProductForm extends Component {
                     <FormattedMessage id="sys.desc" />
                   </Label>
                   <Col sm={9}>
-                    <ReactQuill
-                      modules={modules}
-                      formats={formats}
-                      style={{ height: 180 }}
-                      value={mode === 'update' ? initialValues.description || '' : this.state.description}
-                      onChange={this.onDescriptionChange}
+                    <Field
+                      component={renderField}
+                      name="description"
+                      id="description"
+                      type="textarea"
+                      style={{height: 220}}
                     />
                   </Col>
                 </FormGroup>
-                <br />
-                <br />
-                <br />
                 <FormGroup row>
                   <Label for="sku" sm={3}>
                     <FormattedMessage id="sys.sku" />
