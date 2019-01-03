@@ -74,8 +74,8 @@ export function fetchProductDetailsFailed() {
   return { type: FETCH_PRODUCT_DETAILS_FAILED };
 }
 
-export function submitProduct(data){
-  return { type: SUBMIT_PRODUCT, value: data };
+export function submitProduct(data, mode){
+  return { type: SUBMIT_PRODUCT, value: data, mode };
 }
 
 export function submitProductSuccess(data){

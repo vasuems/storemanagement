@@ -140,13 +140,26 @@ class ProductForm extends Component {
   }
 
   onSubmit = data => {
-    const { dispatch, storeId } = this.props;
+    const { 
+      dispatch,
+      mode,
+      storeId,
+      match: {
+        params: { id },
+      },
+    } = this.props;
 
     data.description = this.state.description;
     data.storeId = storeId;
     if (data.allowQuantity === undefined) {
       data.allowQuantity = false;
     }
+    data.mode = mode;
+
+    if(mode === 'update'){
+      data.productId = id;
+    }
+    
     dispatch(submitProduct(data));
   };
 
@@ -181,7 +194,6 @@ class ProductForm extends Component {
                 <FormattedMessage id="sys.newSuccess" />
               </Alert> : null
         }
-
         <Row>
           <Col md={7}>
             <Card>

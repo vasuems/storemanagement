@@ -81,15 +81,16 @@ export function* fetchProductDetails(action) {
   }
 }
 
-export function* addProduct(action){
+export function* upsertProduct(action){
   try{
+    const { value, mode } = action;
     const res = yield axios({
-      method: 'post',
-      url: `${config.apiDomain}/stores/${action.value.storeId}/products`,
+      method: mode === 'new' ? 'post' : 'put',
+      url: `${config.apiDomain}/stores/${value.storeId}/products${mode === 'new' ? '' : '/' + value.productId}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
-      data: action.value,
+      data: value,
     });
 
     yield put(submitProductSuccess(res.data));

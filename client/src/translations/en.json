@@ -137,7 +137,7 @@
   "sys.website": "Website",
   "sys.percentage": "Percentage",
   "sys.value": "Value",
-  "sys.newFailed": "Failed creating new item.",
-  "sys.newSuccess": "Creating new item successful.",
+  "sys.newFailed": "Failed submitting item.",
+  "sys.newSuccess": "Submitting item successful.",
   "sys.noRecords": "No records."
 }
