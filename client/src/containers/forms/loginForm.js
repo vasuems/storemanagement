@@ -84,11 +84,7 @@ class LoginForm extends Component {
             <FormattedMessage id="sys.invalidAuth" />
           </Alert>
         ) : null}
-
         <br />
-        <Button color="link" id="forgot-pwd">
-          <FormattedMessage id="sys.forgotPwd" />
-        </Button>
       </Form>
     );
   }

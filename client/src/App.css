@@ -100,6 +100,7 @@ a, a:hover, a:link, a:active, a:visited{
   padding-bottom: 20px;
 }
 #footer{
+  margin-top: 360px;
   padding: 20px 0 10px;
 }
 .footer a, .focus a:hover, .focus a:active, .focus a:link{
@@ -217,13 +218,25 @@ a, a:hover, a:link, a:active, a:visited{
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center;  
 }
-#login-box{
+#login-box, #pwd-box{
+  position: absolute;
   width: 320px;
   background-color: #fff;
   padding: 20px;
   border: 1px solid #dadada;
+  text-align: center;
+}
+#login-box{
+  transform: perspective(600px) rotateY(0deg);
+  backface-visibility: hidden;
+  transition: transform .5s linear 0s;
+}
+#pwd-box{
+  transform: perspective(600px) rotateY(180deg);
+  backface-visibility: hidden;
+  transition: transform .5s linear 0s;
 }
 #forgot-pwd{
   font-size: 13px;
