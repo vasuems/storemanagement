@@ -147,7 +147,6 @@ class ProductForm extends Component {
     if (data.allowQuantity === undefined) {
       data.allowQuantity = false;
     }
-
     dispatch(submitProduct(data));
   };
 

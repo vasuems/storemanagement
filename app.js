@@ -316,7 +316,10 @@ app.post(
         unitPrice,
         cost,
         coverImage,
+        supplierId,
+        manufacturerId,
       } = req.body;
+
       const product = new Product(
         shortid.generate(),
         name,
@@ -330,7 +333,9 @@ app.post(
         res.locals.auth.accountId,
         unitPrice,
         cost,
-        coverImage
+        coverImage,
+        manufacturerId,
+        supplierId,
       );
       const data = await product.add(product);
 
