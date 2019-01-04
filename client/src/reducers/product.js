@@ -20,12 +20,13 @@ const initialState = {
   productDetails: {},
   categoryDetails: {},
   newSuccess: undefined,
+  fetchSuccess: false,
 };
 
 export default function productReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_PRODUCTS_SUCCESS:
-      return { ...state, products: action.value };
+      return { ...state, products: action.value, fetchSuccess: true };
     case FETCH_PRODUCT_DETAILS_SUCCESS:
       return { ...state, productDetails: action.value };
     case CLEAR_PRODUCT_DETAILS:
