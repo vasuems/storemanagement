@@ -16,6 +16,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
 import jwt from 'jsonwebtoken';
+import ContentLoader from 'react-content-loader';
 import { fetchProducts } from '../../actions';
 import { ProductListItem } from '../../components';
 import config from '../../config';
@@ -84,10 +85,27 @@ class ProductList extends Component {
           <BreadcrumbItem active>
             <FormattedMessage id="sys.products" />
           </BreadcrumbItem>
-        </Breadcrumb>
-        <div className="content-body">
-          <div className="table-container">
+        </Breadcrumb>        
+        <div className="content-body">          
+          <div className="table-container">            
             <Col md={12} className="table-content">
+              <ContentLoader 
+                height={475}
+                width={400}
+                speed={2}
+                primaryColor="#f3f3f3"
+                secondaryColor="#ecebeb"
+              >
+                <rect x="25" y="10" rx="4" ry="4" width="359" height="20" /> 
+                <rect x="25" y="40" rx="4" ry="4" width="359" height="10" />
+                <rect x="25" y="60" rx="4" ry="4" width="359" height="10" />
+                <rect x="25" y="80" rx="4" ry="4" width="359" height="10" />
+                <rect x="25" y="100" rx="4" ry="4" width="359" height="10" />
+                <rect x="25" y="120" rx="4" ry="4" width="359" height="10" />
+                <rect x="25" y="140" rx="4" ry="4" width="359" height="10" />
+                <rect x="25" y="160" rx="4" ry="4" width="359" height="10" />
+              </ContentLoader>
+
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>
                   <InputGroup size="sm">
