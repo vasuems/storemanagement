@@ -17,7 +17,7 @@ import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
 import jwt from 'jsonwebtoken';
 import { fetchSuppliers } from '../../actions';
-import { SupplierListItem } from '../../components';
+import { SupplierListItem, Loader } from '../../components';
 import config from '../../config';
 
 class SupplierList extends Component {
@@ -65,8 +65,15 @@ class SupplierList extends Component {
   }
 
   render() {
-    const { history, suppliers, total, count } = this.props;
-    const { formatMessage } = this.props.intl;
+    const {
+      history,
+      suppliers,
+      total,
+      count,
+      fetchSuccess,
+      intl: { formatMessage },
+    } = this.props;
+
     return (
       <div>
         <Breadcrumb>
@@ -82,84 +89,89 @@ class SupplierList extends Component {
         <div className="content-body">
           <div className="table-container">
             <Col md={12} className="table-content">
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div>
-                  <InputGroup size="sm">
-                    <Input placeholder={formatMessage({ id: 'sys.search' })} />
-                    <InputGroupAddon addonType="append">
-                      <Button color="secondary">
-                        <FiSearch />
+              {
+                !fetchSuccess ? <Loader /> :
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div>
+                        <InputGroup size="sm">
+                          <Input placeholder={formatMessage({ id: 'sys.search' })} />
+                          <InputGroupAddon addonType="append">
+                            <Button color="secondary">
+                              <FiSearch />
+                            </Button>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </div>
+                      <Button
+                        size="sm"
+                        color="primary"
+                        className="pull-right form-btn"
+                        onClick={() => history.push('/new-supplier')}
+                      >
+                        <FiPlusCircle />
+                        &nbsp;
+                        <FormattedMessage id="sys.addNew" />
                       </Button>
-                    </InputGroupAddon>
-                  </InputGroup>
-                </div>
-                <Button
-                  size="sm"
-                  color="primary"
-                  className="pull-right form-btn"
-                  onClick={() => history.push('/new-supplier')}
-                >
-                  <FiPlusCircle />
-                  &nbsp;
-                  <FormattedMessage id="sys.addNew" />
-                </Button>
-              </div>
-              <br />
-              <Table responsive size="sm">
-                <thead className="table-header">
-                  <tr>
-                    <th>
-                      <FormattedMessage id="sys.logo" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.name" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.contactInfo" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.status" />
-                    </th>
-                    <th />
-                  </tr>
-                </thead>
-                <tbody>
-                  {suppliers.length > 0 ? suppliers.map(product => (
-                    <SupplierListItem
-                      key={product.code}
-                      id={product.code}
-                      logo={product.logo}
-                      name={product.name}
-                      url={product.url}
-                      address={product.address}
-                      email={product.email}
-                      contact={product.contact}
-                      status={product.status}
-                      onClick={this.onViewClick}
-                    />
-                  )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
-                </tbody>
-              </Table>
-              <div className="pagination-container">
-                <span className="text-muted">Total {count} entries</span>
-                <ReactPaginate
-                  pageCount={total || 1}
-                  pageRangeDisplayed={3}
-                  marginPagesDisplayed={2}
-                  containerClassName="pagination"
-                  subContainerClassName="pages pagination"
-                  pageClassName="page-item"
-                  breakClassName="page-item"
-                  breakLabel="..."
-                  pageLinkClassName="page-link"
-                  previousLabel="‹"
-                  nextLabel="›"
-                  previousLinkClassName="page-link"
-                  nextLinkClassName="page-link"
-                  activeClassName="active"
-                  onPageChange={this.onPageChange}
-                />
-              </div>
+                    </div>
+                    <br />
+                    <Table responsive size="sm">
+                      <thead className="table-header">
+                        <tr>
+                          <th>
+                            <FormattedMessage id="sys.logo" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.name" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.contactInfo" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.status" />
+                          </th>
+                          <th />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {suppliers.length > 0 ? suppliers.map(product => (
+                          <SupplierListItem
+                            key={product.code}
+                            id={product.code}
+                            logo={product.logo}
+                            name={product.name}
+                            url={product.url}
+                            address={product.address}
+                            email={product.email}
+                            contact={product.contact}
+                            status={product.status}
+                            onClick={this.onViewClick}
+                          />
+                        )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
+                      </tbody>
+                    </Table>
+                    <div className="pagination-container">
+                      <span className="text-muted">Total {count} entries</span>
+                      <ReactPaginate
+                        pageCount={total || 1}
+                        pageRangeDisplayed={3}
+                        marginPagesDisplayed={2}
+                        containerClassName="pagination"
+                        subContainerClassName="pages pagination"
+                        pageClassName="page-item"
+                        breakClassName="page-item"
+                        breakLabel="..."
+                        pageLinkClassName="page-link"
+                        previousLabel="‹"
+                        nextLabel="›"
+                        previousLinkClassName="page-link"
+                        nextLinkClassName="page-link"
+                        activeClassName="active"
+                        onPageChange={this.onPageChange}
+                      />
+                    </div>
+                  </div>
+              }
             </Col>
           </div>
         </div>
@@ -173,6 +185,7 @@ const mapStateToProps = state => {
   return ({
     suppliers: state.supplierReducer.suppliers.data,
     count: state.supplierReducer.suppliers.count,
+    fetchSuccess: state.supplierReducer.fetchSuccess,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   });
 };
@@ -184,6 +197,7 @@ SupplierList.propTypes = {
   total: PropTypes.number.isRequired,
   history: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
+  fetchSuccess: PropTypes.bool.isRequired,
 };
 
 export default withRouter(

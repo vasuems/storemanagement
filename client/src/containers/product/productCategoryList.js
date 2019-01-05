@@ -16,7 +16,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
 import jwt from 'jsonwebtoken';
-import { CategoryListItem } from '../../components';
+import { CategoryListItem, Loader } from '../../components';
 import { fetchProductCategories } from '../../actions';
 import config from '../../config';
 
@@ -70,6 +70,7 @@ class ProductCategoryList extends Component {
       categories,
       total,
       count,
+      fetchSuccess,
       intl: { formatMessage },
     } = this.props;
     const parentCats = categories.filter(cat => !cat.parentId);
@@ -89,73 +90,78 @@ class ProductCategoryList extends Component {
         <div className="content-body">
           <div className="table-container">
             <Col md={12} className="table-content">
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div>
-                  <InputGroup size="sm">
-                    <Input placeholder={formatMessage({ id: 'sys.search' })} />
-                    <InputGroupAddon addonType="append">
-                      <Button color="secondary">
-                        <FiSearch />
+              {
+                !fetchSuccess ? <Loader /> :
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div>
+                        <InputGroup size="sm">
+                          <Input placeholder={formatMessage({ id: 'sys.search' })} />
+                          <InputGroupAddon addonType="append">
+                            <Button color="secondary">
+                              <FiSearch />
+                            </Button>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </div>
+                      <Button
+                        size="sm"
+                        color="primary"
+                        className="pull-right form-btn"
+                        onClick={() => history.push('/new-category')}
+                      >
+                        <FiPlusCircle />
+                        &nbsp;
+                        <FormattedMessage id="sys.addNew" />
                       </Button>
-                    </InputGroupAddon>
-                  </InputGroup>
-                </div>
-                <Button
-                  size="sm"
-                  color="primary"
-                  className="pull-right form-btn"
-                  onClick={() => history.push('/new-category')}
-                >
-                  <FiPlusCircle />
-                  &nbsp;
-                  <FormattedMessage id="sys.addNew" />
-                </Button>
-              </div>
-              <br />
-              <Table responsive size="sm">
-                <thead className="table-header">
-                  <tr>
-                    <th width="40%">
-                      <FormattedMessage id="sys.name" />
-                    </th>
-                    <th width="10%">
-                      <FormattedMessage id="sys.status" />
-                    </th>
-                    <th width="10%" />
-                  </tr>
-                </thead>
+                    </div>
+                    <br />
+                    <Table responsive size="sm">
+                      <thead className="table-header">
+                        <tr>
+                          <th width="40%">
+                            <FormattedMessage id="sys.name" />
+                          </th>
+                          <th width="10%">
+                            <FormattedMessage id="sys.status" />
+                          </th>
+                          <th width="10%" />
+                        </tr>
+                      </thead>
 
-                {parentCats.length > 0 ? parentCats.map(cat => (
-                  <CategoryListItem
-                    key={cat.code}
-                    id={cat.code}
-                    name={cat.name}
-                    status={cat.status}
-                    childCats={categories.filter(ccat => ccat.parentId === cat.code)}
-                    onClick={this.onViewClick}
-                  />
-                )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
-              </Table>
-              <div className="pagination-container">
-                <span className="text-muted">Total {count} entries</span>
-                <ReactPaginate
-                  pageCount={total || 1}
-                  pageRangeDisplayed={3}
-                  marginPagesDisplayed={2}
-                  containerClassName="pagination"
-                  subContainerClassName="pages pagination"
-                  pageClassName="page-item"
-                  breakClassName="page-item"
-                  breakLabel="..."
-                  pageLinkClassName="page-link"
-                  previousLabel="‹"
-                  nextLabel="›"
-                  previousLinkClassName="page-link"
-                  nextLinkClassName="page-link"
-                  activeClassName="active"
-                  onPageChange={this.onPageChange}
-                />
-              </div>
+                      {parentCats.length > 0 ? parentCats.map(cat => (
+                        <CategoryListItem
+                          key={cat.code}
+                          id={cat.code}
+                          name={cat.name}
+                          status={cat.status}
+                          childCats={categories.filter(ccat => ccat.parentId === cat.code)}
+                          onClick={this.onViewClick}
+                        />
+                      )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
+                    </Table>
+                    <div className="pagination-container">
+                      <span className="text-muted">Total {count} entries</span>
+                      <ReactPaginate
+                        pageCount={total || 1}
+                        pageRangeDisplayed={3}
+                        marginPagesDisplayed={2}
+                        containerClassName="pagination"
+                        subContainerClassName="pages pagination"
+                        pageClassName="page-item"
+                        breakClassName="page-item"
+                        breakLabel="..."
+                        pageLinkClassName="page-link"
+                        previousLabel="‹"
+                        nextLabel="›"
+                        previousLinkClassName="page-link"
+                        nextLinkClassName="page-link"
+                        activeClassName="active"
+                        onPageChange={this.onPageChange}
+                      />
+                    </div>
+                  </div>
+              }
             </Col>
           </div>
         </div>
@@ -171,6 +177,7 @@ ProductCategoryList.propTypes = {
   intl: PropTypes.object.isRequired,
   total: PropTypes.number.isRequired,
   count: PropTypes.number.isRequired,
+  fetchSuccess: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -178,6 +185,7 @@ const mapStateToProps = state => {
   return {
     categories: state.productReducer.categories.data,
     count: state.productReducer.categories.count,
+    fetchSuccess: state.productReducer.fetchSuccess,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   };
 };

@@ -5,6 +5,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import {
   Form,
   Input,
+  Button,
 } from 'reactstrap';
 
 const required = value => (value ? undefined : 'Required');
@@ -37,6 +38,9 @@ const ResetForm = props => {
         placeholder={formatMessage({ id: 'sys.email' })}
         validate={[required]}
       /><br />
+      <Button color="secondary" type="submit" block>
+        <FormattedMessage id="sys.send" />
+      </Button>
     </Form>
   );
 };

@@ -26,7 +26,7 @@ class Login extends Component {
           <p id="login-site-name">
             <FormattedMessage id="site.name" />
           </p>
-          <LoginForm />
+          <LoginForm /><br />
           <Button color="link" id="forgot-pwd" onClick={this.onFlip}>
             <FormattedMessage id="sys.forgotPwd" />
           </Button>
@@ -35,7 +35,7 @@ class Login extends Component {
           <p id="login-site-name">
             <FormattedMessage id="sys.forgotPwd" />
           </p>
-          <ResetForm />
+          <ResetForm /><br />
           <Button color="link" id="forgot-pwd" onClick={this.onFlip}>
             <FormattedMessage id="sys.signin" />
           </Button>

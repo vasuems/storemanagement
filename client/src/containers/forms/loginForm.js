@@ -84,7 +84,6 @@ class LoginForm extends Component {
             <FormattedMessage id="sys.invalidAuth" />
           </Alert>
         ) : null}
-        <br />
       </Form>
     );
   }

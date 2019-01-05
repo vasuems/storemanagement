@@ -16,9 +16,8 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
 import jwt from 'jsonwebtoken';
-import ContentLoader from 'react-content-loader';
 import { fetchProducts } from '../../actions';
-import { ProductListItem } from '../../components';
+import { ProductListItem, Loader } from '../../components';
 import config from '../../config';
 
 class ProductList extends Component {
@@ -86,117 +85,102 @@ class ProductList extends Component {
           <BreadcrumbItem active>
             <FormattedMessage id="sys.products" />
           </BreadcrumbItem>
-        </Breadcrumb>        
-        <div className="content-body">          
-          <div className="table-container">            
+        </Breadcrumb>
+        <div className="content-body">
+          <div className="table-container">
             <Col md={12} className="table-content">
-            {
-              !fetchSuccess ?
-                <ContentLoader 
-                  height={475}
-                  width={400}
-                  speed={2}
-                  primaryColor="#f3f3f3"
-                  secondaryColor="#ecebeb"
-                >
-                  <rect x="25" y="10" rx="4" ry="4" width="359" height="20" /> 
-                  <rect x="25" y="40" rx="4" ry="4" width="359" height="10" />
-                  <rect x="25" y="60" rx="4" ry="4" width="359" height="10" />
-                  <rect x="25" y="80" rx="4" ry="4" width="359" height="10" />
-                  <rect x="25" y="100" rx="4" ry="4" width="359" height="10" />
-                  <rect x="25" y="120" rx="4" ry="4" width="359" height="10" />
-                  <rect x="25" y="140" rx="4" ry="4" width="359" height="10" />
-                  <rect x="25" y="160" rx="4" ry="4" width="359" height="10" />
-                </ContentLoader>
-              :
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              {
+                !fetchSuccess ?
+                  <Loader />
+                  :
                   <div>
-                    <InputGroup size="sm">
-                      <Input placeholder={formatMessage({ id: 'sys.search' })} />
-                      <InputGroupAddon addonType="append">
-                        <Button color="secondary">
-                          <FiSearch />
-                        </Button>
-                      </InputGroupAddon>
-                    </InputGroup>
-                  </div>
-                  <Button
-                    size="sm"
-                    color="primary"
-                    className="pull-right form-btn"
-                    onClick={() => history.push('/new-product')}
-                  >
-                    <FiPlusCircle />
-                    &nbsp;
-                    <FormattedMessage id="sys.addNew" />
-                  </Button>
-                </div>
-                <br />
-                <Table responsive size="sm">
-                  <thead className="table-header">
-                    <tr>
-                      <th>
-                        <FormattedMessage id="sys.thumbnail" />
-                      </th>
-                      <th>
-                        <FormattedMessage id="sys.name" />
-                      </th>
-                      <th>
-                        <FormattedMessage id="sys.sku" />
-                      </th>
-                      <th>
-                        <FormattedMessage id="sys.price" />
-                      </th>
-                      <th>
-                        <FormattedMessage id="sys.qty" />
-                      </th>
-                      <th>
-                        <FormattedMessage id="sys.status" />
-                      </th>
-                      <th />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {products.length > 0 ? products.map(product => (
-                      <ProductListItem
-                        key={product.code}
-                        id={product.code}
-                        coverImage={product.coverImage}
-                        name={product.name}
-                        sku={product.sku}
-                        currency={product.currency}
-                        currencySign="$"
-                        price={product.unitPrice}
-                        quantity={product.quantity}
-                        status={product.status}
-                        onClick={this.onViewClick}
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div>
+                        <InputGroup size="sm">
+                          <Input placeholder={formatMessage({ id: 'sys.search' })} />
+                          <InputGroupAddon addonType="append">
+                            <Button color="secondary">
+                              <FiSearch />
+                            </Button>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </div>
+                      <Button
+                        size="sm"
+                        color="primary"
+                        className="pull-right form-btn"
+                        onClick={() => history.push('/new-product')}
+                      >
+                        <FiPlusCircle />
+                        &nbsp;
+                        <FormattedMessage id="sys.addNew" />
+                      </Button>
+                    </div>
+                    <br />
+                    <Table responsive size="sm">
+                      <thead className="table-header">
+                        <tr>
+                          <th>
+                            <FormattedMessage id="sys.thumbnail" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.name" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.sku" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.price" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.qty" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.status" />
+                          </th>
+                          <th />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {products.length > 0 ? products.map(product => (
+                          <ProductListItem
+                            key={product.code}
+                            id={product.code}
+                            coverImage={product.coverImage}
+                            name={product.name}
+                            sku={product.sku}
+                            currency={product.currency}
+                            currencySign="$"
+                            price={product.unitPrice}
+                            quantity={product.quantity}
+                            status={product.status}
+                            onClick={this.onViewClick}
+                          />
+                        )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
+                      </tbody>
+                    </Table>
+                    <div className="pagination-container">
+                      <span className="text-muted">Total {count} entries</span>
+                      <ReactPaginate
+                        pageCount={total || 1}
+                        pageRangeDisplayed={3}
+                        marginPagesDisplayed={2}
+                        containerClassName="pagination"
+                        subContainerClassName="pages pagination"
+                        pageClassName="page-item"
+                        breakClassName="page-item"
+                        breakLabel="..."
+                        pageLinkClassName="page-link"
+                        previousLabel="‹"
+                        nextLabel="›"
+                        previousLinkClassName="page-link"
+                        nextLinkClassName="page-link"
+                        activeClassName="active"
+                        onPageChange={this.onPageChange}
                       />
-                    )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
-                  </tbody>
-                </Table>
-                <div className="pagination-container">
-                  <span className="text-muted">Total {count} entries</span>
-                  <ReactPaginate
-                    pageCount={total || 1}
-                    pageRangeDisplayed={3}
-                    marginPagesDisplayed={2}
-                    containerClassName="pagination"
-                    subContainerClassName="pages pagination"
-                    pageClassName="page-item"
-                    breakClassName="page-item"
-                    breakLabel="..."
-                    pageLinkClassName="page-link"
-                    previousLabel="‹"
-                    nextLabel="›"
-                    previousLinkClassName="page-link"
-                    nextLinkClassName="page-link"
-                    activeClassName="active"
-                    onPageChange={this.onPageChange}
-                  />
-                </div>
-              </div>
-            }
+                    </div>
+                  </div>
+              }
             </Col>
           </div>
         </div>

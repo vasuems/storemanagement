@@ -38,7 +38,7 @@ export default function productReducer(state = initialState, action) {
     case SUBMIT_PRODUCT_CATEGORY_FAILED:
       return { ...state, newSuccess: false };
     case FETCH_PRODUCT_CATEGORIES_SUCCESS:
-      return { ...state, categories: action.value };
+      return { ...state, categories: action.value, fetchSuccess: true };
     case FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS:
       return { ...state, categoryDetails: action.value };
     case FETCH_PRODUCTS_FAILED:

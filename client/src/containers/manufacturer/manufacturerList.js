@@ -17,7 +17,7 @@ import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
 import jwt from 'jsonwebtoken';
 import { fetchManufacturers } from '../../actions';
-import { ManufacturerListItem } from '../../components';
+import { ManufacturerListItem, Loader } from '../../components';
 import config from '../../config';
 
 class ManufacturerList extends Component {
@@ -69,6 +69,7 @@ class ManufacturerList extends Component {
       manufacturers,
       total,
       count,
+      fetchSuccess,
       intl: { formatMessage },
     } = this.props;
 
@@ -87,84 +88,89 @@ class ManufacturerList extends Component {
         <div className="content-body">
           <div className="table-container">
             <Col md={12} className="table-content">
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div>
-                  <InputGroup size="sm">
-                    <Input placeholder={formatMessage({ id: 'sys.search' })} />
-                    <InputGroupAddon addonType="append">
-                      <Button color="secondary">
-                        <FiSearch />
+              {
+                !fetchSuccess ? <Loader /> :
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div>
+                        <InputGroup size="sm">
+                          <Input placeholder={formatMessage({ id: 'sys.search' })} />
+                          <InputGroupAddon addonType="append">
+                            <Button color="secondary">
+                              <FiSearch />
+                            </Button>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </div>
+                      <Button
+                        size="sm"
+                        color="primary"
+                        className="pull-right form-btn"
+                        onClick={() => history.push('/new-manufacturer')}
+                      >
+                        <FiPlusCircle />
+                        &nbsp;
+                        <FormattedMessage id="sys.addNew" />
                       </Button>
-                    </InputGroupAddon>
-                  </InputGroup>
-                </div>
-                <Button
-                  size="sm"
-                  color="primary"
-                  className="pull-right form-btn"
-                  onClick={() => history.push('/new-manufacturer')}
-                >
-                  <FiPlusCircle />
-                  &nbsp;
-                  <FormattedMessage id="sys.addNew" />
-                </Button>
-              </div>
-              <br />
-              <Table responsive size="sm">
-                <thead className="table-header">
-                  <tr>
-                    <th>
-                      <FormattedMessage id="sys.logo" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.name" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.contactInfo" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.status" />
-                    </th>
-                    <th />
-                  </tr>
-                </thead>
-                <tbody>
-                  {manufacturers.length > 0 ? manufacturers.map(manufacturer => (
-                    <ManufacturerListItem
-                      key={manufacturer.code}
-                      id={manufacturer.code}
-                      logo={manufacturer.logo}
-                      name={manufacturer.name}
-                      url={manufacturer.url}
-                      address={manufacturer.address}
-                      email={manufacturer.email}
-                      contact={manufacturer.contact}
-                      status={manufacturer.status}
-                      onClick={this.onViewClick}
-                    />
-                  )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
-                </tbody>
-              </Table>
-              <div className="pagination-container">
-                <span className="text-muted">Total {count} entries</span>
-                <ReactPaginate
-                  pageCount={total || 1}
-                  pageRangeDisplayed={3}
-                  marginPagesDisplayed={2}
-                  containerClassName="pagination"
-                  subContainerClassName="pages pagination"
-                  pageClassName="page-item"
-                  breakClassName="page-item"
-                  breakLabel="..."
-                  pageLinkClassName="page-link"
-                  previousLabel="‹"
-                  nextLabel="›"
-                  previousLinkClassName="page-link"
-                  nextLinkClassName="page-link"
-                  activeClassName="active"
-                  onPageChange={this.onPageChange}
-                />
-              </div>
+                    </div>
+                    <br />
+                    <Table responsive size="sm">
+                      <thead className="table-header">
+                        <tr>
+                          <th>
+                            <FormattedMessage id="sys.logo" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.name" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.contactInfo" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.status" />
+                          </th>
+                          <th />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {manufacturers.length > 0 ? manufacturers.map(manufacturer => (
+                          <ManufacturerListItem
+                            key={manufacturer.code}
+                            id={manufacturer.code}
+                            logo={manufacturer.logo}
+                            name={manufacturer.name}
+                            url={manufacturer.url}
+                            address={manufacturer.address}
+                            email={manufacturer.email}
+                            contact={manufacturer.contact}
+                            status={manufacturer.status}
+                            onClick={this.onViewClick}
+                          />
+                        )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
+                      </tbody>
+                    </Table>
+                    <div className="pagination-container">
+                      <span className="text-muted">Total {count} entries</span>
+                      <ReactPaginate
+                        pageCount={total || 1}
+                        pageRangeDisplayed={3}
+                        marginPagesDisplayed={2}
+                        containerClassName="pagination"
+                        subContainerClassName="pages pagination"
+                        pageClassName="page-item"
+                        breakClassName="page-item"
+                        breakLabel="..."
+                        pageLinkClassName="page-link"
+                        previousLabel="‹"
+                        nextLabel="›"
+                        previousLinkClassName="page-link"
+                        nextLinkClassName="page-link"
+                        activeClassName="active"
+                        onPageChange={this.onPageChange}
+                      />
+                    </div>
+                  </div>
+              }
             </Col>
           </div>
         </div>
@@ -180,6 +186,7 @@ ManufacturerList.propTypes = {
   total: PropTypes.number.isRequired,
   count: PropTypes.number.isRequired,
   intl: PropTypes.object.isRequired,
+  fetchSuccess: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -187,6 +194,7 @@ const mapStateToProps = state => {
   return ({
     manufacturers: state.manufacturerReducer.manufacturers.data,
     count: state.manufacturerReducer.manufacturers.count,
+    fetchSuccess: state.manufacturerReducer.fetchSuccess,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   });
 };

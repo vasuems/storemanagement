@@ -242,7 +242,10 @@ a, a:hover, a:link, a:active, a:visited{
   font-size: 13px;
   color: #777;
 }
-#login-form .form-control, #login-form .btn{
+#login-form .form-control, 
+#login-form .btn, 
+#reset-form .form-control, 
+#reset-form .btn{
   border-radius: 0;
 }
 #login-form{
