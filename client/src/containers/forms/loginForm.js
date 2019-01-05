@@ -108,7 +108,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(LoginForm));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(LoginForm)
+);

@@ -139,5 +139,6 @@
   "sys.value": "Value",
   "sys.newFailed": "Failed submitting item.",
   "sys.newSuccess": "Submitting item successful.",
-  "sys.noRecords": "No records."
+  "sys.noRecords": "No records.",
+  "sys.send": "Send"
 }

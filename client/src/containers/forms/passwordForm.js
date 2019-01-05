@@ -2,7 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { Form, CardHeader, Input, Button, Card, CardBody, FormGroup, Label, Col } from 'reactstrap';
+import {
+  Form,
+  CardHeader,
+  Input,
+  Button,
+  Card,
+  CardBody,
+  FormGroup,
+  Label,
+  Col,
+} from 'reactstrap';
 
 const validate = values => {
   const errors = {};
@@ -21,11 +31,11 @@ const renderField = ({
   type,
   meta: { touched, error },
 }) => (
-  <div>
-    <Input {...input} placeholder={placeholder} type={type} />
-    {touched && (error && <span className="text-danger">{error}</span>)}
-  </div>
-);
+    <div>
+      <Input {...input} placeholder={placeholder} type={type} />
+      {touched && (error && <span className="text-danger">{error}</span>)}
+    </div>
+  );
 
 const PasswordForm = props => {
   const { handleSubmit } = props;
@@ -63,7 +73,7 @@ const PasswordForm = props => {
                 id="new-pwd"
               />
             </Col>
-          </FormGroup>          
+          </FormGroup>
           <Button color="primary" style={{ marginTop: 10 }}>
             <FormattedMessage id="sys.save" />
           </Button>

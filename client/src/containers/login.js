@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
-import { LoginForm } from './forms';
+import { LoginForm, ResetForm } from './forms';
 import Footer from '../components/footer';
 
 class Login extends Component {
@@ -33,8 +33,9 @@ class Login extends Component {
         </div>
         <div id="pwd-box" style={{ transform: `perspective(600px) rotateY(${!this.state.isFlipped ? '180deg' : '0deg'})` }}>
           <p id="login-site-name">
-            <FormattedMessage id="site.name" />
+            <FormattedMessage id="sys.forgotPwd" />
           </p>
+          <ResetForm />
           <Button color="link" id="forgot-pwd" onClick={this.onFlip}>
             <FormattedMessage id="sys.signin" />
           </Button>

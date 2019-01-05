@@ -4,6 +4,7 @@ import ProductCategoryForm from './productCategoryForm';
 import ProductForm from './productForm';
 import PasswordForm from './passwordForm';
 import LoginForm from './loginForm';
+import ResetForm from './resetForm';
 import CredentialForm from './credentialForm';
 import SupplierForm from './supplierForm';
 import ManufacturerForm from './manufacturerForm';
@@ -16,6 +17,7 @@ export {
   ProductForm,
   PasswordForm,
   LoginForm,
+  ResetForm,
   CredentialForm,
   SupplierForm,
   ManufacturerForm,
