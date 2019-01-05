@@ -13,7 +13,7 @@ import ShipTodayItem from './dashboard/shipTodayItem';
 import Tile from './dashboard/tile';
 import FeedItem from './dashboard/feedItem';
 import CredentialListItem from './setting/credentialListItem';
-import { Loader, ProfileLoader } from './loader';
+import { Loader, ProfileLoader, ParallelLoader } from './loader';
 
 export {
   OrderListItem,
@@ -33,4 +33,5 @@ export {
   ManufacturerListItem,
   Loader,
   ProfileLoader,
+  ParallelLoader,
 };

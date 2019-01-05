@@ -36,7 +36,28 @@ const ProfileLoader = props => (
   </ContentLoader>
 );
 
+const ParallelLoader = props => (
+  <ContentLoader
+    rtl
+    height={280}
+    width={600}
+    speed={2}
+    primaryColor="#f3f3f3"
+    secondaryColor="#ddd"
+    {...props}
+  >
+    <rect x="14.33" y="32.61" rx="0" ry="0" width="0" height="0" />
+    <rect x="12.53" y="29.61" rx="0" ry="0" width="0" height="0" />
+    <rect x="44.53" y="54.61" rx="0" ry="0" width="0" height="1" />
+    <rect x="44.53" y="54.61" rx="0" ry="0" width="0" height="0" />
+    <rect x="320" y="18" rx="0" ry="0" width="190" height="100" />
+    <rect x="10.63" y="18" rx="0" ry="0" width="260" height="209.72" />
+    <rect x="320" y="128" rx="0" ry="0" width="190" height="80" />
+  </ContentLoader>
+)
+
 export {
   Loader,
   ProfileLoader,
+  ParallelLoader,
 };

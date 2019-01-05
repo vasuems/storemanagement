@@ -27,7 +27,7 @@ import {
   fetchManufacturers,
   submitProduct,
 } from '../../actions';
-import { ProfileLoader } from '../../components';
+import { ParallelLoader } from '../../components';
 
 const required = value => (value ? undefined : 'Required');
 
@@ -138,7 +138,7 @@ class ProductForm extends Component {
 
     return (
       mode === 'update' && !done ?
-        <ProfileLoader /> :
+        <ParallelLoader /> :
         <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
           <Button size="sm" color="primary" className="pull-right form-btn">
             <FiSave />
