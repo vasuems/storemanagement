@@ -24,6 +24,7 @@ import {
   fetchSupplierDetails,
   clearSupplierDetails,
 } from '../../actions';
+import { ProfileLoader } from '../../components';
 
 const required = value => (value ? undefined : 'Required');
 
@@ -99,8 +100,8 @@ class SupplierForm extends Component {
   }
 
   onSubmit = data => {
-    const { 
-      dispatch, 
+    const {
+      dispatch,
       storeId,
       mode,
       match: {
@@ -110,7 +111,7 @@ class SupplierForm extends Component {
 
     data.storeId = storeId;
 
-    if(mode === 'update'){
+    if (mode === 'update') {
       data.supplierId = id;
     }
 
@@ -122,138 +123,143 @@ class SupplierForm extends Component {
       handleSubmit,
       initialValues,
       countries,
-      newSuccess,
+      mode,
+      error,
+      done,
     } = this.props;
 
     return (
-      <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
-        <Button size="sm" color="primary" className="pull-right form-btn">
-          <FiSave />
-          &nbsp;
-          <FormattedMessage id="sys.save" />
-        </Button>
-        <br />
-        <br />
-        {
-          newSuccess === false ?
-            <Alert color="danger">
-              <FormattedMessage id="sys.newFailed" />
-            </Alert> :
-            newSuccess === true ?
-              <Alert color="success">
-                <FormattedMessage id="sys.newSuccess" />
-              </Alert> : null
-        }
-        <Row>
-          <Col md={3}>
-            <p className="lead"><FormattedMessage id="sys.logo" /></p>
-            <img
-              src={initialValues.logo || require('../../assets/no_image.svg')}
-              style={{ width: 128, height: 128 }}
-            /><br /><br />
-            <Field
-              name="logo"
-              id="logo"
-              component={renderFileInput}
-            />
-          </Col>
-          <Col md={9}>
-            <Card>
-              <CardHeader>
-                <FormattedMessage id="sys.basicInfo" />
-              </CardHeader>
-              <CardBody>
-                <FormGroup row>
-                  <Label for="name" sm={3}>
-                    <FormattedMessage id="sys.name" />
-                    <span className="text-danger mandatory-field">*</span>
-                  </Label>
-                  <Col sm={9}>
-                    <Field
-                      component={renderField}
-                      name="name"
-                      className="form-control"
-                      id="name"
-                      validate={[required]}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="url" sm={3}>
-                    <FormattedMessage id="sys.website" />
-                  </Label>
-                  <Col sm={9}>
-                    <Field
-                      component={renderField}
-                      name="url"
-                      className="form-control"
-                      id="url"
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="email" sm={3}>
-                    <FormattedMessage id="sys.email" />
-                  </Label>
-                  <Col sm={9}>
-                    <Field
-                      component={renderField}
-                      name="email"
-                      className="form-control"
-                      id="email"
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="contact" sm={3}>
-                    <FormattedMessage id="sys.contactNo" />
-                    <span className="text-danger mandatory-field">*</span>
-                  </Label>
-                  <Col sm={9}>
-                    <Field
-                      component={renderField}
-                      name="contact"
-                      className="form-control"
-                      id="contact"
-                      validate={[required]}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="contact" sm={3}>
-                    <FormattedMessage id="sys.country" />
-                    <span className="text-danger mandatory-field">*</span>
-                  </Label>
-                  <Col sm={9}>
-                    <Field
-                      component={renderSelect}
-                      name="countryId"
-                      id="country-id"
-                      data={countries}
-                      validate={[required]}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="address" sm={3}>
-                    <FormattedMessage id="sys.address" />
-                    <span className="text-danger mandatory-field">*</span>
-                  </Label>
-                  <Col sm={9}>
-                    <Field
-                      component={renderField}
-                      name="address"
-                      className="form-control"
-                      id="address"
-                      validate={[required]}
-                    />
-                  </Col>
-                </FormGroup>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </Form>
+      mode === 'update' && !done ?
+        <ProfileLoader /> :
+        <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
+
+          <Button size="sm" color="primary" className="pull-right form-btn">
+            <FiSave />
+            &nbsp;
+            <FormattedMessage id="sys.save" />
+          </Button>
+          <br />
+          <br />
+          {
+            mode === 'new' && error ?
+              <Alert color="danger">
+                <FormattedMessage id="sys.newFailed" />
+              </Alert> :
+              mode === 'new' && done ?
+                <Alert color="success">
+                  <FormattedMessage id="sys.newSuccess" />
+                </Alert> : null
+          }
+          <Row>
+            <Col md={3}>
+              <p className="lead"><FormattedMessage id="sys.logo" /></p>
+              <img
+                src={initialValues.logo || require('../../assets/no_image.svg')}
+                style={{ width: 128, height: 128 }}
+              /><br /><br />
+              <Field
+                name="logo"
+                id="logo"
+                component={renderFileInput}
+              />
+            </Col>
+            <Col md={9}>
+              <Card>
+                <CardHeader>
+                  <FormattedMessage id="sys.basicInfo" />
+                </CardHeader>
+                <CardBody>
+                  <FormGroup row>
+                    <Label for="name" sm={3}>
+                      <FormattedMessage id="sys.name" />
+                      <span className="text-danger mandatory-field">*</span>
+                    </Label>
+                    <Col sm={9}>
+                      <Field
+                        component={renderField}
+                        name="name"
+                        className="form-control"
+                        id="name"
+                        validate={[required]}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="url" sm={3}>
+                      <FormattedMessage id="sys.website" />
+                    </Label>
+                    <Col sm={9}>
+                      <Field
+                        component={renderField}
+                        name="url"
+                        className="form-control"
+                        id="url"
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="email" sm={3}>
+                      <FormattedMessage id="sys.email" />
+                    </Label>
+                    <Col sm={9}>
+                      <Field
+                        component={renderField}
+                        name="email"
+                        className="form-control"
+                        id="email"
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="contact" sm={3}>
+                      <FormattedMessage id="sys.contactNo" />
+                      <span className="text-danger mandatory-field">*</span>
+                    </Label>
+                    <Col sm={9}>
+                      <Field
+                        component={renderField}
+                        name="contact"
+                        className="form-control"
+                        id="contact"
+                        validate={[required]}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="contact" sm={3}>
+                      <FormattedMessage id="sys.country" />
+                      <span className="text-danger mandatory-field">*</span>
+                    </Label>
+                    <Col sm={9}>
+                      <Field
+                        component={renderSelect}
+                        name="countryId"
+                        id="country-id"
+                        data={countries}
+                        validate={[required]}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="address" sm={3}>
+                      <FormattedMessage id="sys.address" />
+                      <span className="text-danger mandatory-field">*</span>
+                    </Label>
+                    <Col sm={9}>
+                      <Field
+                        component={renderField}
+                        name="address"
+                        className="form-control"
+                        id="address"
+                        validate={[required]}
+                      />
+                    </Col>
+                  </FormGroup>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </Form>
     );
   }
 }
@@ -263,8 +269,9 @@ SupplierForm.propTypes = {
   initialValues: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
-  mode: PropTypes.string,
-  newSuccess: PropTypes.bool,
+  mode: PropTypes.string.isRequired,
+  error: PropTypes.bool.isRequired,
+  done: PropTypes.bool.isRequired,
   storeId: PropTypes.string.isRequired,
   countries: PropTypes.array.isRequired,
 };
@@ -278,7 +285,8 @@ export default withRouter(
     return {
       initialValues: state.supplierReducer.supplierDetails,
       countries: state.publicReducer.countries,
-      newSuccess: state.supplierReducer.newSuccess,
+      done: state.supplierReducer.done,
+      error: state.supplierReducer.error,
       enableReinitialize: true,
     };
   })(SupplierForm)

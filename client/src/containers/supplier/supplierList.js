@@ -70,7 +70,7 @@ class SupplierList extends Component {
       suppliers,
       total,
       count,
-      fetchSuccess,
+      done,
       intl: { formatMessage },
     } = this.props;
 
@@ -90,7 +90,7 @@ class SupplierList extends Component {
           <div className="table-container">
             <Col md={12} className="table-content">
               {
-                !fetchSuccess ? <Loader /> :
+                !done ? <Loader /> :
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <div>
@@ -185,7 +185,7 @@ const mapStateToProps = state => {
   return ({
     suppliers: state.supplierReducer.suppliers.data,
     count: state.supplierReducer.suppliers.count,
-    fetchSuccess: state.supplierReducer.fetchSuccess,
+    done: state.supplierReducer.done,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   });
 };
@@ -197,7 +197,7 @@ SupplierList.propTypes = {
   total: PropTypes.number.isRequired,
   history: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
-  fetchSuccess: PropTypes.bool.isRequired,
+  done: PropTypes.bool.isRequired,
 };
 
 export default withRouter(

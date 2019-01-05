@@ -12,6 +12,7 @@ import supplierReducer from './supplier';
 import manufacturerReducer from './manufacturer';
 import publicReducer from './public';
 import accountReducer from './account';
+import categoryReducer from './category';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   customerReducer,
   dashboardReducer,
   productReducer,
+  categoryReducer,
   pathReducer,
   reportReducer,
   settingReducer,

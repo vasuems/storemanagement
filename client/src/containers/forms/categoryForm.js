@@ -7,9 +7,9 @@ import { Col, Form, FormGroup, Label, Button, Input, Alert } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FiSave } from 'react-icons/fi';
 import {
-  fetchProductCategories,
-  fetchProductCategoryDetails,
-  submitProductCategory,
+  fetchCategories,
+  fetchCategoryDetails,
+  submitCategory,
 } from '../../actions';
 
 const required = value => (value ? undefined : 'Required');
@@ -40,7 +40,7 @@ const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
   </div>
 );
 
-class ProductCategoryForm extends Component {
+class CategoryForm extends Component {
   componentDidMount() {
     const {
       dispatch,
@@ -52,11 +52,11 @@ class ProductCategoryForm extends Component {
     } = this.props;
 
     //TODO: replace the store ID here
-    dispatch(fetchProductCategories({ storeId, pageSize: 200, pageNo: 1 }));
+    dispatch(fetchCategories({ storeId, pageSize: 200, pageNo: 1 }));
 
     if (mode === 'update') {
       dispatch(
-        fetchProductCategoryDetails({
+        fetchCategoryDetails({
           storeId,
           categoryId: id,
         })
@@ -68,7 +68,7 @@ class ProductCategoryForm extends Component {
     const { dispatch, storeId } = this.props;
 
     data.storeId = storeId;
-    dispatch(submitProductCategory(data));
+    dispatch(submitCategory(data));
   };
 
   render() {
@@ -131,7 +131,7 @@ class ProductCategoryForm extends Component {
   }
 }
 
-ProductCategoryForm.propTypes = {
+CategoryForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   storeId: PropTypes.string.isRequired,
@@ -142,22 +142,22 @@ ProductCategoryForm.propTypes = {
   mode: PropTypes.string,
 };
 
-ProductCategoryForm = reduxForm({
-  form: 'productCategoryForm',
-})(ProductCategoryForm);
+CategoryForm = reduxForm({
+  form: 'categoryForm',
+})(CategoryForm);
 
 export default withRouter(
   connect(state => {
-    const { name, parentId } = state.productReducer.categoryDetails;
+    const { name, parentId } = state.categoryReducer.categoryDetails;
 
     return {
       initialValues: {
         name,
         parentId,
       },
-      newSuccess: state.productReducer.newSuccess,
-      categories: state.productReducer.categories.data,
+      newSuccess: state.categoryReducer.newSuccess,
+      categories: state.categoryReducer.categories.data,
       enableReinitialize: true,
     };
-  })(ProductCategoryForm)
+  })(CategoryForm)
 );

@@ -17,10 +17,10 @@ import { FiPlusCircle, FiSearch } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
 import jwt from 'jsonwebtoken';
 import { CategoryListItem, Loader } from '../../components';
-import { fetchProductCategories } from '../../actions';
+import { fetchCategories } from '../../actions';
 import config from '../../config';
 
-class ProductCategoryList extends Component {
+class CategoryList extends Component {
   constructor(props) {
     super(props);
     const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
@@ -37,7 +37,7 @@ class ProductCategoryList extends Component {
       I figure out a good way to handle pagination for list with sub-items
     */
     dispatch(
-      fetchProductCategories(
+      fetchCategories(
         {
           storeId: this.state.storeId,
           pageSize: this.state.pageSize,
@@ -54,7 +54,7 @@ class ProductCategoryList extends Component {
   onPageChange = page => {
     const { dispatch } = this.props;
     dispatch(
-      fetchProductCategories(
+      fetchCategories(
         {
           storeId: this.state.storeId,
           pageSize: this.state.pageSize,
@@ -70,7 +70,7 @@ class ProductCategoryList extends Component {
       categories,
       total,
       count,
-      fetchSuccess,
+      done,
       intl: { formatMessage },
     } = this.props;
     const parentCats = categories.filter(cat => !cat.parentId);
@@ -91,7 +91,7 @@ class ProductCategoryList extends Component {
           <div className="table-container">
             <Col md={12} className="table-content">
               {
-                !fetchSuccess ? <Loader /> :
+                !done ? <Loader /> :
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <div>
@@ -170,22 +170,22 @@ class ProductCategoryList extends Component {
   }
 }
 
-ProductCategoryList.propTypes = {
+CategoryList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired,
   intl: PropTypes.object.isRequired,
   total: PropTypes.number.isRequired,
   count: PropTypes.number.isRequired,
-  fetchSuccess: PropTypes.bool.isRequired,
+  done: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => {
-  const diff = state.productReducer.categories.count / 20;
+  const diff = state.categoryReducer.categories.count / 20;
   return {
-    categories: state.productReducer.categories.data,
-    count: state.productReducer.categories.count,
-    fetchSuccess: state.productReducer.fetchSuccess,
+    categories: state.categoryReducer.categories.data,
+    count: state.categoryReducer.categories.count,
+    done: state.categoryReducer.done,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   };
 };
@@ -194,5 +194,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     null
-  )(injectIntl(ProductCategoryList))
+  )(injectIntl(CategoryList))
 );

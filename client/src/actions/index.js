@@ -2,6 +2,7 @@ export * from './setting';
 export * from './order';
 export * from './customer';
 export * from './product';
+export * from './category';
 export * from './dashboard';
 export * from './path';
 export * from './report';

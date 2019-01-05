@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Breadcrumb, BreadcrumbItem, Button, Col } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
@@ -45,17 +44,8 @@ class Product extends Component {
 }
 
 Product.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-});
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    null
-  )(Product)
-);
+export default withRouter(Product);

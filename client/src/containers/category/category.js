@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Col, Button, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 import { FormattedMessage } from 'react-intl';
-import ProductCategoryForm from '../forms/productCategoryForm';
+import CategoryForm from '../forms/categoryForm';
 import config from '../../config';
 
 class ProductCategory extends Component {
@@ -33,7 +32,7 @@ class ProductCategory extends Component {
         <div className="content-body">
           <div className="table-container">
             <Col md={12} className="table-content">
-              <ProductCategoryForm
+              <CategoryForm
                 mode={path === '/new-category' ? 'new' : 'update'}
                 storeId={storeId} />
             </Col>
@@ -45,16 +44,9 @@ class ProductCategory extends Component {
 }
 
 ProductCategory.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({});
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    null
-  )(ProductCategory)
-);
+export default withRouter(ProductCategory);

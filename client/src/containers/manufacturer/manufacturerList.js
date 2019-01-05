@@ -69,7 +69,7 @@ class ManufacturerList extends Component {
       manufacturers,
       total,
       count,
-      fetchSuccess,
+      done,
       intl: { formatMessage },
     } = this.props;
 
@@ -89,7 +89,7 @@ class ManufacturerList extends Component {
           <div className="table-container">
             <Col md={12} className="table-content">
               {
-                !fetchSuccess ? <Loader /> :
+                !done ? <Loader /> :
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <div>
@@ -186,7 +186,7 @@ ManufacturerList.propTypes = {
   total: PropTypes.number.isRequired,
   count: PropTypes.number.isRequired,
   intl: PropTypes.object.isRequired,
-  fetchSuccess: PropTypes.bool.isRequired,
+  done: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -194,7 +194,7 @@ const mapStateToProps = state => {
   return ({
     manufacturers: state.manufacturerReducer.manufacturers.data,
     count: state.manufacturerReducer.manufacturers.count,
-    fetchSuccess: state.manufacturerReducer.fetchSuccess,
+    done: state.manufacturerReducer.done,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   });
 };

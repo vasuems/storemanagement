@@ -1,77 +1,76 @@
 import { call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import {
-  fetchProductsSuccess,
-  fetchProductsFailed,
-  submitProductSuccess,
-  submitProductFailed,
-  fetchProductDetailsSuccess,
-  fetchProductDetailsFailed,
+  fetchCategoriesSuccess,
+  fetchCategoriesFailed,
+  submitCategorySuccess,
+  submitCategoryFailed,
+  fetchCategoryDetailsSuccess,
+  fetchCategoryDetailsFailed,
   clearToken,
 } from '../actions';
 import config from '../config';
 
-export function* fetchProducts(action) {
+export function* fetchCategories(action) {
   try {
     const { storeId, pageNo, pageSize } = action.value;
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${storeId}/products?page=${pageNo}&size=${pageSize}`,
+      url: `${config.apiDomain}/stores/${storeId}/categories?page=${pageNo}&size=${pageSize}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
     });
 
-    yield put(fetchProductsSuccess(res.data));
+    yield put(fetchCategoriesSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
       yield put(clearToken());
     } else {
-      yield put(fetchProductsFailed());
+      yield put(fetchCategoriesFailed());
     }
   }
 }
 
-export function* fetchProductDetails(action) {
+export function* fetchCategoryDetails(action) {
   try {
     const res = yield axios({
       method: 'get',
-      url: `${config.apiDomain}/stores/${action.value.storeId}/products/${
-        action.value.productId
+      url: `${config.apiDomain}/stores/${action.value.storeId}/categories/${
+        action.value.categoryId
         }`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
     });
 
-    yield put(fetchProductDetailsSuccess(res.data));
+    yield put(fetchCategoryDetailsSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
       yield put(clearToken());
     } else {
-      yield put(fetchProductDetailsFailed());
+      yield put(fetchCategoryDetailsFailed());
     }
   }
 }
 
-export function* upsertProduct(action) {
+export function* addCategory(action) {
   try {
-    const { value, mode } = action;
     const res = yield axios({
-      method: mode === 'new' ? 'post' : 'put',
-      url: `${config.apiDomain}/stores/${value.storeId}/products${mode === 'new' ? '' : '/' + value.productId}`,
+      method: 'post',
+      url: `${config.apiDomain}/stores/${action.value.storeId}/categories`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
-      data: value,
+      data: action.value,
     });
 
-    yield put(submitProductSuccess(res.data));
+    yield put(submitCategorySuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
       yield put(clearToken());
     } else {
-      yield put(submitProductFailed());
+      yield put(submitCategoryFailed());
     }
   }
 }

@@ -33,7 +33,7 @@ import {
 import {
   fetchProductDetails,
   clearProductDetails,
-  fetchProductCategories,
+  fetchCategories,
   fetchSuppliers,
   fetchManufacturers,
   submitProduct,
@@ -106,7 +106,7 @@ class OrderForm extends Component {
       },
     } = this.props;
 
-    dispatch(fetchProductCategories({ storeId, pageSize: 200, pageNo: 1 }));
+    dispatch(fetchCategories({ storeId, pageSize: 200, pageNo: 1 }));
     dispatch(fetchSuppliers(storeId));
     dispatch(fetchManufacturers(storeId));
 

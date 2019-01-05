@@ -1,13 +1,15 @@
 import { call, all, takeEvery } from 'redux-saga/effects';
 import { fetchOrders, fetchOrderDetails } from './order';
 import {
-  fetchProductCategories,
   fetchProducts,
   fetchProductDetails,
-  fetchProductCategoryDetails,
   upsertProduct,
-  addProductCategory,
 } from './product';
+import {
+  fetchCategories,
+  fetchCategoryDetails,
+  addCategory,
+} from './category';
 import { fetchSalesReportProducts, fetchSalesReportCategories } from './report';
 import { fetchDashboardData } from './dashboard';
 import { fetchStoreSettings } from './setting';
@@ -24,12 +26,12 @@ import {
   CLEAR_TOKEN,
   FETCH_ORDERS,
   FETCH_ORDER_DETAILS,
-  FETCH_PRODUCT_CATEGORIES,
-  FETCH_PRODUCT_CATEGORY_DETAILS,
+  FETCH_CATEGORIES,
+  FETCH_CATEGORY_DETAILS,
   FETCH_PRODUCTS,
   FETCH_PRODUCT_DETAILS,
   SUBMIT_PRODUCT,
-  SUBMIT_PRODUCT_CATEGORY,
+  SUBMIT_CATEGORY,
   FETCH_SUPPLIERS,
   FETCH_SUPPLIER_DETAILS,
   SUBMIT_SUPPLIER,
@@ -51,11 +53,11 @@ export default function* rootSaga() {
     takeEvery(CLEAR_TOKEN, clearToken),
     takeEvery(FETCH_ORDERS, fetchOrders),
     takeEvery(FETCH_ORDER_DETAILS, fetchOrderDetails),
-    takeEvery(FETCH_PRODUCT_CATEGORIES, fetchProductCategories),
+    takeEvery(FETCH_CATEGORIES, fetchCategories),
     takeEvery(FETCH_PRODUCTS, fetchProducts),
     takeEvery(FETCH_PRODUCT_DETAILS, fetchProductDetails),
     takeEvery(SUBMIT_PRODUCT, upsertProduct),
-    takeEvery(SUBMIT_PRODUCT_CATEGORY, addProductCategory),
+    takeEvery(SUBMIT_CATEGORY, addCategory),
     takeEvery(FETCH_DASHBOARD_DATA, fetchDashboardData),
     takeEvery(FETCH_SALES_REPORT_PRODUCTS, fetchSalesReportProducts),
     takeEvery(FETCH_SALES_REPORT_CATEGORIES, fetchSalesReportCategories),
@@ -67,7 +69,7 @@ export default function* rootSaga() {
     takeEvery(FETCH_MANUFACTURERS, fetchManufacturers),
     takeEvery(SUBMIT_MANUFACTURER, addManufacturer),
     takeEvery(FETCH_MANUFACTURER_DETAILS, fetchManufacturerDetails),
-    takeEvery(FETCH_PRODUCT_CATEGORY_DETAILS, fetchProductCategoryDetails),
+    takeEvery(FETCH_CATEGORY_DETAILS, fetchCategoryDetails),
     takeEvery(FETCH_COUNTRIES, fetchCountries),
     takeEvery(FETCH_CURRENCIES, fetchCurrencies),
     takeEvery(FETCH_ACCOUNT, fetchAccount),

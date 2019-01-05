@@ -4,8 +4,8 @@ import ProductList from './product/productList';
 import Product from './product/product';
 import SupplierList from './supplier/supplierList';
 import Supplier from './supplier/supplier';
-import ProductCategoryList from './product/productCategoryList';
-import ProductCategory from './product/productCategory';
+import CategoryList from './category/categoryList';
+import Category from './category/category';
 import ManufacturerList from './manufacturer/manufacturerList';
 import Manufacturer from './manufacturer/manufacturer';
 import Payment from './payment/payment';
@@ -16,8 +16,8 @@ export {
   OrderList,
   Order,
   ProductList,
-  ProductCategory,
-  ProductCategoryList,
+  Category,
+  CategoryList,
   Payment,
   Setting,
   Product,

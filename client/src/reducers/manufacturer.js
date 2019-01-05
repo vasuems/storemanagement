@@ -5,27 +5,30 @@ import {
   FETCH_MANUFACTURER_DETAILS_FAILED,
   SUBMIT_MANUFACTURER_SUCCESS,
   SUBMIT_MANUFACTURER_FAILED,
+  CLEAR_MANUFACTURER_DETAILS,
 } from '../actions';
 
 const initialState = {
   manufacturers: { data: [], count: 0 },
   manufacturerDetails: {},
-  newSuccess: undefined,
-  fetchSuccess: false,
+  done: false,
+  error: false,
 };
 
 export default function manufacturerReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_MANUFACTURERS_SUCCESS:
-      return { ...state, manufacturers: action.value, fetchSuccess: true };
+      return { ...state, manufacturers: action.value, done: true };
     case FETCH_MANUFACTURER_DETAILS_SUCCESS:
-      return { ...state, manufacturerDetails: action.value };
+      return { ...state, manufacturerDetails: action.value, done: true };
     case SUBMIT_MANUFACTURER_SUCCESS:
-      return { ...state, newSuccess: true };
+      return { ...state, done: true };
+    case CLEAR_MANUFACTURER_DETAILS:
+      return { ...state, ...initialState };
     case SUBMIT_MANUFACTURER_FAILED:
-      return { ...state, newSuccess: false };
     case FETCH_MANUFACTURERS_FAILED:
     case FETCH_MANUFACTURER_DETAILS_FAILED:
+      return { ...state, error: true };
     default:
       return state;
   }

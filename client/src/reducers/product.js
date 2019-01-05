@@ -1,50 +1,34 @@
 import {
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAILED,
-  FETCH_PRODUCT_CATEGORIES_SUCCESS,
-  FETCH_PRODUCT_CATEGORIES_FAILED,
   CLEAR_PRODUCT_DETAILS,
   SUBMIT_PRODUCT_SUCCESS,
   SUBMIT_PRODUCT_FAILED,
-  SUBMIT_PRODUCT_CATEGORY_SUCCESS,
-  SUBMIT_PRODUCT_CATEGORY_FAILED,
   FETCH_PRODUCT_DETAILS_SUCCESS,
   FETCH_PRODUCT_DETAILS_FAILED,
-  FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS,
-  FETCH_PRODUCT_CATEGORY_DETAILS_FAILED,
 } from '../actions';
 
 const initialState = {
   products: { data: [], count: 0 },
-  categories: { data: [], count: 0 },
   productDetails: {},
-  categoryDetails: {},
-  newSuccess: undefined,
-  fetchSuccess: false,
+  done: false,
+  error: false,
 };
 
 export default function productReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_PRODUCTS_SUCCESS:
-      return { ...state, products: action.value, fetchSuccess: true };
+      return { ...state, products: action.value, done: true };
     case FETCH_PRODUCT_DETAILS_SUCCESS:
-      return { ...state, productDetails: action.value };
+      return { ...state, productDetails: action.value, done: true };
     case CLEAR_PRODUCT_DETAILS:
-      return { ...state, productDetails: {} };
+      return { ...state, ...initialState };
     case SUBMIT_PRODUCT_SUCCESS:
-    case SUBMIT_PRODUCT_CATEGORY_SUCCESS:
-      return { ...state, newSuccess: true };
+      return { ...state, done: true };
     case SUBMIT_PRODUCT_FAILED:
-    case SUBMIT_PRODUCT_CATEGORY_FAILED:
-      return { ...state, newSuccess: false };
-    case FETCH_PRODUCT_CATEGORIES_SUCCESS:
-      return { ...state, categories: action.value, fetchSuccess: true };
-    case FETCH_PRODUCT_CATEGORY_DETAILS_SUCCESS:
-      return { ...state, categoryDetails: action.value };
     case FETCH_PRODUCTS_FAILED:
-    case FETCH_PRODUCT_CATEGORIES_FAILED:
     case FETCH_PRODUCT_DETAILS_FAILED:
-    case FETCH_PRODUCT_CATEGORY_DETAILS_FAILED:
+      return { ...state, error: true };
     default:
       return state;
   }

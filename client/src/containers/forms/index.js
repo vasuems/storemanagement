@@ -1,6 +1,6 @@
 import StoreSettingForm from './storeSettingForm';
 import AccountSettingForm from './accountSettingForm';
-import ProductCategoryForm from './productCategoryForm';
+import CategoryForm from './categoryForm';
 import ProductForm from './productForm';
 import PasswordForm from './passwordForm';
 import LoginForm from './loginForm';
@@ -13,7 +13,7 @@ import OrderForm from './orderForm';
 export {
   StoreSettingForm,
   AccountSettingForm,
-  ProductCategoryForm,
+  CategoryForm,
   ProductForm,
   PasswordForm,
   LoginForm,

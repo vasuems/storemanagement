@@ -70,7 +70,7 @@ class ProductList extends Component {
       products,
       total,
       count,
-      fetchSuccess,
+      done,
       intl: { formatMessage },
     } = this.props;
 
@@ -90,7 +90,7 @@ class ProductList extends Component {
           <div className="table-container">
             <Col md={12} className="table-content">
               {
-                !fetchSuccess ?
+                !done ?
                   <Loader />
                   :
                   <div>
@@ -196,7 +196,7 @@ ProductList.propTypes = {
   total: PropTypes.number.isRequired,
   count: PropTypes.number.isRequired,
   intl: PropTypes.object.isRequired,
-  fetchSuccess: PropTypes.bool,
+  done: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -204,7 +204,7 @@ const mapStateToProps = state => {
   return {
     products: state.productReducer.products.data,
     count: state.productReducer.products.count,
-    fetchSuccess: state.productReducer.fetchSuccess,
+    done: state.productReducer.done,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   };
 };

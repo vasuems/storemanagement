@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Breadcrumb, BreadcrumbItem, Button, Col } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
@@ -34,7 +33,7 @@ class Manufacturer extends Component {
           <div className="table-container">
             <Col md={12} className="table-content">
               <ManufacturerForm
-                mode={path === '/new-category' ? 'new' : 'update'}
+                mode={path === '/new-manufacturer' ? 'new' : 'update'}
                 storeId={storeId}
               />
             </Col>
@@ -46,16 +45,9 @@ class Manufacturer extends Component {
 }
 
 Manufacturer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({});
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    null
-  )(Manufacturer)
-);
+export default withRouter(Manufacturer);
