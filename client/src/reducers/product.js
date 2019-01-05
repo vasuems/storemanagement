@@ -21,14 +21,14 @@ export default function productReducer(state = initialState, action) {
       return { ...state, products: action.value, done: true };
     case FETCH_PRODUCT_DETAILS_SUCCESS:
       return { ...state, productDetails: action.value, done: true };
-    case CLEAR_PRODUCT_DETAILS:
-      return { ...state, ...initialState };
     case SUBMIT_PRODUCT_SUCCESS:
       return { ...state, done: true };
     case SUBMIT_PRODUCT_FAILED:
     case FETCH_PRODUCTS_FAILED:
     case FETCH_PRODUCT_DETAILS_FAILED:
       return { ...state, error: true };
+    case CLEAR_PRODUCT_DETAILS:
+      return { ...state, ...initialState };
     default:
       return state;
   }

@@ -132,7 +132,6 @@ class SupplierForm extends Component {
       mode === 'update' && !done ?
         <ProfileLoader /> :
         <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
-
           <Button size="sm" color="primary" className="pull-right form-btn">
             <FiSave />
             &nbsp;
@@ -270,7 +269,7 @@ SupplierForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
   mode: PropTypes.string.isRequired,
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
   done: PropTypes.bool.isRequired,
   storeId: PropTypes.string.isRequired,
   countries: PropTypes.array.isRequired,

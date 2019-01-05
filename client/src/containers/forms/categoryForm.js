@@ -7,10 +7,12 @@ import { Col, Form, FormGroup, Label, Button, Input, Alert } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FiSave } from 'react-icons/fi';
 import {
-  fetchCategories,
+  fetchParentCategories,
   fetchCategoryDetails,
   submitCategory,
+  clearCategoryDetails,
 } from '../../actions';
+import { Loader } from '../../components';
 
 const required = value => (value ? undefined : 'Required');
 
@@ -51,8 +53,7 @@ class CategoryForm extends Component {
       },
     } = this.props;
 
-    //TODO: replace the store ID here
-    dispatch(fetchCategories({ storeId, pageSize: 200, pageNo: 1 }));
+    dispatch(fetchParentCategories({ storeId, pageSize: 200, pageNo: 1 }));
 
     if (mode === 'update') {
       dispatch(
@@ -60,6 +61,10 @@ class CategoryForm extends Component {
           storeId,
           categoryId: id,
         })
+      );
+    } else {
+      dispatch(
+        clearCategoryDetails()
       );
     }
   }
@@ -75,58 +80,62 @@ class CategoryForm extends Component {
     const {
       handleSubmit,
       categories,
-      newSuccess,
+      mode,
+      done,
+      error,
     } = this.props;
 
     return (
-      <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
-        <Button size="sm" color="primary" className="pull-right form-btn">
-          <FiSave />
-          &nbsp;
-          <FormattedMessage id="sys.save" />
-        </Button>
-        <br />
-        <br />
-        {
-          newSuccess === false ?
-            <Alert color="danger">
-              <FormattedMessage id="sys.newFailed" />
-            </Alert> :
-            newSuccess === true ?
-              <Alert color="success">
-                <FormattedMessage id="sys.newSuccess" />
-              </Alert> : null
-        }
-        <FormGroup row>
-          <Label for="name" sm={2}>
-            <FormattedMessage id="sys.categoryName" />
-            <span className="text-danger mandatory-field">*</span>
-          </Label>
-          <Col sm={10}>
-            <Field
-              component={renderField}
-              name="name"
-              className="form-control"
-              id="name"
-              validate={[required]}
-            />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="parent-id" sm={2}>
-            <FormattedMessage id="sys.parentCategory" />
-          </Label>
-          <Col sm={10}>
-            <Field
-              component={renderSelect}
-              id="parent-id"
-              name="parentId"
-              data={categories.filter(cat => !cat.parentId)}
-            >
-            </Field>
-          </Col>
-        </FormGroup>
-      </Form>
+      mode === 'update' && !done ?
+        <Loader /> :
+        <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
+          <Button size="sm" color="primary" className="pull-right form-btn">
+            <FiSave />
+            &nbsp;
+            <FormattedMessage id="sys.save" />
+          </Button>
+          <br />
+          <br />
+          {
+            mode === 'new' && error ?
+              <Alert color="danger">
+                <FormattedMessage id="sys.newFailed" />
+              </Alert> :
+              mode === 'new' && done ?
+                <Alert color="success">
+                  <FormattedMessage id="sys.newSuccess" />
+                </Alert> : null
+          }
+          <FormGroup row>
+            <Label for="name" sm={2}>
+              <FormattedMessage id="sys.categoryName" />
+              <span className="text-danger mandatory-field">*</span>
+            </Label>
+            <Col sm={10}>
+              <Field
+                component={renderField}
+                name="name"
+                className="form-control"
+                id="name"
+                validate={[required]}
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="parent-id" sm={2}>
+              <FormattedMessage id="sys.parentCategory" />
+            </Label>
+            <Col sm={10}>
+              <Field
+                component={renderSelect}
+                id="parent-id"
+                name="parentId"
+                data={categories.filter(cat => !cat.parentId)}
+              >
+              </Field>
+            </Col>
+          </FormGroup>
+        </Form>
     );
   }
 }
@@ -137,9 +146,10 @@ CategoryForm.propTypes = {
   storeId: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  newSuccess: PropTypes.bool,
+  done: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
   match: PropTypes.object,
-  mode: PropTypes.string,
+  mode: PropTypes.string.isRequired,
 };
 
 CategoryForm = reduxForm({
@@ -148,14 +158,10 @@ CategoryForm = reduxForm({
 
 export default withRouter(
   connect(state => {
-    const { name, parentId } = state.categoryReducer.categoryDetails;
-
     return {
-      initialValues: {
-        name,
-        parentId,
-      },
-      newSuccess: state.categoryReducer.newSuccess,
+      initialValues: state.categoryReducer.categoryDetails,
+      done: state.categoryReducer.done,
+      error: state.categoryReducer.error,
       categories: state.categoryReducer.categories.data,
       enableReinitialize: true,
     };

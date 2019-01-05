@@ -32,6 +32,18 @@ export function fetchCategoriesFailed() {
   return { type: FETCH_CATEGORIES_FAILED };
 }
 
+export function fetchParentCategories(data) {
+  return { type: FETCH_PARENT_CATEGORIES, value: data };
+}
+
+export function fetchParentCategoriesSuccess(data) {
+  return { type: FETCH_PARENT_CATEGORIES_SUCCESS, value: data };
+}
+
+export function fetchParentCategoriesFailed() {
+  return { type: FETCH_PARENT_CATEGORIES_FAILED };
+}
+
 export function fetchCategoryDetails(data) {
   return { type: FETCH_CATEGORY_DETAILS, value: data };
 }

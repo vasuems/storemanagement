@@ -3,6 +3,8 @@ import axios from 'axios';
 import {
   fetchCategoriesSuccess,
   fetchCategoriesFailed,
+  fetchParentCategoriesSuccess,
+  fetchParentCategoriesFailed,
   submitCategorySuccess,
   submitCategoryFailed,
   fetchCategoryDetailsSuccess,
@@ -28,6 +30,27 @@ export function* fetchCategories(action) {
       yield put(clearToken());
     } else {
       yield put(fetchCategoriesFailed());
+    }
+  }
+}
+
+export function* fetchParentCategories(action) {
+  try {
+    const { storeId, pageNo, pageSize } = action.value;
+    const res = yield axios({
+      method: 'get',
+      url: `${config.apiDomain}/stores/${storeId}/categories?page=${pageNo}&size=${pageSize}`,
+      headers: {
+        authorization: localStorage.getItem(config.accessTokenKey),
+      },
+    });
+
+    yield put(fetchParentCategoriesSuccess(res.data));
+  } catch (error) {
+    if (error.response.status === 401) {
+      yield put(clearToken());
+    } else {
+      yield put(fetchParentCategoriesFailed());
     }
   }
 }

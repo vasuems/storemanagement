@@ -48,5 +48,4 @@ ProductCategory.propTypes = {
   match: PropTypes.object.isRequired,
 };
 
-
 export default withRouter(ProductCategory);

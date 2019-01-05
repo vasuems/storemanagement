@@ -357,11 +357,11 @@ ProductForm.propTypes = {
   suppliers: PropTypes.array.isRequired,
   manufacturers: PropTypes.array.isRequired,
   done: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
-  mode: PropTypes.string,
+  mode: PropTypes.string.isRequired,
   storeId: PropTypes.string.isRequired,
   initialValues: PropTypes.object,
 };

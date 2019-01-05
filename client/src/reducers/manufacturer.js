@@ -23,12 +23,12 @@ export default function manufacturerReducer(state = initialState, action) {
       return { ...state, manufacturerDetails: action.value, done: true };
     case SUBMIT_MANUFACTURER_SUCCESS:
       return { ...state, done: true };
-    case CLEAR_MANUFACTURER_DETAILS:
-      return { ...state, ...initialState };
     case SUBMIT_MANUFACTURER_FAILED:
     case FETCH_MANUFACTURERS_FAILED:
     case FETCH_MANUFACTURER_DETAILS_FAILED:
       return { ...state, error: true };
+    case CLEAR_MANUFACTURER_DETAILS:
+      return { ...state, ...initialState };
     default:
       return state;
   }
