@@ -77,7 +77,6 @@ class ProductForm extends Component {
     const {
       dispatch,
       mode,
-      done,
       storeId,
       match: {
         params: { id },
@@ -126,15 +125,14 @@ class ProductForm extends Component {
       categories,
       suppliers,
       done,
+      loaded,
       error,
       manufacturers,
-      initialValues,
       mode,
-      intl: { formatMessage },
     } = this.props;
 
     return (
-      mode === 'update' && !done ?
+      mode === 'update' && !loaded ?
         <ParallelLoader /> :
         <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
           <Button size="sm" color="primary" className="pull-right form-btn">
@@ -145,11 +143,11 @@ class ProductForm extends Component {
           <br />
           <br />
           {
-            mode === 'new' && error ?
+            error ?
               <Alert color="danger">
                 <FormattedMessage id="sys.newFailed" />
               </Alert> :
-              mode === 'new' && done ?
+              done ?
                 <Alert color="success">
                   <FormattedMessage id="sys.newSuccess" />
                 </Alert> : null
@@ -354,6 +352,7 @@ ProductForm.propTypes = {
   suppliers: PropTypes.array.isRequired,
   manufacturers: PropTypes.array.isRequired,
   done: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired,
   error: PropTypes.bool,
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
@@ -374,6 +373,7 @@ export default withRouter(
       categories: state.categoryReducer.categories.data,
       suppliers: state.supplierReducer.suppliers.data,
       manufacturers: state.manufacturerReducer.manufacturers.data,
+      loaded: state.productReducer.loaded,
       done: state.productReducer.done,
       error: state.productReducer.error,
       enableReinitialize: true,

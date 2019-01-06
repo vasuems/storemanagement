@@ -128,10 +128,11 @@ class SupplierForm extends Component {
       mode,
       error,
       done,
+      loaded,
     } = this.props;
 
     return (
-      mode === 'update' && !done ?
+      mode === 'update' && !loaded ?
         <ProfileLoader /> :
         <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
           <Button size="sm" color="primary" className="pull-right form-btn">
@@ -142,11 +143,11 @@ class SupplierForm extends Component {
           <br />
           <br />
           {
-            mode === 'new' && error ?
+            error ?
               <Alert color="danger">
                 <FormattedMessage id="sys.newFailed" />
               </Alert> :
-              mode === 'new' && done ?
+              done ?
                 <Alert color="success">
                   <FormattedMessage id="sys.newSuccess" />
                 </Alert> : null
@@ -273,6 +274,7 @@ SupplierForm.propTypes = {
   mode: PropTypes.string.isRequired,
   error: PropTypes.bool,
   done: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired,
   storeId: PropTypes.string.isRequired,
   countries: PropTypes.array.isRequired,
 };
@@ -287,6 +289,7 @@ export default withRouter(
       initialValues: state.supplierReducer.supplierDetails,
       countries: state.publicReducer.countries,
       done: state.supplierReducer.done,
+      loaded: state.supplierReducer.loaded,
       error: state.supplierReducer.error,
       enableReinitialize: true,
     };

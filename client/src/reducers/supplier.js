@@ -11,6 +11,7 @@ import {
 const initialState = {
   suppliers: { data: [], count: 0 },
   supplierDetails: {},
+  loaded: false,
   done: false,
   error: false,
 };
@@ -18,9 +19,9 @@ const initialState = {
 export default function supplierReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_SUPPLIERS_SUCCESS:
-      return { ...state, suppliers: action.value, done: true };
+      return { ...state, suppliers: action.value, loaded: true };
     case FETCH_SUPPLIER_DETAILS_SUCCESS:
-      return { ...state, supplierDetails: action.value, done: true };
+      return { ...state, supplierDetails: action.value, loaded: true };
     case SUBMIT_SUPPLIER_SUCCESS:
       return { ...state, done: true };
     case SUBMIT_SUPPLIER_FAILED:

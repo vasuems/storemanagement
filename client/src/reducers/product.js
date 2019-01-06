@@ -11,6 +11,7 @@ import {
 const initialState = {
   products: { data: [], count: 0 },
   productDetails: {},
+  loaded: false,
   done: false,
   error: false,
 };
@@ -18,11 +19,11 @@ const initialState = {
 export default function productReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_PRODUCTS_SUCCESS:
-      return { ...state, products: action.value, done: true };
+      return { ...state, products: action.value, loaded: true };
     case FETCH_PRODUCT_DETAILS_SUCCESS:
-      return { ...state, productDetails: action.value, done: true };
+      return { ...state, productDetails: action.value, loaded: true };
     case SUBMIT_PRODUCT_SUCCESS:
-      return { ...state, done: true };
+      return { ...state, productDetails: action.value, done: true };
     case SUBMIT_PRODUCT_FAILED:
     case FETCH_PRODUCTS_FAILED:
     case FETCH_PRODUCT_DETAILS_FAILED:

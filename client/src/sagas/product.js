@@ -56,10 +56,10 @@ export function* fetchProductDetails(action) {
 
 export function* upsertProduct(action) {
   try {
-    const { value, mode } = action;
+    const { value } = action;
     const res = yield axios({
-      method: mode === 'new' ? 'post' : 'put',
-      url: `${config.apiDomain}/stores/${value.storeId}/products${mode === 'new' ? '' : '/' + value.productId}`,
+      method: value.mode === 'new' ? 'post' : 'put',
+      url: `${config.apiDomain}/stores/${value.storeId}/products${value.mode === 'new' ? '' : '/' + value.productId}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },

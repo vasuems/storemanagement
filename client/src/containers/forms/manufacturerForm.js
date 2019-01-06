@@ -102,9 +102,21 @@ class ManufacturerForm extends Component {
   }
 
   onSubmit = data => {
-    const { dispatch, storeId } = this.props;
+    const {
+      dispatch,
+      mode,
+      storeId,
+      match: {
+        params: { id },
+      },
+    } = this.props;
 
     data.storeId = storeId;
+    data.mode = mode;
+
+    if (mode === 'update') {
+      data.manufacturerId = id;
+    }
 
     dispatch(submitManufacturer(data));
   };
@@ -116,11 +128,12 @@ class ManufacturerForm extends Component {
       countries,
       mode,
       error,
+      loaded,
       done,
     } = this.props;
 
     return (
-      mode === 'update' && !done ?
+      mode === 'update' && !loaded ?
         <ProfileLoader /> :
         <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
           <Button size="sm" color="primary" className="pull-right form-btn">
@@ -131,11 +144,11 @@ class ManufacturerForm extends Component {
           <br />
           <br />
           {
-            mode === 'new' && error ?
+            error ?
               <Alert color="danger">
                 <FormattedMessage id="sys.newFailed" />
               </Alert> :
-              mode === 'new' && done ?
+              done ?
                 <Alert color="success">
                   <FormattedMessage id="sys.newSuccess" />
                 </Alert> : null
@@ -262,6 +275,7 @@ ManufacturerForm.propTypes = {
   match: PropTypes.object,
   mode: PropTypes.string.isRequired,
   error: PropTypes.bool,
+  loaded: PropTypes.bool.isRequired,
   done: PropTypes.bool.isRequired,
   storeId: PropTypes.string.isRequired,
   countries: PropTypes.array.isRequired,
@@ -277,6 +291,7 @@ export default withRouter(
       initialValues: state.manufacturerReducer.manufacturerDetails,
       countries: state.publicReducer.countries,
       done: state.manufacturerReducer.done,
+      loaded: state.manufacturerReducer.loaded,
       error: state.supplierReducer.error,
       enableReinitialize: true,
     };

@@ -11,6 +11,7 @@ import {
 const initialState = {
   manufacturers: { data: [], count: 0 },
   manufacturerDetails: {},
+  loaded: false,
   done: false,
   error: false,
 };
@@ -18,11 +19,11 @@ const initialState = {
 export default function manufacturerReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_MANUFACTURERS_SUCCESS:
-      return { ...state, manufacturers: action.value, done: true };
+      return { ...state, manufacturers: action.value, loaded: true };
     case FETCH_MANUFACTURER_DETAILS_SUCCESS:
-      return { ...state, manufacturerDetails: action.value, done: true };
+      return { ...state, manufacturerDetails: action.value, loaded: true };
     case SUBMIT_MANUFACTURER_SUCCESS:
-      return { ...state, done: true };
+      return { ...state, manufacturerDetails: action.value, done: true };
     case SUBMIT_MANUFACTURER_FAILED:
     case FETCH_MANUFACTURERS_FAILED:
     case FETCH_MANUFACTURER_DETAILS_FAILED:

@@ -211,6 +211,53 @@ Manufacturer.prototype.add = function (manufacturer) {
   });
 };
 
+Manufacturer.prototype.update = function (manufacturer) {
+  return new Promise((resolve, reject) => {
+    if (manufacturer instanceof Manufacturer) {
+      const {
+        code,
+        name,
+        url,
+        email,
+        contact,
+        address,
+        logo,
+        storeId,
+        countryId,
+        addedBy,
+      } = manufacturer;
+
+      db.query(
+        `update manufacturer set name='${name}', url='${url}', email='${email}', contact='${contact}', 
+         address='${address}', logo='${logo}', country_id='${countryId}'
+         where code='${code}' and added_by='${addedBy}'`,
+        (error, results) => {
+          if (error || results.affectedRows == 0) {
+            reject(new BadRequestError('Invalide manufacturer data.'));
+          } else {
+            resolve(
+              new Manufacturer(
+                code,
+                name,
+                url,
+                email,
+                contact,
+                address,
+                logo,
+                storeId,
+                countryId,
+                addedBy
+              )
+            );
+          }
+        }
+      );
+    } else {
+      reject(new BadRequestError('Invalide manufacturer data.'));
+    }
+  });
+};
+
 Manufacturer.prototype.delete = function (code) {
   return new Promise((resolve, reject) => {
     db.query(

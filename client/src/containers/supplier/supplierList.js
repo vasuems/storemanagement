@@ -70,7 +70,7 @@ class SupplierList extends Component {
       suppliers,
       total,
       count,
-      done,
+      loaded,
       intl: { formatMessage },
     } = this.props;
 
@@ -90,7 +90,7 @@ class SupplierList extends Component {
           <div className="table-container">
             <Col md={12} className="table-content">
               {
-                !done ? <Loader /> :
+                !loaded ? <Loader /> :
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <div>
@@ -180,16 +180,6 @@ class SupplierList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const diff = state.supplierReducer.suppliers.count / 20;
-  return ({
-    suppliers: state.supplierReducer.suppliers.data,
-    count: state.supplierReducer.suppliers.count,
-    done: state.supplierReducer.done,
-    total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
-  });
-};
-
 SupplierList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   suppliers: PropTypes.array.isRequired,
@@ -197,7 +187,17 @@ SupplierList.propTypes = {
   total: PropTypes.number.isRequired,
   history: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
-  done: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = state => {
+  const diff = state.supplierReducer.suppliers.count / 20;
+  return ({
+    suppliers: state.supplierReducer.suppliers.data,
+    count: state.supplierReducer.suppliers.count,
+    loaded: state.supplierReducer.loaded,
+    total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
+  });
 };
 
 export default withRouter(

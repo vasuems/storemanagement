@@ -652,7 +652,7 @@ app.put(
         countryId,
       } = req.body;
       const manufacturer = new Manufacturer(
-        req.params.supplierId,
+        req.params.manufacturerId,
         name,
         url,
         email,

@@ -53,16 +53,16 @@ export function* fetchManufacturerDetails(action) {
   }
 }
 
-export function* addManufacturer(action) {
+export function* upsertManufacturer(action) {
   try {
-    const { storeId } = action.value;
+    const { value } = action;
     const res = yield axios({
-      method: 'post',
-      url: `${config.apiDomain}/stores/${storeId}/manufacturers`,
+      method: value.mode === 'new' ? 'post' : 'put',
+      url: `${config.apiDomain}/stores/${value.storeId}/manufacturers${value.mode === 'new' ? '' : '/' + value.manufacturerId}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
-      data: action.value,
+      data: value,
     });
 
     yield put(submitManufacturerSuccess(res.data));

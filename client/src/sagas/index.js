@@ -15,11 +15,11 @@ import { fetchSalesReportProducts, fetchSalesReportCategories } from './report';
 import { fetchDashboardData } from './dashboard';
 import { fetchStoreSettings } from './setting';
 import { submitLoginData, clearToken } from './auth';
-import { fetchSuppliers, fetchSupplierDetails, addSupplier } from './supplier';
+import { fetchSuppliers, fetchSupplierDetails, upsertSupplier } from './supplier';
 import {
   fetchManufacturers,
   fetchManufacturerDetails,
-  addManufacturer,
+  upsertManufacturer,
 } from './manufacturer';
 import { fetchCountries, fetchCurrencies } from './public';
 import { fetchAccount } from './account';
@@ -68,9 +68,9 @@ export default function* rootSaga() {
     takeEvery(SUBMIT_LOGIN_DATA, submitLoginData),
     takeEvery(FETCH_SUPPLIERS, fetchSuppliers),
     takeEvery(FETCH_SUPPLIER_DETAILS, fetchSupplierDetails),
-    takeEvery(SUBMIT_SUPPLIER, addSupplier),
+    takeEvery(SUBMIT_SUPPLIER, upsertSupplier),
     takeEvery(FETCH_MANUFACTURERS, fetchManufacturers),
-    takeEvery(SUBMIT_MANUFACTURER, addManufacturer),
+    takeEvery(SUBMIT_MANUFACTURER, upsertManufacturer),
     takeEvery(FETCH_MANUFACTURER_DETAILS, fetchManufacturerDetails),
     takeEvery(FETCH_CATEGORY_DETAILS, fetchCategoryDetails),
     takeEvery(FETCH_COUNTRIES, fetchCountries),

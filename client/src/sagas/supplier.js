@@ -53,12 +53,12 @@ export function* fetchSupplierDetails(action) {
   }
 }
 
-export function* addSupplier(action) {
+export function* upsertSupplier(action) {
   try {
-    const { storeId } = action.value;
+    const { value } = action;
     const res = yield axios({
-      method: 'post',
-      url: `${config.apiDomain}/stores/${storeId}/suppliers`,
+      method: value.mode === 'new' ? 'post' : 'put',
+      url: `${config.apiDomain}/stores/${value.storeId}/suppliers${value.mode === 'new' ? '' : '/' + value.supplierId}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
