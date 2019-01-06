@@ -70,7 +70,7 @@ class CategoryList extends Component {
       categories,
       total,
       count,
-      done,
+      loaded,
       intl: { formatMessage },
     } = this.props;
     const parentCats = categories.filter(cat => !cat.parentId);
@@ -91,7 +91,7 @@ class CategoryList extends Component {
           <div className="table-container">
             <Col md={12} className="table-content">
               {
-                !done ? <Loader /> :
+                !loaded ? <Loader /> :
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <div>
@@ -177,7 +177,7 @@ CategoryList.propTypes = {
   intl: PropTypes.object.isRequired,
   total: PropTypes.number.isRequired,
   count: PropTypes.number.isRequired,
-  done: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -185,7 +185,7 @@ const mapStateToProps = state => {
   return {
     categories: state.categoryReducer.categories.data,
     count: state.categoryReducer.categories.count,
-    done: state.categoryReducer.done,
+    loaded: state.categoryReducer.loaded,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   };
 };

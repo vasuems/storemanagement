@@ -13,6 +13,7 @@ import {
 const initialState = {
   categories: { data: [], count: 0 },
   categoryDetails: {},
+  loaded: false,
   done: false,
   error: false,
 };
@@ -20,13 +21,13 @@ const initialState = {
 export default function categoryReducer(state = initialState, action) {
   switch (action.type) {
     case SUBMIT_CATEGORY_SUCCESS:
-      return { ...state, done: true };
+      return { ...state, categoryDetails: action.value, done: true };
     case FETCH_CATEGORIES_SUCCESS:
-      return { ...state, categories: action.value, done: true };
+      return { ...state, categories: action.value, loaded: true };
     case FETCH_PARENT_CATEGORIES_SUCCESS:
       return { ...state, categories: action.value };
     case FETCH_CATEGORY_DETAILS_SUCCESS:
-      return { ...state, categoryDetails: action.value, done: true };
+      return { ...state, categoryDetails: action.value, loaded: true };
     case SUBMIT_CATEGORY_FAILED:
     case FETCH_CATEGORIES_FAILED:
     case FETCH_CATEGORY_DETAILS_FAILED:

@@ -77,15 +77,16 @@ export function* fetchCategoryDetails(action) {
   }
 }
 
-export function* addCategory(action) {
+export function* upsertCategory(action) {
   try {
+    const { value } = action;
     const res = yield axios({
-      method: 'post',
-      url: `${config.apiDomain}/stores/${action.value.storeId}/categories`,
+      method: value.mode === 'new' ? 'post' : 'put',
+      url: `${config.apiDomain}/stores/${action.value.storeId}/categories${value.mode === 'new' ? '' : '/' + value.categoryId}`,
       headers: {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
-      data: action.value,
+      data: value,
     });
 
     yield put(submitCategorySuccess(res.data));

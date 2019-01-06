@@ -72,9 +72,22 @@ class CategoryForm extends Component {
   }
 
   onSubmit = data => {
-    const { dispatch, storeId } = this.props;
+    const {
+      dispatch,
+      mode,
+      storeId,
+      match: {
+        params: { id },
+      },
+    } = this.props;
 
     data.storeId = storeId;
+    data.mode = mode;
+
+    if (mode === 'update') {
+      data.categoryId = id;
+    }
+
     dispatch(submitCategory(data));
   };
 
@@ -84,11 +97,12 @@ class CategoryForm extends Component {
       categories,
       mode,
       done,
+      loaded,
       error,
     } = this.props;
 
     return (
-      mode === 'update' && !done ?
+      mode === 'update' && !loaded ?
         <Loader /> :
         <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
           <Button size="sm" color="primary" className="pull-right form-btn">
@@ -99,11 +113,11 @@ class CategoryForm extends Component {
           <br />
           <br />
           {
-            mode === 'new' && error ?
+            error ?
               <Alert color="danger">
                 <FormattedMessage id="sys.newFailed" />
               </Alert> :
-              mode === 'new' && done ?
+              done ?
                 <Alert color="success">
                   <FormattedMessage id="sys.newSuccess" />
                 </Alert> : null
@@ -149,6 +163,7 @@ CategoryForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   done: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired,
   error: PropTypes.bool,
   match: PropTypes.object,
   mode: PropTypes.string.isRequired,
@@ -163,6 +178,7 @@ export default withRouter(
     return {
       initialValues: state.categoryReducer.categoryDetails,
       done: state.categoryReducer.done,
+      loaded: state.categoryReducer.loaded,
       error: state.categoryReducer.error,
       categories: state.categoryReducer.categories.data,
       enableReinitialize: true,
