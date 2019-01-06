@@ -67,10 +67,17 @@ const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
 );
 
 class ProductForm extends Component {
+  componentWillMount() {
+    this.props.dispatch(
+      clearProductDetails()
+    );
+  }
+
   componentDidMount() {
     const {
       dispatch,
       mode,
+      done,
       storeId,
       match: {
         params: { id },
@@ -87,17 +94,7 @@ class ProductForm extends Component {
       dispatch(
         fetchProductDetails({ storeId, productId: id })
       );
-    } else {
-      dispatch(
-        clearProductDetails()
-      );
     }
-  }
-
-  onDescriptionChange = data => {
-    this.setState({
-      description: data,
-    });
   }
 
   onSubmit = data => {

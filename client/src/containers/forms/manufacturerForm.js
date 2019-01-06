@@ -76,6 +76,12 @@ const renderFileInput = ({
   />
 
 class ManufacturerForm extends Component {
+  componentWillMount() {
+    this.props.dispatch(
+      clearManufacturerDetails()
+    );
+  }
+
   componentDidMount() {
     const {
       dispatch,
@@ -91,10 +97,6 @@ class ManufacturerForm extends Component {
     if (mode === 'update') {
       dispatch(
         fetchManufacturerDetails({ storeId, manufacturerId: id })
-      );
-    } else {
-      dispatch(
-        clearManufacturerDetails()
       );
     }
   }

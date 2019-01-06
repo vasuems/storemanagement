@@ -43,6 +43,12 @@ const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
 );
 
 class CategoryForm extends Component {
+  componentWillMount() {
+    this.props.dispatch(
+      clearCategoryDetails()
+    );
+  }
+
   componentDidMount() {
     const {
       dispatch,
@@ -61,10 +67,6 @@ class CategoryForm extends Component {
           storeId,
           categoryId: id,
         })
-      );
-    } else {
-      dispatch(
-        clearCategoryDetails()
       );
     }
   }
