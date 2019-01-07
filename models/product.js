@@ -53,9 +53,9 @@ Product.prototype.get = function (id) {
   return new Promise((resolve, reject) => {
     db.query(
       `select code, name, category_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity,
-       added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage,
-       manufacturer_id as manufacturerId, supplier_id as supplierId, status
-       from product where code='${id}'`,
+          added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage,
+          manufacturer_id as manufacturerId, supplier_id as supplierId, status
+          from product where code='${id}'`,
       (error, results) => {
 
         if (error || results.length == 0) {
@@ -105,77 +105,83 @@ Product.prototype.get = function (id) {
   });
 };
 
-Product.prototype.getTotalCountByStoreId = function (id) {
+Product.prototype.getTotalCountByStoreId = function (id, search = null) {
   return new Promise((resolve, reject) => {
-    db.query(
-      `select count(*) as total 
-       from product where store_id='${id}'`,
-      (error, results) => {
-        if (error) {
-          reject(new NoRecordFoundError('No products found.'));
-        } else {
-          resolve(results[0].total);
-        }
+    let sql = `select count(*) as total from product where store_id='${id}'`;
+
+    if (search) {
+      sql += ` and status=1 and (code like '%${search}%' or name like '%${search}%' or sku like '%${search}%')`;
+    }
+
+    db.query(sql, (error, results) => {
+      if (error) {
+        reject(new NoRecordFoundError('No products found.'));
+      } else {
+        resolve(results[0].total);
       }
-    );
+    });
   });
 };
 
-Product.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
+Product.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20, search = null) {
   return new Promise((resolve, reject) => {
-    db.query(
-      `select code, name, category_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity,
-       added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage,
-       manufacturer_id as manufacturerId, supplier_id as supplierId, status
-       from product where store_id='${id}' order by added_on desc limit ${(page - 1) *
-      pageSize}, ${pageSize}`,
-      (error, results) => {
+    let sql = `select code, name, category_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity,
+               added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage,
+               manufacturer_id as manufacturerId, supplier_id as supplierId, status
+               from product where store_id='${id}'`;
 
-        if (error) {
-          reject(new NoRecordFoundError('No products found.'));
-        } else {
-          const products = results.map(product => {
-            const {
-              code,
-              name,
-              categoryId,
-              storeId,
-              sku,
-              description,
-              quantity,
-              allowQuantity,
-              addedOn,
-              addedBy,
-              unitPrice,
-              cost,
-              coverImage,
-              manufacturerId,
-              supplierId,
-              status,
-            } = product;
-            return new Product(
-              code,
-              name,
-              categoryId,
-              storeId,
-              sku,
-              description,
-              quantity,
-              allowQuantity,
-              addedOn,
-              addedBy,
-              unitPrice,
-              cost,
-              coverImage,
-              manufacturerId,
-              supplierId,
-              status
-            );
-          });
+    if (search) {
+      sql += ` and status=1 and (code like '%${search}%' or name like '%${search}%' or sku like '%${search}%')`;
+    }
 
-          resolve(products);
-        }
+    sql += ` order by added_on desc limit ${(page - 1) * pageSize}, ${pageSize}`;
+
+    db.query(sql, (error, results) => {
+      if (error) {
+        reject(new NoRecordFoundError('No products found.'));
+      } else {
+        const products = results.map(product => {
+          const {
+            code,
+            name,
+            categoryId,
+            storeId,
+            sku,
+            description,
+            quantity,
+            allowQuantity,
+            addedOn,
+            addedBy,
+            unitPrice,
+            cost,
+            coverImage,
+            manufacturerId,
+            supplierId,
+            status,
+          } = product;
+          return new Product(
+            code,
+            name,
+            categoryId,
+            storeId,
+            sku,
+            description,
+            quantity,
+            allowQuantity,
+            addedOn,
+            addedBy,
+            unitPrice,
+            cost,
+            coverImage,
+            manufacturerId,
+            supplierId,
+            status
+          );
+        });
+
+        resolve(products);
       }
+    }
     );
   });
 };

@@ -21,18 +21,23 @@ import {
   Table,
   FormGroup,
   Label,
+  Modal,
+  ModalHeader,
+  ModalBody,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { FiDownload, FiPrinter, FiPlusCircle } from 'react-icons/fi';
 import classnames from 'classnames';
 import {
-  OrderInfoItem,
+  ProfileLoader,
   OrderShippingItem,
   OrderProductListItem,
 } from '../../components';
+import { ProductSearchForm } from '../forms';
 import {
   fetchProductDetails,
   clearProductDetails,
+  clearOrderDetails,
   fetchCategories,
   fetchSuppliers,
   fetchManufacturers,
@@ -83,18 +88,16 @@ class OrderForm extends Component {
     super(props);
 
     this.state = {
-      description: '',
       activeTab: '1',
+      modal: false,
     };
   }
 
-  toggle = tab => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab,
-      });
-    }
-  };
+  componentWillMount() {
+    this.props.dispatch(
+      clearOrderDetails()
+    );
+  }
 
   componentDidMount() {
     const {
@@ -121,16 +124,23 @@ class OrderForm extends Component {
     }
   }
 
-  onDescriptionChange = data => {
+  toggle = tab => {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab,
+      });
+    }
+  };
+
+  modalToggle = () => {
     this.setState({
-      description: data,
+      modal: !this.state.modal,
     });
   }
 
   onSubmit = data => {
     const { dispatch, storeId } = this.props;
 
-    data.description = this.state.description;
     data.storeId = storeId;
     if (data.allowQuantity === undefined) {
       data.allowQuantity = false;
@@ -143,278 +153,289 @@ class OrderForm extends Component {
     const {
       history,
       handleSubmit,
-      newSuccess,
-      initialValues,
+      done,
+      loaded,
+      error,
       mode,
       intl: { formatMessage },
     } = this.props;
     const products = [];
 
     return (
-      <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
-        <Button size="sm" color="primary" className="pull-right form-btn">
-          <FiSave />
-          &nbsp;
-          <FormattedMessage id="sys.save" />
-        </Button>
-        <br />
-        <br />
-        {
-          newSuccess === false ?
-            <Alert color="danger">
-              <FormattedMessage id="sys.newFailed" />
-            </Alert> :
-            newSuccess === true ?
-              <Alert color="success">
-                <FormattedMessage id="sys.newSuccess" />
-              </Alert> : null
-        }
-        <Nav tabs>
-          <NavItem>
-            <NavLink
-              className={classnames({
-                active: this.state.activeTab === '1',
-              })}
-              onClick={() => {
-                this.toggle('1');
-              }}
-            >
-              <FormattedMessage id="sys.orderDetails" />
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({
-                active: this.state.activeTab === '2',
-              })}
-              onClick={() => {
-                this.toggle('2');
-              }}
-            >
-              <FormattedMessage id="sys.shipping" />
-            </NavLink>
-          </NavItem>
-        </Nav>
-        <TabContent
-          activeTab={this.state.activeTab}
-          style={{ backgroundColor: '#fff', padding: 15 }}
-        >
-          <TabPane tabId="1">
-            <Row>
-              <Col md={12}>
-                <Button
-                  size="sm"
-                  color="dark"
-                  className="pull-right form-btn"
-                  onClick={() => history.push('/new-product')}
-                >
-                  <FiDownload />
-                  &nbsp;
-                  <FormattedMessage id="sys.downloadInvoice" />
-                </Button>
-                <Button
-                  size="sm"
-                  color="danger"
-                  className="pull-right form-btn"
-                  onClick={() => history.push('/new-product')}
-                  style={{ marginRight: 10 }}
-                >
-                  <FiPrinter />
-                  &nbsp;
-                  <FormattedMessage id="sys.printInvoice" />
-                </Button>
-              </Col>
-            </Row>
+      mode === 'update' && !loaded ?
+        <ProfileLoader /> :
+        <div>
+          <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
+            <Button size="sm" color="primary" className="pull-right form-btn">
+              <FiSave />
+              &nbsp;
+              <FormattedMessage id="sys.save" />
+            </Button>
             <br />
-            <Row>
-              <Col md={7}>
-                <CardTitle>
-                  <FormattedMessage id="sys.products" />
-                </CardTitle>
-                <Table responsive size="sm">
-                  <thead className="table-header">
-                    <tr>
-                      <th>
-                        <FormattedMessage id="sys.productName" />
-                      </th>
-                      <th>
-                        <FormattedMessage id="sys.unitPrice" />
-                      </th>
-                      <th>
-                        <FormattedMessage id="sys.qty" />
-                      </th>
-                      <th>
-                        <FormattedMessage id="sys.amount" />
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {products.length > 0 ? products.map(product => {
-                      return (
-                        <OrderProductListItem
-                          key={product.id}
-                          name={product.name}
-                          price={product.price.toFixed(2)}
-                          quantity={product.quantity}
-                          amount={product.amount.toFixed(2)}
-                          currencySign={product.currencySign}
-                        />
-                      );
-                    }) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
-                  </tbody>
-                </Table>
-                <Button
-                  color="link"
-                  className="pull-right form-btn"
-                  onClick={() => history.push('/new-order')}
+            <br />
+            {
+              error ?
+                <Alert color="danger">
+                  <FormattedMessage id="sys.newFailed" />
+                </Alert> :
+                done ?
+                  <Alert color="success">
+                    <FormattedMessage id="sys.newSuccess" />
+                  </Alert> : null
+            }
+            <Nav tabs>
+              <NavItem>
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeTab === '1',
+                  })}
+                  onClick={() => {
+                    this.toggle('1');
+                  }}
                 >
-                  <FiPlusCircle />
-                  &nbsp;
-                  <FormattedMessage id="sys.addNew" />
-                </Button><br /><br /><br />
-                <Col md={6} className="pull-right">
-                  <Table size="sm" responsive>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <FormattedMessage id="sys.subTotal" />:
-                        </td>
-                        <td>SGD $116.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <FormattedMessage id="sys.taxIncluded" />:
-                        </td>
-                        <td>SGD $8.12</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <FormattedMessage id="sys.shipping" />:
-                        </td>
-                        <td>SGD $21.60</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>
-                            <FormattedMessage id="sys.total" />:
-                          </b>
-                        </td>
-                        <td>
-                          <b>SGD $137.60</b>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </Col>
-              </Col>
-              <Col md={5}>
-                <CardTitle>
-                  <FormattedMessage id="sys.customerInfo" />
-                </CardTitle>
-                <Card body>
-                  <FormGroup row>
-                    <Label for="email" sm={4}>
-                      <FormattedMessage id="sys.name" />
-                      <span className="text-danger mandatory-field">*</span>
-                    </Label>
-                    <Col sm={8}>
-                      <Field
-                        component={renderField}
-                        name="customerName"
-                        className="form-control"
-                        id="customer-name"
-                        validate={[required]}
-                      />
+                  <FormattedMessage id="sys.orderDetails" />
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeTab === '2',
+                  })}
+                  onClick={() => {
+                    this.toggle('2');
+                  }}
+                >
+                  <FormattedMessage id="sys.shipping" />
+                </NavLink>
+              </NavItem>
+            </Nav>
+            <TabContent
+              activeTab={this.state.activeTab}
+              style={{ backgroundColor: '#fff', padding: 15 }}
+            >
+              <TabPane tabId="1">
+                <Row>
+                  <Col md={12}>
+                    <Button
+                      size="sm"
+                      color="dark"
+                      className="pull-right form-btn"
+                      onClick={() => history.push('/new-product')}
+                    >
+                      <FiDownload />
+                      &nbsp;
+                      <FormattedMessage id="sys.downloadInvoice" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      color="danger"
+                      className="pull-right form-btn"
+                      onClick={() => history.push('/new-product')}
+                      style={{ marginRight: 10 }}
+                    >
+                      <FiPrinter />
+                      &nbsp;
+                      <FormattedMessage id="sys.printInvoice" />
+                    </Button>
+                  </Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col md={7}>
+                    <CardTitle>
+                      <FormattedMessage id="sys.products" />
+                    </CardTitle>
+                    <Table responsive size="sm">
+                      <thead className="table-header">
+                        <tr>
+                          <th>
+                            <FormattedMessage id="sys.productName" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.unitPrice" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.qty" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.amount" />
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {products.length > 0 ? products.map(product => {
+                          return (
+                            <OrderProductListItem
+                              key={product.id}
+                              name={product.name}
+                              price={product.price.toFixed(2)}
+                              quantity={product.quantity}
+                              amount={product.amount.toFixed(2)}
+                              currencySign={product.currencySign}
+                            />
+                          );
+                        }) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
+                      </tbody>
+                    </Table>
+                    <Button
+                      color="link"
+                      className="pull-right form-btn"
+                      onClick={this.modalToggle}
+                    >
+                      <FiPlusCircle />
+                      &nbsp;
+                      <FormattedMessage id="sys.addNew" />
+                    </Button><br /><br /><br />
+                    <Col md={6} className="pull-right">
+                      <Table size="sm" responsive>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <FormattedMessage id="sys.subTotal" />:
+                            </td>
+                            <td>SGD $116.00</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <FormattedMessage id="sys.taxIncluded" />:
+                            </td>
+                            <td>SGD $8.12</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <FormattedMessage id="sys.shipping" />:
+                            </td>
+                            <td>SGD $21.60</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <b>
+                                <FormattedMessage id="sys.total" />:
+                              </b>
+                            </td>
+                            <td>
+                              <b>SGD $137.60</b>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </Table>
                     </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="email" sm={4}>
-                      <FormattedMessage id="sys.contactNo" />
-                      <span className="text-danger mandatory-field">*</span>
-                    </Label>
-                    <Col sm={8}>
-                      <Field
-                        component={renderField}
-                        name="customerContact"
-                        className="form-control"
-                        id="customer-contact"
-                        validate={[required]}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="email" sm={4}>
-                      <FormattedMessage id="sys.deliveryAddr" />
-                      <span className="text-danger mandatory-field">*</span>
-                    </Label>
-                    <Col sm={8}>
-                      <Field
-                        component={renderField}
-                        name="deliveryAddress"
-                        className="form-control"
-                        id="address"
-                        validate={[required]}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="email" sm={4}>
-                      <FormattedMessage id="sys.billingAddr" />
-                      <span className="text-danger mandatory-field">*</span>
-                    </Label>
-                    <Col sm={8}>
-                      <Field
-                        component={renderField}
-                        name="billingAddress"
-                        className="form-control"
-                        id="billing-address"
-                        validate={[required]}
-                      />
-                    </Col>
-                  </FormGroup>
-                </Card>
-              </Col>
-            </Row>
-          </TabPane>
-          <TabPane tabId="2">
-            <Row>
-              <Col md={5}>
-                <OrderShippingItem
-                  courier="Fedex Express"
-                  trackingId="asa3djfa123lksdfj23432sdf"
-                  datetime="2018-11-11 11:11:00"
-                  location="Singapore logistics center"
-                  status="Processing"
-                  statusColor="green"
-                />
-                <OrderShippingItem
-                  courier="Fedex Express"
-                  trackingId="234adsf9asdf31asdf"
-                  datetime="2018-11-10 07:10:00"
-                  location="Malaysia logistic center"
-                  status="Shipped out"
-                />
-                <OrderShippingItem
-                  courier="Fedex Express"
-                  trackingId="Not available"
-                  datetime="2018-11-08 16:30:00"
-                  location="Seller"
-                  status="Dispatched"
-                />
-              </Col>
-              <Col md={7}>
-                <iframe
-                  width="100%"
-                  height="450"
-                  frameBorder="0"
-                  src={`https://www.google.com/maps/embed/v1/place?key=${config.googleApiKey}&q=Space+Needle,Seattle+WA`}
-                  allowFullScreen>
-                </iframe>
-              </Col>
-            </Row>
-          </TabPane>
-        </TabContent>
-      </Form>
+                  </Col>
+                  <Col md={5}>
+                    <CardTitle>
+                      <FormattedMessage id="sys.customerInfo" />
+                    </CardTitle>
+                    <Card body>
+                      <FormGroup row>
+                        <Label for="email" sm={4}>
+                          <FormattedMessage id="sys.name" />
+                          <span className="text-danger mandatory-field">*</span>
+                        </Label>
+                        <Col sm={8}>
+                          <Field
+                            component={renderField}
+                            name="customerName"
+                            className="form-control"
+                            id="customer-name"
+                            validate={[required]}
+                          />
+                        </Col>
+                      </FormGroup>
+                      <FormGroup row>
+                        <Label for="email" sm={4}>
+                          <FormattedMessage id="sys.contactNo" />
+                          <span className="text-danger mandatory-field">*</span>
+                        </Label>
+                        <Col sm={8}>
+                          <Field
+                            component={renderField}
+                            name="customerContact"
+                            className="form-control"
+                            id="customer-contact"
+                            validate={[required]}
+                          />
+                        </Col>
+                      </FormGroup>
+                      <FormGroup row>
+                        <Label for="email" sm={4}>
+                          <FormattedMessage id="sys.deliveryAddr" />
+                          <span className="text-danger mandatory-field">*</span>
+                        </Label>
+                        <Col sm={8}>
+                          <Field
+                            component={renderField}
+                            name="deliveryAddress"
+                            className="form-control"
+                            id="address"
+                            validate={[required]}
+                          />
+                        </Col>
+                      </FormGroup>
+                      <FormGroup row>
+                        <Label for="email" sm={4}>
+                          <FormattedMessage id="sys.billingAddr" />
+                          <span className="text-danger mandatory-field">*</span>
+                        </Label>
+                        <Col sm={8}>
+                          <Field
+                            component={renderField}
+                            name="billingAddress"
+                            className="form-control"
+                            id="billing-address"
+                            validate={[required]}
+                          />
+                        </Col>
+                      </FormGroup>
+                    </Card>
+                  </Col>
+                </Row>
+              </TabPane>
+              <TabPane tabId="2">
+                <Row>
+                  <Col md={5}>
+                    <OrderShippingItem
+                      courier="Fedex Express"
+                      trackingId="asa3djfa123lksdfj23432sdf"
+                      datetime="2018-11-11 11:11:00"
+                      location="Singapore logistics center"
+                      status="Processing"
+                      statusColor="green"
+                    />
+                    <OrderShippingItem
+                      courier="Fedex Express"
+                      trackingId="234adsf9asdf31asdf"
+                      datetime="2018-11-10 07:10:00"
+                      location="Malaysia logistic center"
+                      status="Shipped out"
+                    />
+                    <OrderShippingItem
+                      courier="Fedex Express"
+                      trackingId="Not available"
+                      datetime="2018-11-08 16:30:00"
+                      location="Seller"
+                      status="Dispatched"
+                    />
+                  </Col>
+                  <Col md={7}>
+                    <iframe
+                      width="100%"
+                      height="450"
+                      frameBorder="0"
+                      src={`https://www.google.com/maps/embed/v1/place?key=${config.googleApiKey}&q=Space+Needle,Seattle+WA`}
+                      allowFullScreen>
+                    </iframe>
+                  </Col>
+                </Row>
+              </TabPane>
+            </TabContent>
+          </Form>
+          <Modal isOpen={this.state.modal} toggle={this.modalToggle} zIndex="10000">
+            <ModalHeader toggle={this.modalToggle}><FormattedMessage id="sys.addProduct" /></ModalHeader>
+            <ModalBody>
+              <ProductSearchForm />
+            </ModalBody>
+          </Modal>
+        </div>
     );
   }
 }
@@ -422,11 +443,13 @@ class OrderForm extends Component {
 OrderForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   storeId: PropTypes.string.isRequired,
-  newSuccess: PropTypes.bool,
+  done: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
-  mode: PropTypes.string,
+  mode: PropTypes.string.isRequired,
   initialValues: PropTypes.object,
   history: PropTypes.object.isRequired,
 };
@@ -439,7 +462,9 @@ export default withRouter(
   connect(state => {
     return {
       initialValues: state.productReducer.productDetails,
-      newSuccess: state.productReducer.newSuccess,
+      done: state.productReducer.done,
+      loaded: state.productReducer.loaded,
+      error: state.productReducer.error,
       enableReinitialize: true,
     };
   })(injectIntl(OrderForm))

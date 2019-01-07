@@ -291,8 +291,16 @@ app.get(
   async (req, res) => {
     try {
       const product = new Product();
-      const data = await product.getAllByStoreId(req.params.storeId, req.query.page || 1, req.query.size || 20);
-      const count = await product.getTotalCountByStoreId(req.params.storeId);
+      /* Check if it's a search call, only code, name and sku fields allowed
+         for product search atm
+      */
+      const data = await product.getAllByStoreId(
+        req.params.storeId,
+        req.query.page || 1,
+        req.query.size || 20,
+        req.query.q || null
+      );
+      const count = await product.getTotalCountByStoreId(req.params.storeId, req.query.q || null);
 
       res.send({ data, count });
     } catch (err) {
