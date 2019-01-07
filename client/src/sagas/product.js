@@ -7,6 +7,8 @@ import {
   submitProductFailed,
   fetchProductDetailsSuccess,
   fetchProductDetailsFailed,
+  searchProductsSuccess,
+  searchProductsFailed,
   clearToken,
 } from '../actions';
 import config from '../config';
@@ -28,6 +30,28 @@ export function* fetchProducts(action) {
       yield put(clearToken());
     } else {
       yield put(fetchProductsFailed());
+    }
+  }
+}
+
+export function* searchProducts(action) {
+  try {
+    const { storeId, keyword, pageNo, pageSize } = action.value;
+    const res = yield axios({
+      method: 'get',
+      url: `${config.apiDomain}/stores/${storeId}/products?q=${keyword}&page=${pageNo}&size=${pageSize}`,
+      headers: {
+        authorization: localStorage.getItem(config.accessTokenKey),
+      },
+    });
+    console.log(res)
+    yield put(searchProductsSuccess(res.data));
+  } catch (error) {
+    console.log(error)
+    if (error.response.status === 401) {
+      yield put(clearToken());
+    } else {
+      yield put(searchProductsFailed());
     }
   }
 }

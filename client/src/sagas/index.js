@@ -4,6 +4,7 @@ import {
   fetchProducts,
   fetchProductDetails,
   upsertProduct,
+  searchProducts,
 } from './product';
 import {
   fetchCategories,
@@ -15,7 +16,11 @@ import { fetchSalesReportProducts, fetchSalesReportCategories } from './report';
 import { fetchDashboardData } from './dashboard';
 import { fetchStoreSettings } from './setting';
 import { submitLoginData, clearToken } from './auth';
-import { fetchSuppliers, fetchSupplierDetails, upsertSupplier } from './supplier';
+import {
+  fetchSuppliers,
+  fetchSupplierDetails,
+  upsertSupplier,
+} from './supplier';
 import {
   fetchManufacturers,
   fetchManufacturerDetails,
@@ -32,6 +37,7 @@ import {
   FETCH_CATEGORY_DETAILS,
   FETCH_PRODUCTS,
   FETCH_PRODUCT_DETAILS,
+  SEARCH_PRODUCTS,
   SUBMIT_PRODUCT,
   SUBMIT_CATEGORY,
   FETCH_SUPPLIERS,
@@ -49,6 +55,7 @@ import {
   FETCH_CURRENCIES,
   FETCH_ACCOUNT,
 } from '../actions';
+import { takeLatest } from 'redux-saga';
 
 export default function* rootSaga() {
   yield all([
@@ -59,6 +66,7 @@ export default function* rootSaga() {
     takeEvery(FETCH_PARENT_CATEGORIES, fetchParentCategories),
     takeEvery(FETCH_PRODUCTS, fetchProducts),
     takeEvery(FETCH_PRODUCT_DETAILS, fetchProductDetails),
+    takeEvery(SEARCH_PRODUCTS, searchProducts),
     takeEvery(SUBMIT_PRODUCT, upsertProduct),
     takeEvery(SUBMIT_CATEGORY, upsertCategory),
     takeEvery(FETCH_DASHBOARD_DATA, fetchDashboardData),

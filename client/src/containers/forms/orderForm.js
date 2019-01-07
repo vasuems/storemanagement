@@ -35,13 +35,14 @@ import {
 } from '../../components';
 import { ProductSearchForm } from '../forms';
 import {
-  fetchProductDetails,
-  clearProductDetails,
+  fetchOrderDetails,
+  addOrderProduct,
   clearOrderDetails,
   fetchCategories,
   fetchSuppliers,
   fetchManufacturers,
   submitProduct,
+  clearSearchProducts,
 } from '../../actions';
 import config from '../../config';
 
@@ -109,17 +110,9 @@ class OrderForm extends Component {
       },
     } = this.props;
 
-    dispatch(fetchCategories({ storeId, pageSize: 200, pageNo: 1 }));
-    dispatch(fetchSuppliers(storeId));
-    dispatch(fetchManufacturers(storeId));
-
     if (mode === 'update') {
       dispatch(
-        fetchProductDetails({ storeId, productId: id })
-      );
-    } else {
-      dispatch(
-        clearProductDetails()
+        fetchOrderDetails({ storeId, productId: id })
       );
     }
   }
@@ -138,6 +131,14 @@ class OrderForm extends Component {
     });
   }
 
+  onAddProductClick = (data) => {
+    const {
+      dispatch,
+    } = this.props;
+
+    dispatch(addOrderProduct({ id: '1234', name: 'Test product', price: 109.12, quantity: 1, amount: 109.12 }));
+  }
+
   onSubmit = data => {
     const { dispatch, storeId } = this.props;
 
@@ -149,6 +150,12 @@ class OrderForm extends Component {
     dispatch(submitProduct(data));
   };
 
+  onSearchClear = () => {
+    const { dispatch } = this.props;
+
+    dispatch(clearSearchProducts());
+  }
+
   render() {
     const {
       history,
@@ -157,9 +164,9 @@ class OrderForm extends Component {
       loaded,
       error,
       mode,
-      intl: { formatMessage },
+      storeId,
+      products,
     } = this.props;
-    const products = [];
 
     return (
       mode === 'update' && !loaded ?
@@ -271,7 +278,7 @@ class OrderForm extends Component {
                               price={product.price.toFixed(2)}
                               quantity={product.quantity}
                               amount={product.amount.toFixed(2)}
-                              currencySign={product.currencySign}
+                              currencySign="$"
                             />
                           );
                         }) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
@@ -432,7 +439,8 @@ class OrderForm extends Component {
           <Modal isOpen={this.state.modal} toggle={this.modalToggle} zIndex="10000">
             <ModalHeader toggle={this.modalToggle}><FormattedMessage id="sys.addProduct" /></ModalHeader>
             <ModalBody>
-              <ProductSearchForm />
+              <ProductSearchForm
+                storeId={storeId} />
             </ModalBody>
           </Modal>
         </div>
@@ -449,7 +457,8 @@ OrderForm.propTypes = {
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
-  mode: PropTypes.string.isRequired,
+  mode: PropTypes.string,
+  products: PropTypes.array.isRequired,
   initialValues: PropTypes.object,
   history: PropTypes.object.isRequired,
 };
@@ -461,10 +470,11 @@ OrderForm = reduxForm({
 export default withRouter(
   connect(state => {
     return {
-      initialValues: state.productReducer.productDetails,
-      done: state.productReducer.done,
-      loaded: state.productReducer.loaded,
-      error: state.productReducer.error,
+      initialValues: state.orderReducer.productDetails,
+      products: state.orderReducer.products,
+      done: state.orderReducer.done,
+      loaded: state.orderReducer.loaded,
+      error: state.orderReducer.error,
       enableReinitialize: true,
     };
   })(injectIntl(OrderForm))

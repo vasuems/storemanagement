@@ -3,38 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { FiSave } from 'react-icons/fi';
 import {
-  Col,
-  Row,
   Form,
-  Card,
-  Nav,
-  TabContent,
-  NavItem,
-  NavLink,
   Input,
-  TabPane,
   Button,
-  Alert,
-  CardTitle,
-  Table,
   FormGroup,
-  Label,
-  Modal,
-  ModalHeader,
-  ModalBody,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import { FiDownload, FiPrinter, FiPlusCircle } from 'react-icons/fi';
-import classnames from 'classnames';
 import {
   ProfileLoader,
-  OrderShippingItem,
-  OrderProductListItem,
 } from '../../components';
 import {
-  searchProduct,
+  searchProducts,
+  clearSearchProducts,
 } from '../../actions';
 
 const required = value => (value ? undefined : 'Required');
@@ -57,34 +38,62 @@ class ProductSearchForm extends Component {
     } = this.props;
   }
 
-  onSubmit = data => {
+  onSearchClick = event => {
     const { dispatch, storeId } = this.props;
-    data.storeId = storeId;
-
-    dispatch(searchProduct(data));
+    if (event.target.value.length >= 2) {
+      // TODO: replace hardcoded page number and page size
+      dispatch(searchProducts({ storeId, keyword: event.target.value, pageNo: 1, pageSize: 200 }));
+    }
   };
+
+  onSearchClear = () => {
+    const { dispatch } = this.props;
+
+    dispatch(clearSearchProducts());
+  }
 
   render() {
     const {
-      history,
       handleSubmit,
-      done,
-      loaded,
-      error,
+      products,
       intl: { formatMessage },
     } = this.props;
 
     return (
       <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
+        <FormGroup row>
+          <Field
+            component={renderField}
+            name="search"
+            className="form-control"
+            id="search"
+            placeholder={formatMessage({ id: 'sys.searchProducts' })}
+            onChange={this.onSearchChange}
+            validate={[required]}
+          />
+          <Button>Search</Button>
+        </FormGroup>
+
+        <div>
+          {
+            products.map(product => {
+              return (
+                <div>{product.name}</div>
+              );
+            })
+          }
+        </div><br />
         <Field
           component={renderField}
-          name="search"
+          name="quantity"
           className="form-control"
-          id="search"
-          placeholder={formatMessage({ id: 'sys.searchProducts' })}
+          id="quantity"
+          type="number"
+          placeholder={formatMessage({ id: 'sys.qty' })}
           validate={[required]}
-        /><br />
-        <Button color="primary" block><FormattedMessage id="sys.add" /></Button>
+        />
+        <br />
+        <Button color="success" block onClick={this.onSearchClear}><FormattedMessage id="sys.add" /></Button>
       </Form >
     );
   }
@@ -93,14 +102,11 @@ class ProductSearchForm extends Component {
 ProductSearchForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   storeId: PropTypes.string.isRequired,
-  done: PropTypes.bool.isRequired,
-  loaded: PropTypes.bool.isRequired,
-  error: PropTypes.bool,
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
-  initialValues: PropTypes.object,
   history: PropTypes.object.isRequired,
+  products: PropTypes.array.isRequired,
 };
 
 ProductSearchForm = reduxForm({
@@ -110,10 +116,7 @@ ProductSearchForm = reduxForm({
 export default withRouter(
   connect(state => {
     return {
-      initialValues: state.productReducer.productDetails,
-      done: state.productReducer.done,
-      loaded: state.productReducer.loaded,
-      error: state.productReducer.error,
+      products: state.productReducer.products.data,
       enableReinitialize: true,
     };
   })(injectIntl(ProductSearchForm))

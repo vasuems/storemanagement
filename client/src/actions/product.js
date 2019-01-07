@@ -11,9 +11,10 @@ export const SUBMIT_PRODUCT = 'SUBMIT_PRODUCT';
 export const SUBMIT_PRODUCT_SUCCESS = 'SUBMIT_PRODUCT_SUCCESS';
 export const SUBMIT_PRODUCT_FAILED = 'SUBMIT_PRODUCT_FAILED';
 
-export const SEARCH_PRODUCT = 'SEARCH_PRODUCT';
-export const SEARCH_PRODUCT_SUCCESS = 'SEARCH_PRODUCT_SUCCESS';
-export const SEARCH_PRODUCT_FAILED = 'SEARCH_PRODUCT_FAILED';
+export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
+export const SEARCH_PRODUCTS_SUCCESS = 'SEARCH_PRODUCTS_SUCCESS';
+export const SEARCH_PRODUCTS_FAILED = 'SEARCH_PRODUCTS_FAILED';
+export const CLEAR_SEARCH_PRODUCTS = 'CLEAR_SEARCH_PRODUCTS';
 
 export function fetchProducts(data) {
   return { type: FETCH_PRODUCTS, value: data };
@@ -55,14 +56,18 @@ export function submitProductFailed() {
   return { type: SUBMIT_PRODUCT_FAILED };
 }
 
-export function searchProduct(data) {
-  return { type: SEARCH_PRODUCT, value: data };
+export function searchProducts(data) {
+  return { type: SEARCH_PRODUCTS, value: data };
 }
 
-export function searchProductSuccess(data) {
-  return { type: SEARCH_PRODUCT_SUCCESS, value: data };
+export function searchProductsSuccess(data) {
+  return { type: SEARCH_PRODUCTS_SUCCESS, value: data };
 }
 
-export function searchProductFailed() {
-  return { type: SEARCH_PRODUCT_FAILED };
+export function searchProductsFailed() {
+  return { type: SEARCH_PRODUCTS_FAILED };
+}
+
+export function clearSearchProducts() {
+  return { type: CLEAR_SEARCH_PRODUCTS };
 }

@@ -8,13 +8,16 @@ import {
   BreadcrumbItem,
   Button,
 } from 'reactstrap';
+import jwt from 'jsonwebtoken';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { OrderForm } from '../forms';
+import config from '../../config';
 
 class Order extends Component {
   render() {
     const { history } = this.props;
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
     return (
       <div>
@@ -36,7 +39,8 @@ class Order extends Component {
         <div className="content-body">
           <Row>
             <Col md={12}>
-              <OrderForm />
+              <OrderForm
+                storeId={storeId} />
             </Col>
           </Row>
         </div>

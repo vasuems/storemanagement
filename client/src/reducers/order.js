@@ -4,6 +4,7 @@ import {
   FETCH_ORDER_DETAILS_SUCCESS,
   FETCH_ORDER_DETAILS_FAILED,
   CLEAR_ORDER_DETAILS,
+  ADD_ORDER_PRODUCT,
 } from '../actions';
 
 const initialState = {
@@ -20,6 +21,8 @@ export default function orderReducer(state = initialState, action) {
       return { ...state, orders: action.value, loaded: true };
     case FETCH_ORDER_DETAILS_SUCCESS:
       return { ...state, products: action.value, loaded: true };
+    case ADD_ORDER_PRODUCT:
+      return { ...state, products: [...state.products, action.value] };
     case CLEAR_ORDER_DETAILS:
       return { ...state, ...initialState };
     case FETCH_ORDERS_FAILED:

@@ -6,6 +6,7 @@ import {
   SUBMIT_PRODUCT_FAILED,
   FETCH_PRODUCT_DETAILS_SUCCESS,
   FETCH_PRODUCT_DETAILS_FAILED,
+  CLEAR_SEARCH_PRODUCTS,
 } from '../actions';
 
 const initialState = {
@@ -29,6 +30,7 @@ export default function productReducer(state = initialState, action) {
     case FETCH_PRODUCT_DETAILS_FAILED:
       return { ...state, error: true };
     case CLEAR_PRODUCT_DETAILS:
+    case CLEAR_SEARCH_PRODUCTS:
       return { ...state, ...initialState };
     default:
       return state;

@@ -11,6 +11,8 @@ export const SUBMIT_ORDER = 'SUBMIT_ORDER';
 export const SUBMIT_ORDER_SUCCESS = 'SUBMIT_ORDER_SUCCESS';
 export const SUBMIT_ORDER_FAILED = 'SUBMIT_ORDER_FAILED';
 
+export const ADD_ORDER_PRODUCT = 'ADD_ORDER_PRODUCT';
+
 export function fetchOrders(data) {
   return { type: FETCH_ORDERS, value: data };
 }
@@ -49,4 +51,8 @@ export function submitOrderSuccess(data) {
 
 export function submitOrderFailed() {
   return { type: SUBMIT_ORDER_FAILED };
+}
+
+export function addOrderProduct(data){
+  return { type: ADD_ORDER_PRODUCT, value: data };
 }
