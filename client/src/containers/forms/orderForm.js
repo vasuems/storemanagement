@@ -267,6 +267,7 @@ class OrderForm extends Component {
                           <th>
                             <FormattedMessage id="sys.amount" />
                           </th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>

@@ -50,7 +50,6 @@ class Order extends Component {
 }
 
 Order.propTypes = {
-  products: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
 };

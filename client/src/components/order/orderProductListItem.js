@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import numeral from 'numeral';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 const OrderProductListItem = props => {
   return (
@@ -9,6 +10,7 @@ const OrderProductListItem = props => {
       <td>{props.currencySign + numeral(props.price).format('0,0.00')}</td>
       <td>{props.quantity}</td>
       <td>{props.currencySign + numeral(props.amount).format('0,0.00')}</td>
+      <td><IoIosCloseCircleOutline color="red" size={18} style={{cursor: 'pointer'}} onClick={() => alert(123)} /></td>
     </tr>
   );
 };

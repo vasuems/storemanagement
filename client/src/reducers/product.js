@@ -7,6 +7,8 @@ import {
   FETCH_PRODUCT_DETAILS_SUCCESS,
   FETCH_PRODUCT_DETAILS_FAILED,
   CLEAR_SEARCH_PRODUCTS,
+  SEARCH_PRODUCTS_SUCCESS,
+  SEARCH_PRODUCTS_FAILED,
 } from '../actions';
 
 const initialState = {
@@ -20,6 +22,7 @@ const initialState = {
 export default function productReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_PRODUCTS_SUCCESS:
+    case SEARCH_PRODUCTS_SUCCESS:
       return { ...state, products: action.value, loaded: true };
     case FETCH_PRODUCT_DETAILS_SUCCESS:
       return { ...state, productDetails: action.value, loaded: true };
@@ -27,6 +30,7 @@ export default function productReducer(state = initialState, action) {
       return { ...state, productDetails: action.value, done: true };
     case SUBMIT_PRODUCT_FAILED:
     case FETCH_PRODUCTS_FAILED:
+    case SEARCH_PRODUCTS_FAILED:
     case FETCH_PRODUCT_DETAILS_FAILED:
       return { ...state, error: true };
     case CLEAR_PRODUCT_DETAILS:

@@ -44,10 +44,10 @@ export function* searchProducts(action) {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
     });
-    console.log(res)
+
+
     yield put(searchProductsSuccess(res.data));
   } catch (error) {
-    console.log(error)
     if (error.response.status === 401) {
       yield put(clearToken());
     } else {
