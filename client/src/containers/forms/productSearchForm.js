@@ -12,10 +12,6 @@ import {
   Table,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import { FiSearch } from 'react-icons/fi';
-import {
-  ProfileLoader,
-} from '../../components';
 import {
   searchProducts,
   clearSearchProducts,
@@ -26,6 +22,13 @@ const required = value => (value ? undefined : 'Required');
 const renderField = ({ input, type, placeholder, meta: { touched, error } }) => (
   <div>
     <Input {...input} placeholder={placeholder} type={type} />
+    {touched && (error && <span className="text-danger">{error}</span>)}
+  </div>
+);
+
+const renderDecimalField = ({ input, type, meta: { touched, error } }) => (
+  <div>
+    <Input {...input} placeholder="0.00" type={type} step=".01" />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
@@ -75,16 +78,15 @@ class ProductSearchForm extends Component {
               placeholder={formatMessage({ id: 'sys.searchProducts' })}
               onChange={this.onSearchChange}
             />
-            <Table hover size="sm">
+            <Table hover size="sm" style={{ border: '1px solid #eee' }}>
               <tbody style={{ fontSize: 12 }}>
                 {
                   products.map(product => {
                     return (
-                      <tr key={product.code}>
-                        <td>{product.code}</td>
+                      <tr key={product.code} onClick={() => alert(product.code)}>
                         <td>{product.name}</td>
                         <td>{product.sku}</td>
-                        <td>{product.unitPrice}</td>
+                        <td>${product.unitPrice.toFixed(2)}</td>
                       </tr>
                     );
                   })
@@ -97,18 +99,9 @@ class ProductSearchForm extends Component {
           </Col> */}
         </Row>
         <Row>
-          <Col md={12}>
-            <Field
-              component={renderField}
-              name="quantity"
-              className="form-control"
-              id="quantity"
-              type="number"
-              placeholder={formatMessage({ id: 'sys.qty' })}
-              validate={[required]}
-            />
+          <Col md={12} style={{ textAlign: 'right' }}>
+            <FormattedMessage id="sys.total" />: ${123.45}
           </Col>
-          <Col md={2}></Col>
         </Row>
         <br />
         <Button color="success" block onClick={this.onSearchClear}><FormattedMessage id="sys.add" /></Button>
