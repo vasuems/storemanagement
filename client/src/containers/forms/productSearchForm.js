@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import {
   Form,
-  Input,
   Button,
   Row,
   Col,
@@ -15,20 +14,12 @@ import { withRouter } from 'react-router-dom';
 import {
   searchProducts,
   clearSearchProducts,
+  selectOrderProduct,
 } from '../../actions';
 
-const required = value => (value ? undefined : 'Required');
-
-const renderField = ({ input, type, placeholder, meta: { touched, error } }) => (
+const renderField = ({ input, type, placeholder, className, style, meta: { touched, error } }) => (
   <div>
-    <Input {...input} placeholder={placeholder} type={type} />
-    {touched && (error && <span className="text-danger">{error}</span>)}
-  </div>
-);
-
-const renderDecimalField = ({ input, type, meta: { touched, error } }) => (
-  <div>
-    <Input {...input} placeholder="0.00" type={type} step=".01" />
+    <input {...input} placeholder={placeholder} type={type} className={className} style={style} />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
@@ -53,16 +44,18 @@ class ProductSearchForm extends Component {
     }
   };
 
-  onSearchClear = () => {
+  onItemClick = item => {
     const { dispatch } = this.props;
 
     dispatch(clearSearchProducts());
+    dispatch(selectOrderProduct(item));
   }
 
   render() {
     const {
       handleSubmit,
       products,
+      productSelected,
       intl: { formatMessage },
     } = this.props;
 
@@ -78,33 +71,72 @@ class ProductSearchForm extends Component {
               placeholder={formatMessage({ id: 'sys.searchProducts' })}
               onChange={this.onSearchChange}
             />
-            <Table hover size="sm" style={{ border: '1px solid #eee' }}>
-              <tbody style={{ fontSize: 12 }}>
-                {
-                  products.map(product => {
-                    return (
-                      <tr key={product.code} onClick={() => alert(product.code)}>
-                        <td>{product.name}</td>
-                        <td>{product.sku}</td>
-                        <td>${product.unitPrice.toFixed(2)}</td>
-                      </tr>
-                    );
-                  })
-                }
-              </tbody>
-            </Table>
+            {products.length > 0 ?
+              <Table hover size="sm" style={{ border: '1px solid #eee', fontSize: 12 }}>
+                <thead style={{ backgroundColor: '#333', color: '#fff' }}>
+                  <tr>
+                    <th><FormattedMessage id="sys.productName" /></th>
+                    <th><FormattedMessage id="sys.sku" /></th>
+                    <th><FormattedMessage id="sys.unitPrice" /></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    products.map(product => {
+                      const { code, name, sku, unitPrice } = product;
+                      return (
+                        <tr style={{ cursor: 'pointer' }} key={code} onClick={() => this.onItemClick({ code, name, sku, unitPrice })}>
+                          <td>{product.name}</td>
+                          <td>{product.sku}</td>
+                          <td>${product.unitPrice.toFixed(2)}</td>
+                        </tr>
+                      );
+                    })
+                  }
+                </tbody>
+              </Table> : null
+            }
           </Col>
           {/* <Col md={2}>
             <Button color="link" onClick={this.onSearchClick}><FiSearch /></Button>
           </Col> */}
-        </Row>
-        <Row>
-          <Col md={12} style={{ textAlign: 'right' }}>
-            <FormattedMessage id="sys.total" />: ${123.45}
-          </Col>
-        </Row>
-        <br />
-        <Button color="success" block onClick={this.onSearchClear}><FormattedMessage id="sys.add" /></Button>
+        </Row><br />
+        {
+          productSelected.code ?
+            <Row>
+              <Col md={10} style={{ fontSize: 13 }}>
+                <Row>
+                  <Col md={4}><FormattedMessage id="sys.productName" />:</Col>
+                  <Col md={8}>{productSelected.name}</Col>
+                </Row>
+                <Row>
+                  <Col md={4}><FormattedMessage id="sys.sku" />:</Col>
+                  <Col md={8}>{productSelected.sku}</Col>
+                </Row>
+                <Row>
+                  <Col md={4}><FormattedMessage id="sys.unitPrice" />:</Col>
+                  <Col md={8}>${productSelected.unitPrice}</Col>
+                </Row>
+                <Row>
+                  <Col md={4}><FormattedMessage id="sys.qty" />:</Col>
+                  <Col md={8}>
+                    <Field
+                      component={renderField}
+                      name="qty"
+                      id="qty"
+                      type="number"
+                      style={{ width: 60, padding: 2 }}
+                      value={1}
+                      onChange={this.onSearchChange}
+                    />
+                  </Col>
+                </Row>
+              </Col>
+              <Col md={2} style={{ display: 'flex', alignItems: 'flex-end' }}>
+                <Button color="success" onClick={this.onSearchClear}><FormattedMessage id="sys.add" /></Button>
+              </Col>
+            </Row> : null
+        }
       </Form >
     );
   }
@@ -116,7 +148,7 @@ ProductSearchForm.propTypes = {
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
-  search: PropTypes.string,
+  productSelected: PropTypes.object,
   history: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,
 };
@@ -127,12 +159,10 @@ ProductSearchForm = reduxForm({
 
 export default withRouter(
   connect(state => {
-    const selector = formValueSelector('productSearchForm');
-    const search = selector(state, 'search');
-
     return {
-      search,
+      initialValues: { search: '', qty: 1 },
       products: state.productReducer.products.data,
+      productSelected: state.orderReducer.productSelected,
       enableReinitialize: true,
     };
   })(injectIntl(ProductSearchForm))

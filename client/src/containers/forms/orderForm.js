@@ -135,8 +135,11 @@ class OrderForm extends Component {
     const {
       dispatch,
     } = this.props;
-
-    dispatch(addOrderProduct({ id: '1234', name: 'Test product', price: 109.12, quantity: 1, amount: 109.12 }));
+    this.setState({
+      modal: !this.state.modal,
+    }, () => {
+      dispatch(clearSearchProducts());
+    });
   }
 
   onSubmit = data => {
