@@ -43,6 +43,7 @@ import {
   fetchManufacturers,
   submitProduct,
   clearSearchProducts,
+  clearOrderSearchedProductResult,
 } from '../../actions';
 import config from '../../config';
 
@@ -135,10 +136,12 @@ class OrderForm extends Component {
     const {
       dispatch,
     } = this.props;
+
     this.setState({
       modal: !this.state.modal,
     }, () => {
       dispatch(clearSearchProducts());
+      dispatch(clearOrderSearchedProductResult());
     });
   }
 
@@ -152,12 +155,6 @@ class OrderForm extends Component {
 
     dispatch(submitProduct(data));
   };
-
-  onSearchClear = () => {
-    const { dispatch } = this.props;
-
-    dispatch(clearSearchProducts());
-  }
 
   render() {
     const {
@@ -291,7 +288,7 @@ class OrderForm extends Component {
                     <Button
                       color="link"
                       className="pull-right form-btn"
-                      onClick={this.modalToggle}
+                      onClick={this.onAddProductClick}
                     >
                       <FiPlusCircle />
                       &nbsp;

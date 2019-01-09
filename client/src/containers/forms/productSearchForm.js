@@ -15,6 +15,7 @@ import {
   searchProducts,
   clearSearchProducts,
   selectOrderProduct,
+  addOrderProduct,
 } from '../../actions';
 
 const renderField = ({ input, type, placeholder, className, style, meta: { touched, error } }) => (
@@ -51,6 +52,18 @@ class ProductSearchForm extends Component {
     dispatch(selectOrderProduct(item));
   }
 
+  onAddProductSubmit = item => {
+    const { dispatch, productSelected } = this.props;
+
+    dispatch(addOrderProduct({
+      id: productSelected.code,
+      name: productSelected.name,
+      price: productSelected.unitPrice,
+      quantity: item.qty,
+      amount: productSelected.unitPrice * parseInt(item.qty).toFixed(2),
+    }));
+  }
+
   render() {
     const {
       handleSubmit,
@@ -60,7 +73,7 @@ class ProductSearchForm extends Component {
     } = this.props;
 
     return (
-      <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
+      <Form onSubmit={handleSubmit(data => this.onAddProductSubmit(data))}>
         <Row>
           <Col md={12}>
             <Field
@@ -133,7 +146,7 @@ class ProductSearchForm extends Component {
                 </Row>
               </Col>
               <Col md={2} style={{ display: 'flex', alignItems: 'flex-end' }}>
-                <Button color="success" onClick={this.onSearchClear}><FormattedMessage id="sys.add" /></Button>
+                <Button color="success"><FormattedMessage id="sys.add" /></Button>
               </Col>
             </Row> : null
         }
@@ -160,7 +173,7 @@ ProductSearchForm = reduxForm({
 export default withRouter(
   connect(state => {
     return {
-      initialValues: { search: '', qty: 1 },
+      initialValues: { search: '', qty: '1' },
       products: state.productReducer.products.data,
       productSelected: state.orderReducer.productSelected,
       enableReinitialize: true,
