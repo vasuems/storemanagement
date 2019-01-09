@@ -11,6 +11,7 @@ import {
   Table,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import numeral from 'numeral';
 import {
   searchProducts,
   clearSearchProducts,
@@ -56,9 +57,9 @@ class ProductSearchForm extends Component {
     const { dispatch, productSelected } = this.props;
 
     dispatch(addOrderProduct({
-      id: productSelected.code,
+      code: productSelected.code,
       name: productSelected.name,
-      price: productSelected.unitPrice,
+      unitPrice: productSelected.unitPrice,
       quantity: parseInt(item.qty),
       amount: productSelected.unitPrice * parseInt(item.qty),
     }));
@@ -101,7 +102,7 @@ class ProductSearchForm extends Component {
                         <tr style={{ cursor: 'pointer' }} key={code} onClick={() => this.onItemClick({ code, name, sku, unitPrice })}>
                           <td>{product.name}</td>
                           <td>{product.sku}</td>
-                          <td>${product.unitPrice}</td>
+                          <td>${numeral(product.unitPrice).format('0,0.00')}</td>
                         </tr>
                       );
                     })
@@ -128,7 +129,7 @@ class ProductSearchForm extends Component {
                 </Row>
                 <Row>
                   <Col md={4}><FormattedMessage id="sys.unitPrice" />:</Col>
-                  <Col md={8}>${productSelected.unitPrice}</Col>
+                  <Col md={8}>${numeral(productSelected.unitPrice).format('0,0.00')}</Col>
                 </Row>
                 <Row>
                   <Col md={4}><FormattedMessage id="sys.qty" />:</Col>

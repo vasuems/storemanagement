@@ -4,13 +4,14 @@ import numeral from 'numeral';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 const OrderProductListItem = props => {
-  console.log(props)
+  const { name, currencySign, unitPrice, quantity, amount } = props;
+
   return (
     <tr>
-      <td>{props.name}</td>
-      <td>{props.currencySign + numeral(props.price).format('0,0.00')}</td>
-      <td>{props.quantity}</td>
-      <td>{props.currencySign + numeral(props.amount).format('0,0.00')}</td>
+      <td>{name}</td>
+      <td>{currencySign + numeral(unitPrice).format('0,0.00')}</td>
+      <td>{quantity}</td>
+      <td>{currencySign + numeral(amount).format('0,0.00')}</td>
       <td><IoIosCloseCircleOutline color="red" size={18} style={{ cursor: 'pointer' }} onClick={() => alert(123)} /></td>
     </tr>
   );
@@ -18,10 +19,9 @@ const OrderProductListItem = props => {
 
 OrderProductListItem.propTypes = {
   name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  unitPrice: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
   amount: PropTypes.number.isRequired,
-  currency: PropTypes.string,
   currencySign: PropTypes.string.isRequired,
 };
 

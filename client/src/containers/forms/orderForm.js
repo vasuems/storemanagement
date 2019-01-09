@@ -274,9 +274,9 @@ class OrderForm extends Component {
                         {products.length > 0 ? products.map(product => {
                           return (
                             <OrderProductListItem
-                              key={product.id}
+                              key={product.code}
                               name={product.name}
-                              price={product.price}
+                              unitPrice={product.unitPrice}
                               quantity={product.quantity}
                               amount={product.amount}
                               currencySign="$"
