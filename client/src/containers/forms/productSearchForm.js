@@ -48,7 +48,6 @@ class ProductSearchForm extends Component {
 
   onItemClick = item => {
     const { dispatch } = this.props;
-
     dispatch(clearSearchProducts());
     dispatch(selectOrderProduct(item));
   }

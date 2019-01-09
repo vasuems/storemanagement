@@ -14,6 +14,7 @@ export const SUBMIT_ORDER_FAILED = 'SUBMIT_ORDER_FAILED';
 export const ADD_ORDER_PRODUCT = 'ADD_ORDER_PRODUCT';
 export const SELECT_ORDER_PRODUCT = 'SELECT_ORDER_PRODUCT';
 export const CLEAR_ORDER_SEARCHED_PRODUCT_RESULT = 'CLEAR_ORDER_SEARCHED_PRODUCT_RESULT';
+export const REMOVE_ORDER_PRODUCT = 'REMOVE_ORDER_PRODUCT';
 
 export function fetchOrders(data) {
   return { type: FETCH_ORDERS, value: data };
@@ -65,4 +66,8 @@ export function selectOrderProduct(data) {
 
 export function clearOrderSearchedProductResult() {
   return { type: CLEAR_ORDER_SEARCHED_PRODUCT_RESULT };
+}
+
+export function removeOrderProduct(data) {
+  return { type: REMOVE_ORDER_PRODUCT, value: data };
 }

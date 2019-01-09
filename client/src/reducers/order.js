@@ -5,6 +5,7 @@ import {
   FETCH_ORDER_DETAILS_FAILED,
   CLEAR_ORDER_DETAILS,
   ADD_ORDER_PRODUCT,
+  REMOVE_ORDER_PRODUCT,
   SELECT_ORDER_PRODUCT,
   CLEAR_ORDER_SEARCHED_PRODUCT_RESULT,
 } from '../actions';
@@ -29,7 +30,7 @@ export default function orderReducer(state = initialState, action) {
       const newProductList = [...state.products];
 
       newProductList.forEach(product => {
-        if (product.id === action.value.id) {
+        if (product.code === action.value.code) {
           product.quantity = product.quantity + action.value.quantity;
           product.amount = product.amount + action.value.amount;
           action.value = null;
@@ -39,6 +40,18 @@ export default function orderReducer(state = initialState, action) {
       if (action.value) {
         newProductList.push(action.value);
       }
+
+      return { ...state, products: newProductList };
+    }
+    case REMOVE_ORDER_PRODUCT: {
+      const newProductList = [...state.products];
+
+      newProductList.forEach((product, index, object) => {
+        if (product.code === action.value) {
+          object.splice(index, 1);
+          return;
+        }
+      });
 
       return { ...state, products: newProductList };
     }

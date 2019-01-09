@@ -45,7 +45,6 @@ export function* searchProducts(action) {
       },
     });
 
-
     yield put(searchProductsSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {

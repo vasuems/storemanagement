@@ -44,6 +44,7 @@ import {
   submitProduct,
   clearSearchProducts,
   clearOrderSearchedProductResult,
+  removeOrderProduct,
 } from '../../actions';
 import config from '../../config';
 
@@ -155,6 +156,14 @@ class OrderForm extends Component {
 
     dispatch(submitProduct(data));
   };
+
+  onProductItemDeleteClick = (code) => {
+    const {
+      dispatch,
+    } = this.props;
+
+    dispatch(removeOrderProduct(code));
+  }
 
   render() {
     const {
@@ -275,11 +284,13 @@ class OrderForm extends Component {
                           return (
                             <OrderProductListItem
                               key={product.code}
+                              code={product.code}
                               name={product.name}
                               unitPrice={product.unitPrice}
                               quantity={product.quantity}
                               amount={product.amount}
                               currencySign="$"
+                              onDeleteClick={this.onProductItemDeleteClick}
                             />
                           );
                         }) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
