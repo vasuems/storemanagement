@@ -4,6 +4,7 @@ import numeral from 'numeral';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 const OrderProductListItem = props => {
+  console.log(props)
   return (
     <tr>
       <td>{props.name}</td>

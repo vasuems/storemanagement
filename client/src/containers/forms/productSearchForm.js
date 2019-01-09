@@ -59,8 +59,8 @@ class ProductSearchForm extends Component {
       id: productSelected.code,
       name: productSelected.name,
       price: productSelected.unitPrice,
-      quantity: item.qty,
-      amount: productSelected.unitPrice * parseInt(item.qty).toFixed(2),
+      quantity: parseInt(item.qty),
+      amount: productSelected.unitPrice * parseInt(item.qty),
     }));
   }
 
@@ -101,7 +101,7 @@ class ProductSearchForm extends Component {
                         <tr style={{ cursor: 'pointer' }} key={code} onClick={() => this.onItemClick({ code, name, sku, unitPrice })}>
                           <td>{product.name}</td>
                           <td>{product.sku}</td>
-                          <td>${product.unitPrice.toFixed(2)}</td>
+                          <td>${product.unitPrice}</td>
                         </tr>
                       );
                     })

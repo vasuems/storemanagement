@@ -276,9 +276,9 @@ class OrderForm extends Component {
                             <OrderProductListItem
                               key={product.id}
                               name={product.name}
-                              price={product.price.toFixed(2)}
+                              price={product.price}
                               quantity={product.quantity}
-                              amount={product.amount.toFixed(2)}
+                              amount={product.amount}
                               currencySign="$"
                             />
                           );

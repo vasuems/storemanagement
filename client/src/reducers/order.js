@@ -25,8 +25,23 @@ export default function orderReducer(state = initialState, action) {
       return { ...state, orders: action.value, loaded: true };
     case FETCH_ORDER_DETAILS_SUCCESS:
       return { ...state, products: action.value, loaded: true };
-    case ADD_ORDER_PRODUCT:
-      return { ...state, products: [...state.products, action.value] };
+    case ADD_ORDER_PRODUCT: {
+      const newProductList = [...state.products];
+
+      newProductList.forEach(product => {
+        if (product.id === action.value.id) {
+          product.quantity = product.quantity + action.value.quantity;
+          product.amount = product.amount + action.value.amount;
+          action.value = null;
+        }
+      });
+
+      if (action.value) {
+        newProductList.push(action.value);
+      }
+
+      return { ...state, products: newProductList };
+    }
     case SELECT_ORDER_PRODUCT:
       return { ...state, productSelected: action.value };
     case CLEAR_ORDER_SEARCHED_PRODUCT_RESULT:
