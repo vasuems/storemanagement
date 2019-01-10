@@ -28,6 +28,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { FiDownload, FiPrinter, FiPlusCircle } from 'react-icons/fi';
 import classnames from 'classnames';
+import numeral from 'numeral';
 import {
   ProfileLoader,
   OrderShippingItem,
@@ -176,6 +177,8 @@ class OrderForm extends Component {
       storeId,
       products,
     } = this.props;
+    const subTotal = products.reduce((acc, product) => acc + product.amount, 0);
+    const shipping = 21.5; // TODO: replace this
 
     return (
       mode === 'update' && !loaded ?
@@ -312,19 +315,19 @@ class OrderForm extends Component {
                             <td>
                               <FormattedMessage id="sys.subTotal" />:
                             </td>
-                            <td>SGD $116.00</td>
+                            <td>${numeral(subTotal).format('0,0.00')}</td>
                           </tr>
                           <tr>
                             <td>
                               <FormattedMessage id="sys.taxIncluded" />:
                             </td>
-                            <td>SGD $8.12</td>
+                            <td>${numeral(subTotal * 0.07).format('0,0.00')}</td>
                           </tr>
                           <tr>
                             <td>
                               <FormattedMessage id="sys.shipping" />:
                             </td>
-                            <td>SGD $21.60</td>
+                            <td>${numeral(shipping).format('0,0.00')}</td>
                           </tr>
                           <tr>
                             <td>
@@ -333,7 +336,7 @@ class OrderForm extends Component {
                               </b>
                             </td>
                             <td>
-                              <b>SGD $137.60</b>
+                              <b>${numeral(subTotal * 1.07 + shipping).format('0,0.00')}</b>
                             </td>
                           </tr>
                         </tbody>

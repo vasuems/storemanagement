@@ -140,5 +140,6 @@
   "sys.newFailed": "Failed submitting item.",
   "sys.newSuccess": "Submitting item successful.",
   "sys.noRecords": "No records.",
-  "sys.send": "Send"
+  "sys.send": "Send",
+  "sys.orderProductUpdated": "Order product updated"
 }

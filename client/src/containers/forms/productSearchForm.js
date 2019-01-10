@@ -43,6 +43,8 @@ class ProductSearchForm extends Component {
     // TODO: replace hardcoded page number and page size
     if (event.target.value.length >= 3) {
       dispatch(searchProducts({ storeId, keyword: event.target.value, pageNo: 1, pageSize: 200 }));
+    } else {
+      dispatch(clearSearchProducts());
     }
   };
 
@@ -91,17 +93,19 @@ class ProductSearchForm extends Component {
                     <th><FormattedMessage id="sys.productName" /></th>
                     <th><FormattedMessage id="sys.sku" /></th>
                     <th><FormattedMessage id="sys.unitPrice" /></th>
+                    <th><FormattedMessage id="sys.qty" /></th>
                   </tr>
                 </thead>
                 <tbody>
                   {
                     products.map(product => {
-                      const { code, name, sku, unitPrice } = product;
+                      const { code, name, sku, unitPrice, quantity } = product;
                       return (
-                        <tr style={{ cursor: 'pointer' }} key={code} onClick={() => this.onItemClick({ code, name, sku, unitPrice })}>
+                        <tr style={{ cursor: 'pointer' }} key={code} onClick={() => this.onItemClick({ code, name, sku, unitPrice, quantity })}>
                           <td>{product.name}</td>
                           <td>{product.sku}</td>
                           <td>${numeral(product.unitPrice).format('0,0.00')}</td>
+                          <td>{quantity}</td>
                         </tr>
                       );
                     })
@@ -173,7 +177,7 @@ ProductSearchForm = reduxForm({
 export default withRouter(
   connect(state => {
     return {
-      initialValues: { search: '', qty: '1' },
+      initialValues: { qty: '1' },
       products: state.productReducer.products.data,
       productSelected: state.orderReducer.productSelected,
       enableReinitialize: true,
