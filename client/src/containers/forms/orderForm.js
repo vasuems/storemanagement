@@ -37,12 +37,8 @@ import {
 import { ProductSearchForm } from '../forms';
 import {
   fetchOrderDetails,
-  addOrderProduct,
   clearOrderDetails,
-  fetchCategories,
-  fetchSuppliers,
-  fetchManufacturers,
-  submitProduct,
+  submitOrder,
   clearSearchProducts,
   clearOrderSearchedProductResult,
   removeOrderProduct,
@@ -148,14 +144,18 @@ class OrderForm extends Component {
   }
 
   onSubmit = data => {
-    const { dispatch, storeId } = this.props;
-
+    const {
+      dispatch,
+      mode,
+      storeId,
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    console.log(data);
     data.storeId = storeId;
-    if (data.allowQuantity === undefined) {
-      data.allowQuantity = false;
-    }
 
-    dispatch(submitProduct(data));
+    dispatch(submitOrder(data));
   };
 
   onProductItemDeleteClick = (code) => {
@@ -184,57 +184,51 @@ class OrderForm extends Component {
       mode === 'update' && !loaded ?
         <ProfileLoader /> :
         <div>
-          <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
-            <Button size="sm" color="primary" className="pull-right form-btn">
-              <FiSave />
-              &nbsp;
-              <FormattedMessage id="sys.save" />
-            </Button>
-            <br />
-            <br />
-            {
-              error ?
-                <Alert color="danger">
-                  <FormattedMessage id="sys.newFailed" />
-                </Alert> :
-                done ?
-                  <Alert color="success">
-                    <FormattedMessage id="sys.newSuccess" />
-                  </Alert> : null
-            }
-            <Nav tabs>
-              <NavItem>
-                <NavLink
-                  className={classnames({
-                    active: this.state.activeTab === '1',
-                  })}
-                  onClick={() => {
-                    this.toggle('1');
-                  }}
-                >
-                  <FormattedMessage id="sys.orderDetails" />
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className={classnames({
-                    active: this.state.activeTab === '2',
-                  })}
-                  onClick={() => {
-                    this.toggle('2');
-                  }}
-                >
-                  <FormattedMessage id="sys.shipping" />
-                </NavLink>
-              </NavItem>
-            </Nav>
-            <TabContent
-              activeTab={this.state.activeTab}
-              style={{ backgroundColor: '#fff', padding: 15 }}
-            >
-              <TabPane tabId="1">
+          {
+            error ?
+              <Alert color="danger">
+                <FormattedMessage id="sys.newFailed" />
+              </Alert> :
+              done ?
+                <Alert color="success">
+                  <FormattedMessage id="sys.newSuccess" />
+                </Alert> : null
+          }
+          <Nav tabs>
+            <NavItem>
+              <NavLink
+                className={classnames({
+                  active: this.state.activeTab === '1',
+                })}
+                onClick={() => {
+                  this.toggle('1');
+                }}
+              >
+                <FormattedMessage id="sys.orderDetails" />
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({
+                  active: this.state.activeTab === '2',
+                })}
+                onClick={() => {
+                  this.toggle('2');
+                }}
+              >
+                <FormattedMessage id="sys.shipping" />
+              </NavLink>
+            </NavItem>
+          </Nav>
+          <TabContent
+            activeTab={this.state.activeTab}
+            style={{ backgroundColor: '#fff', padding: 15 }}
+          >
+            <TabPane tabId="1">
+              <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
                 <Row>
                   <Col md={12}>
+
                     <Button
                       size="sm"
                       color="dark"
@@ -255,6 +249,16 @@ class OrderForm extends Component {
                       <FiPrinter />
                       &nbsp;
                       <FormattedMessage id="sys.printInvoice" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      color="primary"
+                      className="pull-right form-btn"
+                      style={{ marginRight: 10 }}
+                    >
+                      <FiSave />
+                      &nbsp;
+                      <FormattedMessage id="sys.save" />
                     </Button>
                   </Col>
                 </Row>
@@ -411,46 +415,47 @@ class OrderForm extends Component {
                     </Card>
                   </Col>
                 </Row>
-              </TabPane>
-              <TabPane tabId="2">
-                <Row>
-                  <Col md={5}>
-                    <OrderShippingItem
-                      courier="Fedex Express"
-                      trackingId="asa3djfa123lksdfj23432sdf"
-                      datetime="2018-11-11 11:11:00"
-                      location="Singapore logistics center"
-                      status="Processing"
-                      statusColor="green"
-                    />
-                    <OrderShippingItem
-                      courier="Fedex Express"
-                      trackingId="234adsf9asdf31asdf"
-                      datetime="2018-11-10 07:10:00"
-                      location="Malaysia logistic center"
-                      status="Shipped out"
-                    />
-                    <OrderShippingItem
-                      courier="Fedex Express"
-                      trackingId="Not available"
-                      datetime="2018-11-08 16:30:00"
-                      location="Seller"
-                      status="Dispatched"
-                    />
-                  </Col>
-                  <Col md={7}>
-                    <iframe
-                      width="100%"
-                      height="450"
-                      frameBorder="0"
-                      src={`https://www.google.com/maps/embed/v1/place?key=${config.googleApiKey}&q=Space+Needle,Seattle+WA`}
-                      allowFullScreen>
-                    </iframe>
-                  </Col>
-                </Row>
-              </TabPane>
-            </TabContent>
-          </Form>
+              </Form>
+            </TabPane>
+            <TabPane tabId="2">
+              <Row>
+                <Col md={5}>
+                  <OrderShippingItem
+                    courier="Fedex Express"
+                    trackingId="asa3djfa123lksdfj23432sdf"
+                    datetime="2018-11-11 11:11:00"
+                    location="Singapore logistics center"
+                    status="Processing"
+                    statusColor="green"
+                  />
+                  <OrderShippingItem
+                    courier="Fedex Express"
+                    trackingId="234adsf9asdf31asdf"
+                    datetime="2018-11-10 07:10:00"
+                    location="Malaysia logistic center"
+                    status="Shipped out"
+                  />
+                  <OrderShippingItem
+                    courier="Fedex Express"
+                    trackingId="Not available"
+                    datetime="2018-11-08 16:30:00"
+                    location="Seller"
+                    status="Dispatched"
+                  />
+                </Col>
+                <Col md={7}>
+                  <iframe
+                    width="100%"
+                    height="450"
+                    frameBorder="0"
+                    src={`https://www.google.com/maps/embed/v1/place?key=${config.googleApiKey}&q=Space+Needle,Seattle+WA`}
+                    allowFullScreen>
+                  </iframe>
+                </Col>
+              </Row>
+            </TabPane>
+          </TabContent>
+
           <Modal isOpen={this.state.modal} toggle={this.modalToggle} zIndex="10000">
             <ModalHeader toggle={this.modalToggle}><FormattedMessage id="sys.addProduct" /></ModalHeader>
             <ModalBody>
