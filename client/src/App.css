@@ -334,3 +334,11 @@ table .btn-link{
 .mandatory-field{
   font-size: 15px;
 }
+.search-result{
+  border: 1px solid #eee;
+  font-size: 12px;
+}
+.search-result thead{
+  background-color: #333;
+  color: #fff;
+}

@@ -27,16 +27,6 @@ const renderField = ({ input, type, placeholder, className, style, meta: { touch
 );
 
 class ProductSearchForm extends Component {
-  componentDidMount() {
-    const {
-      dispatch,
-      storeId,
-      match: {
-        params: { id },
-      },
-    } = this.props;
-  }
-
   onSearchChange = event => {
     const { dispatch, storeId } = this.props;
 
@@ -49,13 +39,15 @@ class ProductSearchForm extends Component {
   };
 
   onItemClick = item => {
-    const { dispatch } = this.props;
+    const { dispatch, reset } = this.props;
     dispatch(clearSearchProducts());
     dispatch(selectOrderProduct(item));
+
+    reset();
   }
 
   onAddProductSubmit = item => {
-    const { dispatch, productSelected } = this.props;
+    const { dispatch, productSelected, reset } = this.props;
 
     dispatch(addOrderProduct({
       code: productSelected.code,
@@ -64,6 +56,8 @@ class ProductSearchForm extends Component {
       quantity: parseInt(item.qty),
       amount: productSelected.unitPrice * parseInt(item.qty),
     }));
+
+    reset();
   }
 
   render() {
@@ -87,8 +81,8 @@ class ProductSearchForm extends Component {
               onChange={this.onSearchChange}
             />
             {products.length > 0 ?
-              <Table hover size="sm" style={{ border: '1px solid #eee', fontSize: 12 }}>
-                <thead style={{ backgroundColor: '#333', color: '#fff' }}>
+              <Table hover size="sm" className="search-result">
+                <thead>
                   <tr>
                     <th><FormattedMessage id="sys.productName" /></th>
                     <th><FormattedMessage id="sys.sku" /></th>
@@ -164,6 +158,7 @@ ProductSearchForm.propTypes = {
   storeId: PropTypes.string.isRequired,
   intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
   match: PropTypes.object,
   productSelected: PropTypes.object,
   history: PropTypes.object.isRequired,
@@ -177,7 +172,7 @@ ProductSearchForm = reduxForm({
 export default withRouter(
   connect(state => {
     return {
-      initialValues: { qty: '1' },
+      initialValues: { search: '', qty: '1' },
       products: state.productReducer.products.data,
       productSelected: state.orderReducer.productSelected,
       enableReinitialize: true,
