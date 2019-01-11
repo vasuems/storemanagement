@@ -142,7 +142,7 @@ class OrderList extends Component {
                       <FormattedMessage id="sys.orderNumber" />
                     </th>
                     <th>
-                      <FormattedMessage id="sys.orderedBy" />
+                      <FormattedMessage id="sys.customerName" />
                     </th>
                     <th>
                       <FormattedMessage id="sys.orderDate" />
@@ -151,7 +151,7 @@ class OrderList extends Component {
                       <FormattedMessage id="sys.payBy" />
                     </th>
                     <th>
-                      <FormattedMessage id="sys.orderStatus" />
+                      <FormattedMessage id="sys.status" />
                     </th>
                     <th />
                   </tr>
@@ -159,10 +159,10 @@ class OrderList extends Component {
                 <tbody>
                   {orders.length > 0 ? orders.map(order => (
                     <OrderListItem
-                      key={order.id}
-                      number={order.number}
-                      customer={order.customer}
-                      date={order.date}
+                      key={order.code}
+                      number={order.code}
+                      customer={order.customerName}
+                      date={order.addedOn}
                       payment={order.payment}
                       status={order.status}
                       onClick={this.onViewClick}

@@ -361,7 +361,7 @@ class OrderForm extends Component {
                     <Card body>
                       <FormGroup row>
                         <Label for="customer-name" sm={4}>
-                          <FormattedMessage id="sys.name" />
+                          <FormattedMessage id="sys.customerName" />
                           <span className="text-danger mandatory-field">*</span>
                         </Label>
                         <Col sm={8}>

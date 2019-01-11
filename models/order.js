@@ -70,7 +70,7 @@ Order.prototype.get = function (id) {
             new Order(
               code,
               storeId,
-              addedOn,
+              moment(addedOn).format('YYYY-MM-DD HH:mm:ss'),
               addedBy,
               paidOn,
               customerName,
@@ -133,7 +133,7 @@ Order.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
             return new Order(
               code,
               storeId,
-              addedOn,
+              moment(addedOn).format('YYYY-MM-DD HH:mm:ss'),
               addedBy,
               paidOn,
               customerName,
@@ -196,7 +196,7 @@ Order.prototype.add = function (order) {
               new Order(
                 code,
                 storeId,
-                addedOn,
+                moment(addedOn).format('YYYY-MM-DD HH:mm:ss'),
                 addedBy,
                 paidOn,
                 customerName,

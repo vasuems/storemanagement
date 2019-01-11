@@ -60,7 +60,7 @@ Account.prototype.get = function (id) {
               email,
               null,
               null,
-              joinedOn,
+              moment(joinedOn).format('YYYY-MM-DD HH:mm:ss'),
               status
             )
           );
@@ -113,7 +113,7 @@ Account.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
               email,
               null,
               null,
-              joinedOn,
+              moment(joinedOn).format('YYYY-MM-DD HH:mm:ss'),
               status
             );
           });
@@ -170,7 +170,7 @@ Account.prototype.add = function (account) {
                 email,
                 password,
                 salt,
-                joinedOn,
+                moment(joinedOn).format('YYYY-MM-DD HH:mm:ss'),
                 true
               )
             );

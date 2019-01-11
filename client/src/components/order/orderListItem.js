@@ -1,26 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'reactstrap';
-import { FormattedMessage } from 'react-intl';
+import { Button, Badge } from 'reactstrap';
+import { injectIntl, FormattedMessage } from 'react-intl';
 
-const OrderListItem = props => (
-  <tr>
-    <td>{props.number}</td>
-    <td>{props.customer}</td>
-    <td>{props.date}</td>
-    <td>{props.payment}</td>
-    <td>{props.status}</td>
-    <td>
-      <Button
-        size="sm"
-        color="link"
-        onClick={() => props.onClick(props.number)}
-      >
-        <FormattedMessage id="sys.view" />
-      </Button>
-    </td>
-  </tr>
-);
+const OrderListItem = props => {
+  const { formatMessage } = props.intl;
+  const {
+    number,
+    customer,
+    date,
+    payment,
+    status,
+    onClick,
+  } = props;
+
+  return (
+    <tr>
+      <td>{number}</td>
+      <td>{customer}</td>
+      <td>{date}</td>
+      <td>{payment}</td>
+      <td>
+        <Badge color={status ? 'success' : 'danger'}>
+          {status
+            ? formatMessage({ id: 'sys.active' })
+            : formatMessage({ id: 'sys.inactive' })}
+        </Badge></td>
+      <td>
+        <Button
+          size="sm"
+          color="link"
+          onClick={() => onClick(number)}
+        >
+          <FormattedMessage id="sys.view" />
+        </Button>
+      </td>
+    </tr>
+  );
+};
 
 OrderListItem.propTypes = {
   number: PropTypes.string.isRequired,
@@ -29,6 +46,7 @@ OrderListItem.propTypes = {
   payment: PropTypes.string.isRequired,
   status: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
-export default OrderListItem;
+export default injectIntl(OrderListItem);
