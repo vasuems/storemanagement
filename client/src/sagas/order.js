@@ -9,7 +9,6 @@ import {
   submitOrderFailed,
   clearToken,
 } from '../actions';
-import { salesReportProducts } from '../apis/mocks/responses';
 import config from '../config';
 
 export function* fetchOrders(action) {
@@ -35,7 +34,17 @@ export function* fetchOrders(action) {
 
 export function* fetchOrderDetails(action) {
   try {
-    yield put(fetchOrderDetailsSuccess(salesReportProducts));
+    const res = yield axios({
+      method: 'get',
+      url: `${config.apiDomain}/stores/${action.value.storeId}/orders/${
+        action.value.orderId
+        }`,
+      headers: {
+        authorization: localStorage.getItem(config.accessTokenKey),
+      },
+    });
+
+    yield put(fetchOrderDetailsSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {
       yield put(clearToken());

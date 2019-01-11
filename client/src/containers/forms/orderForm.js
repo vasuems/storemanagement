@@ -111,7 +111,7 @@ class OrderForm extends Component {
 
     if (mode === 'update') {
       dispatch(
-        fetchOrderDetails({ storeId, productId: id })
+        fetchOrderDetails({ storeId, orderId: id })
       );
     }
   }
@@ -184,7 +184,8 @@ class OrderForm extends Component {
       storeId,
       products,
     } = this.props;
-    const subTotal = products.reduce((acc, product) => acc + product.amount, 0);
+    console.log(products);
+    const subTotal = products.length > 0 ? products.reduce((acc, product) => acc + product.amount, 0) : 0.00;
     const shipping = 21.5; // TODO: replace this
 
     return (
@@ -497,7 +498,7 @@ OrderForm = reduxForm({
 export default withRouter(
   connect(state => {
     return {
-      initialValues: state.orderReducer.productDetails,
+      initialValues: state.orderReducer.orderDetails,
       products: state.orderReducer.products,
       done: state.orderReducer.done,
       loaded: state.orderReducer.loaded,
