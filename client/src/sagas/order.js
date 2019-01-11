@@ -43,7 +43,7 @@ export function* fetchOrderDetails(action) {
         authorization: localStorage.getItem(config.accessTokenKey),
       },
     });
-
+    res.data.products = [];
     yield put(fetchOrderDetailsSuccess(res.data));
   } catch (error) {
     if (error.response.status === 401) {

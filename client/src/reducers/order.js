@@ -14,13 +14,13 @@ import {
 
 const initialState = {
   orders: { data: [], count: 0 },
-  products: [],
   searchedProducts: [],
   productSelected: {},
-  orderDetails: {},
+  orderDetails: { products: [] },
   loaded: false,
   done: false,
   error: false,
+  counter: 0,
 };
 
 export default function orderReducer(state = initialState, action) {
@@ -28,9 +28,9 @@ export default function orderReducer(state = initialState, action) {
     case FETCH_ORDERS_SUCCESS:
       return { ...state, orders: action.value, loaded: true };
     case FETCH_ORDER_DETAILS_SUCCESS:
-      return { ...state, products: action.value, loaded: true };
+      return { ...state, orderDetails: action.value, loaded: true };
     case ADD_ORDER_PRODUCT: {
-      const newProductList = [...state.products];
+      const newProductList = [...state.orderDetails.products];
 
       newProductList.forEach(product => {
         if (product.code === action.value.code) {
@@ -44,10 +44,15 @@ export default function orderReducer(state = initialState, action) {
         newProductList.push(action.value);
       }
 
-      return { ...state, products: newProductList };
+      return {
+        ...state,
+        orderDetails: { ...state.orderDetails, products: newProductList },
+        done: true,
+        counter: state.counter + 1,
+      };
     }
     case REMOVE_ORDER_PRODUCT: {
-      const newProductList = [...state.products];
+      const newProductList = [...state.orderDetails.products];
 
       newProductList.forEach((product, index, object) => {
         if (product.code === action.value) {
@@ -56,7 +61,12 @@ export default function orderReducer(state = initialState, action) {
         }
       });
 
-      return { ...state, products: newProductList };
+      return {
+        ...state,
+        orderDetails: { ...state.orderDetails, products: newProductList },
+        done: true,
+        counter: state.counter + 1,
+      };
     }
     case SUBMIT_ORDER_SUCCESS:
       return { ...state, orderDetails: action.value, done: true };

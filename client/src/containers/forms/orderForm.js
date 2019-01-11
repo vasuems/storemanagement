@@ -82,7 +82,6 @@ const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
   </div>
 );
 
-
 class OrderForm extends Component {
   constructor(props) {
     super(props);
@@ -148,14 +147,14 @@ class OrderForm extends Component {
       dispatch,
       mode,
       storeId,
-      products,
+      initialValues,
       match: {
         params: { id },
       },
     } = this.props;
-
+    console.log(initialValues.products)
     data.storeId = storeId;
-    data.products = products;
+    data.products = initialValues.products;
     data.mode = mode;
 
     if (mode === 'update') {
@@ -182,9 +181,10 @@ class OrderForm extends Component {
       error,
       mode,
       storeId,
-      products,
+      initialValues,
     } = this.props;
-    console.log(products);
+
+    const products = initialValues.products;
     const subTotal = products.length > 0 ? products.reduce((acc, product) => acc + product.amount, 0) : 0.00;
     const shipping = 21.5; // TODO: replace this
 
@@ -486,7 +486,6 @@ OrderForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
   mode: PropTypes.string,
-  products: PropTypes.array.isRequired,
   initialValues: PropTypes.object,
   history: PropTypes.object.isRequired,
 };
@@ -499,10 +498,10 @@ export default withRouter(
   connect(state => {
     return {
       initialValues: state.orderReducer.orderDetails,
-      products: state.orderReducer.products,
       done: state.orderReducer.done,
       loaded: state.orderReducer.loaded,
       error: state.orderReducer.error,
+      counter: state.orderReducer.counter,
       enableReinitialize: true,
     };
   })(injectIntl(OrderForm))
