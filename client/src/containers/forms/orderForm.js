@@ -148,12 +148,19 @@ class OrderForm extends Component {
       dispatch,
       mode,
       storeId,
+      products,
       match: {
         params: { id },
       },
     } = this.props;
-    console.log(data);
+
     data.storeId = storeId;
+    data.products = products;
+    data.mode = mode;
+
+    if (mode === 'update') {
+      data.orderId = id;
+    }
 
     dispatch(submitOrder(data));
   };

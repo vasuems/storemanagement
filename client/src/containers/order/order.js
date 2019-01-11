@@ -16,7 +16,7 @@ import config from '../../config';
 
 class Order extends Component {
   render() {
-    const { history } = this.props;
+    const { history, match: { path } } = this.props;
     const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
     return (
@@ -40,6 +40,7 @@ class Order extends Component {
           <Row>
             <Col md={12}>
               <OrderForm
+                mode={path === '/new-order' ? 'new' : 'update'}
                 storeId={storeId} />
             </Col>
           </Row>
@@ -51,14 +52,7 @@ class Order extends Component {
 
 Order.propTypes = {
   history: PropTypes.object.isRequired,
-  intl: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({});
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    null
-  )(injectIntl(Order))
-);
+export default withRouter(Order);
