@@ -62,7 +62,7 @@
   "sys.myAcct": "My Account",
   "sys.myOrders": "My Orders",
   "sys.address": "Address",
-  "sys.deliveryAddr": "Delivery address",
+  "sys.shippingAddr": "Shipping address",
   "sys.billingAddr": "Billing address",
   "sys.update": "Update",
   "sys.contactNo": "Contact No.",

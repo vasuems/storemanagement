@@ -47,7 +47,7 @@ const PasswordForm = props => {
         </CardHeader>
         <CardBody>
           <FormGroup row>
-            <Label for="name" sm={4}>
+            <Label for="current-pwd" sm={4}>
               <FormattedMessage id="sys.currentPwd" />
             </Label>
             <Col sm={8}>
@@ -61,7 +61,7 @@ const PasswordForm = props => {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="name" sm={4}>
+            <Label for="new-pwd" sm={4}>
               <FormattedMessage id="sys.newPwd" />
             </Label>
             <Col sm={8}>

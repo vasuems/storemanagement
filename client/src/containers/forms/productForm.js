@@ -204,7 +204,7 @@ class ProductForm extends Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="categoryId" sm={3}>
+                    <Label for="category-id" sm={3}>
                       <FormattedMessage id="sys.category" />
                       <span className="text-danger mandatory-field">*</span>
                     </Label>
@@ -235,7 +235,7 @@ class ProductForm extends Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="manufacturerId" sm={3}>
+                    <Label for="manufacturer-id" sm={3}>
                       <FormattedMessage id="sys.manufacturer" />
                     </Label>
                     <Col sm={9}>
@@ -248,7 +248,7 @@ class ProductForm extends Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="supplierId" sm={3}>
+                    <Label for="supplier-id" sm={3}>
                       <FormattedMessage id="sys.supplier" />
                     </Label>
                     <Col sm={9}>
@@ -286,7 +286,7 @@ class ProductForm extends Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="qty" sm={5}>
+                    <Label for="quantity" sm={5}>
                       <FormattedMessage id="sys.qty" />
                     </Label>
                     <Col sm={7}>

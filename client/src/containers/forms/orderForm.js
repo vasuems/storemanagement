@@ -360,7 +360,7 @@ class OrderForm extends Component {
                     </CardTitle>
                     <Card body>
                       <FormGroup row>
-                        <Label for="email" sm={4}>
+                        <Label for="customer-name" sm={4}>
                           <FormattedMessage id="sys.name" />
                           <span className="text-danger mandatory-field">*</span>
                         </Label>
@@ -375,7 +375,7 @@ class OrderForm extends Component {
                         </Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="email" sm={4}>
+                        <Label for="customer-contact" sm={4}>
                           <FormattedMessage id="sys.contactNo" />
                           <span className="text-danger mandatory-field">*</span>
                         </Label>
@@ -390,22 +390,22 @@ class OrderForm extends Component {
                         </Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="email" sm={4}>
-                          <FormattedMessage id="sys.deliveryAddr" />
+                        <Label for="shipping-address" sm={4}>
+                          <FormattedMessage id="sys.shippingAddr" />
                           <span className="text-danger mandatory-field">*</span>
                         </Label>
                         <Col sm={8}>
                           <Field
                             component={renderField}
-                            name="deliveryAddress"
+                            name="shippingAddress"
                             className="form-control"
-                            id="address"
+                            id="shipping-address"
                             validate={[required]}
                           />
                         </Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="email" sm={4}>
+                        <Label for="billing-address" sm={4}>
                           <FormattedMessage id="sys.billingAddr" />
                           <span className="text-danger mandatory-field">*</span>
                         </Label>

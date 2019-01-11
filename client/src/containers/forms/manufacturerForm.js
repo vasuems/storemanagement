@@ -230,7 +230,7 @@ class ManufacturerForm extends Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="contact" sm={3}>
+                    <Label for="country-id" sm={3}>
                       <FormattedMessage id="sys.country" />
                       <span className="text-danger mandatory-field">*</span>
                     </Label>

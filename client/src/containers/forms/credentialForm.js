@@ -31,11 +31,11 @@ const renderField = ({
   type,
   meta: { touched, error },
 }) => (
-  <div>
-    <Input {...input} placeholder={placeholder} type={type} />
-    {touched && (error && <span className="text-danger">{error}</span>)}
-  </div>
-);
+    <div>
+      <Input {...input} placeholder={placeholder} type={type} />
+      {touched && (error && <span className="text-danger">{error}</span>)}
+    </div>
+  );
 
 const CredentialForm = props => {
   const { handleSubmit } = props;
@@ -82,7 +82,7 @@ const CredentialForm = props => {
                 <Col sm={9}>
                   <Field
                     component={renderField}
-                    name="contact-no"
+                    name="contactNo"
                     className="form-control"
                     id="contact-no"
                     readonly
