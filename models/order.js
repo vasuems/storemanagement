@@ -22,7 +22,7 @@ function Order(
   customerName,
   shippingAddress,
   billingAddress,
-  contact,
+  customerContact,
   products,
   status = true
 ) {
@@ -35,7 +35,7 @@ function Order(
   this.customerName = customerName;
   this.shippingAddress = shippingAddress;
   this.billingAddress = billingAddress;
-  this.contact = contact || '';
+  this.customerContact = customerContact || '';
   this.products = products;
   this.status = status ? true : false;
 }
@@ -45,7 +45,7 @@ Order.prototype.get = function (id) {
     db.query(
       `select code, store_id as storeId, added_by as addedBy, added_on as addedOn, paid_on as paidOn, 
        customer_name as customerName, shipping_address as shippingAddress, billing_address as billingAddress, 
-       contact, status
+       customer_contact as customerContact, status
        from \`order\`
        where code='${id}'`,
       (error, results) => {
@@ -110,7 +110,7 @@ Order.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
     db.query(
       `select code, store_id as storeId, added_by as addedBy, added_on as addedOn, paid_on as paidOn, 
        customer_name as customerName, shipping_address as shippingAddress, billing_address as billingAddress, 
-       contact, status
+       customer_contact as customerContact, status
        from \`order\`
        where store_id='${id}' order by added_on desc limit ${(page - 1) *
       pageSize}, ${pageSize}`,
@@ -128,7 +128,7 @@ Order.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
               customerName,
               shippingAddress,
               billingAddress,
-              contact,
+              customerContact,
               products,
               status,
             } = order;
@@ -141,7 +141,7 @@ Order.prototype.getAllByStoreId = function (id, page = 1, pageSize = 20) {
               customerName,
               shippingAddress,
               billingAddress,
-              contact,
+              customerContact,
               products,
               status
             );
@@ -183,13 +183,13 @@ Order.prototype.add = function (order) {
         customerName,
         shippingAddress,
         billingAddress,
-        contact,
+        customerContact,
         products,
       } = order;
 
       db.query(
-        `insert into \`order\`(code, store_id, added_on, added_by, paid_on, customer_name, shipping_address, billing_address, contact) 
-         values('${code}', '${storeId}', '${addedOn}', '${addedBy}', ` + (paidOn ? `'${paidOn}'` : null) + `, '${customerName}', '${shippingAddress}', '${billingAddress}', '${contact}')`,
+        `insert into \`order\`(code, store_id, added_on, added_by, paid_on, customer_name, shipping_address, billing_address, customer_contact) 
+         values('${code}', '${storeId}', '${addedOn}', '${addedBy}', ` + (paidOn ? `'${paidOn}'` : null) + `, '${customerName}', '${shippingAddress}', '${billingAddress}', '${customerContact}')`,
         (error, results) => {
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalid order data.'));
@@ -227,7 +227,7 @@ Order.prototype.add = function (order) {
                 customerName,
                 shippingAddress,
                 billingAddress,
-                contact,
+                customerContact,
                 products,
                 true
               )
@@ -252,13 +252,13 @@ Order.prototype.update = function (order) {
         customerName,
         shippingAddress,
         billingAddress,
-        contact,
+        customerContact,
         products,
       } = order;
 
       db.query(
         `update \`order\` set paid_on=` + (paidOn ? `'${paidOn}'` : null) + `, customer_name='${customerName}', 
-         shipping_address='${shippingAddress}', billing_address='${billingAddress}', contact='${contact}'
+         shipping_address='${shippingAddress}', billing_address='${billingAddress}', customer_contact='${customerContact}'
          where code='${code}' and added_by='${addedBy}'`,
         (error, results) => {
           if (error || results.affectedRows == 0) {
@@ -274,7 +274,7 @@ Order.prototype.update = function (order) {
                 customerName,
                 shippingAddress,
                 billingAddress,
-                contact,
+                customerContact,
                 products
               )
             );

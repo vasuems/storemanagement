@@ -399,7 +399,7 @@ app.put(
         customerName,
         shippingAddress,
         billingAddress,
-        contact,
+        customerContact,
         products,
       } = req.body;
 
@@ -412,7 +412,7 @@ app.put(
         customerName,
         shippingAddress,
         billingAddress,
-        contact,
+        customerContact,
         products
       );
       const data = await order.update(order);
@@ -434,7 +434,7 @@ app.post(
         customerName,
         shippingAddress,
         billingAddress,
-        contact,
+        customerContact,
         products,
       } = req.body;
 
@@ -447,7 +447,7 @@ app.post(
         customerName,
         shippingAddress,
         billingAddress,
-        contact,
+        customerContact,
         products
       );
       const data = await order.add(order);
