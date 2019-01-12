@@ -152,7 +152,7 @@ class OrderForm extends Component {
         params: { id },
       },
     } = this.props;
-    console.log(initialValues.products)
+
     data.storeId = storeId;
     data.products = initialValues.products;
     data.mode = mode;
@@ -185,7 +185,7 @@ class OrderForm extends Component {
     } = this.props;
 
     const products = initialValues.products;
-    const subTotal = products.length > 0 ? products.reduce((acc, product) => acc + product.amount, 0) : 0.00;
+    const subTotal = products.length > 0 ? products.reduce((acc, product) => acc + product.unitPrice * product.quantity, 0) : 0.00;
     const shipping = 21.5; // TODO: replace this
 
     return (
@@ -303,7 +303,6 @@ class OrderForm extends Component {
                               name={product.name}
                               unitPrice={product.unitPrice}
                               quantity={product.quantity}
-                              amount={product.amount}
                               currencySign="$"
                               onDeleteClick={this.onProductItemDeleteClick}
                             />

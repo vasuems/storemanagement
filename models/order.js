@@ -49,37 +49,39 @@ Order.prototype.get = function (id) {
        from \`order\`
        where code='${id}'`,
       (error, results) => {
-
         if (error || results.length == 0) {
           reject(new NoRecordFoundError('No order found.'));
         } else {
-          const {
-            code,
-            storeId,
-            addedOn,
-            addedBy,
-            paidOn,
-            customerName,
-            shippingAddress,
-            billingAddress,
-            contact,
-            products,
-            status,
-          } = results[0];
-          resolve(
-            new Order(
-              code,
-              storeId,
-              moment(addedOn).format('YYYY-MM-DD HH:mm:ss'),
-              addedBy,
-              paidOn,
-              customerName,
-              shippingAddress,
-              billingAddress,
-              contact,
-              products,
-              status
-            )
+          const order = results[0];
+          db.query(
+            `select p.code, p.name, p.sku, op.purchasing_price as unitPrice, op.quantity
+             from product as p
+             right join order_product as op on p.code = op.product_id
+             where order_id='${id}' and op.status=1`,
+            (error, results) => {
+              if (error || results.length == 0) {
+                order.products = [];
+              } else {
+                order.products = results.map(product => {
+                  const {
+                    code,
+                    name,
+                    sku,
+                    unitPrice,
+                    quantity,
+                  } = product;
+                  return {
+                    code,
+                    name,
+                    sku,
+                    unitPrice,
+                    quantity,
+                  };
+                });
+              }
+
+              resolve(order);
+            }
           );
         }
       }
@@ -192,6 +194,29 @@ Order.prototype.add = function (order) {
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalid order data.'));
           } else {
+            let proceed = true;
+            if (products.length > 0) {
+              let sql = 'insert into order_product(product_id, purchasing_price, order_id, quantity) values';
+
+              products.forEach(product => {
+                sql += ` ('${product.code}', ${product.unitPrice}, '${code}', ${product.quantity}),`;
+              });
+
+              sql = sql.slice(0, -1);
+              sql += ';';
+
+              db.query(sql, (error, results) => {
+                if (error || results.affectedRows == 0) {
+                  reject(new BadRequestError('Invalid order data.'));
+                  proceed = false;
+                }
+              });
+            }
+
+            if (!proceed) {
+              return;
+            }
+
             resolve(
               new Order(
                 code,
