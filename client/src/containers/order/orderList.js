@@ -18,9 +18,9 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { FiSearch, FiPlusCircle } from 'react-icons/fi';
 import ReactPaginate from 'react-paginate';
 import jwt from 'jsonwebtoken';
-import { fetchOrders } from '../../actions';
-import { OrderListItem } from '../../components';
 import 'react-datepicker/dist/react-datepicker.css';
+import { fetchOrders } from '../../actions';
+import { OrderListItem, Loader } from '../../components';
 import config from '../../config';
 
 class OrderList extends Component {
@@ -73,6 +73,7 @@ class OrderList extends Component {
       history,
       total,
       count,
+      loaded,
       intl: { formatMessage },
     } = this.props;
 
@@ -94,102 +95,107 @@ class OrderList extends Component {
         <div className="content-body">
           <div className="table-container">
             <Col md={12} className="table-content">
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div>
-                  <InputGroup size="sm">
-                    <Input placeholder={formatMessage({ id: 'sys.search' })} />
-                    <InputGroupAddon addonType="append">
-                      <Button color="secondary">
-                        <FiSearch />
-                      </Button>
-                    </InputGroupAddon>
-                  </InputGroup>
-                </div>
-                <div>
+              {
+                !loaded ? <Loader /> :
                   <div>
-                    <FormattedMessage id="sys.orderDate" />
-                    :&nbsp;
-                    <DatePicker
-                      dateFormat="YYYY-MM-DD"
-                      selected={moment()}
-                      popperModifiers={{
-                        offset: {
-                          enabled: true,
-                          offset: '10px, 10px',
-                        },
-                      }}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <Button
-                    size="sm"
-                    color="primary"
-                    className="pull-right form-btn"
-                    onClick={() => history.push('/new-order')}
-                  >
-                    <FiPlusCircle />
-                    &nbsp;
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div>
+                        <InputGroup size="sm">
+                          <Input placeholder={formatMessage({ id: 'sys.search' })} />
+                          <InputGroupAddon addonType="append">
+                            <Button color="secondary">
+                              <FiSearch />
+                            </Button>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </div>
+                      <div>
+                        <div>
+                          <FormattedMessage id="sys.orderDate" />
+                          :&nbsp;
+                          <DatePicker
+                            dateFormat="YYYY-MM-DD"
+                            selected={moment()}
+                            popperModifiers={{
+                              offset: {
+                                enabled: true,
+                                offset: '10px, 10px',
+                              },
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <Button
+                          size="sm"
+                          color="primary"
+                          className="pull-right form-btn"
+                          onClick={() => history.push('/new-order')}
+                        >
+                          <FiPlusCircle />
+                          &nbsp;
                     <FormattedMessage id="sys.addNew" />
-                  </Button>
-                </div>
-              </div>
-              <br />
-              <Table responsive>
-                <thead className="table-header">
-                  <tr>
-                    <th>
-                      <FormattedMessage id="sys.orderNumber" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.customerName" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.orderDate" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.payBy" />
-                    </th>
-                    <th>
-                      <FormattedMessage id="sys.status" />
-                    </th>
-                    <th />
-                  </tr>
-                </thead>
-                <tbody>
-                  {orders.length > 0 ? orders.map(order => (
-                    <OrderListItem
-                      key={order.code}
-                      number={order.code}
-                      customer={order.customerName}
-                      date={order.addedOn}
-                      payment={order.payment}
-                      status={order.status}
-                      onClick={this.onViewClick}
-                    />
-                  )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
-                </tbody>
-              </Table>
-              <div className="pagination-container">
-                <span className="text-muted">Total {count} entries</span>
-                <ReactPaginate
-                  pageCount={total || 1}
-                  pageRangeDisplayed={3}
-                  marginPagesDisplayed={2}
-                  containerClassName="pagination"
-                  subContainerClassName="pages pagination"
-                  pageClassName="page-item"
-                  breakClassName="page-item"
-                  breakLabel="..."
-                  pageLinkClassName="page-link"
-                  previousLabel="‹"
-                  nextLabel="›"
-                  previousLinkClassName="page-link"
-                  nextLinkClassName="page-link"
-                  activeClassName="active"
-                  onPageChange={this.onPageChange}
-                />
-              </div>
+                        </Button>
+                      </div>
+                    </div>
+                    <br />
+                    <Table responsive>
+                      <thead className="table-header">
+                        <tr>
+                          <th>
+                            <FormattedMessage id="sys.orderNumber" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.customerName" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.orderDate" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.payBy" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.status" />
+                          </th>
+                          <th />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {orders.length > 0 ? orders.map(order => (
+                          <OrderListItem
+                            key={order.code}
+                            number={order.code}
+                            customer={order.customerName}
+                            date={order.addedOn}
+                            payment={order.payment}
+                            status={order.status}
+                            onClick={this.onViewClick}
+                          />
+                        )) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>}
+                      </tbody>
+                    </Table>
+                    <div className="pagination-container">
+                      <span className="text-muted">Total {count} entries</span>
+                      <ReactPaginate
+                        pageCount={total || 1}
+                        pageRangeDisplayed={3}
+                        marginPagesDisplayed={2}
+                        containerClassName="pagination"
+                        subContainerClassName="pages pagination"
+                        pageClassName="page-item"
+                        breakClassName="page-item"
+                        breakLabel="..."
+                        pageLinkClassName="page-link"
+                        previousLabel="‹"
+                        nextLabel="›"
+                        previousLinkClassName="page-link"
+                        nextLinkClassName="page-link"
+                        activeClassName="active"
+                        onPageChange={this.onPageChange}
+                      />
+                    </div>
+                  </div>
+              }
             </Col>
           </div>
         </div>
@@ -205,6 +211,7 @@ OrderList.propTypes = {
   total: PropTypes.number.isRequired,
   count: PropTypes.number.isRequired,
   intl: PropTypes.object.isRequired,
+  loaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -213,6 +220,7 @@ const mapStateToProps = state => {
   return ({
     orders: state.orderReducer.orders.data,
     count: state.orderReducer.orders.count,
+    loaded: state.orderReducer.loaded,
     total: Number.isInteger(diff) ? diff : parseInt(diff) + 1,
   });
 };
