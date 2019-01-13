@@ -79,19 +79,22 @@ class OrderList extends Component {
 
     return (
       <div>
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <Button
-              color="link"
-              onClick={() => this.props.history.push('/dashboard')}
-            >
-              <FormattedMessage id="sys.dashboard" />
-            </Button>
-          </BreadcrumbItem>
-          <BreadcrumbItem active>
-            <FormattedMessage id="sys.orders" />
-          </BreadcrumbItem>
-        </Breadcrumb>
+        <div className="page-navbar">
+          <div className="page-name"><FormattedMessage id="sys.orders" /></div>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Button
+                color="link"
+                onClick={() => this.props.history.push('/dashboard')}
+              >
+                <FormattedMessage id="sys.dashboard" />
+              </Button>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>
+              <FormattedMessage id="sys.orders" />
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </div>
         <div className="content-body">
           <div className="table-container">
             <Col md={12} className="table-content">

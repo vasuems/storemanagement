@@ -115,11 +115,17 @@ a, a:hover, a:link, a:active, a:visited{
   color: #999;
 }
 .sidebar{
-  background: #333; 
-  margin-top: 56px;
+  background: #333745; 
   position: fixed;
   height: 100%;
   padding: 0;
+}
+.sidebar-container{
+  margin: 0;
+  padding: 0;
+}
+.sidebar-open{
+  background-color: #414557;
 }
 .sidebar-link a{
   color: #ddd;
@@ -130,7 +136,7 @@ a, a:hover, a:link, a:active, a:visited{
 }
 .sidebar-link:hover{
   color: #fafafa;
-  background-color: #666;
+  background-color: #2B2F3B;
 }
 .sidebar-icon{
   margin-top: -3px;
@@ -159,12 +165,9 @@ a, a:hover, a:link, a:active, a:visited{
   -webkit-box-shadow: none !important;
   box-shadow: none  !important;
 }
-.site-navbar, .admin-navbar{
-  position: fixed;
-  z-index: 9999;
+.admin-navbar{
   width: 100%;
-  box-shadow: 1px 0 3px 1px #ccc;
-  background-color: #fff;
+  background-color: #efefef;
 }
 .admin-navbar .dropdown-menu{
   left: -30px;
@@ -266,13 +269,31 @@ a, a:hover, a:link, a:active, a:visited{
   padding-left: 20px;
   padding-right: 20px;
 }
-.breadcrumb{
-  margin-top: 56px;
+.page-navbar{
   background: #fff;
+  color: #6c757d;
+}
+.page-name{
+  padding: 20px 0 0 20px;
+  font-weight: 200;
+  font-size: 24px;
+}
+.breadcrumb{
+  background: #fff;
+  font-size: 14px;
 }
 .breadcrumb-item button{
   padding: 0;
-  color: #007bff;
+  font-weight: 200;
+  color: #6c757d;
+  font-size: 14px;
+}
+.breadcrumb-item button:hover{
+  text-decoration: none;
+  color: #6c757d;
+}
+.breadcrumb-item.active{
+  font-weight: bold;
 }
 .table{
   margin-bottom: 10px;

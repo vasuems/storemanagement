@@ -14,21 +14,24 @@ class Manufacturer extends Component {
 
     return (
       <div>
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <Button color="link" onClick={() => history.push('/dashboard')}>
-              <FormattedMessage id="sys.dashboard" />
-            </Button>
-          </BreadcrumbItem>
-          <BreadcrumbItem>
-            <Button color="link" onClick={() => history.push('/manufacturers')}>
-              <FormattedMessage id="sys.manufacturers" />
-            </Button>
-          </BreadcrumbItem>
-          <BreadcrumbItem active>
-            <FormattedMessage id="sys.manufacturer" />
-          </BreadcrumbItem>
-        </Breadcrumb>
+        <div className="page-navbar">
+          <div className="page-name"><FormattedMessage id="sys.manufacturer" /></div>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Button color="link" onClick={() => history.push('/dashboard')}>
+                <FormattedMessage id="sys.dashboard" />
+              </Button>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <Button color="link" onClick={() => history.push('/manufacturers')}>
+                <FormattedMessage id="sys.manufacturers" />
+              </Button>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>
+              <FormattedMessage id="sys.manufacturer" />
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </div>
         <div className="content-body">
           <div className="table-container">
             <Col md={12} className="table-content">

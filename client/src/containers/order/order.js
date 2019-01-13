@@ -9,8 +9,7 @@ import {
   Button,
 } from 'reactstrap';
 import jwt from 'jsonwebtoken';
-import { connect } from 'react-redux';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { OrderForm } from '../forms';
 import config from '../../config';
 
@@ -21,21 +20,24 @@ class Order extends Component {
 
     return (
       <div>
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <Button color="link" onClick={() => history.push('/dashboard')}>
-              <FormattedMessage id="sys.dashboard" />
-            </Button>
-          </BreadcrumbItem>
-          <BreadcrumbItem>
-            <Button color="link" onClick={() => history.push('/orders')}>
-              <FormattedMessage id="sys.orders" />
-            </Button>
-          </BreadcrumbItem>
-          <BreadcrumbItem active>
-            <FormattedMessage id="sys.orderDetails" />
-          </BreadcrumbItem>
-        </Breadcrumb>
+        <div className="page-navbar">
+          <div className="page-name"><FormattedMessage id="sys.orderDetails" /></div>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Button color="link" onClick={() => history.push('/dashboard')}>
+                <FormattedMessage id="sys.dashboard" />
+              </Button>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <Button color="link" onClick={() => history.push('/orders')}>
+                <FormattedMessage id="sys.orders" />
+              </Button>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>
+              <FormattedMessage id="sys.orderDetails" />
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </div>
         <div className="content-body">
           <Row>
             <Col md={12}>

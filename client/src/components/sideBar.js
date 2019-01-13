@@ -40,6 +40,7 @@ class SideBarContent extends Component {
       dispatch(productMenuClose());
     } else {
       dispatch(productMenuOpen());
+      dispatch(reportMenuClose());
     }
   };
 
@@ -50,27 +51,28 @@ class SideBarContent extends Component {
       dispatch(reportMenuClose());
     } else {
       dispatch(reportMenuOpen());
+      dispatch(productMenuClose());
     }
   };
 
   render() {
     const { productMenu, reportMenu } = this.props;
     return (
-      <Container>
+      <Container className="sidebar-container">
         <br />
-        <Row className="sidebar-link">
+        <div className="sidebar-link">
           <Link to="/dashboard">
             <FiHome className="sidebar-icon" />
             <FormattedMessage id="sys.dashboard" />
           </Link>
-        </Row>
-        <Row className="sidebar-link">
+        </div>
+        <div className="sidebar-link">
           <Link to="/orders">
             <FiShoppingCart className="sidebar-icon" />
             <FormattedMessage id="sys.orders" />
           </Link>
-        </Row>
-        <Row
+        </div>
+        <div
           className="sidebar-link"
           onClick={this.onProductMenuClick}
           style={{ display: 'flex', justifyContent: 'space-between' }}
@@ -84,34 +86,34 @@ class SideBarContent extends Component {
           <div style={{ color: '#ddd', marginRight: 10, cursor: 'pointer' }}>
             {productMenu ? <FaCaretDown /> : <FaCaretLeft />}
           </div>
-        </Row>
-        <Collapse isOpen={productMenu}>
-          <Row className="sidebar-link sub-menu">
+        </div>
+        <Collapse isOpen={productMenu} className="sidebar-open">
+          <div className="sidebar-link sub-menu">
             <Link to="/categories">
               <FiGrid className="sidebar-icon" />
               <FormattedMessage id="sys.categories" />
             </Link>
-          </Row>
-          <Row className="sidebar-link sub-menu">
+          </div>
+          <div className="sidebar-link sub-menu">
             <Link to="/products">
               <FiShoppingBag className="sidebar-icon" />
               <FormattedMessage id="sys.products" />
             </Link>
-          </Row>
-          <Row className="sidebar-link sub-menu">
+          </div>
+          <div className="sidebar-link sub-menu">
             <Link to="/suppliers">
               <FaWarehouse className="sidebar-icon" />
               <FormattedMessage id="sys.suppliers" />
             </Link>
-          </Row>
-          <Row className="sidebar-link sub-menu">
+          </div>
+          <div className="sidebar-link sub-menu">
             <Link to="/manufacturers">
               <FaIndustry className="sidebar-icon" />
               <FormattedMessage id="sys.manufacturers" />
             </Link>
-          </Row>
+          </div>
         </Collapse>
-        <Row
+        <div
           className="sidebar-link"
           onClick={this.onReportMenuClick}
           style={{ display: 'flex', justifyContent: 'space-between' }}
@@ -125,21 +127,21 @@ class SideBarContent extends Component {
           <div style={{ color: '#ddd', marginRight: 10, cursor: 'pointer' }}>
             {reportMenu ? <FaCaretDown /> : <FaCaretLeft />}
           </div>
-        </Row>
-        <Collapse isOpen={reportMenu}>
-          <Row className="sidebar-link sub-menu">
+        </div>
+        <Collapse isOpen={reportMenu} className="sidebar-open">
+          <div className="sidebar-link sub-menu">
             <Link to="/sales-reports">
               <FiDollarSign className="sidebar-icon" />
               <FormattedMessage id="sys.salesReports" />
             </Link>
-          </Row>
+          </div>
         </Collapse>
-        <Row className="sidebar-link">
+        <div className="sidebar-link">
           <Link to="/settings">
             <FiSettings className="sidebar-icon" />
             <FormattedMessage id="sys.settings" />
           </Link>
-        </Row>
+        </div>
       </Container>
     );
   }

@@ -40,9 +40,6 @@ class Navigation extends Component {
       <div className="admin-navbar">
         <Container fluid>
           <Navbar light expand="md">
-            <NavbarBrand href="/dashboard">
-              <FormattedMessage id="site.name" />
-            </NavbarBrand>
             <Nav className="ml-auto">
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav>

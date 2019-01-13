@@ -57,16 +57,19 @@ class Setting extends Component {
     const { settings, history } = this.props;
     return (
       <div>
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <Button color="link" onClick={() => history.push('/dashboard')}>
-              <FormattedMessage id="sys.dashboard" />
-            </Button>
-          </BreadcrumbItem>
-          <BreadcrumbItem active>
-            <FormattedMessage id="sys.settings" />
-          </BreadcrumbItem>
-        </Breadcrumb>
+        <div className="page-navbar">
+          <div className="page-name"><FormattedMessage id="sys.settings" /></div>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Button color="link" onClick={() => history.push('/dashboard')}>
+                <FormattedMessage id="sys.dashboard" />
+              </Button>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>
+              <FormattedMessage id="sys.settings" />
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </div>
         <div className="content-body">
           <div>
             <Nav tabs>

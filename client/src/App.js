@@ -144,30 +144,31 @@ const App = () => (
   <Router>
     <div>
       <Route exact path="/" component={Login} />
-      <div>
-        <NavBar />
-        <div style={{ display: 'flex', height: '100%' }}>
-          <Col md={2} className="sidebar">
-            {routes.map((route, index) => (
-              <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                component={route.sidebar}
-              />
-            ))}
-          </Col>
-          <Col md={{ size: 10, offset: 2 }} style={{ padding: 0 }}>
-            {routes.map((route, index) => (
-              <PrivateRoute
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                component={route.main}
-              />
-            ))}
-          </Col>
-        </div>
+      <div style={{ display: 'flex', height: '100%' }}>
+        <Col md={2} className="sidebar">
+          <div style={{ padding: 20, color: '#fff' }}>
+            <h4>ELFCommerce</h4>
+          </div>
+          {routes.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              exact={route.exact}
+              component={route.sidebar}
+            />
+          ))}
+        </Col>
+        <Col md={{ size: 10, offset: 2 }} style={{ padding: 0 }}>
+          <NavBar />
+          {routes.map((route, index) => (
+            <PrivateRoute
+              key={index}
+              path={route.path}
+              exact={route.exact}
+              component={route.main}
+            />
+          ))}
+        </Col>
       </div>
     </div>
   </Router>
