@@ -194,7 +194,6 @@ Order.prototype.add = function (order) {
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalid order data.'));
           } else {
-            let proceed = true;
             if (products.length > 0) {
               let sql = 'insert into order_product(product_id, purchasing_price, order_id, quantity) values';
 
@@ -208,30 +207,41 @@ Order.prototype.add = function (order) {
               db.query(sql, (error, results) => {
                 if (error || results.affectedRows == 0) {
                   reject(new BadRequestError('Invalid order data.'));
-                  proceed = false;
+                } else {
+                  resolve(
+                    new Order(
+                      code,
+                      storeId,
+                      moment(addedOn).format('YYYY-MM-DD HH:mm:ss'),
+                      addedBy,
+                      paidOn,
+                      customerName,
+                      shippingAddress,
+                      billingAddress,
+                      customerContact,
+                      products,
+                      true
+                    )
+                  );
                 }
               });
+            } else {
+              resolve(
+                new Order(
+                  code,
+                  storeId,
+                  moment(addedOn).format('YYYY-MM-DD HH:mm:ss'),
+                  addedBy,
+                  paidOn,
+                  customerName,
+                  shippingAddress,
+                  billingAddress,
+                  customerContact,
+                  products,
+                  true
+                )
+              );
             }
-
-            if (!proceed) {
-              return;
-            }
-
-            resolve(
-              new Order(
-                code,
-                storeId,
-                moment(addedOn).format('YYYY-MM-DD HH:mm:ss'),
-                addedBy,
-                paidOn,
-                customerName,
-                shippingAddress,
-                billingAddress,
-                customerContact,
-                products,
-                true
-              )
-            );
           }
         }
       );
@@ -264,19 +274,60 @@ Order.prototype.update = function (order) {
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalid order data.'));
           } else {
-            resolve(
-              new Order(
-                code,
-                storeId,
-                '',
-                addedBy,
-                paidOn,
-                customerName,
-                shippingAddress,
-                billingAddress,
-                customerContact,
-                products
-              )
+            db.query(
+              `update order_product set status=0
+               where order_id='${code}' and status=1`, (error, results) => {
+                if (error) {
+                  reject(new BadRequestError('Invalid order product data.'));
+                } else {
+                  if (products.length > 0) {
+                    let sql = 'insert into order_product(product_id, purchasing_price, order_id, quantity) values';
+
+                    products.forEach(product => {
+                      sql += ` ('${product.code}', ${product.unitPrice}, '${code}', ${product.quantity}),`;
+                    });
+
+                    sql = sql.slice(0, -1);
+                    sql += ';';
+
+                    db.query(sql, (error, results) => {
+                      if (error || results.affectedRows == 0) {
+                        reject(new BadRequestError('Invalid order product data.'));
+                      } else {
+                        resolve(
+                          new Order(
+                            code,
+                            storeId,
+                            '',
+                            addedBy,
+                            paidOn,
+                            customerName,
+                            shippingAddress,
+                            billingAddress,
+                            customerContact,
+                            products
+                          )
+                        );
+                      }
+                    });
+                  } else {
+                    resolve(
+                      new Order(
+                        code,
+                        storeId,
+                        '',
+                        addedBy,
+                        paidOn,
+                        customerName,
+                        shippingAddress,
+                        billingAddress,
+                        customerContact,
+                        products
+                      )
+                    );
+                  }
+                }
+              }
             );
           }
         }

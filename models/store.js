@@ -24,25 +24,25 @@ function Store(
   facebook,
   twitter
 ) {
-  this.code = code || '';
-  this.name = name || '';
+  this.code = code;
+  this.name = name;
   this.description = description || '';
   this.logo = logo || '';
-  this.countryId = countryId || 0;
-  this.language = language || 'en';
-  this.currencyId = currencyId || 0;
-  this.createdBy = createdBy || 0;
+  this.countryId = countryId;
+  this.language = language;
+  this.currencyId = currencyId;
+  this.createdBy = createdBy;
   this.facebook = facebook || '';
   this.twitter = twitter || '';
 }
 
-Store.prototype.get = function(code) {
+Store.prototype.get = function (code) {
   return new Promise((resolve, reject) => {
     db.query(
       `select name, code, description, logo, country_id as countryId, language, currency_id as currencyId, facebook, twitter 
        from store where code='${code}' and status=1`,
       (error, results) => {
-        
+
         if (error || results.length == 0) {
           reject(new NoRecordFoundError('No store found.'));
         } else {
@@ -77,18 +77,25 @@ Store.prototype.get = function(code) {
   });
 };
 
-Store.prototype.add = function(store) {
+Store.prototype.add = function (store) {
   return new Promise((resolve, reject) => {
+    let proceed = true;
+
     if (store instanceof Store) {
-      Object.keys(store).forEach(function(key, index) {
-        if (!store[key]) {
+      Object.keys(store).forEach(function (key, index) {
+        if (store[key] === undefined) {
           reject(
             new InvalidModelArgumentsError(
               'Not all required fields have a value.'
             )
           );
+          proceed = false;
         }
       });
+
+      if (!proceed) {
+        return;
+      }
 
       const {
         code,
@@ -106,12 +113,12 @@ Store.prototype.add = function(store) {
       db.query(
         `insert into store(name, code, description, created_on, created_by, logo, country_id, language, currency_id, facebook, twitter) 
          values('${name}', '${code}', '${description}', '${moment
-  .utc()
-  .format(
-    'YYYY-MM-DD HH:mm:ss'
-  )}', '${createdBy}', '${logo}', ${countryId}, '${language}', ${currencyId}, '${facebook}', '${twitter}')`,
+          .utc()
+          .format(
+            'YYYY-MM-DD HH:mm:ss'
+          )}', '${createdBy}', '${logo}', ${countryId}, '${language}', ${currencyId}, '${facebook}', '${twitter}')`,
         (error, results) => {
-          
+
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide store data.'));
           } else {
@@ -138,7 +145,7 @@ Store.prototype.add = function(store) {
   });
 };
 
-Store.prototype.update = function(store) {
+Store.prototype.update = function (store) {
   return new Promise((resolve, reject) => {
     if (store instanceof Store) {
       const {
@@ -158,7 +165,7 @@ Store.prototype.update = function(store) {
         `update store set name='${name}', logo='${logo}', description='${description}', currency_id='${currencyId}', language='${language}', country_id=${countryId}, facebook='${facebook}', twitter='${twitter}'
          where code='${code}' and created_by='${createdBy}'`,
         (error, results) => {
-          
+
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalide store data.'));
           } else {
@@ -185,12 +192,12 @@ Store.prototype.update = function(store) {
   });
 };
 
-Store.prototype.delete = function(code) {
+Store.prototype.delete = function (code) {
   return new Promise((resolve, reject) => {
     db.query(
       `update store set status=0 where code=${code}`,
       (error, results) => {
-        
+
         if (error || results.affectedRows == 0) {
           reject(new BadRequestError('Deleting store failed.'));
         } else {
