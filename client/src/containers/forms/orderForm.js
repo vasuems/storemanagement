@@ -26,7 +26,7 @@ import {
   ModalBody,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import { FiDownload, FiPrinter, FiPlusCircle } from 'react-icons/fi';
+import { FiDownload, FiPlusCircle } from 'react-icons/fi';
 import classnames from 'classnames';
 import numeral from 'numeral';
 import {
@@ -54,16 +54,10 @@ const renderField = ({ input, type, meta: { touched, error } }) => (
   </div>
 );
 
-const renderDecimalField = ({ input, type, meta: { touched, error } }) => (
+const renderDecimalField = ({ input, type, style, currencySign, meta: { touched, error } }) => (
   <div>
-    <Input {...input} placeholder="0.00" type={type} step=".01" />
-    {touched && (error && <span className="text-danger">{error}</span>)}
-  </div>
-);
-
-const renderNumberField = ({ input, type, meta: { touched, error } }) => (
-  <div>
-    <Input {...input} placeholder="0" type={type} />
+    {currencySign || ''}
+    <input {...input} placeholder="0.00" type={type} style={style} step=".01" /><br />
     {touched && (error && <span className="text-danger">{error}</span>)}
   </div>
 );
@@ -235,28 +229,25 @@ class OrderForm extends Component {
             <TabPane tabId="1">
               <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
                 <Row>
-                  <Col md={12}>
-
+                  <Col md={4}>
+                    {
+                      mode === 'update' ?
+                        <span style={{ fontWeight: 100, fontSize: 20, backgroundColor: '#eee' }}>
+                          <FormattedMessage id="sys.orderNumber" />: <b>{initialValues.code}</b>
+                        </span>
+                        : null
+                    }
+                  </Col>
+                  <Col md={8}>
                     <Button
                       size="sm"
-                      color="dark"
+                      color="secondary"
                       className="pull-right form-btn"
                       onClick={() => history.push('/new-product')}
                     >
                       <FiDownload />
                       &nbsp;
                       <FormattedMessage id="sys.downloadInvoice" />
-                    </Button>
-                    <Button
-                      size="sm"
-                      color="danger"
-                      className="pull-right form-btn"
-                      onClick={() => history.push('/new-product')}
-                      style={{ marginRight: 10 }}
-                    >
-                      <FiPrinter />
-                      &nbsp;
-                      <FormattedMessage id="sys.printInvoice" />
                     </Button>
                     <Button
                       size="sm"
@@ -330,7 +321,7 @@ class OrderForm extends Component {
                           </tr>
                           <tr>
                             <td>
-                              <FormattedMessage id="sys.taxIncluded" />:
+                              <FormattedMessage id="sys.tax" />:
                             </td>
                             <td>${numeral(subTotal * 0.07).format('0,0.00')}</td>
                           </tr>
@@ -338,7 +329,17 @@ class OrderForm extends Component {
                             <td>
                               <FormattedMessage id="sys.shipping" />:
                             </td>
-                            <td>${numeral(shipping).format('0,0.00')}</td>
+                            <td>
+                              <Field
+                                component={renderDecimalField}
+                                name="shipping-fee"
+                                id="shipping-fee"
+                                type="number"
+                                style={{ width: 80 }}
+                                currencySign="$"
+                                validate={[required]}
+                              />
+                            </td>
                           </tr>
                           <tr>
                             <td>

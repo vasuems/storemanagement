@@ -69,6 +69,7 @@
   "sys.contactInfo": "Contact info",
   "sys.empty": "Empty",
   "sys.submit": "Submit",
+  "sys.order": "Order",
   "sys.orderDate": "Order date",
   "sys.orderStatus": "Order status",
   "sys.orderNumber": "Order number",

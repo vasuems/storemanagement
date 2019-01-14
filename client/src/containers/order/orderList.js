@@ -137,7 +137,7 @@ class OrderList extends Component {
                         >
                           <FiPlusCircle />
                           &nbsp;
-                    <FormattedMessage id="sys.addNew" />
+                          <FormattedMessage id="sys.addNew" />
                         </Button>
                       </div>
                     </div>

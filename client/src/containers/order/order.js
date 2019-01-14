@@ -21,7 +21,7 @@ class Order extends Component {
     return (
       <div>
         <div className="page-navbar">
-          <div className="page-name"><FormattedMessage id="sys.orderDetails" /></div>
+          <div className="page-name"><FormattedMessage id="sys.order" /></div>
           <Breadcrumb>
             <BreadcrumbItem>
               <Button color="link" onClick={() => history.push('/dashboard')}>
@@ -34,7 +34,7 @@ class Order extends Component {
               </Button>
             </BreadcrumbItem>
             <BreadcrumbItem active>
-              <FormattedMessage id="sys.orderDetails" />
+              <FormattedMessage id="sys.order" />
             </BreadcrumbItem>
           </Breadcrumb>
         </div>
