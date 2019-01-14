@@ -15,7 +15,7 @@ class Product extends Component {
     return (
       <div>
         <div className="page-navbar">
-          <div className="page-name"><FormattedMessage id="sys.productDetails" /></div>
+          <div className="page-name"><FormattedMessage id="sys.product" /></div>
           <Breadcrumb>
             <BreadcrumbItem>
               <Button color="link" onClick={() => history.push('/dashboard')}>
@@ -28,7 +28,7 @@ class Product extends Component {
               </Button>
             </BreadcrumbItem>
             <BreadcrumbItem active>
-              <FormattedMessage id="sys.productDetails" />
+              <FormattedMessage id="sys.product" />
             </BreadcrumbItem>
           </Breadcrumb>
         </div>

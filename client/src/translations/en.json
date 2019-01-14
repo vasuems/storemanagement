@@ -28,6 +28,7 @@
   "sys.fName": "First Name",
   "sys.lName": "Last Name",
   "sys.payments": "Payments",
+  "sys.product": "Product",
   "sys.products": "Products",
   "sys.productInfo": "Product info",
   "sys.newProduct": "New product",
