@@ -34,9 +34,12 @@ const ProductListItem = props => {
             : formatMessage({ id: 'sys.inactive' })}
         </Badge>
       </td>
-      <td>
-        <Button size="sm" color="link" onClick={() => onClick(id)}>
+      <td style={{ textAlign: 'right' }}>
+        <Button size="sm" className="action-btn" onClick={() => onClick(id)}>
           <FormattedMessage id="sys.view" />
+        </Button>
+        <Button size="sm" className="action-btn" onClick={() => onClick(id)}>
+          <FormattedMessage id="sys.delete" />
         </Button>
       </td>
     </tr>

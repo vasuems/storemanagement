@@ -4,6 +4,7 @@ html, body{
   padding: 0;
   font-family: 'Open Sans', sans-serif;
   background: #efefef;
+  color: #676a6c;
 }
 #root{
   width: 100%;
@@ -271,7 +272,7 @@ a, a:hover, a:link, a:active, a:visited{
 }
 .page-navbar{
   background: #fff;
-  color: #6c757d;
+  color: #676a6c;
 }
 .page-name{
   padding: 20px 0 0 20px;
@@ -285,12 +286,12 @@ a, a:hover, a:link, a:active, a:visited{
 .breadcrumb-item button{
   padding: 0;
   font-weight: 200;
-  color: #6c757d;
+  color: #676a6c;
   font-size: 14px;
 }
 .breadcrumb-item button:hover{
   text-decoration: none;
-  color: #6c757d;
+  color: #676a6c;
 }
 .breadcrumb-item.active{
   font-weight: bold;
@@ -362,4 +363,15 @@ table .btn-link{
 .search-result thead{
   background-color: #333;
   color: #fff;
+}
+.nav-item .nav-link{
+  font-size: 15px;
+  color: #676a6c;
+}
+.action-btn{
+  border-radius: 0;
+  background-color: #fff;
+  border: 1px solid #dedede;
+  color: #676a6c;
+  font-size: 12px;
 }

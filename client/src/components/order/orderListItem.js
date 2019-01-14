@@ -26,13 +26,12 @@ const OrderListItem = props => {
             ? formatMessage({ id: 'sys.active' })
             : formatMessage({ id: 'sys.inactive' })}
         </Badge></td>
-      <td>
-        <Button
-          size="sm"
-          color="link"
-          onClick={() => onClick(number)}
-        >
+      <td style={{ textAlign: 'right' }}>
+        <Button size="sm" className="action-btn" onClick={() => onClick(number)}>
           <FormattedMessage id="sys.view" />
+        </Button>
+        <Button size="sm" className="action-btn" onClick={() => onClick(number)}>
+          <FormattedMessage id="sys.delete" />
         </Button>
       </td>
     </tr>

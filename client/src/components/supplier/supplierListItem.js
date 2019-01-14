@@ -1,45 +1,59 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Badge, Col, Row } from 'reactstrap';
+import { Button, Badge } from 'reactstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { FaGlobe, FaAt, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 
 const SupplierListItem = props => {
-  const { formatMessage } = props.intl;
+  const {
+    logo,
+    name,
+    url,
+    email,
+    address,
+    contact,
+    status,
+    onClick,
+    id,
+    intl: { formatMessage } } = props;
+
   return (
     <tr>
       <td>
-        <img src={props.logo || require('../../assets/no_image.svg')} className="thumbnail" />
+        <img src={logo || require('../../assets/no_image.svg')} className="thumbnail" />
       </td>
-      <td>{props.name}</td>
+      <td>{name}</td>
       <td style={{ fontSize: 14 }}>
         <div>
           <FaGlobe color="#555" />
-          &nbsp;&nbsp;{props.url}
+          &nbsp;&nbsp;{url}
         </div>
         <div style={{ marginTop: 5 }}>
           <FaAt color="#e22b46" />
-          &nbsp;&nbsp;{props.email}
+          &nbsp;&nbsp;{email}
         </div>
         <div style={{ marginTop: 5 }}>
           <FaMapMarkerAlt color="#2e66c1" />
-          &nbsp;&nbsp;{props.address}
+          &nbsp;&nbsp;{address}
         </div>
         <div style={{ marginTop: 5 }}>
           <FaPhone color="#26ad72" />
-          &nbsp;&nbsp;{props.contact}
+          &nbsp;&nbsp;{contact}
         </div>
       </td>
       <td>
-        <Badge color={props.status ? 'success' : 'danger'}>
-          {props.status
+        <Badge color={status ? 'success' : 'danger'}>
+          {status
             ? formatMessage({ id: 'sys.active' })
             : formatMessage({ id: 'sys.inactive' })}
         </Badge>
       </td>
-      <td>
-        <Button size="sm" color="link" onClick={() => props.onClick(props.id)}>
+      <td style={{ textAlign: 'right' }}>
+        <Button size="sm" className="action-btn" onClick={() => onClick(id)}>
           <FormattedMessage id="sys.view" />
+        </Button>
+        <Button size="sm" className="action-btn" onClick={() => onClick(id)}>
+          <FormattedMessage id="sys.delete" />
         </Button>
       </td>
     </tr >
