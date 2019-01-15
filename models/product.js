@@ -337,6 +337,8 @@ function ProductAttribute(
   productId,
   quantity,
   varPrice,
+  addedOn,
+  addedBy,
   productAttributeCategoryId,
   productAttributeCategoryName,
   status = true
@@ -347,6 +349,8 @@ function ProductAttribute(
   this.productId = productId;
   this.quantity = quantity;
   this.varPrice = varPrice;
+  this.addedOn = addedOn;
+  this.addedBy = addedBy;
   this.productAttributeCategoryId = productAttributeCategoryId;
   this.productAttributeCategoryName = productAttributeCategoryName || '';
   this.status = status ? true : false;
@@ -355,7 +359,8 @@ function ProductAttribute(
 ProductAttribute.prototype.getAllByProductId = function (id) {
   return new Promise((resolve, reject) => {
     db.query(
-      `select code, product_id as productId, pa.name as attributeName, quantity, var_price as varPrice, pac.name as categoryName, status 
+      `select code, product_id as productId, pa.name as attributeName, quantity, var_price as varPrice, added_on as addedOn, added_by as addedBy, 
+       product_attribute_category_id as productAttributeCategoryId, pac.name as categoryName, status 
        from product_attribute as pa left join product_attribute_category as pac on pa.product_attribute_category_id = pac.id
        where code='${id}' and status=1`,
       (error, results) => {
@@ -369,6 +374,9 @@ ProductAttribute.prototype.getAllByProductId = function (id) {
               productId,
               quantity,
               varPrice,
+              addedOn,
+              addedBy,
+              productAttributeCategoryId,
               productAttributeCategoryName,
               status,
             } = attr;
@@ -378,6 +386,9 @@ ProductAttribute.prototype.getAllByProductId = function (id) {
               productId,
               quantity,
               varPrice,
+              addedOn,
+              addedBy,
+              productAttributeCategoryId,
               productAttributeCategoryName,
               status
             );
@@ -416,13 +427,14 @@ ProductAttribute.prototype.add = function (productAttribute) {
         productId,
         quantity,
         varPrice,
+        addedOn,
+        addedBy,
         productAttributeCategoryId,
-        productAttributeCategoryName,
       } = productAttribute;
 
       db.query(
-        `insert into product_attribute(code, product_id, name, quantity, var_price, product_attribute_category_id) 
-         values('${code}', '${productId}', '${attributeName}', ${quantity}, ${varPrice}, '${productAttributeCategoryId}')`,
+        `insert into product_attribute(code, product_id, name, quantity, var_price, added_on, added_by, product_attribute_category_id) 
+         values('${code}', '${productId}', '${attributeName}', ${quantity}, ${varPrice}, '${addedOn}', '${addedBy}', '${productAttributeCategoryId}')`,
         (error, results) => {
           if (error || results.affectedRows == 0) {
             reject(new BadRequestError('Invalid product attribute data.'));
@@ -434,8 +446,10 @@ ProductAttribute.prototype.add = function (productAttribute) {
                 productId,
                 quantity,
                 varPrice,
+                addedOn,
+                addedBy,
                 productAttributeCategoryId,
-                productAttributeCategoryName,
+                '',
                 true,
               )
             );
@@ -445,6 +459,63 @@ ProductAttribute.prototype.add = function (productAttribute) {
     } else {
       reject(new BadRequestError('Invalid product attribute data.'));
     }
+  });
+};
+
+ProductAttribute.prototype.update = function (productAttribute) {
+  return new Promise((resolve, reject) => {
+    if (productAttribute instanceof Product) {
+      const {
+        code,
+        attributeName,
+        productId,
+        quantity,
+        varPrice,
+        addedBy,
+        productAttributeCategoryId,
+      } = productAttribute;
+
+      db.query(
+        `update product_attribute set name='${attributeName}', product_id='${productId}', quantity=${quantity}, 
+         varPrice=${varPrice}, product_attribute_category_id='${productAttributeCategoryId}'
+         where code='${code}' and added_by='${addedBy}'`,
+        (error, results) => {
+          if (error || results.affectedRows == 0) {
+            reject(new BadRequestError('Invalid product attribute data.'));
+          } else {
+            resolve(
+              new ProductAttribute(
+                code,
+                attributeName,
+                productId,
+                quantity,
+                varPrice,
+                null,
+                addedBy,
+                productAttributeCategoryId,
+              )
+            );
+          }
+        }
+      );
+    } else {
+      reject(new BadRequestError('Invalid product attribute data.'));
+    }
+  });
+};
+
+ProductAttribute.prototype.delete = function (code) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `update product_attribute set status=0 where code='${code}'`,
+      (error, results) => {
+        if (error || results.affectedRows == 0) {
+          reject(new BadRequestError('Deleting product attribute failed.'));
+        } else {
+          resolve('Product attribute deleted.');
+        }
+      }
+    );
   });
 };
 
