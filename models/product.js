@@ -331,4 +331,124 @@ Product.prototype.delete = function (code) {
   });
 };
 
-module.exports = Product;
+function ProductAttribute(
+  code,
+  attributeName,
+  productId,
+  quantity,
+  varPrice,
+  productAttributeCategoryId,
+  productAttributeCategoryName,
+  status = true
+) {
+  // If a field is optional then provide default empty value
+  this.code = code;
+  this.attributeName = attributeName;
+  this.productId = productId;
+  this.quantity = quantity;
+  this.varPrice = varPrice;
+  this.productAttributeCategoryId = productAttributeCategoryId;
+  this.productAttributeCategoryName = productAttributeCategoryName || '';
+  this.status = status ? true : false;
+}
+
+ProductAttribute.prototype.getAllByProductId = function (id) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `select code, product_id as productId, pa.name as attributeName, quantity, var_price as varPrice, pac.name as categoryName, status 
+       from product_attribute as pa left join product_attribute_category as pac on pa.product_attribute_category_id = pac.id
+       where code='${id}' and status=1`,
+      (error, results) => {
+        if (error || results.length == 0) {
+          reject(new NoRecordFoundError('No product attributes found.'));
+        } else {
+          const productAttributes = results.map(attr => {
+            const {
+              code,
+              attributeName,
+              productId,
+              quantity,
+              varPrice,
+              productAttributeCategoryName,
+              status,
+            } = attr;
+            return new ProductAttribute(
+              code,
+              attributeName,
+              productId,
+              quantity,
+              varPrice,
+              productAttributeCategoryName,
+              status
+            );
+          });
+
+          resolve(productAttributes);
+        }
+      }
+    );
+  });
+};
+
+ProductAttribute.prototype.add = function (productAttribute) {
+  let proceed = true;
+
+  return new Promise((resolve, reject) => {
+    if (productAttribute instanceof ProductAttribute) {
+      Object.keys(productAttribute).forEach(function (key, index) {
+        if (productAttribute[key] === undefined) {
+          reject(
+            new InvalidModelArgumentsError(
+              'Not all required attribute fields have a value.'
+            )
+          );
+          proceed = false;
+        }
+      });
+
+      if (!proceed) {
+        return;
+      }
+
+      const {
+        code,
+        attributeName,
+        productId,
+        quantity,
+        varPrice,
+        productAttributeCategoryId,
+        productAttributeCategoryName,
+      } = productAttribute;
+
+      db.query(
+        `insert into product_attribute(code, product_id, name, quantity, var_price, product_attribute_category_id) 
+         values('${code}', '${productId}', '${attributeName}', ${quantity}, ${varPrice}, '${productAttributeCategoryId}')`,
+        (error, results) => {
+          if (error || results.affectedRows == 0) {
+            reject(new BadRequestError('Invalid product attribute data.'));
+          } else {
+            resolve(
+              new ProductAttribute(
+                code,
+                attributeName,
+                productId,
+                quantity,
+                varPrice,
+                productAttributeCategoryId,
+                productAttributeCategoryName,
+                true,
+              )
+            );
+          }
+        }
+      );
+    } else {
+      reject(new BadRequestError('Invalid product attribute data.'));
+    }
+  });
+};
+
+module.exports = {
+  Product,
+  ProductAttribute,
+};
