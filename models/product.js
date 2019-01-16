@@ -362,7 +362,7 @@ ProductAttribute.prototype.getAllByProductId = function (id) {
       `select code, product_id as productId, pa.name as attributeName, quantity, var_price as varPrice, added_on as addedOn, added_by as addedBy, 
        product_attribute_category_id as productAttributeCategoryId, pac.name as categoryName, status 
        from product_attribute as pa left join product_attribute_category as pac on pa.product_attribute_category_id = pac.id
-       where code='${id}' and status=1`,
+       where product_id='${id}' and status=1`,
       (error, results) => {
         if (error || results.length == 0) {
           reject(new NoRecordFoundError('No product attributes found.'));

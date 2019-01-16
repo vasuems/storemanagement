@@ -16,6 +16,7 @@ const {
   User,
   Store,
   Product,
+  ProductAttribute,
   Order,
   Category,
   Public,
@@ -23,11 +24,11 @@ const {
   Manufacturer,
 } = require('./models');
 const { UnauthorisedError } = require('./exceptions');
-
+const { tokenSecret } = process.env;
 const app = express();
 app.use(cors());
 
-const { tokenSecret } = process.env;
+// TODO: added middleware to verify storeId for all endpoints 
 
 const authMiddleware = async (req, res, next) => {
   // This should be replaced by key-value pair storage like memcache
@@ -346,6 +347,51 @@ app.post(
         supplierId,
       );
       const data = await product.add(product);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.get(
+  '/stores/:storeId/products/:productId/attributes',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const aroductAttribute = new ProductAttribute();
+      const data = await aroductAttribute.getAllByProductId(req.params.productId);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.post(
+  '/stores/:storeId/products/:productId/attributes',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const {
+        name,
+        quantity,
+        varPrice,
+        productAttributeCategoryId,
+      } = req.body;
+      const aroductAttribute = new ProductAttribute(
+        shortid.generate(),
+        name,
+        req.params.productId,
+        quantity,
+        varPrice,
+        moment.utc().format('YYYY-MM-DD HH:mm:ss'),
+        res.locals.auth.accountId,
+        productAttributeCategoryId
+      );
+      const data = await aroductAttribute.add(aroductAttribute);
 
       res.send(data);
     } catch (err) {
