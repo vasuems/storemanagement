@@ -35,6 +35,8 @@
   "sys.productName": "Product name",
   "sys.productNo": "Product number",
   "sys.productAttributes": "Product attributes",
+  "sys.attributeName": "Attribute name",
+  "sys.varPrice": "Variable pricing",
   "sys.categories": "Categories",
   "sys.category": "Category",
   "sys.categoryName": "Category name",

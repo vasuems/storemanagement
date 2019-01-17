@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Breadcrumb, BreadcrumbItem, Button, Col } from 'reactstrap';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  Button,
+  Row,
+  Col,
+} from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 import { FormattedMessage } from 'react-intl';
@@ -33,13 +39,13 @@ class Product extends Component {
           </Breadcrumb>
         </div>
         <div className="content-body">
-          <div className="table-container">
-            <Col md={12} className="table-content">
+          <Row>
+            <Col md={12}>
               <ProductForm
                 mode={path === '/new-product' ? 'new' : 'update'}
                 storeId={storeId} />
             </Col>
-          </div>
+          </Row>
         </div>
       </div>
     );

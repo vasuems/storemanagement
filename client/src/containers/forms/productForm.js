@@ -22,6 +22,7 @@ import {
   NavItem,
   NavLink,
   TabPane,
+  Table,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
@@ -33,7 +34,10 @@ import {
   fetchManufacturers,
   submitProduct,
 } from '../../actions';
-import { ParallelLoader } from '../../components';
+import {
+  ParallelLoader,
+  ProductAttributeListItem,
+} from '../../components';
 
 const required = value => (value ? undefined : 'Required');
 
@@ -153,6 +157,21 @@ class ProductForm extends Component {
       mode,
     } = this.props;
 
+    const attributes = [{
+      code: 'asdfasd fasdf',
+      name: 'Large',
+      varPrice: 1.00,
+      quantity: 100,
+      category: 'Size',
+      status: true,
+    },{
+      code: 'asdfaasd sd fasdf',
+      name: 'Medium',
+      varPrice: 1.00,
+      quantity: 100,
+      category: 'Size',
+      status: true,
+    }];
     return (
       mode === 'update' && !loaded ?
         <ParallelLoader /> :
@@ -393,6 +412,65 @@ class ProductForm extends Component {
                         </FormGroup>
                       </CardBody>
                     </Card>
+                  </Col>
+                </Row>
+              </Form>
+            </TabPane>
+            <TabPane tabId="2">
+              <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
+                {
+                  error ?
+                    <Alert color="danger">
+                      <FormattedMessage id="sys.newFailed" />
+                    </Alert> :
+                    done ?
+                      <Alert color="success">
+                        <FormattedMessage id="sys.newSuccess" />
+                      </Alert> : null
+                }
+                <Row>
+                  <Col md={12}>
+                    <Table responsive size="sm">
+                      <thead className="table-header">
+                        <tr>
+                          <th>
+                            <FormattedMessage id="sys.attributeName" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.category" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.varPrice" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.qty" />
+                          </th>
+                          <th>
+                            <FormattedMessage id="sys.status" />
+                          </th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          attributes.length > 0 ? attributes.map(attribute => {
+                            return (
+                              <ProductAttributeListItem
+                                key={attribute.code}
+                                code={attribute.code}
+                                name={attribute.name}
+                                varPrice={attribute.varPrice}
+                                quantity={attribute.quantity}
+                                category={attribute.category}
+                                status={attribute.status}
+                                currencySign="$"
+                                onDeleteClick={this.onProductItemDeleteClick}
+                              />
+                            );
+                          }) : <tr><td><FormattedMessage id="sys.noRecords" /></td></tr>
+                        }
+                      </tbody>
+                    </Table>
                   </Col>
                 </Row>
               </Form>
