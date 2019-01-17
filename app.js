@@ -27,6 +27,7 @@ const { UnauthorisedError } = require('./exceptions');
 const { tokenSecret } = process.env;
 const app = express();
 app.use(cors());
+app.use(bodyParser.json());
 
 // TODO: added middleware to verify storeId for all endpoints 
 
@@ -81,8 +82,6 @@ const storeIdVerifier = (req, res, next) => {
     res.status(err.statusCode).send(err);
   }
 };
-
-app.use(bodyParser.json());
 
 // public APIs
 app.get('/countries', authMiddleware, async (req, res) => {

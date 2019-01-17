@@ -224,7 +224,7 @@ class OrderForm extends Component {
           </Nav>
           <TabContent
             activeTab={this.state.activeTab}
-            style={{ backgroundColor: '#fff', padding: 15 }}
+            className="table-content"
           >
             <TabPane tabId="1">
               <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
@@ -232,7 +232,7 @@ class OrderForm extends Component {
                   <Col md={4}>
                     {
                       mode === 'update' ?
-                        <span style={{ fontWeight: 100, fontSize: 20, backgroundColor: '#eee' }}>
+                        <span className="tab-content-title">
                           <FormattedMessage id="sys.orderNumber" />: <b>{initialValues.code}</b>
                         </span>
                         : null

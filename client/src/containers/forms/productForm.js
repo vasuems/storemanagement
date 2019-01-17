@@ -17,8 +17,14 @@ import {
   InputGroup,
   Button,
   Alert,
+  Nav,
+  TabContent,
+  NavItem,
+  NavLink,
+  TabPane,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import classnames from 'classnames';
 import {
   fetchProductDetails,
   clearProductDetails,
@@ -67,6 +73,14 @@ const renderSelect = ({ input, type, data, meta: { touched, error } }) => (
 );
 
 class ProductForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeTab: '1',
+    };
+  }
+
   componentWillMount() {
     this.props.dispatch(
       clearProductDetails()
@@ -95,6 +109,14 @@ class ProductForm extends Component {
       );
     }
   }
+
+  toggle = tab => {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab,
+      });
+    }
+  };
 
   onSubmit = data => {
     const {
@@ -134,214 +156,249 @@ class ProductForm extends Component {
     return (
       mode === 'update' && !loaded ?
         <ParallelLoader /> :
-        <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
-          <Button size="sm" color="primary" className="pull-right form-btn">
-            <FiSave />
-            &nbsp;
-            <FormattedMessage id="sys.save" />
-          </Button>
-          <br />
-          <br />
-          {
-            error ?
-              <Alert color="danger">
-                <FormattedMessage id="sys.newFailed" />
-              </Alert> :
-              done ?
-                <Alert color="success">
-                  <FormattedMessage id="sys.newSuccess" />
-                </Alert> : null
-          }
-          <Row>
-            <Col md={7}>
-              <Card>
-                <CardHeader>
-                  <FormattedMessage id="sys.productInfo" />
-                </CardHeader>
-                <CardBody>
-                  <FormGroup row>
-                    <Label for="name" sm={3}>
-                      <FormattedMessage id="sys.productName" />
-                      <span className="text-danger mandatory-field">*</span>
-                    </Label>
-                    <Col sm={9}>
-                      <Field
-                        component={renderField}
-                        name="name"
-                        className="form-control"
-                        id="name"
-                        validate={[required]}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="description" sm={3}>
-                      <FormattedMessage id="sys.desc" />
-                    </Label>
-                    <Col sm={9}>
-                      <Field
-                        component={renderField}
-                        name="description"
-                        id="description"
-                        type="textarea"
-                        style={{ height: 220 }}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="sku" sm={3}>
-                      <FormattedMessage id="sys.sku" />
-                      <span className="text-danger mandatory-field">*</span>
-                    </Label>
-                    <Col sm={9}>
-                      <Field
-                        component={renderField}
-                        name="sku"
-                        className="form-control"
-                        id="sku"
-                        validate={[required]}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="category-id" sm={3}>
-                      <FormattedMessage id="sys.category" />
-                      <span className="text-danger mandatory-field">*</span>
-                    </Label>
-                    <Col sm={9}>
-                      <Field
-                        component={renderSelect}
-                        id="category-id"
-                        name="categoryId"
-                        data={categories}
-                        validate={[required]}
-                      >
-                      </Field>
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="cost" sm={3}>
-                      <FormattedMessage id="sys.costPrice" />
-                      <span className="text-danger mandatory-field">*</span>
-                    </Label>
-                    <Col sm={9}>
-                      <Field
-                        component={renderDecimalField}
-                        type="number"
-                        name="cost"
-                        id="cost"
-                        validate={[required]}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="manufacturer-id" sm={3}>
-                      <FormattedMessage id="sys.manufacturer" />
-                    </Label>
-                    <Col sm={9}>
-                      <Field
-                        component={renderSelect}
-                        id="manufacturer-id"
-                        name="manufacturerId"
-                        data={manufacturers}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="supplier-id" sm={3}>
-                      <FormattedMessage id="sys.supplier" />
-                    </Label>
-                    <Col sm={9}>
-                      <Field
-                        component={renderSelect}
-                        id="supplier-id"
-                        name="supplierId"
-                        data={suppliers}
-                      />
-                    </Col>
-                  </FormGroup>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md={5}>
-              <Card>
-                <CardHeader>
-                  <FormattedMessage id="sys.inventory" />
-                </CardHeader>
-                <CardBody>
-                  <FormGroup row>
-                    <Label for="allow-quantity" sm={5}>
-                      <FormattedMessage id="sys.allowQty" />?
-                    </Label>
-                    <Col sm={7}>
-                      <InputGroup>
-                        <Field
-                          component="input"
-                          type="checkbox"
-                          name="allowQuantity"
-                          id="allow-quantity"
-                          style={{ width: 32, height: 32 }}
-                        />
-                      </InputGroup>
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="quantity" sm={5}>
-                      <FormattedMessage id="sys.qty" />
-                    </Label>
-                    <Col sm={7}>
-                      <InputGroup>
-                        <Field
-                          component={renderNumberField}
-                          type="number"
-                          name="quantity"
-                          id="quantity"
-                          checked
-                        />
-                      </InputGroup>
-                    </Col>
-                  </FormGroup>
-                </CardBody>
-              </Card>
-              <br />
-              <Card>
-                <CardHeader>
-                  <FormattedMessage id="sys.price" />
-                </CardHeader>
-                <CardBody>
-                  <FormGroup row>
-                    <Label for="price" sm={4}>
-                      <FormattedMessage id="sys.price" />
-                      <span className="text-danger mandatory-field">*</span>
-                    </Label>
-                    <Col sm={8}>
-                      <Field
-                        component={renderDecimalField}
-                        type="number"
-                        name="unitPrice"
-                        id="price"
-                        validate={[required]}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="discount" sm={4}>
-                      <FormattedMessage id="sys.discountPrice" />
-                    </Label>
-                    <Col sm={8}>
-                      <Field
-                        component={renderDecimalField}
-                        type="number"
-                        name="discount"
-                        id="discount"
-                      />
-                    </Col>
-                  </FormGroup>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </Form>
+        <div>
+          <Nav tabs>
+            <NavItem>
+              <NavLink
+                className={classnames({
+                  active: this.state.activeTab === '1',
+                })}
+                onClick={() => {
+                  this.toggle('1');
+                }}
+              >
+                <FormattedMessage id="sys.productDetails" />
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({
+                  active: this.state.activeTab === '2',
+                })}
+                onClick={() => {
+                  this.toggle('2');
+                }}
+              >
+                <FormattedMessage id="sys.productAttributes" />
+              </NavLink>
+            </NavItem>
+          </Nav>
+          <TabContent
+            activeTab={this.state.activeTab}
+            className="table-content"
+          >
+            <TabPane tabId="1">
+              <Form onSubmit={handleSubmit(data => this.onSubmit(data))}>
+                <Button size="sm" color="primary" className="pull-right form-btn">
+                  <FiSave />
+                  &nbsp;
+                  <FormattedMessage id="sys.save" />
+                </Button>
+                <br />
+                <br />
+                {
+                  error ?
+                    <Alert color="danger">
+                      <FormattedMessage id="sys.newFailed" />
+                    </Alert> :
+                    done ?
+                      <Alert color="success">
+                        <FormattedMessage id="sys.newSuccess" />
+                      </Alert> : null
+                }
+                <Row>
+                  <Col md={7}>
+                    <Card>
+                      <CardHeader>
+                        <FormattedMessage id="sys.productInfo" />
+                      </CardHeader>
+                      <CardBody>
+                        <FormGroup row>
+                          <Label for="name" sm={3}>
+                            <FormattedMessage id="sys.productName" />
+                            <span className="text-danger mandatory-field">*</span>
+                          </Label>
+                          <Col sm={9}>
+                            <Field
+                              component={renderField}
+                              name="name"
+                              className="form-control"
+                              id="name"
+                              validate={[required]}
+                            />
+                          </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                          <Label for="description" sm={3}>
+                            <FormattedMessage id="sys.desc" />
+                          </Label>
+                          <Col sm={9}>
+                            <Field
+                              component={renderField}
+                              name="description"
+                              id="description"
+                              type="textarea"
+                              style={{ height: 220 }}
+                            />
+                          </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                          <Label for="sku" sm={3}>
+                            <FormattedMessage id="sys.sku" />
+                            <span className="text-danger mandatory-field">*</span>
+                          </Label>
+                          <Col sm={9}>
+                            <Field
+                              component={renderField}
+                              name="sku"
+                              className="form-control"
+                              id="sku"
+                              validate={[required]}
+                            />
+                          </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                          <Label for="category-id" sm={3}>
+                            <FormattedMessage id="sys.category" />
+                            <span className="text-danger mandatory-field">*</span>
+                          </Label>
+                          <Col sm={9}>
+                            <Field
+                              component={renderSelect}
+                              id="category-id"
+                              name="categoryId"
+                              data={categories}
+                              validate={[required]}
+                            >
+                            </Field>
+                          </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                          <Label for="cost" sm={3}>
+                            <FormattedMessage id="sys.costPrice" />
+                            <span className="text-danger mandatory-field">*</span>
+                          </Label>
+                          <Col sm={9}>
+                            <Field
+                              component={renderDecimalField}
+                              type="number"
+                              name="cost"
+                              id="cost"
+                              validate={[required]}
+                            />
+                          </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                          <Label for="manufacturer-id" sm={3}>
+                            <FormattedMessage id="sys.manufacturer" />
+                          </Label>
+                          <Col sm={9}>
+                            <Field
+                              component={renderSelect}
+                              id="manufacturer-id"
+                              name="manufacturerId"
+                              data={manufacturers}
+                            />
+                          </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                          <Label for="supplier-id" sm={3}>
+                            <FormattedMessage id="sys.supplier" />
+                          </Label>
+                          <Col sm={9}>
+                            <Field
+                              component={renderSelect}
+                              id="supplier-id"
+                              name="supplierId"
+                              data={suppliers}
+                            />
+                          </Col>
+                        </FormGroup>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                  <Col md={5}>
+                    <Card>
+                      <CardHeader>
+                        <FormattedMessage id="sys.inventory" />
+                      </CardHeader>
+                      <CardBody>
+                        <FormGroup row>
+                          <Label for="allow-quantity" sm={5}>
+                            <FormattedMessage id="sys.allowQty" />?
+                          </Label>
+                          <Col sm={7}>
+                            <InputGroup>
+                              <Field
+                                component="input"
+                                type="checkbox"
+                                name="allowQuantity"
+                                id="allow-quantity"
+                                style={{ width: 32, height: 32 }}
+                              />
+                            </InputGroup>
+                          </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                          <Label for="quantity" sm={5}>
+                            <FormattedMessage id="sys.qty" />
+                          </Label>
+                          <Col sm={7}>
+                            <InputGroup>
+                              <Field
+                                component={renderNumberField}
+                                type="number"
+                                name="quantity"
+                                id="quantity"
+                                checked
+                              />
+                            </InputGroup>
+                          </Col>
+                        </FormGroup>
+                      </CardBody>
+                    </Card>
+                    <br />
+                    <Card>
+                      <CardHeader>
+                        <FormattedMessage id="sys.price" />
+                      </CardHeader>
+                      <CardBody>
+                        <FormGroup row>
+                          <Label for="price" sm={4}>
+                            <FormattedMessage id="sys.price" />
+                            <span className="text-danger mandatory-field">*</span>
+                          </Label>
+                          <Col sm={8}>
+                            <Field
+                              component={renderDecimalField}
+                              type="number"
+                              name="unitPrice"
+                              id="price"
+                              validate={[required]}
+                            />
+                          </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                          <Label for="discount" sm={4}>
+                            <FormattedMessage id="sys.discountPrice" />
+                          </Label>
+                          <Col sm={8}>
+                            <Field
+                              component={renderDecimalField}
+                              type="number"
+                              name="discount"
+                              id="discount"
+                            />
+                          </Col>
+                        </FormGroup>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                </Row>
+              </Form>
+            </TabPane>
+          </TabContent>
+        </div>
     );
   }
 }

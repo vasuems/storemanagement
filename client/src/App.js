@@ -144,10 +144,10 @@ const App = () => (
   <Router>
     <div>
       <Route exact path="/" component={Login} />
-      <div style={{ display: 'flex', height: '100%' }}>
+      <div className="dashboard-page">
         <Col md={2} className="sidebar">
-          <div style={{ padding: 20, color: '#fff' }}>
-            <h4>ELFCommerce</h4>
+          <div id="site-name">
+            ELFCommerce
           </div>
           {routes.map((route, index) => (
             <Route

@@ -224,6 +224,10 @@ a, a:hover, a:link, a:active, a:visited{
   justify-content: center;
   align-items: center;  
 }
+.dashboard-page{
+  display: flex;
+  height: 100%;
+}
 #login-box, #pwd-box{
   position: absolute;
   width: 320px;
@@ -261,6 +265,10 @@ a, a:hover, a:link, a:active, a:visited{
 #login-site-name{
   text-align: center;
   font-weight: bold;
+}
+#site-name{
+  padding: 20px; 
+  color: #fff;
 }
 .padding-v20{
   padding-top: 20px;
@@ -374,4 +382,9 @@ table .btn-link{
   border: 1px solid #dedede;
   color: #676a6c;
   font-size: 12px;
+}
+.tab-content-title{
+  font-weight: 100;
+  font-size: 20px;
+  background-color: #eee;
 }

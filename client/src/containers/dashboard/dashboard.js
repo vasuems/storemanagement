@@ -24,9 +24,9 @@ class Dashboard extends Component {
     const { weeklySales, categoryProducts } = this.props.data;
     return (
       <div className="content-body">
-        <h3>
+        <h4>
           <FormattedMessage id="sys.dashboard" />
-        </h3>
+        </h4>
         <Row style={{ marginTop: 15 }}>
           <Col md={9}>
             <Row>
