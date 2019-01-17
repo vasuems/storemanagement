@@ -14,6 +14,7 @@ import {
 const initialState = {
   products: { data: [], count: 0 },
   productDetails: {},
+  productAttributes: [],
   loaded: false,
   done: false,
   error: false,
@@ -34,7 +35,7 @@ export default function productReducer(state = initialState, action) {
     case FETCH_PRODUCT_DETAILS_FAILED:
       return { ...state, error: true };
     case CLEAR_PRODUCT_DETAILS:
-      return { ...state, productDetails: {} };
+      return { ...state, productDetails: {}, productAttributes: [] };
     case CLEAR_SEARCH_PRODUCTS:
       return { ...state, ...initialState };
     default:

@@ -164,7 +164,7 @@ class ProductForm extends Component {
       quantity: 100,
       category: 'Size',
       status: true,
-    },{
+    }, {
       code: 'asdfaasd sd fasdf',
       name: 'Medium',
       varPrice: 1.00,
