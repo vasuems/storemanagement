@@ -32,6 +32,7 @@ import {
   fetchCategories,
   fetchSuppliers,
   fetchManufacturers,
+  fetchProductAttributes,
   submitProduct,
 } from '../../actions';
 import {
@@ -111,10 +112,12 @@ class ProductForm extends Component {
       dispatch(
         fetchProductDetails({ storeId, productId: id })
       );
+      dispatch(fetchProductAttributes({ storeId, productId: id }));
     }
   }
 
   toggle = tab => {
+    const { dispatch } = this.props;
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab,
@@ -148,6 +151,7 @@ class ProductForm extends Component {
   render() {
     const {
       handleSubmit,
+      productAttributes,
       categories,
       suppliers,
       done,
@@ -157,21 +161,6 @@ class ProductForm extends Component {
       mode,
     } = this.props;
 
-    const attributes = [{
-      code: 'asdfasd fasdf',
-      name: 'Large',
-      varPrice: 1.00,
-      quantity: 100,
-      category: 'Size',
-      status: true,
-    }, {
-      code: 'asdfaasd sd fasdf',
-      name: 'Medium',
-      varPrice: 1.00,
-      quantity: 100,
-      category: 'Size',
-      status: true,
-    }];
     return (
       mode === 'update' && !loaded ?
         <ParallelLoader /> :
@@ -453,15 +442,15 @@ class ProductForm extends Component {
                       </thead>
                       <tbody>
                         {
-                          attributes.length > 0 ? attributes.map(attribute => {
+                          productAttributes.length > 0 ? productAttributes.map(attribute => {
                             return (
                               <ProductAttributeListItem
                                 key={attribute.code}
                                 code={attribute.code}
-                                name={attribute.name}
+                                name={attribute.attributeName}
                                 varPrice={attribute.varPrice}
                                 quantity={attribute.quantity}
-                                category={attribute.category}
+                                category={attribute.productAttributeCategoryName}
                                 status={attribute.status}
                                 currencySign="$"
                                 onDeleteClick={this.onProductItemDeleteClick}
@@ -486,6 +475,7 @@ ProductForm.propTypes = {
   categories: PropTypes.array.isRequired,
   suppliers: PropTypes.array.isRequired,
   manufacturers: PropTypes.array.isRequired,
+  productAttributes: PropTypes.array,
   done: PropTypes.bool.isRequired,
   loaded: PropTypes.bool.isRequired,
   error: PropTypes.bool,
@@ -505,6 +495,7 @@ export default withRouter(
   connect(state => {
     return {
       initialValues: state.productReducer.productDetails,
+      productAttributes: state.productReducer.productAttributes,
       categories: state.categoryReducer.categories.data,
       suppliers: state.supplierReducer.suppliers.data,
       manufacturers: state.manufacturerReducer.manufacturers.data,

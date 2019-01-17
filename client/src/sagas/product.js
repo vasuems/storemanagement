@@ -9,6 +9,8 @@ import {
   fetchProductDetailsFailed,
   searchProductsSuccess,
   searchProductsFailed,
+  fetchProductAttributesSuccess,
+  fetchProductAttributesFailed,
   clearToken,
 } from '../actions';
 import config from '../config';
@@ -95,6 +97,27 @@ export function* upsertProduct(action) {
       yield put(clearToken());
     } else {
       yield put(submitProductFailed());
+    }
+  }
+}
+
+export function* fetchProductAttributes(action) {
+  try {
+    const { storeId, productId } = action.value;
+    const res = yield axios({
+      method: 'get',
+      url: `${config.apiDomain}/stores/${storeId}/products/${productId}/attributes`,
+      headers: {
+        authorization: localStorage.getItem(config.accessTokenKey),
+      },
+    });
+    console.log(res.data)
+    yield put(fetchProductAttributesSuccess(res.data));
+  } catch (error) {
+    if (error.response.status === 401) {
+      yield put(clearToken());
+    } else {
+      yield put(fetchProductAttributesFailed());
     }
   }
 }

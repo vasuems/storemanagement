@@ -360,7 +360,7 @@ ProductAttribute.prototype.getAllByProductId = function (id) {
   return new Promise((resolve, reject) => {
     db.query(
       `select code, product_id as productId, pa.name as attributeName, quantity, var_price as varPrice, added_on as addedOn, added_by as addedBy, 
-       product_attribute_category_id as productAttributeCategoryId, pac.name as categoryName, status 
+       product_attribute_category_id as productAttributeCategoryId, pac.name as productAttributeCategoryName, status 
        from product_attribute as pa left join product_attribute_category as pac on pa.product_attribute_category_id = pac.id
        where product_id='${id}' and status=1`,
       (error, results) => {
