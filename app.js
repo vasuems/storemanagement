@@ -15,6 +15,7 @@ const {
   OAuth2Request,
   User,
   Store,
+  StoreSummary,
   Product,
   ProductAttribute,
   Order,
@@ -202,6 +203,21 @@ app.put(
         res.locals.auth.accountId
       );
       const data = await store.update(store);
+
+      res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.get(
+  '/stores/:storeId/summary',
+  [authMiddleware, storeIdVerifier],
+  async (req, res) => {
+    try {
+      const summary = new StoreSummary();
+      const data = await summary.get(req.params.storeId);
 
       res.send(data);
     } catch (err) {

@@ -10,6 +10,7 @@ import {
 } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 import { Line, Pie } from 'react-chartjs-2';
 import {
   fetchAccount,
@@ -20,12 +21,14 @@ import {
   ShipTodayItem,
   Tile,
 } from '../../components';
+import config from '../../config';
 
 class Dashboard extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
+    const { data: { storeId } } = jwt.decode(localStorage.getItem(config.accessTokenKey));
 
-    dispatch(fetchDashboardData());
+    dispatch(fetchDashboardData(storeId));
   }
 
   onShipTodayItemClick = id => {
@@ -34,7 +37,10 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { weeklySales, categoryProducts } = this.props.data;
+    const { data: { orderSummary, productSummary } } = this.props;
+
+    console.log(orderSummary);
+
     return (
       <div className="content-body">
         <h4>
@@ -59,14 +65,14 @@ class Dashboard extends Component {
                 <Tile
                   title="200 Orders"
                   tileStyle={{ borderRadius: 0, borderTop: '2px solid #888' }}
-                  description={<p>$12,877.98<br /><br /></p>}
+                  description={<p>30 paid<br />170 pending</p>}
                 />
               </Col>
               <Col md={4}>
                 <Tile
                   title="100 Products"
                   tileStyle={{ borderRadius: 0, borderTop: '2px solid #55d0e0' }}
-                  description={<p>$8,101.12<br /><br /></p>}
+                  description={<p>$108,101.12<br /><br /></p>}
                 />
               </Col>
               <Col md={4}>
@@ -151,12 +157,16 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   data: PropTypes.object.isRequired,
+  done: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   data: state.dashboardReducer.data,
+  done: state.dashboardReducer.done,
+  error: state.dashboardReducer.error,
 });
 
 export default connect(

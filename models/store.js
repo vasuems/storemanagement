@@ -12,6 +12,47 @@ require('dotenv').load();
 const { host, user, password, database } = process.env;
 var db = new MySQL(host, user, password, database);
 
+function StoreSummary(orderSummary, productSummary, shippingSummary) {
+  this.orderSummary = orderSummary || null;
+  this.productSummary = productSummary || null;
+  this.shippingSummary = shippingSummary || null;
+}
+
+StoreSummary.prototype.get = function (code) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `select count(*) as total, status
+       from \`order\` 
+       where store_id='${code}'
+       group by status`,
+      (error, orderSummary) => {
+        if (error) {
+          reject(new NoRecordFoundError('No store summary found.'));
+        } else {
+          db.query(
+            `select count(*) as total, status
+             from product 
+             where store_id='${code}'
+             group by status`,
+            (error, productSummary) => {
+              if (error) {
+                reject(new NoRecordFoundError('No store summary found.'));
+              } else {
+                resolve(
+                  new StoreSummary(
+                    orderSummary,
+                    productSummary,
+                  )
+                );
+              }
+            }
+          );
+        }
+      }
+    );
+  });
+};
+
 function Store(
   code,
   name,
@@ -208,4 +249,7 @@ Store.prototype.delete = function (code) {
   });
 };
 
-module.exports = Store;
+module.exports = {
+  Store,
+  StoreSummary,
+};

@@ -19,7 +19,7 @@ Tile.propTypes = {
   tileStyle: PropTypes.object,
   titleStyle: PropTypes.object,
   textStyle: PropTypes.object,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.object,
 };
 
 export default Tile;
