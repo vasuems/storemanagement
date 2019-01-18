@@ -146,5 +146,6 @@
   "sys.newSuccess": "Submitting item successful.",
   "sys.noRecords": "No records.",
   "sys.send": "Send",
-  "sys.orderProductUpdated": "Order product updated"
+  "sys.orderProductUpdated": "Order product updated",
+  "sys.shipments": "Shipments"
 }

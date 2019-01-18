@@ -8,12 +8,11 @@ import {
   Row,
   Col,
 } from 'reactstrap';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 import { Line, Pie } from 'react-chartjs-2';
 import {
-  fetchAccount,
   fetchDashboardData,
 } from '../../actions';
 import {
@@ -37,9 +36,13 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { data: { orderSummary, productSummary } } = this.props;
-
-    console.log(orderSummary);
+    const {
+      data: {
+        orderSummary,
+        productSummary,
+      },
+      intl: { formatMessage },
+    } = this.props;
 
     return (
       <div className="content-body">
@@ -63,22 +66,25 @@ class Dashboard extends Component {
             <Row>
               <Col md={4}>
                 <Tile
-                  title="200 Orders"
+                  title={`${orderSummary.length > 0 ? orderSummary.reduce((sum, item) => sum + item.total, 0) : 0} ${formatMessage({ id: 'sys.orders' })}`}
                   tileStyle={{ borderRadius: 0, borderTop: '2px solid #888' }}
+                  titleStyle={{ fontSize: 24 }}
                   description={<p>30 paid<br />170 pending</p>}
                 />
               </Col>
               <Col md={4}>
                 <Tile
-                  title="100 Products"
+                  title={`${productSummary.length > 0 ? productSummary.reduce((sum, item) => sum + item.total, 0) : 0} ${formatMessage({ id: 'sys.products' })}`}
                   tileStyle={{ borderRadius: 0, borderTop: '2px solid #55d0e0' }}
+                  titleStyle={{ fontSize: 24 }}
                   description={<p>$108,101.12<br /><br /></p>}
                 />
               </Col>
               <Col md={4}>
                 <Tile
-                  title="50 Shipments"
+                  title={`${orderSummary.length > 0 ? orderSummary.reduce((sum, item) => sum + item.total, 0) : 0} ${formatMessage({ id: 'sys.shipments' })}`}
                   tileStyle={{ borderRadius: 0, borderTop: '2px solid #3bc633' }}
+                  titleStyle={{ fontSize: 24 }}
                   description={<p>10 in transit<br />40 in warehouses</p>}
                 />
               </Col>
@@ -159,6 +165,7 @@ Dashboard.propTypes = {
   data: PropTypes.object.isRequired,
   done: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
+  intl: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
 };
@@ -169,7 +176,9 @@ const mapStateToProps = state => ({
   error: state.dashboardReducer.error,
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(Dashboard));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(injectIntl(Dashboard))
+);
