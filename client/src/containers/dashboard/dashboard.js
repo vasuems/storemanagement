@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Card, CardTitle, Table, Row, Col } from 'reactstrap';
+import {
+  Card,
+  CardTitle,
+  Table,
+  Row,
+  Col,
+} from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { Line, Pie } from 'react-chartjs-2';
-import { fetchAccount, fetchDashboardData } from '../../actions';
-import { FeedItem, ShipTodayItem } from '../../components';
+import {
+  fetchAccount,
+  fetchDashboardData,
+} from '../../actions';
+import {
+  FeedItem,
+  ShipTodayItem,
+  Tile,
+} from '../../components';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -29,7 +42,7 @@ class Dashboard extends Component {
         </h4>
         <Row style={{ marginTop: 15 }}>
           <Col md={9}>
-            <Row>
+            {/* <Row>
               <Col md={6} className="text-center">
                 <div className="chart-container">
                   <Line data={weeklySales} height={200} />
@@ -40,7 +53,31 @@ class Dashboard extends Component {
                   <Pie data={categoryProducts} height={200} />
                 </div>
               </Col>
+            </Row> */}
+            <Row>
+              <Col md={4}>
+                <Tile
+                  title="200 Orders"
+                  tileStyle={{ borderRadius: 0, borderTop: '2px solid #888' }}
+                  description={<p>$12,877.98<br /><br /></p>}
+                />
+              </Col>
+              <Col md={4}>
+                <Tile
+                  title="100 Products"
+                  tileStyle={{ borderRadius: 0, borderTop: '2px solid #55d0e0' }}
+                  description={<p>$8,101.12<br /><br /></p>}
+                />
+              </Col>
+              <Col md={4}>
+                <Tile
+                  title="50 Shipments"
+                  tileStyle={{ borderRadius: 0, borderTop: '2px solid #3bc633' }}
+                  description={<p>10 in transit<br />40 in warehouses</p>}
+                />
+              </Col>
             </Row>
+
             <FeedItem
               backgroundColor="#fff"
               fontColor="#333"

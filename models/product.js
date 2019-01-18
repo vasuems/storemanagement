@@ -54,7 +54,8 @@ Product.prototype.get = function (id) {
     db.query(
       `select code, name, category_id as categoryId, store_id as storeId, sku, description, quantity, allow_quantity as allowQuantity,
        added_on as addedOn, added_by as addedBy, unit_price as unitPrice, cost, cover_image as coverImage,
-       manufacturer_id as manufacturerId, supplier_id as supplierId, status from product where code='${id}'`,
+       manufacturer_id as manufacturerId, supplier_id as supplierId, status
+       from product where code='${id}'`,
       (error, results) => {
         if (error || results.length == 0) {
           reject(new NoRecordFoundError('No product found.'));
