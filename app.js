@@ -9,8 +9,8 @@ const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 const shortid = require('shortid');
 const moment = require('moment');
+const multer = require('multer');
 require('dotenv').load();
-
 const {
   OAuth2Request,
   User,
@@ -25,6 +25,11 @@ const {
   Manufacturer,
 } = require('./models');
 const { UnauthorisedError } = require('./exceptions');
+
+const upload = multer({
+  dest: 'uploads/',
+});
+
 const { tokenSecret } = process.env;
 const app = express();
 app.use(cors());
@@ -205,6 +210,22 @@ app.put(
       const data = await store.update(store);
 
       res.send(data);
+    } catch (err) {
+      res.status(err.statusCode).send(err);
+    }
+  }
+);
+
+app.post(
+  '/stores/:storeId/images',
+  [authMiddleware, storeIdVerifier, upload.single('imageUpload')],
+  async (req, res) => {
+    try {
+      // const store = new Store();
+      // const data = await store.get(req.params.storeId);
+
+      // res.send(data);
+      res.send('Success');
     } catch (err) {
       res.status(err.statusCode).send(err);
     }

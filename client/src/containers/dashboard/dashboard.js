@@ -46,9 +46,6 @@ class Dashboard extends Component {
 
     return (
       <div className="content-body">
-        <h4>
-          <FormattedMessage id="sys.dashboard" />
-        </h4>
         <Row style={{ marginTop: 15 }}>
           <Col md={9}>
             {/* <Row>
@@ -67,24 +64,24 @@ class Dashboard extends Component {
               <Col md={4}>
                 <Tile
                   title={`${orderSummary.length > 0 ? orderSummary.reduce((sum, item) => sum + item.total, 0) : 0} ${formatMessage({ id: 'sys.orders' })}`}
-                  tileStyle={{ borderRadius: 0, borderTop: '2px solid #888' }}
-                  titleStyle={{ fontSize: 24 }}
+                  tileStyle={{ borderRadius: 0, borderTop: '3px solid orange' }}
+                  titleStyle={{ fontSize: 24, color: 'orange' }}
                   description={<p>30 paid<br />170 pending</p>}
                 />
               </Col>
               <Col md={4}>
                 <Tile
                   title={`${productSummary.length > 0 ? productSummary.reduce((sum, item) => sum + item.total, 0) : 0} ${formatMessage({ id: 'sys.products' })}`}
-                  tileStyle={{ borderRadius: 0, borderTop: '2px solid #55d0e0' }}
-                  titleStyle={{ fontSize: 24 }}
+                  tileStyle={{ borderRadius: 0, borderTop: '3px solid #55d0e0' }}
+                  titleStyle={{ fontSize: 24, color: '#55d0e0' }}
                   description={<p>$108,101.12<br /><br /></p>}
                 />
               </Col>
               <Col md={4}>
                 <Tile
                   title={`${orderSummary.length > 0 ? orderSummary.reduce((sum, item) => sum + item.total, 0) : 0} ${formatMessage({ id: 'sys.shipments' })}`}
-                  tileStyle={{ borderRadius: 0, borderTop: '2px solid #3bc633' }}
-                  titleStyle={{ fontSize: 24 }}
+                  tileStyle={{ borderRadius: 0, borderTop: '3px solid #3bc633' }}
+                  titleStyle={{ fontSize: 24, color: '#3bc633' }}
                   description={<p>10 in transit<br />40 in warehouses</p>}
                 />
               </Col>

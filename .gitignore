@@ -14,6 +14,9 @@
 /build
 /client/build
 
+# uploaded files
+/uploads
+
 .env
 claudia.json
 
