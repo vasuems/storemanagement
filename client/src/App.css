@@ -144,6 +144,9 @@ a, a:hover, a:link, a:active, a:visited{
   margin-right: 12px;
   color: #aaa;
 }
+.sidebar-link.active{
+  border-left: 4px solid #16ad85;
+}
 
 /* Navbar style */
 .admin-navbar .dropdown-item{

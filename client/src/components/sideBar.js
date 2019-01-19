@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Container, Row, Collapse } from 'reactstrap';
+import { Link, withRouter } from 'react-router-dom';
+import { Container, Collapse } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import {
   FiMenu,
@@ -56,17 +56,23 @@ class SideBarContent extends Component {
   };
 
   render() {
-    const { productMenu, reportMenu } = this.props;
+    const {
+      productMenu,
+      reportMenu,
+      location: { pathname },
+    } = this.props;
+    const currentPath = pathname.split('/')[1];
+
     return (
       <Container className="sidebar-container">
         <br />
-        <div className="sidebar-link">
+        <div className={`sidebar-link${currentPath == 'dashboard' ? ' active' : ''}`}>
           <Link to="/dashboard">
             <FiHome className="sidebar-icon" />
             <FormattedMessage id="sys.dashboard" />
           </Link>
         </div>
-        <div className="sidebar-link">
+        <div className={`sidebar-link${currentPath == 'orders' ? ' active' : ''}`}>
           <Link to="/orders">
             <FiShoppingCart className="sidebar-icon" />
             <FormattedMessage id="sys.orders" />
@@ -88,25 +94,25 @@ class SideBarContent extends Component {
           </div>
         </div>
         <Collapse isOpen={productMenu} className="sidebar-open">
-          <div className="sidebar-link sub-menu">
+          <div className={`sidebar-link sub-menu${currentPath == 'categories' ? ' active' : ''}`}>
             <Link to="/categories">
               <FiGrid className="sidebar-icon" />
               <FormattedMessage id="sys.categories" />
             </Link>
           </div>
-          <div className="sidebar-link sub-menu">
+          <div className={`sidebar-link sub-menu${currentPath == 'products' ? ' active' : ''}`}>
             <Link to="/products">
               <FiShoppingBag className="sidebar-icon" />
               <FormattedMessage id="sys.products" />
             </Link>
           </div>
-          <div className="sidebar-link sub-menu">
+          <div className={`sidebar-link sub-menu${currentPath == 'suppliers' ? ' active' : ''}`}>
             <Link to="/suppliers">
               <FaWarehouse className="sidebar-icon" />
               <FormattedMessage id="sys.suppliers" />
             </Link>
           </div>
-          <div className="sidebar-link sub-menu">
+          <div className={`sidebar-link sub-menu${currentPath == 'manufacturers' ? ' active' : ''}`}>
             <Link to="/manufacturers">
               <FaIndustry className="sidebar-icon" />
               <FormattedMessage id="sys.manufacturers" />
@@ -129,20 +135,20 @@ class SideBarContent extends Component {
           </div>
         </div>
         <Collapse isOpen={reportMenu} className="sidebar-open">
-          <div className="sidebar-link sub-menu">
+          <div className={`sidebar-link sub-menu${currentPath == 'sales-reports' ? ' active' : ''}`}>
             <Link to="/sales-reports">
               <FiDollarSign className="sidebar-icon" />
               <FormattedMessage id="sys.salesReports" />
             </Link>
           </div>
         </Collapse>
-        <div className="sidebar-link">
+        <div className={`sidebar-link${currentPath == 'settings' ? ' active' : ''}`}>
           <Link to="/settings">
             <FiSettings className="sidebar-icon" />
             <FormattedMessage id="sys.settings" />
           </Link>
         </div>
-      </Container>
+      </Container >
     );
   }
 }
@@ -151,6 +157,7 @@ SideBarContent.propTypes = {
   dispatch: PropTypes.func.isRequired,
   productMenu: PropTypes.bool.isRequired,
   reportMenu: PropTypes.bool.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -158,7 +165,9 @@ const mapStateToProps = state => ({
   reportMenu: state.pathReducer.reportMenu,
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(SideBarContent);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(SideBarContent)
+);

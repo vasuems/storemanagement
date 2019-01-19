@@ -9,7 +9,6 @@ const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 const shortid = require('shortid');
 const moment = require('moment');
-const multer = require('multer');
 require('dotenv').load();
 const {
   OAuth2Request,
@@ -26,14 +25,11 @@ const {
 } = require('./models');
 const { UnauthorisedError } = require('./exceptions');
 
-const upload = multer({
-  dest: 'uploads/',
-});
-
 const { tokenSecret } = process.env;
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
 
 // TODO: added middleware to verify storeId for all endpoints 
 
@@ -218,7 +214,7 @@ app.put(
 
 app.post(
   '/stores/:storeId/images',
-  [authMiddleware, storeIdVerifier, upload.single('imageUpload')],
+  [authMiddleware, storeIdVerifier],
   async (req, res) => {
     try {
       // const store = new Store();
