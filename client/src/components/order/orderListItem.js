@@ -14,6 +14,7 @@ const OrderListItem = props => {
     onClick,
   } = props;
 
+
   return (
     <tr>
       <td>{number}</td>
@@ -21,11 +22,36 @@ const OrderListItem = props => {
       <td>{date}</td>
       <td>{payment}</td>
       <td>
-        <Badge color={status ? 'success' : 'danger'}>
-          {status
-            ? formatMessage({ id: 'sys.active' })
-            : formatMessage({ id: 'sys.inactive' })}
-        </Badge></td>
+        <Badge color={
+          (status => {
+            switch (status) {
+              case 0:
+                return 'light';
+              case 1:
+                return 'warning';
+              case 2:
+                return 'success';
+              case 3:
+                return 'dark';
+            }
+          })(status)
+        }>
+          {
+            (status => {
+              switch (status) {
+                case 0:
+                  return formatMessage({ id: 'sys.inactive' });
+                case 1:
+                  return formatMessage({ id: 'sys.pending' });
+                case 2:
+                  return formatMessage({ id: 'sys.shipped' });
+                case 3:
+                  return formatMessage({ id: 'sys.completed' });
+              }
+            })(status)
+          }
+        </Badge>
+      </td>
       <td style={{ textAlign: 'right' }}>
         <Button size="sm" className="action-btn" onClick={() => onClick(number)}>
           <FormattedMessage id="sys.view" />

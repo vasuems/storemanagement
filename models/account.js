@@ -21,7 +21,7 @@ function Account(
   password,
   salt,
   joinedOn,
-  status = true
+  status = 1
 ) {
   // If a field is optional then provide default empty value
   this.code = code;
@@ -31,7 +31,7 @@ function Account(
   this.password = password;
   this.salt = salt;
   this.joinedOn = joinedOn || moment.utc().format('YYYY-MM-DD HH:mm:ss');
-  this.status = status ? true : false;
+  this.status = status;
 }
 
 Account.prototype.get = function (id) {

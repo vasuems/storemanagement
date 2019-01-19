@@ -24,7 +24,7 @@ function Order(
   billingAddress,
   customerContact,
   products,
-  status = true
+  status = 1
 ) {
   // If a field is optional then provide default empty value
   this.code = code;
@@ -37,7 +37,7 @@ function Order(
   this.billingAddress = billingAddress;
   this.customerContact = customerContact || '';
   this.products = products;
-  this.status = status ? true : false;
+  this.status = status;
 }
 
 Order.prototype.get = function (id) {

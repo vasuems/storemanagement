@@ -11,13 +11,13 @@ require('dotenv').load();
 const { host, user, password, database } = process.env;
 var db = new MySQL(host, user, password, database);
 
-function Category(code, name, storeId, addedBy, parentId, status = true) {
+function Category(code, name, storeId, addedBy, parentId, status = 1) {
   this.code = code;
   this.name = name;
   this.storeId = storeId;
   this.addedBy = addedBy;
   this.parentId = parentId || null;
-  this.status = status ? true : false;
+  this.status = status;
 }
 
 Category.prototype.get = function (code) {

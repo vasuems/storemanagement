@@ -22,7 +22,7 @@ function Supplier(
   storeId,
   countryId,
   addedBy,
-  status = true
+  status = 1
 ) {
   this.code = code;
   this.name = name;
@@ -34,7 +34,7 @@ function Supplier(
   this.storeId = storeId;
   this.countryId = countryId;
   this.addedBy = addedBy;
-  this.status = status ? true : false;
+  this.status = status;
 }
 
 Supplier.prototype.get = function (code) {

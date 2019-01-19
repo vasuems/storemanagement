@@ -147,5 +147,9 @@
   "sys.noRecords": "No records.",
   "sys.send": "Send",
   "sys.orderProductUpdated": "Order product updated",
-  "sys.shipments": "Shipments"
+  "sys.shipments": "Shipments",
+  "sys.pending": "Pending",
+  "sys.paid": "Paid",
+  "sys.shipped": "Shipped",
+  "sys.completed": "Completed"
 }

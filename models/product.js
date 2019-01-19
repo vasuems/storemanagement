@@ -28,7 +28,7 @@ function Product(
   coverImage,
   manufacturerId,
   supplierId,
-  status = true
+  status = 1
 ) {
   // If a field is optional then provide default empty value
   this.code = code;
@@ -46,7 +46,7 @@ function Product(
   this.coverImage = coverImage || '';
   this.manufacturerId = manufacturerId || '';
   this.supplierId = supplierId || '';
-  this.status = status ? true : false;
+  this.status = status;
 }
 
 Product.prototype.get = function (id) {
